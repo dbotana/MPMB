@@ -180,5 +180,5 @@ AddWarlockInvocation("Quickdraw (prereq: Pact of the Cannon)", {
     prereqeval: function (v) {
         return GetFeatureChoice('class', 'warlock', 'pact boon') == 'pact of the cannon'
     },
-    savetxt: { text: ["I can mark creatures after initiative is rolled", "I gain a death die to increase damage against marked creatures"] }
+    savetxt: { text: ["I can use my rxn to make one attack after initiative is rolled"] }
 });
