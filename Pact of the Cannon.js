@@ -27,7 +27,7 @@ AddWarlockPactBoon("Pact of the Cannon", {
         source : [["HB", 1]],
         list : "firearm",
         ability : 2,
-        type : "Martial",
+        type : "Firearm",
         damage : [1, 10, "piercing"],
         range : "30/90 ft",
         weight : 3,
@@ -41,7 +41,7 @@ AddWarlockPactBoon("Pact of the Cannon", {
         source : [["HB", 1]],
         list : "firearm",
         ability : 2,
-        type : "Martial",
+        type : "Firearm",
         damage : [1, 12, "piercing"],
         range : "40/120 ft",
         weight : 10,
@@ -55,7 +55,7 @@ AddWarlockPactBoon("Pact of the Cannon", {
         source : [["HB", 1]],
         list : "firearm",
         ability : 2,
-        type : "Martial",
+        type : "Firearm",
         damage : [2, 6, "piercing"],
         range : "30/90 ft",
         weight : 7,
@@ -69,7 +69,7 @@ AddWarlockPactBoon("Pact of the Cannon", {
         source : [["HB", 1]],
         list : "firearm",
         ability : 2,
-        type : "Martial",
+        type : "Firearm",
         damage : [2, 6, "piercing"],
         range : "150/600 ft",
         weight : 10,
@@ -152,7 +152,7 @@ AddWarlockInvocation("Eagle Eye (prereq: Pact of the Cannon)", {
     calcChanges : {
         atkAdd : [
             function (fields, v) {
-                if (!v.eagleEye && /firearm/i.test(v.theWea.type + " " + v.theWea.list) && (/\d+ ?(f.{0,2}t|m)/i).test(fields.Range)) {
+                if (!v.eagleEye && v.isRangedWeapon && /firearm/i.test(v.theWea.type + " " + v.theWea.list) && (/\d+ ?(f.{0,2}t|m)/i).test(fields.Range)) {
                     v.eagleEye = true;
                     var rangeNmbr = fields.Range.match(/\d+([.,]\d+)?/g);
                     var notNmbrs = fields.Range.split(RegExp(rangeNmbr.join('|')));
