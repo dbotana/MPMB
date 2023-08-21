@@ -88,7 +88,6 @@ AddWarlockInvocation("Agressive Fire (prereq: Pact of the Cannon, 5th level)", {
     submenu: "[improves Pact of the Cannon]",
     action : ['action', 'Pact Weapon (2 attacks per action)'],
     prereqeval: function (v) { return GetFeatureChoice('class', 'warlock', 'pact boon') == 'pact of the cannon' && classes.known.warlock.level >= 5; },
-    savetxt: { text: ["I can attack twice with my firearm"] }
 }),
 //Bullet Time
 AddWarlockInvocation("Bullet Time (prereq: Pact of the Cannon, 15th level)", {
@@ -105,7 +104,6 @@ AddWarlockInvocation("Bullet Time (prereq: Pact of the Cannon, 15th level)", {
         selection : ["haste"],
         firstCol : "oncelr"
     },
-    savetxt: { text: ["I can cast haste on myself after initiative is rolled"] }
 }),
 
 // Deadeye Invocation
@@ -117,7 +115,6 @@ AddWarlockInvocation("Deadeye (prereq: Pact of the Cannon)", {
     prereqeval: function (v) {
         return GetFeatureChoice('class', 'warlock', 'pact boon') == 'pact of the cannon';
     },
-    savetxt: { text: ["I don't have disadvantage using firearm in close combat or long range", "I can use my firearm as a spellcasting focus"] }
 }),
 
 // Death List Invocation
@@ -129,7 +126,6 @@ AddWarlockInvocation("Death List (prereq: Pact of the Cannon, 9th level)", {
     prereqeval: function (v) {
         return GetFeatureChoice('class', 'warlock', 'pact boon') == 'pact of the cannon' && classes.known.warlock.level >= 9;
     },
-    savetxt: { text: ["I can mark creatures after initiative is rolled", "I gain a death die to increase damage against marked creatures"] }
 }),
 
 // Dual Dirge Invocation
@@ -142,14 +138,13 @@ AddWarlockInvocation("Dual Dirge (prereq: Pact of the Cannon)", {
     prereqeval: function (v) {
         return GetFeatureChoice('class', 'warlock', 'pact boon') == 'pact of the cannon';
     },
-    savetxt: { text: ["I can create a second pistol when forming a pact firearm", "I can attack with a second pistol using a bonus action"] }
 }),
 
 // Eagle Eye Invocation
 AddWarlockInvocation("Eagle Eye (prereq: Pact of the Cannon)", {
     name: "Eagle Eye",
     description: "\n   " + "While I am wielding a firearm, its long and short attack range are both doubled.",
-    source: ["HB", 1],
+    source: ["HB", 56],
     submenu: "[improves Pact of the Cannon]",
     prereqeval: function (v) {
         return GetFeatureChoice('class', 'warlock', 'pact boon') == 'pact of the cannon';
@@ -157,7 +152,7 @@ AddWarlockInvocation("Eagle Eye (prereq: Pact of the Cannon)", {
     calcChanges : {
         atkAdd : [
             function (fields, v) {
-                if (!v.eagleEye && v.isRangedWeapon && /firearm/i.test(v.theWea.type + " " + v.theWea.list) && (/\d+ ?(f.{0,2}t|m)/i).test(fields.Range)) {
+                if (!v.eagleEye && /firearm/i.test(v.theWea.type + " " + v.theWea.list) && (/\d+ ?(f.{0,2}t|m)/i).test(fields.Range)) {
                     v.eagleEye = true;
                     var rangeNmbr = fields.Range.match(/\d+([.,]\d+)?/g);
                     var notNmbrs = fields.Range.split(RegExp(rangeNmbr.join('|')));
@@ -179,7 +174,7 @@ AddWarlockInvocation("Eagle Eye (prereq: Pact of the Cannon)", {
             700
         ]
     }
-}),
+});
 
 //Quickdraw
 AddWarlockInvocation("Quickdraw (prereq: Pact of the Cannon)", {
@@ -190,5 +185,4 @@ AddWarlockInvocation("Quickdraw (prereq: Pact of the Cannon)", {
     prereqeval: function (v) {
         return GetFeatureChoice('class', 'warlock', 'pact boon') == 'pact of the cannon'
     },
-    savetxt: { text: ["I can use my rxn to make one attack after initiative is rolled"] }
 });
