@@ -86,6 +86,7 @@ AddWarlockInvocation("Agressive Fire (prereq: Pact of the Cannon, 5th level)", {
     description: "\n   " + "You can attack with your pact firearm twice as an attack action on your turn",
     source: ["HB", 1],
     submenu: "[improves Pact of the Cannon]",
+    action : ['action', 'Pact Weapon (2 attacks per action)'],
     prereqeval: function (v) { return GetFeatureChoice('class', 'warlock', 'pact boon') == 'pact of the cannon' && classes.known.warlock.level >= 5; },
     savetxt: { text: ["I can attack twice with my firearm"] }
 }),
@@ -96,6 +97,14 @@ AddWarlockInvocation("Bullet Time (prereq: Pact of the Cannon, 15th level)", {
     source: ["HB", 1],
     submenu: "[improves Pact of the Cannon]",
     prereqeval: function (v) { return GetFeatureChoice('class', 'warlock', 'pact boon') == 'pact of the cannon' && classes.known.warlock.level >= 15; },
+    usages : 1,
+    recovery : "long rest",
+    spellcastingBonus : {
+        name : "Bullet Time",
+        spells : ["haste"],
+        selection : ["haste"],
+        firstCol : "oncelr"
+    },
     savetxt: { text: ["I can cast haste on myself after initiative is rolled"] }
 }),
 
@@ -128,6 +137,7 @@ AddWarlockInvocation("Dual Dirge (prereq: Pact of the Cannon)", {
     name: "Dual Dirge",
     description: "\n   " + "Whenever I create my pact firearm in the form of a pistol, I can choose to create a second loaded pistol in my other hand. Additionally, when I use the Attack action and attack with a one-handed weapon, I can use a bonus action to attack with a pistol I am holding.",
     source: ["HB", 1],
+    action : ["bonus action", "One-Handed Pact Weapon (off hand attack)"],
     submenu: "[improves Pact of the Cannon]",
     prereqeval: function (v) {
         return GetFeatureChoice('class', 'warlock', 'pact boon') == 'pact of the cannon';
