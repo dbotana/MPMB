@@ -93,7 +93,6 @@ AddWarlockInvocation("Alliance Upheld (prereq: 7th level, Eternal Citadel patron
         return classes.known.warlock.subclass == 'warlock-the eternal citadel' && classes.known.warlock.level >= 7;
     }
 }),
-    //add animated shield familiar creature
     AddWarlockInvocation("Steadfast Companion (prereq: Eternal Citadel patron, Pact of the Chain feature)", {
         name: "Steadfast Companion",
         description: "\n   " + "If I have an animate shield as my familiar, it gains additional hit points equal to my warlock level" + "\n   " + "I can cast the mending and light cantrips",
@@ -105,8 +104,25 @@ AddWarlockInvocation("Alliance Upheld (prereq: 7th level, Eternal Citadel patron
             selection: ["mending", "light"],
             firstCol: 'atwill'
         },
-        prereqeval: function (v) { return classes.known.warlock.subclass == 'warlock-the eternal citadel' && GetFeatureChoice('class', 'warlock', 'pact boon') == 'pact of the chain'; }
-    }),
+        prereqeval: function (v) { return classes.known.warlock.subclass == 'warlock-the eternal citadel' && GetFeatureChoice('class', 'warlock', 'pact boon') == 'pact of the chain'; },
+        calcChanges: {
+            companionCallback: [function (prefix, hp, bAdd, sCompType) {
+                if (sCompType !== "pact_of_the_chain") return;
+                var strFea = "\u25C6 Steadfast Companion: The familiar gains additional hit points equal to my warlock level.";
+                var aFnc = bAdd ? AddString : RemoveString;
+                aFnc(prefix + "Comp.Use.Features", strFea, true);
+
+                // Calculate additional hit points for the familiar
+                var additionalHP = classes.known.warlock ? classes.known.warlock.level : 0;
+
+                // Add the additional hit points to the companion's total
+                hp.total += additionalHP;
+
+                return hp; // Return the modified hit points
+            }]
+        },
+    }
+    ),
     CreatureList["animate shield"] = {
         name: "Animate Shield",
         nameAlt: ["Shield, Animate"],
@@ -155,15 +171,10 @@ AddWarlockInvocation("Alliance Upheld (prereq: 7th level, Eternal Citadel patron
         }, {
             name: "Stalwart Defense",
             description: "Whenever an enemy attacks the animate shield, they take 2 psychic damage."
-        }],
-        calcChanges: {
-            hp: function (v) {
-                if (GetFeatureChoice('class', 'warlock', 'invocation') == 'steadfast companion') {
-                    return [16 + classes.known.warlock.level];
-                }
-            },
-            setAltHp: true
-        }
+        }, {
+            name: "Steadfast Companion",
+            description: "If I have the Steadfast Companion eldritch invocation the shield has additional hit points equal to my warlock level."
+        }]
     },
 
 
