@@ -1,5 +1,3 @@
-//push to git
-
 var iFileName = "Warlock - The Eternal Citadel [Rocky].js";
 RequiredSheetVersion(13);
 
@@ -8,7 +6,7 @@ SourceList["TEC"] = {
     abbreviation: "TEC",
     abbreviationSpellsheet: "TC",
     group: "Rocky's Homebrew",
-    date: "2023/8/23"
+    date: "2023/8/25"
 };
 
 AddSubClass("warlock", "the eternal citadel", {
@@ -54,7 +52,7 @@ AddSubClass("warlock", "the eternal citadel", {
             recovery: "short rest",
             usages: 1,
             additional: levels.map(function (n) {
-                return n < 1 ? "" : Math.floor(n / 2)+" temp HP";
+                return n < 1 ? "" : Math.floor(n / 2) + " temp HP";
             })
         },
         "subclassfeature10": {
@@ -91,9 +89,11 @@ AddWarlockInvocation("Alliance Upheld (prereq: 7th level, Eternal Citadel patron
     description: "\n   " + "When using Righteous Guardian on an ally with 1+ HP, they regain hit points equal to my Charisma modifier",
     source: ["HB", 3],
     submenu: "[requires Eternal Citadel patron]",
-    prereqeval: function (v) { return v.warlocksubclasschoice == 'the eternal citadel' && classes.known.warlock.level >= 7; },
+    prereqeval: function (v) {
+        return classes.known.warlock.subclass == 'warlock-the eternal citadel' && classes.known.warlock.level >= 7;
+    }
 }),
-
+    //add animated shield familiar creature
     AddWarlockInvocation("Steadfast Companion (prereq: Eternal Citadel patron, Pact of the Chain feature)", {
         name: "Steadfast Companion",
         description: "\n   " + "If I have an animate shield as my familiar, it gains additional hit points equal to my warlock level" + "\n   " + "I can cast the mending and light cantrips",
@@ -105,29 +105,89 @@ AddWarlockInvocation("Alliance Upheld (prereq: 7th level, Eternal Citadel patron
             selection: ["mending", "light"],
             firstCol: 'atwill'
         },
-        prereqeval: function (v) { return v.warlocksubclasschoice == 'the eternal citadel' && GetFeatureChoice('class', 'warlock', 'pact boon') == 'pact of the chain'; }
+        prereqeval: function (v) { return classes.known.warlock.subclass == 'warlock-the eternal citadel' && GetFeatureChoice('class', 'warlock', 'pact boon') == 'pact of the chain'; }
     }),
+    CreatureList["animate shield"] = {
+        name: "Animate Shield",
+        nameAlt: ["Shield, Animate"],
+        source: [["HB", 3]],
+        size: 4, //small
+        type: "Construct",
+        alignment: "Lawful Neutral",
+        ac: 16,
+        hp: 16,
+        hd: [3, 6],
+        speed: "0 ft, fly 45 ft (hover)",
+        scores: [14, 12, 14, 11, 12, 11], //[Str, Dex, Con, Int, Wis, Cha]
+        skills: {
+            "perception": 5,
+        },
+        senses: "Darkvision 60 ft",
+        damage_resistances: "bludgeoning, piercing, slashing",
+        damage_immunities: "poison, radiant",
+        condition_immunities: "blinded, charmed, frightened, poisoned, exhaustion",
+        passivePerception: 16,
+        languages: "Common, all known by master",
+        challengeRating: "1",
+        proficiencyBonus: 4,
+        attacksAction: 1,
+        attacks: [{
+            name: "Bash",
+            ability: 1,
+            damage: [1, 6, "bludgeoning"],
+            range: "Melee (5 ft)",
+            description: "hit target is pushed back 5 ft",
+            abilitytodamage: true
+        }, {
+            name: "Guard",
+            description: "Hovers within 5 ft of ally, shield is hit by next attack that would hit the ally",
+            tooltip: "The shield cannot be forcibly moved while Guarding an ally. If the ally tteleports, the shield teleports with them."
+        }],
+        traits: [{
+            name: "Durable",
+            description: "Whenever the animate shield would take damage from an attack, reduce that damage by 3. Additionally, it has advantage on Constitution saving throws."
+        }, {
+            name: "Equipment",
+            description: "The shield can be equipped as a normal shield and the bearer is considered proficient with it. While equipped, it is an object that takes no damage. Only action it can take is to remove itself from bearer."
+        }, {
+            name: "Magic Resistance",
+            description: "The shield has advantage on saves against spells and magical effects."
+        }, {
+            name: "Stalwart Defense",
+            description: "Whenever an enemy attacks the animate shield, they take 2 psychic damage."
+        }],
+        calcChanges: {
+            hp: function (v) {
+                if (GetFeatureChoice('class', 'warlock', 'invocation') == 'steadfast companion') {
+                    return [16 + classes.known.warlock.level];
+                }
+            },
+            setAltHp: true
+        }
+    },
+
 
     AddWarlockInvocation("Hammer of Dawn (prereq: Eternal Citadel patron, Pact of the Blade feature)", {
         name: "Hammer of Dawn",
         description: "\n   " + "I can create a weapon that deals bludgeoning damage from stone infused with golden metal using Pact of the Blade" + "\n   " + "I can choose for it to deal force damage instead" + "\n   " + "I use my Charisma mod on its attack and damage rolls" + "\n   " + "Targets hit by it can't make opportunity attacks targeting others than me until my next turn",
         source: ["HB", 3],
         submenu: "[requires Eternal Citadel patron]",
-        prereqeval: function (v) { return v.warlocksubclasschoice == 'the eternal citadel' && GetFeatureChoice('class', 'warlock', 'pact boon') == 'pact of the blade'; },
+        prereqeval: function (v) { return classes.known.warlock.subclass == 'warlock-the eternal citadel' && GetFeatureChoice('class', 'warlock', 'pact boon') == 'pact of the blade'; },
         action: ["action", " (create weapon)"],
         calcChanges: {
             atkAdd: [
                 function (fields, v) {
-                    if (What('Cha Mod') > What(AbilityScores.abbreviations[fields.Mod - 1] + ' Mod') && /^(?=.*hammer of dawn).*$/i.test(v.WeaponText)) {
+                    if (What('Cha Mod') > What(AbilityScores.abbreviations[fields.Mod - 1] + ' Mod') && /^(?=.*of dawn).*$/i.test(v.WeaponText)) {
                         fields.Mod = 6;
                         fields.Damage_Type = 'Force';
                         fields.Description += (fields.Description ? '; ' : '') + "hit targets can only opportunity attack me until my next turn";
                     };
                 },
-                "If I include the words 'Hammer of Dawn' in the name of a bludgeoning weapon, it gets treated as the weapon I imbued to use Charisma for its attack and damage rolls instead of Strength, if my Charisma modifier is higher than the ability it would otherwise use. This weapon also deals Force damage and has a special effect on hit targets."
+                "If I include the words 'of Dawn' in the name of a bludgeoning weapon, it gets treated as the weapon I imbued to use Charisma for its attack and damage rolls instead of Strength, if my Charisma modifier is higher than the ability it would otherwise use. This weapon also deals Force damage and has a special effect on hit targets."
             ]
         }
     }),
+
     // Add the Invested Defense shield item
     MagicItemsList["invested defense"] = {
         name: "Invested Defense",
@@ -139,6 +199,7 @@ AddWarlockInvocation("Alliance Upheld (prereq: 7th level, Eternal Citadel patron
         shieldAdd: "Invested Defense"
     };
 
+
 // Update the Invested Defense Invocation
 AddWarlockInvocation("Invested Defense (prereq: Eternal Citadel patron, Pact of the Blade feature)", {
     name: "Invested Defense",
@@ -147,7 +208,7 @@ AddWarlockInvocation("Invested Defense (prereq: Eternal Citadel patron, Pact of 
     submenu: "[requires Eternal Citadel patron]",
     armorProfs: [false, false, false, true], // Added shield proficiency
     shieldAdd: "Invested Defense",
-    prereqeval: function (v) { return v.warlocksubclasschoice == 'the eternal citadel' && GetFeatureChoice('class', 'warlock', 'pact boon') == 'pact of the blade'; }
+    prereqeval: function (v) { return classes.known.warlock.subclass == 'warlock-the eternal citadel' && GetFeatureChoice('class', 'warlock', 'pact boon') == 'pact of the blade'; }
 }),
 
     AddWarlockInvocation("Preserved Document (prereq: Eternal Citadel patron, Pact of the Tome feature)", {
@@ -155,7 +216,7 @@ AddWarlockInvocation("Invested Defense (prereq: Eternal Citadel patron, Pact of 
         source: ["HB", 3],
         submenu: "[requires Eternal Citadel patron]",
         description: "\n   " + "I'm instantly aware if other parties try to break terms of contracts or agreements signed by me",
-        prereqeval: function (v) { return v.warlocksubclasschoice == 'the eternal citadel' && GetFeatureChoice('class', 'warlock', 'pact boon') == 'pact of the tome'; }
+        prereqeval: function (v) { return classes.known.warlock.subclass == 'warlock-the eternal citadel' && GetFeatureChoice('class', 'warlock', 'pact boon') == 'pact of the tome'; }
     }),
 
     AddWarlockInvocation("Servants of the Citadel (prereq: Eternal Citadel patron)", {
@@ -163,6 +224,6 @@ AddWarlockInvocation("Invested Defense (prereq: Eternal Citadel patron, Pact of 
         description: "\n   " + "When I deal damage with a cantrip or weapon attack, I can use a bonus action to give an ally within 60 ft temporary hit points equal to my Charisma mod for 1 minute",
         source: ["HB", 3],
         submenu: "[requires Eternal Citadel patron]",
-        prereqeval: function (v) { return v.warlocksubclasschoice == 'the eternal citadel'; },
-        action: ['bonus action', ' (after dealing damage) ally +CHA temp HP']
+        prereqeval: function (v) { return classes.known.warlock.subclass == 'warlock-the eternal citadel'; },
+        action: ['bonus action', ' (after dealing damage)']
     });
