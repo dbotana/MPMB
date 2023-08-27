@@ -82,7 +82,7 @@ AddSubClass("warlock", "the eternal citadel", {
             usages: 1
         }
     }
-});
+}),
 
 AddWarlockInvocation("Alliance Upheld (prereq: 7th level, Eternal Citadel patron)", {
     name: "Alliance Upheld",
@@ -105,21 +105,34 @@ AddWarlockInvocation("Alliance Upheld (prereq: 7th level, Eternal Citadel patron
             firstCol: 'atwill'
         },
         prereqeval: function (v) { return classes.known.warlock.subclass == 'warlock-the eternal citadel' && GetFeatureChoice('class', 'warlock', 'pact boon') == 'pact of the chain'; },
-        calcChanges: {
-            companionCallback: [function (prefix, hp, bAdd, sCompType) {
-                if (sCompType !== "pact_of_the_chain") return;
-                var strFea = "\u25C6 Steadfast Companion: The familiar gains additional hit points equal to my warlock level.";
-                var aFnc = bAdd ? AddString : RemoveString;
-                aFnc(prefix + "Comp.Use.Features", strFea, true);
-
-                // Calculate additional hit points for the familiar
-                var additionalHP = classes.known.warlock ? classes.known.warlock.level : 0;
-
-                // Add the additional hit points to the companion's total
-                hp.total += additionalHP;
-
-                return hp; // Return the modified hit points
-            }]
+        calcChanges : {
+            companionCallback: [
+                function (prefix, oCrea, bAdd, sCompType) {
+                    // Check if this is a Pact of the Chain Animated Shield
+                    if (sCompType !== "pact_of_the_chain" || oCrea.name != "Animated Shield") return;
+                    var strFea = "\u25C6 Steadfast Companion: The Animated Shield gains additional hit points equal to my warlock level.";
+                    var aFnc = bAdd ? AddString : RemoveString;
+                    aFnc(prefix + "Comp.Use.Features", strFea, true);
+                    
+                    // Create a calcChanges hp object to add to the companion
+                    var evalObj = {
+                        hp : function(totalHD, HDobj, prefix) {
+                            var warlockLvl = classes.known.warlock.level;
+                            var creaHp = CurrentCompRace[prefix] && CurrentCompRace[prefix].hp ? CurrentCompRace[prefix].hp : 0;
+                            HDobj.alt.push((creaHp + warlockLvl))
+                            HDobj.altStr.push(" = " + creaHp + " from Animated Shield's normal maximum plus my warlock level (" + warlockLvl + ")")
+                        },
+                        setAltHp : true
+                    }
+                    addCompEvals(evalObj, prefix, "Steadfast Companion hit points calculation", bAdd)
+        
+                    // Manually reset the HP field to default
+                    if (!bAdd) {
+                        Value(prefix + "Comp.Use.HP.Max", oCrea.hp ? oCrea.hp : 0)
+                    }
+        
+                }
+            ]
         },
     }
     ),
