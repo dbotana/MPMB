@@ -9,7 +9,7 @@
     Subject:	Subclass
     Effect:		This script adds a subclass for the Paladin, called "Oath of Safeguarding"
                 This is taken from Tome of Heroes (https://koboldpress.com/kpstore/product/tome-of-heroes-for-5th-edition/)
-                Thiscompendium is published by Kobold Press (https://koboldpress.com/)
+                This compendium is published by Kobold Press (https://koboldpress.com/)
     Code by:	Rocky
     Date:		2023-08-28
 */
