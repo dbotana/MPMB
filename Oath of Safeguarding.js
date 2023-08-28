@@ -73,8 +73,8 @@ AddSubClass("paladin", "oath of safeguarding", {
             source: ["HB", 4],
             minlevel: 15,
             description: desc([
-                "I cannot be shoved. When a hostile creature within 10 ft of me moves more than 10 feet away,",
-                "I can use my reaction to move up to 10 feet and make an attacka gainst the creature",
+                "I cannot be shoved. If a hostile creature within 10 ft of me moves more than 10 feet away,",
+                "I can use my reaction to move up to 10 feet and make an attack against the creature",
             ]),
             action: ["reaction", ""]
         },
