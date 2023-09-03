@@ -66,9 +66,9 @@ AddSubClass("druid", "circle of sacrifice", {
             description: desc([
                 "During or after combat, I can begin a ritual which takes ten minutes.",
                 "If during the ritual, three criteria are met then the target gains vulnerability to all damage for 24 hrs.",
-                "*Wounding:* the creature must take any non-magical damage",
-                "*Drowning/Poisoning: The creature must be submerged in liquid, take poison damage or be poisoned",
-                "Hanging: The creature must be suspended off the ground from any part of their body",
+                "\u2022 Wounding: the creature must take any non-magical damage",
+                "\u2022 Drowning/Poisoning: The creature must be submerged in liquid, take poison damage or be poisoned",
+                "\u2022 Hanging: The creature must be suspended off the ground from any part of their body",
                 "Additionally, until my next long rest I maximize hit dice I spend",
                 "At the end of my next long rest, I double the number of my highest level spell slots until my next long rest",
             ])
@@ -82,7 +82,10 @@ AddSubClass("druid", "circle of sacrifice", {
                 "The creature must have CR <= half druid level, and must be a beast or elemental.",
                 "The creature summoned through the ritual acts on its own initiative, defends me by default, and obeys my commands",
                 "If the creature dies it is gone forever and a new ritual must be done to summon a new creature."
-            ])
+            ]),
+            additional: levels.map(function (n) {
+                return n < 1 ? "" : "CR " + Math.floor(n / 2);
+            })
         }
     }
 });
