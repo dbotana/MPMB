@@ -33,8 +33,8 @@ AddSubClass("druid", "circle of time", {
 			minlevel : 6,
 			description : "\n   I can use the Ready or Dodge actions as a bonus action a number of times per day equal to my Wisdom modifier",
 			action : ["bonus action", " (Ready/Dodge)"],
-			usages : "Wisdom modifier per ",
-			usagescalc : "event.value = Math.max(1, What('Wis Mod'));",
+			usages : "1/2 Wisdom modifier per ",
+			usagescalc : "event.value = Math.max(1, What('Wis Mod')/2);",
 			recovery : "long rest"
 		},
 		"subclassfeature10" : {
