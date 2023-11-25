@@ -94,8 +94,13 @@ AddSubClass("artificer", "mastermaker", {
                 "Can choose to be considered a construct instead of other creature types against spells/effects",
                 "Can cast Antilife Shell and Investiture of Stone without spell slot, preparation, or material components using battlefist as focus (once per long rest for each spell)"
             ]),
+            savetxt: {
+                immune: ["poisoned"],
+                resistance: ["poison", "psychic"]
+            },
             spellcastingBonus: {
                 name: "Construct Apotheosis",
+                times : 2,
                 spells: ["antilife shell", "investiture of stone"],
                 selection: ["antilife shell", "investiture of stone"],
                 firstCol: "oncelr",
