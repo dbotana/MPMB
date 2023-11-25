@@ -99,6 +99,15 @@ AddSubClass("artificer", "mastermaker", {
                 resistance: ["poison", "psychic"],
                 text: ["Construct or creature vs spells/effects"]
             },
+            extraLimitedFeatures: [{
+                name: "Construct Apotheosis: Antilife Shell",
+                usages: 1,
+                recovery: "long rest"
+            }, {
+                name: "Construct Apotheosis: Investiture of Stone",
+                usages: 1,
+                recovery: "long rest"
+            }],
             spellcastingBonus: {
                 name: "Construct Apotheosis",
                 spells: ["antilife shell", "investiture of stone"],
@@ -106,7 +115,7 @@ AddSubClass("artificer", "mastermaker", {
                 firstCol: "oncelr",
                 times: 2
             }
-        }
+        }        
     }
 });
 MagicItemsList["Improved Battlefist Shield"] = {
