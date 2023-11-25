@@ -104,7 +104,7 @@ AddSubClass("artificer", "mastermaker", {
                 spells: ["antilife shell", "investiture of stone"],
                 selection: ["antilife shell", "investiture of stone"],
                 firstCol: "oncelr",
-                times: 2,
+                times: 2
             }
         }
     }
