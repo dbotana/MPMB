@@ -8,10 +8,9 @@
 /*	-INFORMATION-
     Subject:	Subclass
     Effect:		This script adds a subclass for the Paladin, called "Oath of discovery"
-                This is taken from Tome of Heroes (https://koboldpress.com/kpstore/product/tome-of-heroes-for-5th-edition/)
-                This compendium is published by Kobold Press (https://koboldpress.com/)
+                This is taken from Seas of Vodari (https://preview.drivethrurpg.com/en/product/308461/The-Seas-of-Vodari-5E-Swashbucking--Sorcery-on-the-High-Seas)
     Code by:	Rocky
-    Date:		2023-08-28
+    Date:		2023-12-17
 */
 
 var iFileName = "Paladin - Oath of Discovery.js";
@@ -23,7 +22,7 @@ SourceList["HB"] = {
     abbreviation: "HB",
     abbreviationSpellsheet: "HB",
     group: "Rocky's Homebrew",
-    date: "2023/8/28"
+    date: "2023/12/17"
 };
 
 AddSubClass("paladin", "oath of discovery", {
