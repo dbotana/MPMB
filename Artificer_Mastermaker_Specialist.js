@@ -15,7 +15,7 @@ AddSubClass("artificer", "mastermaker", {
     subname: "Mastermaker",
     fullname: "Mastermaker",
     source: ["HB", 2],
-    attacks : [1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+    attacks: [1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
     features: {
         "subclassfeature3": {
             name: "Tools of Integration",
@@ -96,21 +96,35 @@ AddSubClass("artificer", "mastermaker", {
             ]),
             savetxt: {
                 immune: ["poisoned"],
-                resistance: ["poison", "psychic"]
+                resistance: ["poison", "psychic"],
+                text: ["Construct or creature vs spells/effects"]
             },
-            spellcastingBonus: {
-                name: "Construct Apotheosis",
-                times : 2,
-                spells: ["antilife shell", "investiture of stone"],
-                selection: ["antilife shell", "investiture of stone"],
-                firstCol: "oncelr",
-            }
+            extraLimitedFeatures: [{
+                name: "Construct Apotheosis: Antilife Shell",
+                usages: 1,
+                recovery: "long rest"
+            }, {
+                name: "Construct Apotheosis: Investiture of Stone",
+                usages: 1,
+                recovery: "long rest"
+            }],
+            spellcastingBonus: [{
+                name: "Construct Apotheosis: Antilife Shell",
+                spells: ["antilife shell"],
+                selection: ["antilife shell"],
+                firstCol: "oncelr"
+            }, {
+                name: "Construct Apotheosis: Investiture of Stone",
+                spells: ["investiture of stone"],
+                selection: ["investiture of stone"],
+                firstCol: "oncelr"
+            }]
         }
     }
 });
 MagicItemsList["Improved Battlefist Shield"] = {
     name: "Improved Battlefist Shield",
-    source: [["HB", 2]], // Update source as appropriate
+    source: [["HB", 2]],
     type: "shield",
     rarity: "common", // Update rarity as appropriate
     description: "When equipped, this shield grants a +2 bonus to AC. It can be infused as both a weapon and a shield. While used as a shield, it still functions as a magical melee weapon.",
