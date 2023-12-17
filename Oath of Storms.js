@@ -72,7 +72,7 @@ AddSubClass("paladin", "oath of storms", {
             source: ["HB", 4],
             minlevel: 15,
             description: desc(["I gain immunity to Lightning and Thunder damage and ranged attack roles are made with disadvantage against me",]),
-            savetxt: { immune: ["lightnight", "radiant"] },
+            savetxt: { immune: ["lightning", "radiant"] },
             },
         "subclassfeature20": {
             name: "Champion of Storm",
