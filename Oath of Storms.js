@@ -16,10 +16,10 @@ var iFileName = "Paladin - Oath of Storms.js";
 RequiredSheetVersion(13);
 
 // Define the source
-SourceList["HB"] = {
+SourceList["OoS"] = {
     name: "Paladin - Oath of Storms",
-    abbreviation: "HB",
-    abbreviationSpellsheet: "HB",
+    abbreviation: "OoS",
+    abbreviationSpellsheet: "OoS",
     group: "Rocky's Homebrew",
     date: "2023/12/17"
 };
@@ -27,11 +27,11 @@ SourceList["HB"] = {
 AddSubClass("paladin", "oath of storms", {
     regExpSearch: /^(((?=.*(storm|lightning|thunder))((?=.*paladin)|((?=.*(exalted|sacred|holy|divine))(?=.*(knight|fighter|warrior|warlord|trooper)))))|((?=.*(Storm|safe|guard))(?=.*(knight|fighter|warrior|warlord|trooper)))).*$/i,
     subname: "Oath of Storms",
-    source: ["HB", 4],
+    source: ["OoS", 4],
     features: {
         "subclassfeature3": {
             name: "Channel Divinity: Thunderous Advance",
-            source: ["HB", 4],
+            source: ["OoS", 4],
             minlevel: 3,
             description: desc([
                 "As a Bonus Action, I can teleport to an unoccupied space I can see within 60 feet",
@@ -41,7 +41,7 @@ AddSubClass("paladin", "oath of storms", {
         },
         "subclassfeature3.1": {
             name: "Channel Divinity: Wield the Storm",
-            source: ["HB", 4],
+            source: ["OoS", 4],
             minlevel: 3,
             description: desc([
                 "As an Action, I imbue myself and my weapon with lightning, transforming it into a 3-foot lightning bolt",
@@ -56,7 +56,7 @@ AddSubClass("paladin", "oath of storms", {
             weaponsAdd: ["Lightning Bolt"],
             weaponOptions: [{
                 name: "Lightning Bolt",
-                source: ["HB", 2],
+                source: ["OoS", 2],
                 regExpSearch: /^(?=.*lightning)(?=.*bolt).*$/i,
                 type: "Martial",
                 ability: 1,
@@ -69,7 +69,7 @@ AddSubClass("paladin", "oath of storms", {
         },
         "subclassfeature7": {
             name: "Aura of Gusts",
-            source: ["HB", 4],
+            source: ["OoS", 4],
             minlevel: 7,
             description: desc([
                 "Within 10 feet of me, the area becomes difficult terrain for my enemies.",
@@ -82,14 +82,14 @@ AddSubClass("paladin", "oath of storms", {
 
         "subclassfeature15": {
             name: "Storm's Herald",
-            source: ["HB", 4],
+            source: ["OoS", 4],
             minlevel: 15,
             description: desc(["I gain immunity to Lightning and Thunder damage and ranged attack roles are made with disadvantage against me",]),
             savetxt: { immune: ["lightning", "radiant"] },
         },
         "subclassfeature20": {
             name: "Champion of Storm",
-            source: ["HB", 4],
+            source: ["OoS", 4],
             minlevel: 20,
             description: desc([
                 "As a action, I embody the fury of a raging storm. For 1 hour:",

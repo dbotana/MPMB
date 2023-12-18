@@ -18,10 +18,10 @@ var iFileName = "Paladin - Oath of Safeguarding.js";
 RequiredSheetVersion(13);
 
 // Define the source
-SourceList["HB"] = {
+SourceList["OoSG"] = {
     name: "Paladin - Oath of Safeguarding",
-    abbreviation: "HB",
-    abbreviationSpellsheet: "HB",
+    abbreviation: "OSG",
+    abbreviationSpellsheet: "OSG",
     group: "Rocky's Homebrew",
     date: "2023/8/28"
 };
@@ -29,11 +29,11 @@ SourceList["HB"] = {
 AddSubClass("paladin", "oath of safeguarding", {
     regExpSearch: /^(((?=.*(safeguarding|safe|guard))((?=.*paladin)|((?=.*(exalted|sacred|holy|divine))(?=.*(knight|fighter|warrior|warlord|trooper)))))|((?=.*(safeguarding|safe|guard))(?=.*(knight|fighter|warrior|warlord|trooper)))).*$/i,
     subname: "Oath of Safeguarding",
-    source: ["HB", 4],
+    source: ["OoSG", 4],
     features: {
         "subclassfeature3": {
             name: "Channel Divinity: Insurmountable Passage",
-            source: ["HB", 4],
+            source: ["OoSG", 4],
             minlevel: 3,
             description: desc([
                 "As an action, I can magically make ground within 60 ft difficult terrain",
@@ -44,7 +44,7 @@ AddSubClass("paladin", "oath of safeguarding", {
         },
         "subclassfeature3.1": {
             name: "Channel Divinity: Protect from Harm",
-            source: ["HB", 4],
+            source: ["OoSG", 4],
             minlevel: 3,
             description: desc([
                 "As an action, I can give reassure friendly creatures that can see or hear me",
@@ -56,7 +56,7 @@ AddSubClass("paladin", "oath of safeguarding", {
         },
         "subclassfeature7": {
             name: "Aura of Preservation",
-            source: ["HB", 4],
+            source: ["OoSG", 4],
             minlevel: 7,
             description: desc([
                 "While not incapacitated, creatures of my choice within range and I gain benefits:",
@@ -70,7 +70,7 @@ AddSubClass("paladin", "oath of safeguarding", {
         },
         "subclassfeature15": {
             name: "Battlefield Controller",
-            source: ["HB", 4],
+            source: ["OoSG", 4],
             minlevel: 15,
             description: desc([
                 "I cannot be shoved. If a hostile creature within 10 ft of me moves more than 10 feet away,",
@@ -80,7 +80,7 @@ AddSubClass("paladin", "oath of safeguarding", {
         },
         "subclassfeature20": {
             name: "Redoubtable Defender",
-            source: ["HB", 4],
+            source: ["OoSG", 4],
             minlevel: 20,
             description: desc([
                 "As an action, I touch a creature or structure and for 1 hour gain benefits:",

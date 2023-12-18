@@ -15,10 +15,10 @@
 var iFileName = "Druid - Circle of Sacrifice [Rocky].js";
 RequiredSheetVersion(13);
 
-SourceList["HB"] = {
+SourceList["CoSC"] = {
     name: "Druid - Circle of Sacrifice",
-    abbreviation: "HB",
-    abbreviationSpellsheet: "HB",
+    abbreviation: "CoSC",
+    abbreviationSpellsheet: "CoSC",
     group: "Rocky's Homebrew",
     date: "2023/09/02"
 };
@@ -27,11 +27,11 @@ SourceList["HB"] = {
 AddSubClass("druid", "circle of sacrifice", {
     regExpSearch: /^(?=.*(druid|shaman))(?=.*circle)(?=.*sacrifice).*$/i,
     subname: "Circle of Sacrifice",
-    source: [["HB", 1]],
+    source: [["CoSC", 1]],
     features: {
         "subclassfeature2": {
             name: "Dagda's Boon",
-            source: [["HB", 1]],
+            source: [["CoSC", 1]],
             minlevel: 2,
             description: desc([
                 "When I kill a creature I can use my reaction to regain a 1st level spell slot",
@@ -44,7 +44,7 @@ AddSubClass("druid", "circle of sacrifice", {
         },
         "subclassfeature6": {
             name: "Ritual of Oak and Mistle Toe",
-            source: [["HB", 2]],
+            source: [["CoSC", 2]],
             minlevel: 6,
             description: desc([
                 "As part of a long rest, I complete a ritual (including sacrifice and a freshly harvested ingredient)",
@@ -61,7 +61,7 @@ AddSubClass("druid", "circle of sacrifice", {
         },
         "subclassfeature10": {
             name: "Ritual of Threefold Death",
-            source: [["HB", 2]],
+            source: [["CoSC", 2]],
             minlevel: 10,
             description: desc([
                 "During or after combat, I can begin a ritual which takes ten minutes.",
@@ -75,7 +75,7 @@ AddSubClass("druid", "circle of sacrifice", {
         },
         "subclassfeature14": {
             name: "The Wicker Man",
-            source: [["HB", 2]],
+            source: [["CoSC", 2]],
             minlevel: 14,
             description: desc([
                 "As a ritual (1 hr) I gather a number of living creatures equal to the CR of the creature I want to summon",

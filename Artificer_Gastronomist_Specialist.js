@@ -14,11 +14,11 @@ AddSubClass("artificer", "gastronomist", {
     regExpSearch: /^(?=.*gastronomist)(?!.*wizard).*$/i,
     subname: "Gastronomist",
     fullname: "Gastronomist",
-    source: ["HB", 2],
+    source: ["Gas", 2],
     features: {
         "subclassfeature3": {
             name: "Tools Proficiency",
-            source: ["HB", 2],
+            source: ["Gas", 2],
             minlevel: 3,
             description: " [proficient with cook's utensils]",
             toolProfs: ["cook's utensils"],
@@ -26,7 +26,7 @@ AddSubClass("artificer", "gastronomist", {
         },
         "subclassfeature3.1": {
             name: "Easy Bake Oven",
-            source: ["HB", 2],
+            source: ["Gas", 2],
             minlevel: 3,
             description: desc([
                 "As an action I can create a number of delicacies less than or equal to my proficency bonus",
@@ -55,7 +55,7 @@ AddSubClass("artificer", "gastronomist", {
         },
         "subclassfeature5": {
             name: "Food Fight",
-            source: [["HB", 2]],
+            source: [["Gas", 2]],
             minlevel: 3,
             description: desc([
                 "As a action, I can fling delicious detonations",
@@ -72,7 +72,7 @@ AddSubClass("artificer", "gastronomist", {
             weaponsAdd: ["Delicious Detonation"],
             weaponOptions: [{
                 name: "Delicious Detonation",
-                source: ["HB", 2],
+                source: ["Gas", 2],
                 regExpSearch: /^(?=.*delicious)(?=.*detonation).*$/i,
                 type: "Cantrip",
                 ability: 4,
@@ -120,7 +120,7 @@ AddSubClass("artificer", "gastronomist", {
         },
         "subclassfeature9": {
             name: "Alternative Medicine",
-            source: ["HB", 2],
+            source: ["Gas", 2],
             minlevel: 9,
             description: desc([
                 "Consuming my delicacies now also grants 2d6 + my Int mod in temp HP (min 1)",
@@ -146,7 +146,7 @@ AddSubClass("artificer", "gastronomist", {
         },
         "subclassfeature15": {
             name: "Master Chef",
-            source: ["HB", 2],
+            source: ["Gas", 2],
             minlevel: 15,
             description: " [each spell 1\xD7 per long rest]" + desc([
                 "I have immunity to fire and poison damage and immunity to being poisoned",

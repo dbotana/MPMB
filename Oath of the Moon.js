@@ -11,12 +11,12 @@ SourceList["HB:OtM"] = {
 AddSubClass("paladin", "oath of the moon", {
     regExpSearch: /^(?=.*paladin)(?=.*moon).*$/i,
     subname: "Oath of the Moon",
-    source: ["HB", 0],
+    source: ["HB:OtM", 0],
     spellcastingExtra: ["faerie fire", "hex", "moonbeam", "zone of truth", "beacon of hope", "remove curse", "locate creature", "guardian of faith", "greater restoration", "scrying"],
     features: {
         "subclassfeature3": {
             name: "Channel Divinity: Oath of the Moon",
-            source: ["HB", 0],
+            source: ["HB:OtM", 0],
             minlevel: 3,
             description: desc([
                 "I gain two Channel Divinity options:",
@@ -27,7 +27,7 @@ AddSubClass("paladin", "oath of the moon", {
         },
         "subclassfeature7": {
             name: "Fake Light",
-            source: ["HB", 0],
+            source: ["HB:OtM", 0],
             minlevel: 7,
             description: desc([
                 "As a bonus action, I can create a sphere of magical darkness around me, through which only I can see.",
@@ -41,14 +41,14 @@ AddSubClass("paladin", "oath of the moon", {
         },
         "subclassfeature15": {
             name: "Moon Cloak",
-            source: ["HB", 0],
+            source: ["HB:OtM", 0],
             minlevel: 15,
             description: "\n   " + "When I am not in sunlight, I gain a +1 bonus to AC. I also gain proficiency in Stealth, or double my proficiency bonus for it if I'm already proficient.",
             skillstxt: "\n\n" + toUni("Oath of the Moon") + ": Stealth proficiency; double proficiency if already proficient.",
         },
         "subclassfeature20": {
             name: "Moon Aura",
-            source: ["HB", 0],
+            source: ["HB:OtM", 0],
             minlevel: 20,
             description: desc([
                 "I emit a soothing aura in a 20-ft radius around me.",

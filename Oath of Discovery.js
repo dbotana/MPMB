@@ -8,7 +8,7 @@
 /*	-INFORMATION-
     Subject:	Subclass
     Effect:		This script adds a subclass for the Paladin, called "Oath of discovery"
-                This is taken from Seas of Vodari (https://preview.drivethrurpg.com/en/product/308461/The-Seas-of-Vodari-5E-Swashbucking--Sorcery-on-the-High-Seas)
+                This is taken from Seas of Vodari (https://preview.drivethrurpg.com/en/product/308461/The-Seas-of-Vodari-5E-SwasOoDucking--Sorcery-on-the-High-Seas)
     Code by:	Rocky
     Date:		2023-12-17
 */
@@ -17,10 +17,10 @@ var iFileName = "Paladin - Oath of Discovery.js";
 RequiredSheetVersion(13);
 
 // Define the source
-SourceList["HB"] = {
+SourceList["OoD"] = {
     name: "Paladin - Oath of discovery",
-    abbreviation: "HB",
-    abbreviationSpellsheet: "HB",
+    abbreviation: "OoD",
+    abbreviationSpellsheet: "OoD",
     group: "Rocky's Homebrew",
     date: "2023/12/17"
 };
@@ -28,11 +28,11 @@ SourceList["HB"] = {
 AddSubClass("paladin", "oath of discovery", {
     regExpSearch: /^(((?=.*(discovery|discover))((?=.*paladin)|((?=.*(exalted|sacred|holy|divine))(?=.*(knight|fighter|warrior|warlord|trooper)))))|((?=.*(discovery|safe|guard))(?=.*(knight|fighter|warrior|warlord|trooper)))).*$/i,
     subname: "Oath of discovery",
-    source: ["HB", 4],
+    source: ["OoD", 4],
     features: {
         "subclassfeature3": {
             name: "Channel Divinity: Explorer’s Ward",
-            source: ["HB", 4],
+            source: ["OoD", 4],
             minlevel: 3,
             description: desc([
                 "As an action, choose a creature within 30 feet to gain temporary hit points and tool proficiencies",
@@ -46,7 +46,7 @@ AddSubClass("paladin", "oath of discovery", {
         },
         "subclassfeature3.1": {
             name: "Channel Divinity: Polarize",
-            source: ["HB", 4],
+            source: ["OoD", 4],
             minlevel: 3,
             description: desc([
                 "As a bonus action, gain polarity charges equal to my Charisma modifier (minimum of 1)",
@@ -60,7 +60,7 @@ AddSubClass("paladin", "oath of discovery", {
         },
         "subclassfeature3.2": {
             name: "Ancient Rites",
-            source: ["HB", 4],
+            source: ["OoD", 4],
             minlevel: 3,
             description: desc([
                 "I gain knowledge of ancient rites and can cast cleric and druid ritual spells",
@@ -75,7 +75,7 @@ AddSubClass("paladin", "oath of discovery", {
 
         "subclassfeature7": {
             name: "Aura of Concentration",
-            source: ["HB", 4],
+            source: ["OoD", 4],
             minlevel: 7,
             description: desc([
                 "While not incapacitated, creatures of my choice within range and I gain benefits:",
@@ -88,7 +88,7 @@ AddSubClass("paladin", "oath of discovery", {
         },
         "subclassfeature15": {
             name: "Twice-Found Sigils",
-            source: ["HB", 4],
+            source: ["OoD", 4],
             minlevel: 15,
             description: desc([
                 "I master ancient sigils of power (see notes), which I can inscribe on a flat surface in 10 minutes",
@@ -108,7 +108,7 @@ AddSubClass("paladin", "oath of discovery", {
         },
         "subclassfeature20": {
             name: "Champion of Discovery",
-            source: ["HB", 4],
+            source: ["OoD", 4],
             minlevel: 20,
             description: desc([
                 "As a bonus action, I can cause shining runes to cover my skin and grow rune wings for 1 minute",
