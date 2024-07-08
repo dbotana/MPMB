@@ -1,0 +1,125 @@
+/*	-WHAT IS THIS?-
+	This file adds optional material to "MPMB's Character Record Sheet" found at https://www.flapkan.com/download#charactersheets
+	Import this file using the "Add Extra Materials" bookmark.
+	-KEEP IN MIND-
+	It is recommended to enter the code in a fresh sheet before adding any other information (i.e. before making your character with it).
+*/
+
+/*	-INFORMATION-
+	Subject:	Alternate Barbarian Rage
+	Effect:		This script modifies the barbarian rage feature to increase the bonus damage by 1 
+=	Sheet:		v13.1.0 and newer
+	Code by:	Rocky
+	Date: 7-6-2024
+*/
+
+var iFileName = "altbarbarianrage.js"; 
+RequiredSheetVersion(13.1); 
+
+SourceList["BR"] = {
+    name : "Alternate Rage",
+    abbreviation : "BR",
+    group : "Homebrew",
+};
+AddFeatureChoice(ClassList.barbarian.features["rage"], true, "Alternate Rage", {
+	name : "Alternate Rage",
+	extraname : "Optional Barbarian 1",
+	source : [["BR", 1]],
+	description : desc([
+        "Increases rage bonus damage by 1"
+    ]),
+    additional : levels.map(function (n) {
+        return "+" + (n < 9 ? 3 : n < 16 ? 4 : 5) + " melee damage";
+    }),
+    action : ["bonus action", " (start/end)"],
+    calcChanges : {
+        atkCalc : [
+            function (fields, v, output) {
+                if (v.isMeleeWeapon && fields.Mod === 1 && classes.known.barbarian && classes.known.barbarian.level && /\brage\b/i.test(v.WeaponTextName)) {
+                    output.extraDmg += 1;
+                }
+            }]
+    },
+    eval : function() {
+        processActions(true, "Barbarian: Rage", ClassList.barbarian.features["rage"].action, "Rage");
+    }
+}, "Optional 1st-level barbarian features");
+
+// AddFeatureChoice(ClassList.barbarian.features["rage"], true, "Enhanced Rage", {
+// 	name : "Enhanced Rage",
+// 	extraname : "Optional Barbarian 1",
+// 	source : [["ER", 1]],
+// 	description : desc([
+//         "Increases my rage bonus damage by 1"
+//     ]),
+//     additional : levels.map(function (n) {
+//         return "+" + (n < 9 ? 3 : n < 16 ? 4 : 5) + " melee damage";
+//     }),
+//     calcChanges : {
+//         atkCalc : [
+//             function (fields, v, output) {
+//                 if (v.isMeleeWeapon && fields.Mod === 1 && classes.known.barbarian && classes.known.barbarian.level && /\brage\b/i.test(v.WeaponTextName)) {
+//                     output.extraDmg += 1;
+//                 }
+//             },
+//             "If I include the word 'Rage' in a melee weapon's name that uses Strength, the calculation will add my Rage's bonus damage to it. Be aware that if the weapon is used to make a ranged attack, the rage bonus damage shouldn't be added (e.g. when using a thrown weapon)."
+//         ]
+//     },
+//     eval : function() {
+//         processActions(true, "Barbarian: Rage", ClassList.barbarian.features["Rage"].action, "Rage");
+//     }
+// }, "Optional 1st-level barbarian features");
+//
+// "rage" : {
+// 				name : "Rage",
+// 				source : [["SRD", 8], ["P", 48]],
+// 				minlevel : 1,
+// 				description : desc([
+// 					"Start/end as bonus action; bonus damage to melee weapon attacks using Str; lasts 1 min",
+// 					"Adv. on Strength checks/saves (not attacks); resistance to bludgeoning/piercing/slashing",
+// 					"Stops if I end turn without attacking or taking damage since last turn, or unconscious"
+// 				]),
+// 				additional : levels.map(function (n) {
+// 					return "+" + (n < 9 ? 2 : n < 16 ? 3 : 4) + " melee damage";
+// 				}),
+// 				usages : [2, 2, 3, 3, 3, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 6, 6, "\u221E\xD7 per "],
+// 				recovery : "long rest",
+// 				action : ["bonus action", " (start/end)"],
+// 				dmgres : [["Bludgeoning", "Bludgeon. (in rage)"], ["Piercing", "Piercing (in rage)"], ["Slashing", "Slashing (in rage)"]],
+// 				savetxt : { text : ["Adv. on Str saves in rage"] },
+// 				calcChanges : {
+// 					atkCalc : [
+// 						function (fields, v, output) {
+// 							if (v.isMeleeWeapon && fields.Mod === 1 && classes.known.barbarian && classes.known.barbarian.level && /\brage\b/i.test(v.WeaponTextName)) {
+// 								output.extraDmg += classes.known.barbarian.level < 9 ? 2 : classes.known.barbarian.level < 16 ? 3 : 4;
+// 							}
+// 						},
+// 						"If I include the word 'Rage' in a melee weapon's name that uses Strength, the calculation will add my Rage's bonus damage to it. Be aware that if the weapon is used to make a ranged attack, the rage bonus damage shouldn't be added (e.g. when using a thrown weapon)."
+// 					]
+// 				}
+//                 eval : function() {
+//                     processActions(false, "Barbarian: Rage", ClassList.barbarian.features["rage"].action, "Rage");
+//                 }
+// 			},
+
+// "subclassfeature2.wild shape" : {
+//             name : "Wild Shape",
+//             source : [["P", 66]],
+//             minlevel : 2,
+//             description : desc([
+//                 "new feature text”}),
+//             action : ["bonus action", " (start/stop)"],
+//             eval : function() {
+//                 processActions(false, "Druid: Wild Shape", ClassList.druid.features["subclassfeature2.wild shape"].action, "Wild Shape");
+//             }
+//         },
+//         "subclassfeature2.1" : {
+//             name : "Combat Wild Shape",
+//             source : [["P", 69]],
+//             minlevel : 2,
+//             description : "\n   " + "As a bonus action while in Wild Shape, I can expend spell slots to heal myself" + "\n   " + "I regain 1d8 HP per expended spell slot level; I can use Wild Shape as a bonus action",
+//             action : ["bonus action", " (heal)"],
+//             removeeval : function() {
+//                 processActions(true, "Druid: Wild Shape", ClassList.druid.features["subclassfeature2.wild shape"].action, "Wild Shape");
+//             }
+//         },
