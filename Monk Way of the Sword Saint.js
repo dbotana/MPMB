@@ -291,7 +291,7 @@ SpellsList["iron wind strike"] = {
     range : "S:30 feet",
     components : "V, S, M (a weapon)",
     duration : "Instantaneous",
-    description : "Choose up to 3 targets; make melee spell attack. On hit, deal 3d8 weapon damage.",
+    description : "Melee spell attack on 3 targets. On hit, deal 3d8 weapon damage.",
     descriptionFull : "You call upon the iron winds to strike your foes. Choose up to three creatures within range. Make a melee spell attack against each target. On a hit, the target takes 3d8 damage of the weapon's type."
 },
 SpellsList["spirit echo"] = {
@@ -303,7 +303,7 @@ SpellsList["spirit echo"] = {
     range : "Self",
     components : "V, S",
     duration : "Concentration, up to 1 minute",
-    description : "Summon a spirit echo to attack with you; shares your space, seperate roll. On hit deal force damage equal to half the damage rolled.",
+    description : "Summon echo to attack with you; shares your space, seperate roll. On hit deal force damage equal to half damage rolled.",
     descriptionFull : "You summon a ghostly echo of yourself that shares your space and mimics your movements. For the duration, whenever you make an attack, the spirit echo also makes an attack against the same target."
 };
 SpellsList["flickering strikes"] = {
@@ -315,6 +315,6 @@ SpellsList["flickering strikes"] = {
     range : "S:30 ft",
     components : "V, S",
     duration : "Instantaneous",
-    description : "Teleport and make a weapon attack against up to 5 targets within range. On hit, deal weapon damage + 6d6 force.",
+    description : "Teleport, make a weapon attack against 5 targets. On hit, deal weapon damage + 6d6 force.",
     descriptionFull : "You flicker between targets, striking each with a weapon attack. You teleport to each target within range and make a melee weapon attack against it. On a hit, the target takes damage equal to the weapon's damage dice + 6d6 force damage."
 }
