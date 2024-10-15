@@ -13,7 +13,7 @@
 */
 var iFileName = "Monk_Way_of_the_Sword_Saint.js";
 
-RequiredSheetVersion("13");
+RequiredSheetVersion(13);
 
 SourceList["WSS"] = {
     name : "Way of the Sword Saint",

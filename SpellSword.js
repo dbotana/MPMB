@@ -36,22 +36,23 @@ ClassList["spellsword"] = {
     name : "Spell Sword",
     source : ["SSH", 0],
     primaryAbility : "4",
+    abilitySave : 4,
     prereqs : "Dexterity and Intelligence 13",
     die : 8,
+    saves : ["Con", "Int"],
     improvements: [0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 5],
-    armorProfs : {
-        primary : [true, true, false, false],
-        secondary : [true, true, false, false]
-    },
-    weaponProfs : {
-        primary : [true, true],
-        secondary : [true, true]
-    },
+    armor : [
+            [true, true, false, false],
+    ],
+    weaponProfs : [
+            [true, false, ["longswords", "rapiers", "scimitars", "shortswords"]],
+    ],
     spellcastingFactor : 2,
     spellcastingFactorRoundupMulti : true,
-	spellcastingTable: [[0, 0, 0, 0, 0, 0, 0, 0, 0]].concat(levels.map(function (n) {
-		return defaultSpellTable[Math.ceil(n / 2)];
-	})),
+    spellcastingKnown : {
+		cantrips : [2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
+		spells : [3, 4, 5, 5, 6, 6, 7, 7, 9, 9, 10, 10, 11, 11, 12, 12, 14, 14, 15, 15]
+	},
     attacks : [1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
     subclasses : ["Eldritch Order", ["Arcane Rager", "Armored Battlemage", "Duskblade", "Eldritch Archer", "Magebane"]],
     features : {
