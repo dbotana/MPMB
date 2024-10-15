@@ -54,7 +54,7 @@ ClassList["spellsword"] = {
 		spells : [3, 4, 5, 5, 6, 6, 7, 7, 9, 9, 10, 10, 11, 11, 12, 12, 14, 14, 15, 15]
 	},
     attacks : [1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
-    subclasses : ["Eldritch Order", ["Arcane Rager", "Armored Battlemage", "Duskblade", "Eldritch Archer", "Magebane"]],
+    subclasses : ["Eldritch Order", []],
     features : {
         "spellcasting" : {
             name : "Spellcasting",
