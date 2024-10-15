@@ -13,125 +13,24 @@ SourceList["SSH"] = {
 // Define the Spell Sword spell list
 [
     // Cantrips (0 Level)
-    "acid splash", "blade ward", "booming blade", "control flames", "dancing lights",
-    "fire bolt", "frostbite", "green-flame blade", "light", "mage hand",
-    "message", "minor illusion", "poison spray", "prestidigitation",
-    "ray of frost", "shocking grasp", "sword burst", "thunderclap", "true strike",
+    "acid splash", "blade ward", "booming blade", "control flames", "dancing lights", "fire bolt", "frostbite", "green-flame blade", "light", "mage hand", "message", "minor illusion", "poison spray", "prestidigitation", "ray of frost", "shocking grasp", "sword burst", "thunderclap", "true strike",
 
     // 1st Level
-    "alarm", "arcane needle", "blazing ring", "burning hands", "chromatic orb",
-    "color spray", "comprehend languages", "detect magic", "expeditious retreat",
-    "false life", "feather fall", "flame thrust", "frostbite beam", 
-    "grease", "ice knife", "identify", "jump", 
-    "longstrider", "mage armor", 
-    "ray of sickness", 
-    "shield", 
-    "silent image",
-    "sleep",
-    "snare",
-    "thunderwave",
-    "witch bolt",
+    "alarm", "arcane needle", "blazing ring", "burning hands", "chromatic orb", "color spray", "comprehend languages", "detect magic", "expeditious retreat", "false life", "feather fall", "flame thrust", "frostbite beam", "grease", "ice knife", "identify", "jump", "longstrider", "mage armor", "ray of sickness", "shield", "silent image", "sleep", "snare", "thunderwave", "witch bolt",
 
     // 2nd Level
-    "aganazzar's scorcher",
-    "arcane lock",
-    "arcane javelin",
-    "blindness/deafness",
-    "blur",
-    "cloud of daggers",
-    "darkness",
-    "darkvision",
-    "detect thoughts",
-    "dragon's breath",
-    "enlarge/reduce",
-    "glacial shroud",
-    "gust of wind",
-    "invisibility",
-    "knock",
-    "levitate",
-    "locate object",
-    "magic weapon",
-    "mind spike",
-    "mirror image",
-    "phantom strike",
-    "poisonous wave",
-    "ray of enfeeblement",
-    "rope trick",
-    "scorching ray",
-    "see invisibility",
-    "shadow blade",
-    "shatter",
-    "silence",
-    "spider climb",
-    "web",
+    "aganazzar's scorcher", "arcane lock", "arcane javelin", "blindness/deafness", "blur", "cloud of daggers", "darkness", "darkvision", "detect thoughts", "dragon's breath", "enlarge/reduce", "glacial shroud", "gust of wind", "invisibility", "knock", "levitate", "locate object", "magic weapon", "mind spike", "mirror image", "phantom strike", "poisonous wave", "ray of enfeeblement", "rope trick", "scorching ray", "see invisibility", "shadow blade", "shatter", "silence", "spider climb", "web",
 
     // 3rd Level
-    "blink",
-    "counterspell",
-    "dispel magic",
-    "fear",
-    "fireball",
-    "fly",
-    "frost lance",
-    "gaseous form",
-    "haste",
-    "hypnotic pattern",
-    "lightning bolt",
-    "major image",
-    "melf's minute meteors",
-    "phantom steed",
-    "protection from energy",
-    "shadowblight claw",
-    "sleet storm",
-    "slow",
-    "sonic burst",
-    "thunder step",
-    "tidal wave",
-    "tongues",
-    "vampiric touch",
-    "wall of sand",
-    "water breathing",
+    "blink", "counterspell", "dispel magic", "fear", "fireball", "fly", "frost lance", "gaseous form", "haste", "hypnotic pattern", "lightning bolt", "major image", "melf's minute meteors", "phantom steed", "protection from energy", "shadowblight claw", "sleet storm", "slow", "sonic burst", "thunder step", "tidal wave", "tongues", "vampiric touch", "wall of sand", "water breathing",
 
     // 4th Level
-    "arcane chains",
-    "banishment",
-    "chaotic blastwave",
-    "control water",
-    "dimension door",
-    "elemental bane",
-    "fire shield",
-    "greater invisibility",
-    "hallucinatory terrain",
-    "ice storm",
-    "lightning arc",
-    "phantasmal killer",
-    "polymorph",
-    "sickening radiance",
-    "stoneskin",
-    "storm sphere",
-    "wall of fire",
+    "arcane chains", "banishment", "chaotic blastwave", "control water", "dimension door", "elemental bane", "fire shield", "greater invisibility", "hallucinatory terrain", "ice storm", "lightning arc", "phantasmal killer", "polymorph", "sickening radiance", "stoneskin", "storm sphere", "wall of fire",
 
     // 5th Level
-    "animate object",
-    "chthonic fissure",
-    "cloudkill",
-    "cone of cold",
-    "ethereal strike",
-    "far step",
-    "immolation",
-    "mislead",
-    "modify memory",
-    "skill empowerment",
-    "steel wind strike",
-    "synaptic static",
-    "telekinesis",
-    "teleportation circle",
-    "wall of stone"
-].forEach( function (s) {
-	if(SpellsList[s] && SpellsList[s].classes && SpellsList[s].classes.indexOf("spellsword") === -1) SpellsList[s].classes.push("spellsword");
-});
+    "animate object", "chthonic fissure", "cloudkill", "cone of cold", "ethereal strike", "far step", "immolation", "mislead", "modify memory", "skill empowerment", "steel wind strike", "synaptic static", "telekinesis", "teleportation circle", "wall of stone"
+].forEach( function (s) {if(SpellsList[s] && SpellsList[s].classes && SpellsList[s].classes.indexOf("spellsword") === -1) SpellsList[s].classes.push("spellsword");});
 
-    
 ClassList["spellsword"] = {
     regExpSearch : /^(?=.*spell)(?=.*sword).*$/i,
     name : "Spell Sword",
@@ -149,7 +48,7 @@ ClassList["spellsword"] = {
         secondary : [true, true]
     },
     spellcastingFactor : 2,
-    spellcastingFactorRoundupMulti: true,
+    spellcastingFactorRoundupMulti : true,
 	spellcastingTable: [[0, 0, 0, 0, 0, 0, 0, 0, 0]].concat(levels.map(function (n) {
 		return defaultSpellTable[Math.ceil(n / 2)];
 	})),
@@ -273,11 +172,11 @@ AddSubClass("spellsword", "arcane rager", {
             calcChanges : {
                 atkCalc : [
                     function (fields, v, output) {
-                        if (v.isMeleeWeapon && fields.Mod === (1|2) && classes.known.spellsword && classes.known.spellsword.level && /\barcane rage\b/i.test(v.WeaponTextName)) {
+                        if (v.isMeleeWeapon && fields.Mod === (1||2) && classes.known.spellsword && classes.known.spellsword.level && /\barcane rage\b/i.test(v.WeaponTextName)) {
                             output.extraDmg += 2;
                         }
                     },
-                    "If I include the phrase 'Arcane Rage' in a melee weapon's name that uses Strength or Dexterity, the calculation will add my Rage's bonus damage to it. Be aware that if the weapon is used to make a ranged attack, the rage bonus damage shouldn't be added (e.g. when using a thrown weapon)."
+                    "If I include the phrase 'Arcane Rage' in a melee weapon's name that uses Strength or Dexterity, the calculation will add my Rage's bonus damage to it. Be aware that if the weapon is used to make a ranged attack, the rage bonus damage shouldn't be added (eg when using a thrown weapon)."
                 ]
             }
         },
@@ -335,8 +234,8 @@ AddSubClass("spellsword", "armored battlemage", {
             description: "\n   Gain proficiency with heavy armor. While wearing armor, gain a +1 bonus to AC. Use Dexterity instead of Strength for heavy armor requirements, ignore speed reduction.",
             armorProfs: [false, false, true, false],
             armorOptions : [{
-                regExpSearch : /justToAddToDropDownAndEffectWildShape/,
-                name : "Spellbound Armor Bonus)",
+                regExpSearch : /Spellbound/,
+                name : "Spellbound Armor Bonus",
                 source : ["SSH", 0],
                 ac : "1",
                 selectNow : true
