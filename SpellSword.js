@@ -1,4 +1,4 @@
-var iFileName = "spell sword homebrew [Rocky].js";
+var iFileName = "SpellSword.js";
 
 RequiredSheetVersion(13);
 
