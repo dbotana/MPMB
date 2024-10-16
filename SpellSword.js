@@ -1,3 +1,16 @@
+/*	-WHAT IS THIS?-
+	This file adds optional material to "MPMB's Character Record Sheet" found at https://flapkan.com/mpmb/charsheets
+	Import this file using the "Add Extra Materials" bookmark.
+	-KEEP IN MIND-
+	It is recommended to enter the code in a fresh sheet before adding any other information (i.e. before making your character with it).
+*/
+
+/*	-INFORMATION-
+	Subject:	Subclass
+	Effect:		This script adds a class called "Spell Sword" and its subclasses.
+	Code by:	Rocky
+	Date:		2024-10-16 (sheet v13)
+*/
 var iFileName = "SpellSword.js";
 
 RequiredSheetVersion(13);
@@ -7,7 +20,7 @@ SourceList["SSH"] = {
     abbreviation : "SSH",
     abbreviationSpellsheet : "SS",
     group : "Rocky's Homebrew",
-    date : "2024/10/15"
+    date : "2024/10/16"
 };
 
 // Define the Spell Sword spell list
