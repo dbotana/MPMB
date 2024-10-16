@@ -230,9 +230,8 @@ AddSubClass("spellsword", "arcane rager", {
             name: "Arcane Resilience",
             source: ["SSH", 0],
             minlevel: 15,
-            description: "\n   When drop to 0 hp, consume spell slot and regain hit points.",
-            additional: "HP=Spell slot+Spell Sword level",
-            usages : "Int mod per",
+            description: "\n   When drop to 0 hp, consume spell slot and regain hit points equal to Spell slot + Spell Sword level",
+            usages : "Int mod per ",
             usagescalc: "event.value = Math.max(1, Number(What('Int Mod')));",
             recovery: "short rest"
         }
@@ -272,14 +271,14 @@ AddSubClass("spellsword", "armored battlemage", {
             description: "\n   As an action, push or pull all creatures within 30 feet. Strength save or be moved 15 feet and take 3d8 force damage and Dazed. Half damage and no movement on success.",
             usages: 1,
             recovery: "short rest",
-            action: [["action", " (Arcane Repulsion)"]]
+            action: [["action", " (Push/Pull)"]]
         },
         "subclassfeature7.1": {
             name: "Eldritch Bulwark",
             source: ["SSH", 0],
             minlevel: 7,
             description: "\n   As a bonus action, consume a spell slot to gain AC bonus equal to the spell level for 1 minute. Gain resistance to that spell's damage type for 1 minute.",
-            action: [["bonus action", " (Eldritch Bulwark)"]]
+            action: [["bonus action", "(AC Bonus/resistance)"]],
         },
         "subclassfeature11": {
             name: "Arcane Aegis",
@@ -289,7 +288,7 @@ AddSubClass("spellsword", "armored battlemage", {
             usages : "Int mod per",
             usagescalc: "event.value = Math.max(1, Number(What('Int Mod')));",
             recovery : "long rest",
-            action : [["reaction", " (Arcane Aegis)"]]
+            action : [["reaction", "(Shield)"]]
         },
         "subclassfeature15": {
             name: "Fortress of Will",
@@ -455,7 +454,7 @@ AddSubClass("spellsword", "magebane", {
             source: ["SSH", 0],
             minlevel: 3,
             description: "\n   Use reaction to make an Attack of Opportunity on a spellcaster within melee range when they cast a spell.",
-            action: [["reaction", " (Magebane Strike)"]]
+            action: [["reaction", " (AoP spell caster)"]]
         },
         "subclassfeature7": {
             name: "Dispelling Maneuver",
@@ -484,8 +483,7 @@ AddSubClass("spellsword", "magebane", {
             name: "Improved Magebane Strike",
             source: ["SSH", 0],
             minlevel: 15,
-            description: "\n   As a reaction, move up to half your speed towards a creature casting a spell within 30 feet. If within melee range, use Magebane Strike as part of reaction. If you hit and the spell is of 5th level or lower, the caster must make a Constitution save or the spell fails.",
-            action: [["reaction", " (Improved Magebane Strike)"]]
+            description: "\n   As a reaction, move up to half your speed towards a creature casting a spell within 30 feet. If within melee range, use Magebane Strike as part of reaction. If you hit and the spell is of 5th level or lower, the caster must make a Constitution save or the spell fails."
         }
     }
 });
