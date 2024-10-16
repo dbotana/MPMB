@@ -29,7 +29,7 @@ SourceList["SSH"] = {
 
     // 5th Level
     "animate object", "chthonic fissure", "cloudkill", "cone of cold", "ethereal strike", "far step", "immolation", "mislead", "modify memory", "skill empowerment", "steel wind strike", "synaptic static", "telekinesis", "teleportation circle", "wall of stone"
-].forEach( function (s) {if(SpellsList[s] && SpellsList[s].classes && SpellsList[s].classes.indexOf("spellsword") === -1) SpellsList[s].classes.push("spellsword");});
+].forEach(function (s) {if(SpellsList[s] && SpellsList[s].classes && SpellsList[s].classes.indexOf("spellsword") === -1) SpellsList[s].classes.push("spellsword");});
 
 ClassList["spellsword"] = {
     regExpSearch : /^(?=.*spell)(?=.*sword).*$/i,
@@ -215,9 +215,7 @@ AddSubClass("spellsword", "arcane rager", {
             minlevel: 15,
             description: "When drop to 0 hp, consume spell slot and regain hit points.",
             additional: "HP=Spell slot+Spell Sword level",
-            usagescalc: levels.map(function(n) {
-                return n < 15 ? "" : Math.max(1, What('Int Mod'));
-            }),
+            usagescalc: Math.max(1, What('Int Mod')),
             recovery: "short rest"
         }
     }
@@ -269,7 +267,7 @@ AddSubClass("spellsword", "armored battlemage", {
             name: "Arcane Aegis",
             source: ["SSH", 0],
             minlevel: 11,
-            description: "\n   Cast Shield as a reaction without expending a spell slot. Gain +2 bonus to saving throws if cast on yourself.",
+            description: "\n   Cast Shield as a reaction without expending a spell slot. Gain +2 bonus to saving throws if cast on self.",
             usagescalc : Math.max(1, What('Int Mod')),
             recovery : "long rest",
             action : [["reaction", " (Arcane Aegis)"]]
@@ -673,27 +671,10 @@ SpellsList["phantom strike"] = {
    components : "V,S,M", 
    compMaterial : "a shard of obsidian", 
    duration : "Instantaneous", 
-   description : 
-      `Melee spell attack; 
-       2d10 psychic dmg;
-       Int save or use reaction to move away.`,
-   descriptionFull : 
-      `Your hand becomes insubstantial,
-       allowing you to strike through physical barriers.
-       Make a melee spell attack against
-       a creature within touch range.
-       On hit,
-       target takes
-       \n2d10 psychic damage and must succeed on an Intelligence saving throw.
-       \nOn failed save,
-       \ntarget uses reaction to move away from you.`,
+   description : "Melee spell attack, 2d10 psychic dmg,Int save or use reaction to move away.",
+   descriptionFull : "Your hand becomes insubstantial, allowing you to strike through physical barriers. Make a melee spell attack against a creature within touch range. On hit, target takes 2d10 psychic damage and must succeed on an Intelligence saving throw. On failed save, target uses reaction to move away from you.",
    atHigherLevels :
-      `When you cast this spell using
-       \na spell slot of
-       \n3rd level or higher,
-       \nthe psychic damage increases by
-       \n1d10 for each slot level above
-       \n2nd.`};
+      `When you cast this spell using a spell slot of 3rd level or higher, the psychic damage increases by 1d10 for each slot level above 2nd.`};
 
 SpellsList["poisonous wave"] = {
    name : `Poisonous Wave`,
@@ -706,32 +687,9 @@ SpellsList["poisonous wave"] = {
    components : `V,S,M`,
    compMaterial : `a snake fang`,
    duration : `Instantaneous`,
-   description :
-      `30-ft cone;
-       Con save or
-       \n3d8 poison dmg;
-       poisoned until end
-       \nof next turn.`,
-   descriptionFull :
-      `You extend your hand and release
-       \na wave of toxic gas in
-       \na
-       \n30-foot cone.
-       \nEach creature in that area must make
-       \na Constitution saving throw.
-       \nOn failed save,
-       \na creature takes
-       \n3d8 poison damage and is poisoned until end
-       \nof next turn.
-       \nOn successful save,
-       \na creature takes half as much damage and isn't poisoned.`,
-   atHigherLevels :
-      `When you cast this spell using
-       \na spell slot of
-       \n3rd level or higher,
-       \nthe damage increases by
-       \n1d6 for each slot level above
-       \n2nd.`};
+   description : "30-ft cone; Con save or 3d8 poison dmg; poisoned until end of next turn.",
+   descriptionFull : "You extend your hand and release a wave of toxic gas in a 30-foot cone. Each creature in that area must make a Constitution saving throw. On a failed save, a creature takes 3d8 poison damage and is poisoned until the end of your next turn. On a successful save, a creature takes half as much damage and isn't poisoned.",
+   atHigherLevels : "When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d8 for each slot level above 2nd."};
 
 SpellsList["shadowblight claw"] = {
    name : `Shadowblight Claw`,
@@ -744,28 +702,9 @@ SpellsList["shadowblight claw"] = {
    components : `V,S,M`,
    compMaterial : `a blackened bone`,
    duration : `Instantaneous`,
-   description :
-      `Melee spell attack;
-        \n4d10 necrotic dmg;
-        Con save or blinded until end
-        \nof next turn.`,
-   descriptionFull :
-      `Your hand transforms into
-        \na claw infused with negative energy drawn from Shadowfell.
-        Make melee spell attack against target within touch range.
-        On hit,
-        target takes
-        \n4d10 necrotic damage and must make Constitution saving throw.
-        On failed save,
-        target is blinded until end
-        \nof next turn.`,
-      atHigherLevels :
-         `When you cast this spell using
-          \na spell slot of
-          \n4th level or higher,
-          \nthe damage increases by
-          \n1d10 for each slot level above
-          \n3rd.`};
+   description : "Melee spell attack; 4d10 necrotic dmg; Con save or blinded until end of next turn.",
+   descriptionFull : "Your hand transforms into a claw infused with negative energy drawn from the Shadowfell. Make a melee spell attack against a target within touch range. On a hit, the target takes 4d10 necrotic damage and must make a Constitution saving throw. On a failed save, the target is blinded until the end of your next turn.",
+   atHigherLevels : "When you cast this spell using a spell slot of 4th level or higher, the necrotic damage increases by 1d10 for each slot level above 3rd."};
 
 SpellsList["sonic burst"] = {
      name:"Sonic Burst", 
@@ -777,21 +716,6 @@ SpellsList["sonic burst"] = {
      range:"Self (30-ft cone)", 
      components:"V,S", 
      duration:"Instantaneous", 
-     description:
-         `30-ft cone;
-          Con save or take
-          \n4d6 thunder dmg;
-          fall prone;
-          deafened for one minute.`,
-     descriptionFull:
-         `You extend your palm forward and release powerful sonic wave that shoots forth from your hand,
-          emitting boom audible out to three hundred feet.
-          All creatures in thirty-foot cone must succeed on Constitution saving throw or take four d six thunder damage,
-          fall prone,
-          deafened for one minute.
-          On success,
-          creatures take half damage and are not knocked prone or deafened.
-          Creature can repeat saving throw at end each turn ending deafened effect on success.`,
-     atHigherLevels:
-         `When you cast this spell using spell slot fourth level higher,
-          damage increases one d six each slot above third.`};
+     description: "30-ft cone; Con save or take 4d6 thunder dmg; fall prone; deafened for one minute.",
+     descriptionFull: "You extend your palm forward and release a powerful sonic wave that shoots forth from your hand, emitting a boom audible out to three hundred feet. All creatures in a thirty-foot cone must succeed on a Constitution saving throw or take 4d6 thunder damage, fall prone, and be deafened for one minute. On a successful save, creatures take half damage and are not knocked prone or deafened. A creature can repeat the saving throw at the end of each of its turns, ending the deafened effect on a success.",
+     atHigherLevels: "When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d6 for each slot level above 3rd."};
