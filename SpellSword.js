@@ -13,7 +13,7 @@
 */
 var iFileName = "SpellSword.js";
 
-RequiredSheetVersion(13);
+RequiredSheetVersion("13.2.1");
 
 SourceList["SSH"] = {
     name : "Spell Sword Homebrew",
@@ -73,7 +73,7 @@ ClassList["spellsword"] = {
             name : "Spellcasting",
             source : ["SSH", 0],
             minlevel : 1,
-            description : "I can cast spells using my mental codex; Intelligence is my spellcasting ability.",
+            description : "\n   I can cast spells using my mental codex; Intelligence is my spellcasting ability.",
             additional : levels.map(function (n, idx) {
                 return [2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4][idx] + " cantrips known";
             })
@@ -88,6 +88,7 @@ ClassList["spellsword"] = {
                 "Area of Effect: The spell must naturally have a cone or line area originating from you.",
                 "Melee Spell Attack: These remain unchanged. Regain 1 use after short rest, all after long rest."
             ]),
+            usages : "",
             usagescalc: levels.map(function(n) { return n < 3 ? "1" : n < 8 ? "2" : n < 13 ? "3" : n < 18 ? "4" : "5"; }),
             recovery : "long rest"
         },
@@ -95,7 +96,7 @@ ClassList["spellsword"] = {
             name: "Mental Recall",
             source: ["SSH", 0],
             minlevel: 2,
-            description: "Recover one expended spell slot after a short rest.",
+            description: "\n   Recover one expended spell slot after a short rest.",
             recovery: "long rest",
             usages: 1
         },
@@ -103,28 +104,27 @@ ClassList["spellsword"] = {
             name: "Arcane Maneuvers",
             source: ["SSH", 0],
             minlevel: 2,
-            description: "Use a bonus action to Dash or Disengage or gain advantage on concentration saves before start of next turn.",
+            description: "\n   Use a bonus action to Dash or Disengage or gain advantage on concentration saves before start of next turn.",
             action : [["bonus action", "Dash or Disengage or Concentration advantage"]]
         },
         "extra attack" : {
             name: "Extra Attack",
             source: ["SSH", 0],
             minlevel: 5,
-            description: "Attack twice when taking the Attack action. You can cast one of your cantrips (casting time of one action) in place of one attack."
+            description: "\n   Attack twice when taking the Attack action. You can cast one of your cantrips (casting time of one action) in place of one attack."
         },
         "agile reflexes" : {
             name: "Agile Reflexes",
             source: ["SSH", 0],
             minlevel: 6,
-            description: "Gain proficiency in Dexterity saving throws (or Strength if already prof). Become immune to effects of your own spells.",
+            description: "\n   Gain proficiency in Dexterity saving throws (or Strength if already prof). Become immune to effects of your own spells.",
 			saves : ["Dex"],
-			prereqeval : function(v) { return tDoc.getField("Dex ST Prof").isBoxChecked(0) ? false : true; }
         },
         "spellsight" : {
             name: "Spellsight",
             source: ["SSH", 0],
             minlevel: 9,
-            description: "Concentration: detect magic and see invisible entities within 30 feet for one minute. While active, touch an object to cast identify on it.",
+            description: "\n   Concentration: detect magic and see invisible entities within 30 feet for one minute. While active, touch an object to cast identify on it.",
             recovery: "short rest",
             action : [["action", "Spell Sight"]],
             usages: 1
@@ -133,13 +133,13 @@ ClassList["spellsword"] = {
             name: "Arcane Slip",
             source: ["SSH", 0],
             minlevel: 10,
-            description: "Teleport to unoccupied space within 30 feet before or after using Spellstrike."
+            description: "\n   Teleport to unoccupied space within 30 feet before or after using Spellstrike."
         },
         "swift enchantment" : {
             name: "Swift Enchantment",
             source: ["SSH", 0],
             minlevel: 14,
-            description: "Cast a spell with a casting time of one action as a bonus action once per short or long rest.",
+            description: "\n   Cast a spell with a casting time of one action as a bonus action once per short or long rest.",
             recovery: "short rest",
             usages: 1,
             action : [["bonus action", "Swift Enchantment"]]
@@ -148,13 +148,13 @@ ClassList["spellsword"] = {
             name: "Improved Spellstrike",
             source: ["SSH", 0],
             minlevel: 18,
-            description: "Ignore limitations of Spellstrike and use any spell with it."
+            description: "\n   Ignore limitations of Spellstrike and use any spell with it."
         },
         "arcane ascendancy" : {
             name: "Arcane Ascendancy",
             source: ["SSH", 0],
             minlevel: 20,
-            description: "Increase Intelligence and Dexterity scores by two. Deal 1d10 extra damage with Spellstrike of spell damage type (Force if none).",
+            description: "\n   Increase Intelligence and Dexterity scores by two. Deal 1d10 extra damage with Spellstrike of spell damage type (Force if none).",
             scores: [0, 2, 0, 2, 0, 0],
 		    scoresMaximum: [0, 25, 0, 25, 0, 0],
         }
@@ -171,7 +171,7 @@ AddSubClass("spellsword", "arcane rager", {
             name: "Arcane Rage",
             source: ["SSH", 0],
             minlevel: 3,
-            description: "Enter a state of Arcane Rage, enhancing physical abilities and arcane attacks.",
+            description: "\n   Enter a state of Arcane Rage, enhancing physical abilities and arcane attacks.",
             action: [["bonus action", " (enter Arcane Rage)"]],
             usages: 2,
             recovery: "long rest",
@@ -198,7 +198,7 @@ AddSubClass("spellsword", "arcane rager", {
             name: "Mystic Fury",
             source: ["SSH", 0],
             minlevel: 7,
-            description: "While raging, expend a spell slot to deal extra damage with melee attacks.",
+            description: "\n   While raging, expend a spell slot to deal extra damage with melee attacks.",
             additional: "1d6 per spell level (max 5d6)",
             action: [["bonus action", "Mystic Fury (extra damage)"]]
         },
@@ -206,7 +206,7 @@ AddSubClass("spellsword", "arcane rager", {
             name: "Eldritch Vitality",
             source: ["SSH", 0],
             minlevel: 7,
-            description: "Gain temporary hit points when entering Arcane Rage. Use reaction to reduce damage.",
+            description: "\n   Gain temporary hit points when entering Arcane Rage. Use reaction to reduce damage.",
             additional: "1d6 + Spellsword level temp HP",
             recovery: "long rest"
         },
@@ -214,9 +214,10 @@ AddSubClass("spellsword", "arcane rager", {
             name: "Arcane Shockwave",
             source: ["SSH", 0],
             minlevel: 11,
-            description: "Release a burst of energy, dealing damage and knocking enemies prone. Dex save for 1/2 damage and resist knockdown.",
+            description: "\n   Release a burst of energy, dealing damage and knocking enemies prone. Dex save for 1/2 damage and resist knockdown.",
             additional: "6d6 force damage",
-            usagescalc: levels.map(function(n) {Math.max(1, What('Int Mod'));}),
+            usages : "Int mod per",
+            usagescalc: "event.value = Math.max(1, Number(What('Int Mod')));",
             recovery: "long rest",
             action: [["action", " (Arcane Shockwave)"]]
         },
@@ -224,9 +225,10 @@ AddSubClass("spellsword", "arcane rager", {
             name: "Arcane Resilience",
             source: ["SSH", 0],
             minlevel: 15,
-            description: "When drop to 0 hp, consume spell slot and regain hit points.",
+            description: "\n   When drop to 0 hp, consume spell slot and regain hit points.",
             additional: "HP=Spell slot+Spell Sword level",
-            usagescalc: Math.max(1, What('Int Mod')),
+            usages : "Int mod per",
+            usagescalc: "event.value = Math.max(1, Number(What('Int Mod')));",
             recovery: "short rest"
         }
     }
@@ -279,7 +281,8 @@ AddSubClass("spellsword", "armored battlemage", {
             source: ["SSH", 0],
             minlevel: 11,
             description: "\n   Cast Shield as a reaction without expending a spell slot. Gain +2 bonus to saving throws if cast on self.",
-            usagescalc : Math.max(1, What('Int Mod')),
+            usages : "Int mod per",
+            usagescalc: "event.value = Math.max(1, Number(What('Int Mod')));",
             recovery : "long rest",
             action : [["reaction", " (Arcane Aegis)"]]
         },
@@ -327,7 +330,8 @@ AddSubClass("spellsword", "duskblade", {
             source: ["SSH", 0],
             minlevel: 7,
             description: "\n   Use reaction to become invisible when targeted by an attack, imposing disadvantage on the attack roll. Remain invisible until start of next turn and teleport up to 30 feet.",
-            usagescalc : Math.max(1, What('Int Mod')),
+            usages : "Int mod per",
+            usagescalc: "event.value = Math.max(1, Number(What('Int Mod')));",
             recovery : "long rest",
             action : [["reaction", " (Cloak of Shadows)"]]
         },
@@ -407,7 +411,8 @@ AddSubClass("spellsword", "eldritch archer", {
             source: ["SSH", 0],
             minlevel: 11,
             description: "\n   When missing a ranged attack, use reaction to redirect it to another target within 60 feet. Make a new attack roll against the second target.",
-            usagescalc : Math.max(1, What('Int Mod')),
+            usages : "Int mod per",
+            usagescalc : "event.value = Math.max(1, Number(What('Int Mod')));",
             recovery : "long rest",
             action : [["reaction", " (Redirect Shot)"]]
         },
