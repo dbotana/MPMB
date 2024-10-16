@@ -199,7 +199,7 @@ AddSubClass("spellsword", "arcane rager", {
             source: ["SSH", 0],
             minlevel: 7,
             description: "\n   While raging, expend a spell slot to deal extra damage with melee attacks.",
-            additional: "1d6 per spell level (max 5d6)",
+            additional: "1d6 per spell level (5d6 max)",
             action: [["bonus action", "Mystic Fury (extra damage)"]]
         },
         "subclassfeature7.1": {
