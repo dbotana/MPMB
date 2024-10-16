@@ -13,7 +13,7 @@
 */
 var iFileName = "SpellSword.js";
 
-RequiredSheetVersion("13.2.1");
+RequiredSheetVersion("13.2.0");
 
 SourceList["SSH"] = {
     name : "Spell Sword Homebrew",
@@ -88,8 +88,7 @@ ClassList["spellsword"] = {
                 "Area of Effect: The spell must naturally have a cone or line area originating from you.",
                 "Melee Spell Attack: These remain unchanged. Regain 1 use after short rest, all after long rest."
             ]),
-            usages : "",
-            usagescalc: levels.map(function(n) { return n < 3 ? "1" : n < 8 ? "2" : n < 13 ? "3" : n < 18 ? "4" : "5"; }),
+            usages : levels.map(function(n) { return n < 3 ? "1" : n < 8 ? "2" : n < 13 ? "3" : n < 18 ? "4" : "5"; }),
             recovery : "long rest"
         },
         "mental recall" : {
@@ -172,13 +171,13 @@ AddSubClass("spellsword", "arcane rager", {
             source: ["SSH", 0],
             minlevel: 3,
             description: "\n   Enter a state of Arcane Rage, enhancing physical abilities and arcane attacks.",
-            action: [["bonus action", " (enter Arcane Rage)"]],
+            action: [["bonus action", "Arcane Rage (start/end)"]],
             usages: 2,
             recovery: "long rest",
             spellcastingBonus : [{
                 spellcastingAbility : 4,
                 name : "Arcane Rager",
-                spellcastingExtra : ["longstrider", "earth tremor", "mirror image", "aganazzar’s scorcher", "blink", "tidal wave", "dimension door", "fire shield", "flame strike", "steel wind strike"]
+                spellcastingExtra : ["longstrider", "earth tremor", "mirror image", "aganazzar's scorcher", "blink", "tidal wave", "dimension door", "fire shield", "flame strike", "steel wind strike"]
             }],
             dmgres : [["Bludgeoning", "Bludgeon. (in rage)"], ["Piercing", "Piercing (in rage)"], ["Slashing", "Slashing (in rage)"]],
 			savetxt : { text : ["Adv. on Str saves in rage"] },
@@ -186,13 +185,19 @@ AddSubClass("spellsword", "arcane rager", {
             calcChanges : {
                 atkCalc : [
                     function (fields, v, output) {
-                        if (v.isMeleeWeapon && fields.Mod === (1||2) && classes.known.spellsword && classes.known.spellsword.level && /\barcane rage\b/i.test(v.WeaponTextName)) {
+                        if (v.isMeleeWeapon && (fields.Mod === 1 || fields.Mod === 2) && classes.known.spellsword && classes.known.spellsword.level && /\barcane rage\b/i.test(v.WeaponTextName)) {
                             output.extraDmg += 2;
                         }
                     },
                     "If I include the phrase 'Arcane Rage' in a melee weapon's name that uses Strength or Dexterity, the calculation will add my Rage's bonus damage to it. Be aware that if the weapon is used to make a ranged attack, the rage bonus damage shouldn't be added (eg when using a thrown weapon)."
                 ]
-            }
+            },
+            armorOptions: [{
+				regExpSearch: /justToAddToDropDownAndEffectWildShape/,
+				name: "Unarmored Defense (INT)",
+				source: [["PHB2024", 51]],
+				ac: "10+Int",
+				affectsWildShape: true}],
         },
         "subclassfeature7": {
             name: "Mystic Fury",
@@ -206,7 +211,7 @@ AddSubClass("spellsword", "arcane rager", {
             name: "Eldritch Vitality",
             source: ["SSH", 0],
             minlevel: 7,
-            description: "\n   Gain temporary hit points when entering Arcane Rage. Use reaction to reduce damage.",
+            description: "\n   Gain temporary hit points when entering Arcane Rage. Use reaction to expend spell slot to reduce damage (1d8/SL + INT).",
             additional: "1d6 + Spellsword level temp HP",
             recovery: "long rest"
         },
@@ -371,7 +376,7 @@ AddSubClass("spellsword", "eldritch archer", {
             minlevel: 3,
             description: "\n   Gain proficiency with all martial ranged weapons. Use ranged weapons as a spellcasting focus for spellsword spells.",
             weaponProfs: [false, true],
-            spellcastingExtra : ["faerie fire", "ensnaring strike", "find trap", "melf’s acid arrow", "conjure barrage", "lightning bolt", "grasping vine", "storm sphere", "conjure volley", "swift quiver"]
+            spellcastingExtra : ["faerie fire", "ensnaring strike", "find trap", "melf's acid arrow", "conjure barrage", "lightning bolt", "grasping vine", "storm sphere", "conjure volley", "swift quiver"]
         },
         "subclassfeature3.1": {
             name: "Ranged Spellstrike",
