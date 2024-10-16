@@ -364,6 +364,7 @@ AddSubClass("spellsword", "duskblade", {
         }
     }
 });
+runFunctionAtEnd(function() {
 AddSubClass("spellsword", "eldritch archer", {
     regExpSearch: /eldritch archer/i,
     subname: "Eldritch Archer",
@@ -435,7 +436,7 @@ AddSubClass("spellsword", "eldritch archer", {
             recovery : "long rest"
         }
     }
-});
+})});
 AddSubClass("spellsword", "magebane", {
     regExpSearch: /magebane/i,
     subname: "Magebane",
