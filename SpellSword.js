@@ -390,7 +390,7 @@ AddSubClass("spellsword", "eldritch archer", {
             description: "\n   Choose a Fighting Style:\n   \u2022 Archery: +2 bonus to attack rolls with ranged weapons.\n   \u2022 Thrown Weapon: Draw thrown weapons as part of the attack, +2 bonus to damage on hit.",
             choices: ["Archery", "Thrown Weapon"],
             "archery": FightingStyles.archery,
-            "thrown weapon": FightingStyles.thrown_weapon
+            "thrown weapon": ClassList.fighter.features["fighting style"]["thrown weapon fighting"]
         },
         "subclassfeature7": {
             name: "Phasing Shot",
