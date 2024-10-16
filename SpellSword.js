@@ -6,7 +6,7 @@
 */
 
 /*	-INFORMATION-
-	Subject:	Subclass
+	Subject:	Class
 	Effect:		This script adds a class called "Spell Sword" and its subclasses.
 	Code by:	Rocky
 	Date:		2024-10-16 (sheet v13)
