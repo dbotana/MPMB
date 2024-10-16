@@ -199,9 +199,7 @@ AddSubClass("spellsword", "arcane rager", {
             source: ["SSH", 0],
             minlevel: 7,
             description: "While raging, expend a spell slot to deal extra damage with melee attacks.",
-            additional: levels.map(function(n) {
-                return n < 7 ? "" : "1d6 per spell level (max 5d6)";
-            }),
+            additional: "1d6 per spell level (max 5d6)",
             action: [["bonus action", "Mystic Fury (extra damage)"]]
         },
         "subclassfeature7.1": {
@@ -687,36 +685,36 @@ SpellsList["phantom strike"] = {
    description : "Melee spell attack, 2d10 psychic dmg,Int save or use reaction to move away.",
    descriptionFull : "Your hand becomes insubstantial, allowing you to strike through physical barriers. Make a melee spell attack against a creature within touch range. On hit, target takes 2d10 psychic damage and must succeed on an Intelligence saving throw. On failed save, target uses reaction to move away from you.",
    atHigherLevels :
-      `When you cast this spell using a spell slot of 3rd level or higher, the psychic damage increases by 1d10 for each slot level above 2nd.`
+      "When you cast this spell using a spell slot of 3rd level or higher, the psychic damage increases by 1d10 for each slot level above 2nd."
 };
 
 SpellsList["poisonous wave"] = {
-   name : `Poisonous Wave`,
-   classes : [`spellsword`],
-   source : [`SSH`,0],
-   level : `2`,
-   school : `Conj`,
-   time : `1 action`,
-   range : `Self (30-ft cone)`,
-   components : `V,S,M`,
-   compMaterial : `a snake fang`,
-   duration : `Instantaneous`,
+   name : "Poisonous Wave",
+   classes : ["spellsword"],
+   source : ["SSH",0],
+   level : "2",
+   school : "Conj",
+   time : "1 action",
+   range : "Self (30-ft cone)",
+   components : "V,S,M",
+   compMaterial : "a snake fang",
+   duration : "Instantaneous",
    description : "30-ft cone; Con save or 3d8 poison dmg; poisoned until end of next turn.",
    descriptionFull : "You extend your hand and release a wave of toxic gas in a 30-foot cone. Each creature in that area must make a Constitution saving throw. On a failed save, a creature takes 3d8 poison damage and is poisoned until the end of your next turn. On a successful save, a creature takes half as much damage and isn't poisoned.",
    atHigherLevels : "When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d8 for each slot level above 2nd."
 };
 
 SpellsList["shadowblight claw"] = {
-   name : `Shadowblight Claw`,
-   classes : [`spellsword`],
-   source : [`SSH`,0],
-   level : `3`,
-   school : `Conj`,
-   time : `1 action`,
-   range : `Touch`,
-   components : `V,S,M`,
-   compMaterial : `a blackened bone`,
-   duration : `Instantaneous`,
+   name : "Shadowblight Claw",
+   classes : ["spellsword"],
+   source : ["SSH",0],
+   level : "3",
+   school : "Conj",
+   time : "1 action",
+   range : "Touch",
+   components : "V,S,M",
+   compMaterial : "a blackened bone",
+   duration : "Instantaneous",
    description : "Melee spell attack; 4d10 necrotic dmg; Con save or blinded until end of next turn.",
    descriptionFull : "Your hand transforms into a claw infused with negative energy drawn from the Shadowfell. Make a melee spell attack against a target within touch range. On a hit, the target takes 4d10 necrotic damage and must make a Constitution saving throw. On a failed save, the target is blinded until the end of your next turn.",
    atHigherLevels : "When you cast this spell using a spell slot of 4th level or higher, the necrotic damage increases by 1d10 for each slot level above 3rd."
