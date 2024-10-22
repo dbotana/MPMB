@@ -64,7 +64,7 @@ RaceList["leafling"] = {
 			usages : 1,
 			minlevel : 1,
 			recovery : "long rest",
-			action : [["action", "PB*d4"]]
+			action : [["action", "Healing Hands (heal PB*d4)"]]
 		},
     }
 };
