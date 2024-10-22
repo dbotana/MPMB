@@ -30,6 +30,7 @@ RaceList["leafling"] = {
 	source : [["Custom", 0]],
 	plural : "Leaflings",
 	size : 4, // Small
+    vision : [["Darkvision", "fixed 60"]],
     speed : {
         walk : { spd : 30, enc : 20 },
         fly : { spd : 30, enc : 0 }
