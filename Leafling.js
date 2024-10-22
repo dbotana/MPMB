@@ -64,8 +64,7 @@ RaceList["leafling"] = {
 			usages : 1,
 			minlevel : 1,
 			recovery : "long rest",
-			additional : "event.value = How('Proficiency Bonus');",
-			action : [["action", ""]]
+			action : [["action", "PB*d4"]]
 		},
     }
 };
