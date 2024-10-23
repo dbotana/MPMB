@@ -14,9 +14,9 @@
 var iFileName = "QigongMonk.js";
 RequiredSheetVersion("13.2.0");
 
-SourceList["QG"] = {
+SourceList["Qi"] = {
     name : "Qigong Monk Homebrew",
-    abbreviation : "QG",
+    abbreviation : "Qi",
     group : "Homebrew Classes",
     date : "2024/10/22"
 };
@@ -24,7 +24,7 @@ SourceList["QG"] = {
 ClassList["qigong monk"] = {
     regExpSearch : /^(?=.*qigong)(?=.*monk).*$/i,
     name : "Qigong Monk",
-    source : ["QG", 0],
+    source : ["Qi", 0],
     primaryAbility : "Dexterity and Wisdom",
     abilitySave : 5,
     prereqs : "Dexterity 13 and Wisdom 13",
@@ -54,7 +54,7 @@ ClassList["qigong monk"] = {
     features : {
        "studied enemy": {
             name: "Studied Enemy",
-            source: ["QG", 0],
+            source: ["Qi", 0],
             minlevel: 1,
             description: desc([
                 "I have significant experience using my abilities on certain enemies I've studied",
@@ -76,13 +76,13 @@ ClassList["qigong monk"] = {
         },
         "unarmored qi defense" : {
             name : "Unarmored Qi Defense",
-            source : ["QG", 0],
+            source : ["Qi", 0],
             minlevel : 1,
             description : desc("Without armor and no shield, my AC is 10 + Dexterity modifier + Wisdom modifier"),
             armorOptions : [{
                 regExpSearch : /justToAddToDropDownAndEffectWildShape/,
                 name : "Unarmored Qi Defense (Wis)",
-                source : ["QG", 0],
+                source : ["Qi", 0],
                 ac : "10+Wis",
                 affectsWildShape: true,
                 selectNow: true
@@ -90,7 +90,7 @@ ClassList["qigong monk"] = {
         },
         "martial arts" : {
             name: "Martial Arts",
-            source: ["QG",0],
+            source: ["Qi",0],
             minlevel:1,
             description:desc([
                 "Monk weapons: any simple melee (not two-handed/heavy), unarmed strike",
@@ -102,7 +102,7 @@ ClassList["qigong monk"] = {
         },
         "studied enemy": {
             name: "Studied Enemy",
-            source: ["QG", 0],
+            source: ["Qi", 0],
             minlevel: 3,
             description: desc([
                 "I can spend 1 minute observing or interacting with a creature to learn its capabilities",
@@ -115,7 +115,7 @@ ClassList["qigong monk"] = {
         },
         "unarmed martial arts": {
             name: "Unarmed Martial Arts",
-            source: ["QG", 0],
+            source: ["Qi", 0],
             minlevel: 1,
             description: desc([
                 "Mastery of a singular style using unarmed strikes and pressure points",
@@ -145,7 +145,7 @@ ClassList["qigong monk"] = {
         },
         "improvisational armor": {
             name: "Improvisational Armor",
-            source: ["QG", 0],
+            source: ["Qi", 0],
             minlevel: 1,
             description: desc([
                 "Add proficiency bonus to AC against one melee attacker per round when using an improvisational item",
@@ -155,7 +155,7 @@ ClassList["qigong monk"] = {
             ]),
             toNotesPage: [{
                 name: "Improvisational Armor Cover",
-                source: ["QG", 0],
+                source: ["Qi", 0],
                 popupName: "Improvisational Armor Cover",
                 note: [
                     "Walls, trees, creatures, and other obstacles can provide cover during combat, making a target more difficult to harm.",
@@ -171,6 +171,49 @@ ClassList["qigong monk"] = {
                     "Full Cover: Can't be targeted directly; add proficiency to saves vs. AoE effects if fully concealed.",
                     "Critical Damage: Items used for cover or attack that are critically hit are considered damaged and unusable until after a short rest."
                 ]
-            }]
-    }
-}};
+            }],
+            // Add the "Entangle and Pin" section to the notes page for the Qigong Monk
+            toNotesPage: [{
+                name: "Entangle and Pin",
+                source: ["Qi", 0],
+                minlevel: 1,
+                description: desc([
+                    "Use improvisational weapons/armor to entangle or pin opponents instead of dealing damage.",
+                    "Entangle: Sacrifice AC/weapon to restrain target's limb/weapon for 1 round if you let go.",
+                    "Pin: Maintain control of object to restrain target; requires a surface to pin against.",
+                    "Effects vary based on what is entangled/pinned:",
+                    "- Arm(s): Can't attack/defend with affected limbs; disadvantage on DEX saves.",
+                    "- Weapon: Can't be used; disadvantage if maintaining grip.",
+                    "- Leg(s)/Foot: Speed 0; disadvantage on attacks and DEX saves.",
+                    "- Body/Hips: Combine arm and leg restrictions; weapon use depends on Storyteller.",
+                    "Escape: STR save DC = 8 + monk proficiency + item size bonus (handheld +1, medium +2, large +3)."
+                ]),
+                eval: function() {
+                    AddString('Extra.Notes', 'Entangle and Pin:\n\u25C6 Use improvisational items to entangle/pin.\n\u25C6 Entangle sacrifices AC/weapon for one round.\n\u25C6 Pin requires maintaining control and a surface.\n\u25C6 Effects vary based on what is restrained.\n\u25C6 Escape requires STR save with item size modifiers.', '\n');
+                    show3rdPageNotes();
+                },
+                removeeval: function() {
+                    RemoveString('Extra.Notes', 'Entangle and Pin:\n\u25C6 Use improvisational items to entangle/pin.\n\u25C6 Entangle sacrifices AC/weapon for one round.\n\u25C6 Pin requires maintaining control and a surface.\n\u25C6 Effects vary based on what is restrained.\n\u25C6 Escape requires STR save with item size modifiers.');
+                }
+            }],
+            
+            "Qi": {
+                name: "Aiqido (Qi Martial Art)",
+                source: ["Qi", 0],
+                minlevel: 2,
+                description: desc([
+                    "Activate Aiqido with an action or spend 1 qi point to activate as a bonus action",
+                    "Gain benefits of Dodge and reduce damage by d20 + proficiency + DEX when hit",
+                    "First melee attack can be followed by a Grapple check; choose grappled, immobilized, or thrown",
+                    "Spend 1 qi point to reroll a failed grapple check once",
+                    "Use a grappled target as cover: +2 AC if same size, +5 AC if one size larger",
+                    "Spend 1 qi point to Dive up to 10 ft without provoking AoO, returning to stance or Prone",
+                    "Spend 1 qi point to enable options against another visible attack or engaged attacker"
+                ]),
+                action: [["action", ""], ["bonus action", ""]],
+                usages: levels.map(function(n) { return n < 2 ? "" : n; }),
+                recovery: "short rest",
+            },
+        },
+    },
+};
