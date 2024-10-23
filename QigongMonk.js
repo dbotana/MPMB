@@ -195,25 +195,51 @@ ClassList["qigong monk"] = {
                 removeeval: function() {
                     RemoveString('Extra.Notes', 'Entangle and Pin:\n\u25C6 Use improvisational items to entangle/pin.\n\u25C6 Entangle sacrifices AC/weapon for one round.\n\u25C6 Pin requires maintaining control and a surface.\n\u25C6 Effects vary based on what is restrained.\n\u25C6 Escape requires STR save with item size modifiers.');
                 }
-            }],
-            
-            "Qi": {
-                name: "Aiqido (Qi Martial Art)",
-                source: ["Qi", 0],
-                minlevel: 2,
-                description: desc([
-                    "Activate Aiqido with an action or spend 1 qi point to activate as a bonus action",
-                    "Gain benefits of Dodge and reduce damage by d20 + proficiency + DEX when hit",
-                    "First melee attack can be followed by a Grapple check; choose grappled, immobilized, or thrown",
-                    "Spend 1 qi point to reroll a failed grapple check once",
-                    "Use a grappled target as cover: +2 AC if same size, +5 AC if one size larger",
-                    "Spend 1 qi point to Dive up to 10 ft without provoking AoO, returning to stance or Prone",
-                    "Spend 1 qi point to enable options against another visible attack or engaged attacker"
-                ]),
-                action: [["action", ""], ["bonus action", ""]],
-                usages: levels.map(function(n) { return n < 2 ? "" : n; }),
-                recovery: "short rest",
-            },
+            }]
         },
-    },
-};
+        "Qi": {
+            name: "Aiqido (Qi Martial Art)",
+            source: ["Qi", 0],
+            minlevel: 2,
+            description: desc([
+                "Activate Aiqido with an action or spend 1 qi point to activate as a bonus action",
+                "Gain benefits of Dodge and reduce damage by d20 + proficiency + DEX when hit",
+                "First melee attack can be followed by a Grapple check; choose grappled, immobilized, or thrown",
+                "Spend 1 qi point to reroll a failed grapple check once",
+                "Use a grappled target as cover: +2 AC if same size, +5 AC if one size larger",
+                "Spend 1 qi point to Dive up to 10 ft without provoking AoO, returning to stance or Prone",
+                "Spend 1 qi point to enable options against another visible attack or engaged attacker"
+            ]),
+            action: [["action", ""], ["bonus action", ""]],
+            usages: levels.map(function(n) { return n < 2 ? "" : n; }),
+            recovery: "short rest",
+            eval: function() {
+                AddString('Extra.Notes', 'Qi Abilities:\n\u25C6 Spend qi points to fuel various qi features.\n\u25C6 Qi save DC = 8 + proficiency bonus + Wisdom modifier.\n\u25C6 One-shot effects prevent repeated conditions until a long rest.\n\u25C6 Attack Label adds unarmed attack damage.\n\u25C6 Backlash on natural 1: Roll on Backlash Table for effects.', '\n');
+                show3rdPageNotes();
+            },
+            removeeval: function() {
+                RemoveString('Extra.Notes', 'Qi Abilities:\n\u25C6 Spend qi points to fuel various qi features.\n\u25C6 Qi save DC = 8 + proficiency bonus + Wisdom modifier.\n\u25C6 One-shot effects prevent repeated conditions until a long rest.\n\u25C6 Attack Label adds unarmed attack damage.\n\u25C6 Backlash on natural 1: Roll on Backlash Table for effects.');
+            }
+        },
+        // Define the Backlash Table for rolling a natural 1
+        "backlash table": {
+            name: "Backlash Table",
+            toNotesPage:
+            [{
+                name: "Backlash Table",
+                source: ["Qi", 0],
+                popupName: "Backlash Table",
+                note: [
+                    "Roll 1d6 for Backlash from a Critical Fail while using Qi:",
+                    "1 = Can't spend more qi until end of next round.",
+                    "2 = Must take an Action/Reaction/Bonus action to unblock before spending more qi.",
+                    "3 = Fumble an improvisational weapon or push one out of reach.",
+                    "4 = Efforts against target interrupted; nothing happens if not in action.",
+                    "5 = Nothing happens, just fail.",
+                    "6 = Spend same qi cost to re-roll attack; if fail again, treat as rolling a 1 again."
+                ]
+            }]
+        },
+        }
+        };
+
