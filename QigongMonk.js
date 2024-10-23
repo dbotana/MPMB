@@ -240,6 +240,265 @@ ClassList["qigong monk"] = {
                 ]
             }]
         },
+        "ability score improvement damage type": {
+            name: "Ability Score Improvement Damage Type",
+            source: ["QG", 0],
+            minlevel: 8,
+            description: desc([
+                "At levels 8, 12, 16, and 19, choose a new damage type to add to your attacks",
+                "Choices are permanent; by level 19, you'll have chosen four types",
+                "Declare the damage type before rolling to hit; change it at the start of your next turn",
+            ]),
+            extraname: "Damage Type Choice",
+            extrachoices: [
+                "Poison (8)", "Necrotic (8)", "Acid (8)",
+                "Cold (12)", "Fire (12)", "Lightning (12)",
+                "Force (16)", "Thunder (16)",
+                "Psychic (19)", "Radiant (19)"
+            ],
+            extraTimes: levels.map(function (n) {
+                return n < 8 ? 0 : n < 12 ? 1 : n < 16 ? 2 : n < 19 ? 3 : 4;
+            }),
+        },
+        "Mitigating Qi": {
+            name: "Mitigating Qi",
+            source: ["Qi", 0],
+            minlevel: 4,
+            description: desc([
+                "Spend 1 qi to negate a critical hit against you, rolling normal damage instead."
+            ]),
+        },
+        "extra attack": {
+            name: "Extra Attack",
+            source: ["QG", 0],
+            minlevel: 5,
+            description: desc([
+                "I can attack twice instead of once when I take the Attack action on my turn",
+                "I can use two special abilities with the Attack label, or one Qi Attack and one normal attack",
+                "One attack must be followed by the extra attack, then a Follow-through Attack as a bonus action",]),
+            action: [["action", ""]],
+            calcChanges: {
+                atkAdd: [
+                    function(fields, v) {
+                        if (v.isMeleeWeapon && v.theWea.monkweapon) {
+                            fields.Description += (fields.Description ? '; ' : '') + 'Can use extra attack';
+                        }
+                    },
+                    "When taking the Attack action, I can make an additional attack."
+                ]
+            }
+        },
+        "stunning strike": {
+            name: "Stunning Strike",
+            source: ["QG", 0],
+            minlevel: 5,
+            description: desc([
+                "Spend 1 qi point to attempt a stunning strike after hitting with an unarmed or improvisational weapon attack",
+                "Target must succeed on a Constitution saving throw or be stunned (cannot take any actions on their next turn)",
+            ]),
+            usages: levels.map(function(n) { return n < 5 ? "" : n; }),
+            recovery: "short rest",
+            action: [["action", ""]],
+            calcChanges: {
+                atkAdd: [
+                    function(fields, v) {
+                        if (v.isMeleeWeapon && (v.theWea.monkweapon || v.baseWeaponName == "unarmed strike")) {
+                            fields.Description += (fields.Description ? '; ' : '') + 'Stunning Strike [1 qi point]';
+                        }
+                    },
+                    "When I hit with an unarmed or improvisational weapon attack, I can spend 1 qi point to attempt a Stunning Strike."
+                ]
+            }
+        },
+        "qi-empowered strikes": {
+            name: "Qi-Empowered Strikes",
+            source: ["QG", 0],
+            minlevel: 6,
+            description: desc([
+                "Unarmed strikes count as magical for overcoming resistances and immunities",
+                "Choose one additional studied enemy and associated language"
+            ]),
+            calcChanges: {
+                atkAdd: [
+                    function (fields, v) {
+                        if (v.baseWeaponName == "unarmed strike" && !v.theWea.isMagicWeapon) {
+                            fields.Description += (fields.Description ? '; ' : '') + 'Counts as magical';
+                        }
+                    },
+                    "My unarmed strikes count as magical for overcoming resistances and immunities."
+                ]
+            },
+        },
+        "free-flowing energy": {
+            name: "Free-flowing Energy",
+            source: ["QG", 0],
+            minlevel: 7,
+            description: desc([
+                "Use a bonus action to end one effect on yourself causing a saving throw each round",
+                "Make saving throw after a Long Rest against long-term effects"
+            ]),
+            action: [["bonus action", ""]],
+            savetxt: {
+                text: ["Adv. on Int/Wis saves; half damage on fail"],
+				dmgres : ["Psychic"]
+            }
+        },
+        "improvisational armor improved": {
+            name: "Improvisational Armor (Improved)",
+            source: ["QG", 0],
+            minlevel: 9,
+            description: desc([
+                "Add double proficiency to AC against one melee attacker per round; two if using Improvisational Weaponry feat",
+                "Bonus applies against all attacks when using Dodge action with an improvisational item",
+                "Critical hit on an unmodified roll of 19 or better"
+            ]),
+            calcChanges: {
+                atkAdd: [
+                    function(fields, v) {
+                        if (v.isMeleeWeapon && v.theWea.improvised) {
+                            fields.Description += (fields.Description ? '; ' : '') + 'Crit. 19-20';
+                        }
+                    },
+                    "My attacks with improvisational weapons score a critical hit on a roll of 19 or 20."
+                ],
+            }
+        },
+        "purity of body": {
+            name: "Purity of Body",
+            source: ["QG", 0],
+            minlevel: 10,
+            description: desc([
+                "I am immune to disease and poison; resistant to necrotic damage"
+            ]),
+            savetxt: {
+                dmgres: ["Necrotic"]
+            },
+        },
+        "tranquility": {
+            name: "Tranquility",
+            source: ["QG", 0],
+            minlevel: 11,
+            description: desc([
+                "Enter a special meditation that grants an aura of peace",
+                "At the end of a Long Rest, gain the effect of a Sanctuary spell until your next Long Rest",
+                "Sanctuary ends early if you make an Attack or cast a spell affecting an enemy",
+                "Qi abilities without the Attack label do not interrupt Sanctuary"
+            ]),
+            savetxt: {
+                text: ["Sanctuary (DC 8 + Wis mod + Prof)"],
+                adv_vs: ["charmed"]
+            },
+            spellcastingBonus: [{
+                name: "Tranquility",
+                spells: ["sanctuary"],
+                selection: ["sanctuary"],
+                firstCol: "LR"
+            }],
+        },
+        "the great wheel": {
+            name: "The Great Wheel",
+            source: ["QG", 0],
+            minlevel : 13,
+            description: desc([
+                "If someone gains advantage against you you can choose to gain advantage against them on your next roll against them (attack or save) or put them at a disadvantage on their next roll (attack or save)"
+            ]),
+        },
+        "diamond soul" : {
+			name : "Diamond Soul",
+			source : [["SRD", 28], ["P", 79]],
+			minlevel : 14,
+			description : desc("I am proficient with all saves; I can reroll a failed save once by spending 1 ki point"),
+			additional : "1 ki point to reroll failed saving throw",
+			saves : ["Str", "Dex", "Con", "Int", "Wis", "Cha"]
+		},
+        "timeless body" : {
+			name : "Timeless Body",
+			source : [["SRD", 28], ["P", 79]],
+			minlevel : 15,
+			description : desc("I don't require food or water; I don't suffer age penalties and can't be aged magically")
+		},
+        "echo of vitality": {
+            name: "Echo of Vitality",
+            source: ["QG", 0],
+            minlevel: 17,
+            description: desc([
+                "Spend 3 qi points after a Long Rest to create health reserves in yourself or another. Reserves last for hours equal to your monk level; qi points can't be recovered until used",
+                "When reduced to 0 HP, roll 9d10 to restore that many hit points. Use 1 qi point to automatically succeed a Death Save. Remaining qi restores health at 3d10 each if reduced to 0 HP again"
+            ]),
+        },
+        "chrysalis": {
+            name: "Chrysalis",
+            source: ["QG", 0],
+            minlevel: 18,
+            description: desc([
+                "Use an action to spend 4 qi points to become resistant to all damage for 1 minute",
+                "Also resistant to mind and body altering magic; skin gains a silky shimmering glow",
+                "Spend 8 qi points to cast a modified Imprisonment spell (Burial or Sleep) without components",
+                "Requires concentration if maintaining two imprisonments; ends if concentration is lost"
+            ]),
+            usages: 1,
+            recovery: "long rest",
+            action: [["action", ""]],
+            savetxt: {
+                text: ["Resistant to all damage types"],
+                adv_vs: ["mind-altering effects"]
+            }
+        },
+        "life is qi": {
+            name: "Life is Qi",
+            source: ["QG", 0],
+            minlevel: 20,
+            description: desc([
+                "When out of qi points, convert unused Hit Dice into Qi points at a 1:1 ratio",
+                "If out of Hit Dice, take 1d8 mystical damage per qi point recovered this way"
+            ])
         }
-        };
-
+        },
+    };
+// Defne the Qigong Monk subclass
+AddSubClass("monk", "path of the five fingers", {
+    regExpSearch: /^(?=.*path)(?=.*five)(?=.*fingers).*$/i,
+    subname: "Path of the Five Fingers",
+    source: ["QG", 0],
+    features: {
+        "subclassfeature3": {
+            name: "Open Hand Technique",
+            source: ["QG", 0],
+            minlevel: 3,
+            description: desc([
+                "Spend 1 qi point when hitting with Follow-through Attack to impose an effect:",
+                "- Intelligence save or gain Advantage on next attack against target in same fight",
+                "- Constitution save or target is Vulnerable to next qi attack within one round",
+                "- Force target to use action to Disengage or suffer -2 AC for one round"
+            ]),
+            usages: levels.map(function(n) { return n < 3 ? "" : n < 6 ? 2 : n < 11 ? 3 : n < 17 ? 4 : 5; }),
+            recovery: "short rest"
+        },
+        "subclassfeature6": {
+            name: "Wholeness of Body",
+            source: ["QG", 0],
+            minlevel: 6,
+            description: desc([
+                "Once per long rest, as an action, regain hit points equal to three times monk level",
+            ]),
+            action: [["action", ""]],
+            usages: 1,
+            recovery: "long rest"
+        },
+        "subclassfeature17": {
+            name: "Five Fingers of Death",
+            source: ["QG", 0],
+            minlevel: 17,
+            description: desc([
+                "Can be used once per Long Rest and only on one target at a time",
+                "Must hit target five times, each hit requires 1 qi point that can't be recovered until released",
+                "Final strike must occur within days equal to monk level; no immediate damage from hits",
+                "After fifth strike, target must make a Constitution saving throw",
+                "On failure, target is reduced to 0 HP; on success, takes 10d10 force damage",
+                "If damage exceeds twice target's max HP, storyteller may allow a gory explosion"
+            ]),
+            usages: 1,
+            recovery: "long rest",
+        }
+    }
+});
