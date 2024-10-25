@@ -230,8 +230,7 @@ ClassList["qigongMonk"] = {
             source: ["QG", 0],
             minlevel: 8,
             description: desc([
-                "At levels 8, 12, 16, and 19, choose a new damage type to add to your attacks",
-                "Choices are permanent; by level 19, you'll have chosen four types",
+                "At levels 8, 12, 16, and 19, choose a new damage type to add to your attacks. Choices are permanent.",
                 "Declare the damage type before rolling to hit; change it at the start of your next turn",
             ]),
             extraname: "Damage Type Choice",
@@ -244,7 +243,6 @@ ClassList["qigongMonk"] = {
             "poison" : {
                 name: "Poison",
                 source: ["Qi", 0],
-                popupName: "Poison Damage",
                 minlevel: 8,
                 toNotesPage:            [{
                     name: "Poison Damage",
@@ -255,7 +253,6 @@ ClassList["qigongMonk"] = {
             "necrotic" : {
                 name: "Necrotic",
                 source: ["Qi", 0],
-                popupName: "Necrotic Damage",
                 minlevel: 8,
                 toNotesPage:            [{
                     name: "Necrotic Damage",
@@ -266,7 +263,6 @@ ClassList["qigongMonk"] = {
             "acid" : {
                 name: "Acid",
                 source: ["Qi", 0],
-                popupName: "Acid Damage",
                 minlevel: 8,
                 toNotesPage:            [{
                     name: "Acid Damage",
@@ -277,7 +273,6 @@ ClassList["qigongMonk"] = {
             "cold" : {
                 name: "Cold",
                 source: ["Qi", 0],
-                popupName: "Cold Damage",
                 minlevel: 12,
                 toNotesPage:            [{
                     name: "Cold Damage",
@@ -288,7 +283,6 @@ ClassList["qigongMonk"] = {
             "fire" : {
                 name: "Fire",
                 source: ["Qi", 0],
-                popupName: "Fire Damage",
                 minlevel: 12,
                 toNotesPage:            [{
                     name: "Fire Damage",
@@ -299,7 +293,6 @@ ClassList["qigongMonk"] = {
             "lightning" : {
                 name: "Lightning",
                 source: ["Qi", 0],
-                popupName: "Lightning Damage",
                 minlevel: 12,
                 toNotesPage:            [{
                     name: "Lightning Damage",
@@ -310,7 +303,6 @@ ClassList["qigongMonk"] = {
             "force" : {
                 name: "Force",
                 source: ["Qi", 0],
-                popupName: "Force Damage",
                 minlevel: 16,
                 toNotesPage:            [{
                     name: "Force Damage",
@@ -321,7 +313,6 @@ ClassList["qigongMonk"] = {
             "thunder" : {
                 name: "Thunder",
                 source: ["Qi", 0],
-                popupName: "Thunder Damage",
                 minlevel: 16,
                 toNotesPage:            [{
                     name: "Thunder Damage",
@@ -332,7 +323,6 @@ ClassList["qigongMonk"] = {
             "psychic" : {
                 name: "Psychic",
                 source: ["Qi", 0],
-                popupName: "Psychic Damage",
                 minlevel: 19,
                 toNotesPage:            [{
                     name: "Psychic Damage",
@@ -343,7 +333,6 @@ ClassList["qigongMonk"] = {
             "radiant" : {
                 name: "Radiant",
                 source: ["Qi", 0],
-                popupName: "Radiant Damage",
                 minlevel: 19,
                 toNotesPage:            [{
                     name: "Radiant Damage",
