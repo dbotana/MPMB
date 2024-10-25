@@ -596,9 +596,9 @@ AddSubClass("qigongMonk", "path of the five fingers", {
 });
 
 // Define Qi features as spells with concise descriptions
-SpellsList["detect poison and disease"] = {
-    name: "Detect Poison and Disease",
-    classes: ["monk"],
+SpellsList["detect poison and disease qi"] = {
+    name: "Detect Poison and Disease Qi",
+    classes: ["qigongMonk"],
     level: 0, // Cantrip level
     source: ["QG", 0],
     description: "Sense poison or disease in a target. Healer's/Poisoner's Kit = 0 Qi.",
@@ -616,9 +616,9 @@ SpellsList["detect poison and disease"] = {
     save: ""
 };
 
-SpellsList["resistance"] = {
-    name: "Resistance",
-    classes: ["monk"],
+SpellsList["resistance qi"] = {
+    name: "Resistance Qi",
+    classes: ["qigongMonk"],
     level: 0, // Cantrip level
     source: ["QG", 0],
     description: "Grant a d4 bonus to a saving throw. 1 minute concentration = 0 Qi cost",
@@ -637,9 +637,9 @@ SpellsList["resistance"] = {
     save: ""
 };
 
-SpellsList["spare the dying"] = {
-    name: "Spare the Dying",
-    classes: ["monk"],
+SpellsList["spare the dying qi"] = {
+    name: "Spare the Dying Qi",
+    classes: ["qigongMonk"],
     level: 0, // Cantrip level
     source: ["QG", 0],
     description: "Stabilize a creature at 0 HP.",
@@ -655,9 +655,9 @@ SpellsList["spare the dying"] = {
     save: ""
 };
 
-SpellsList["cure wounds"] = {
-    name: "Cure Wounds",
-    classes: ["monk"],
+SpellsList["cure wounds qi"] = {
+    name: "Cure Wounds Qi",
+    classes: ["qigongMonk"],
     level: 1,
     source: ["QG", 0],
     description: "Heal a creature you touch. 1d8 + Wis modifier. +1d8/Qi.",
@@ -674,9 +674,9 @@ SpellsList["cure wounds"] = {
     save: ""
 };
 
-SpellsList["inflict wounds"] = {
-    name: "Inflict Wounds",
-    classes: ["monk"],
+SpellsList["inflict wounds qi"] = {
+    name: "Inflict Wounds Qi",
+    classes: ["qigongMonk"],
     level: 1,
     source: ["QG", 0],
     description: "Deal 3d10 necrotic damage on a hit. +1d10/Qi",
@@ -689,10 +689,10 @@ SpellsList["inflict wounds"] = {
     components: "1",
     duration: "",
 };
-// Define Qi features as spells with concise descriptions
-SpellsList["sleep"] = {
-    name: "Sleep",
-    classes: ["monk"],
+
+SpellsList["sleep qi"] = {
+    name: "Sleep Qi",
+    classes: ["qigongMonk"],
     level: 1,
     source: ["QG", 0],
     description: "Induce slumber using qi.",
@@ -711,9 +711,9 @@ SpellsList["sleep"] = {
     save: ""
 };
 
-SpellsList["blindness deafness"] = {
-    name: "Blindness Deafness",
-    classes: ["monk"],
+SpellsList["blindness deafness qi"] = {
+    name: "Blindness Deafness Qi",
+    classes: ["qigongMonk"],
     level: 2,
     source: ["QG", 0],
     description: "Blind or deafen a foe with qi.",
@@ -732,9 +732,9 @@ SpellsList["blindness deafness"] = {
     save: "Con"
 };
 
-SpellsList["calm emotions"] = {
-    name: "Calm Emotions",
-    classes: ["monk"],
+SpellsList["calm emotions qi"] = {
+    name: "Calm Emotions Qi",
+    classes: ["qigongMonk"],
     level: 3,
     source: ["QG", 0],
     description: "Calm emotions through qi manipulation.",
@@ -749,9 +749,9 @@ SpellsList["calm emotions"] = {
     save: "Con"
 };
 
-SpellsList["increase ability"] = {
-    name: "Increase Ability",
-    classes: ["monk"],
+SpellsList["increase ability qi"] = {
+    name: "Increase Ability Qi",
+    classes: ["qigongMonk"],
     level: 3,
     source: ["QG", 0],
     description: "Temporarily increase natural abilities.",
@@ -765,9 +765,9 @@ SpellsList["increase ability"] = {
     duration: "10 minutes",
 };
 
-SpellsList["hold person"] = {
-    name: "Hold Person",
-    classes: ["monk"],
+SpellsList["hold person qi"] = {
+    name: "Hold Person Qi",
+    classes: ["qigongMonk"],
     level: 3,
     source: ["QG", 0],
     description: "Paralyze a humanoid with qi.",
@@ -781,9 +781,9 @@ SpellsList["hold person"] = {
     duration: "",
 };
 
-SpellsList["lesser restoration"] = {
-	name : "Lesser Restoration",
-	classes : ["monk"],
+SpellsList["lesser restoration qi"] = {
+	name : "Lesser Restoration Qi",
+	classes : ["qigongMonk"],
 	level : 3,
 	source : ["QG", 0],
 	description : "End one disease or condition affecting target.",
@@ -796,10 +796,10 @@ SpellsList["lesser restoration"] = {
 	components : "3",
 	duration : "",
 };
-// Define Qi features as spells with concise descriptions
-SpellsList["protection from poison"] = {
-    name: "Protection from Poison",
-    classes: ["monk"],
+
+SpellsList["protection from poison qi"] = {
+    name: "Protection from Poison Qi",
+    classes: ["qigongMonk"],
     level: 3,
     source: ["QG", 0],
     description: "Neutralize poison or grant advantage on CON saves.",
@@ -817,9 +817,9 @@ SpellsList["protection from poison"] = {
     save: ""
 };
 
-SpellsList["weakness"] = {
-    name: "Weakness",
-    classes: ["monk"],
+SpellsList["weakness qi"] = {
+    name: "Weakness Qi",
+    classes: ["qigongMonk"],
     level: 3,
     source: ["QG", 0],
     description: "Halve target's damage with Strength-based attacks.",
@@ -834,9 +834,9 @@ SpellsList["weakness"] = {
     save: "Con"
 };
 
-SpellsList["shatter"] = {
-    name: "Shatter",
-    classes: ["monk"],
+SpellsList["shatter qi"] = {
+    name: "Shatter Qi",
+    classes: ["qigongMonk"],
     level: 3,
     source: ["QG", 0],
     description: "Deal force damage to objects or creatures.",
@@ -851,9 +851,9 @@ SpellsList["shatter"] = {
     duration: "",
 };
 
-SpellsList["bestow curse"] = {
-    name: "Bestow Curse",
-    classes: ["monk"],
+SpellsList["bestow curse qi"] = {
+    name: "Bestow Curse Qi",
+    classes: ["qigongMonk"],
     level: 4,
     source: ["QG", 0],
     description: "Curse a target with various effects.",
@@ -872,9 +872,9 @@ SpellsList["bestow curse"] = {
     duration: "",
 };
 
-SpellsList["dispel magic"] = {
-	name : "Dispel Magic",
-	classes : ["monk"],
+SpellsList["dispel magic qi"] = {
+	name : "Dispel Magic Qi",
+	classes : ["qigongMonk"],
 	level : 4,
 	source : ["QG", 0],
 	description : "End effects of spells on target.",
@@ -888,9 +888,9 @@ SpellsList["dispel magic"] = {
 	duration : "",
 };
 
-SpellsList["haste"] = {
-	name : "Haste",
-	classes : ["monk"],
+SpellsList["haste qi"] = {
+	name : "Haste Qi",
+	classes : ["qigongMonk"],
 	level : 4,
 	source : ["QG", 0],
 	description : "Double speed and grant extra actions.",
@@ -904,9 +904,9 @@ SpellsList["haste"] = {
 	duration : "",
 };
 
-SpellsList["hypnotic kata"] = {
-    name: "Hypnotic Kata",
-    classes: ["monk"],
+SpellsList["hypnotic kata qi"] = {
+    name: "Hypnotic Kata Qi",
+    classes: ["qigongMonk"],
     level: 4,
     source: ["QG", 0],
     description: "Charm creatures with a hypnotic pattern.",
@@ -924,9 +924,9 @@ SpellsList["hypnotic kata"] = {
     save: "Wis"
 };
 
-SpellsList["protection from energy"] = {
-    name: "Protection from Energy",
-    classes: ["monk"],
+SpellsList["protection from energy qi"] = {
+    name: "Protection from Energy Qi",
+    classes: ["qigongMonk"],
     level: 4,
     source: ["QG", 0],
     description: "Grant resistance to energy damage.",
@@ -940,9 +940,9 @@ SpellsList["protection from energy"] = {
     duration: "1 hour"
 };
 
-SpellsList["remove curse"] = {
-    name: "Remove Curse",
-    classes: ["monk"],
+SpellsList["remove curse qi"] = {
+    name: "Remove Curse Qi",
+    classes: ["qigongMonk"],
     level: 4,
     source: ["QG", 0],
     description: "End curses on a creature or object.",
@@ -956,9 +956,9 @@ SpellsList["remove curse"] = {
     duration: ""
 };
 
-SpellsList["revivify"] = {
-    name: "Revivify",
-    classes: ["monk"],
+SpellsList["revivify qi"] = {
+    name: "Revivify Qi",
+    classes: ["qigongMonk"],
     level: 4,
     source: ["QG", 0],
     description: "Return life to a recently deceased creature.",
@@ -972,9 +972,9 @@ SpellsList["revivify"] = {
     components: "4",
 };
 
-SpellsList["slow"] = {
-	name : "Slow",
-	classes : ["monk"],
+SpellsList["slow qi"] = {
+	name : "Slow Qi",
+	classes : ["qigongMonk"],
 	level : 4,
 	source : ["QG", 0],
 	description : "Slow target's perception of time.",
@@ -989,9 +989,9 @@ SpellsList["slow"] = {
 	save : "Wis"
 };
 
-SpellsList["dominate person"] = {
-	name : "Dominate Person",
-	classes : ["monk"],
+SpellsList["dominate person qi"] = {
+	name : "Dominate Person Qi",
+	classes : ["qigongMonk"],
 	level : 6,
 	source : ["QG", 0],
 	description : "Dominate a person's actions through ritual.",
@@ -1005,9 +1005,9 @@ SpellsList["dominate person"] = {
 	duration : ""
 };
 
-SpellsList["hold monster"] = {
-	name : "Hold Monster",
-	classes : ["monk"],
+SpellsList["hold monster qi"] = {
+	name : "Hold Monster Qi",
+	classes : ["qigongMonk"],
 	level : 6,
 	source : ["QG", 0],
 	description : "Paralyze a creature with qi pressure points.",
@@ -1021,9 +1021,9 @@ SpellsList["hold monster"] = {
 	duration : ""
 };
 
-SpellsList["disintegrate - advanced shatter"] = {
-    name: "Disintegrate - Advanced Shatter",
-    classes: ["monk"],
+SpellsList["disintegrate advanced shatter qi"] = {
+    name: "Disintegrate Advanced Shatter Qi",
+    classes: ["qigongMonk"],
     level: 7,
     source: ["QG", 0],
     description: "Disintegrate a target with force damage.",
@@ -1041,9 +1041,9 @@ SpellsList["disintegrate - advanced shatter"] = {
     duration: "",
 };
 
-SpellsList["harm"] = {
-    name: "Harm",
-    classes: ["monk"],
+SpellsList["harm qi"] = {
+    name: "Harm Qi",
+    classes: ["qigongMonk"],
     level: 7,
     source: ["QG", 0],
     description: "Unleash a virulent disease causing necrotic damage.",
@@ -1058,9 +1058,9 @@ SpellsList["harm"] = {
     duration: "",
 };
 
-SpellsList["heal"] = {
-    name: "Heal",
-    classes: ["monk"],
+SpellsList["heal qi"] = {
+    name: "Heal Qi",
+    classes: ["qigongMonk"],
     level: 7,
     source: ["QG", 0],
     description: "Cure diseases and restore hit points.",
@@ -1074,9 +1074,9 @@ SpellsList["heal"] = {
     components: "7",
 };
 
-SpellsList["finger of death"] = {
-    name: "Finger of Death",
-    classes: ["monk"],
+SpellsList["finger of death qi"] = {
+    name: "Finger of Death Qi",
+    classes: ["qigongMonk"],
     level: 8,
     source: ["QG", 0],
     description: "Deal necrotic damage and raise a zombie.",
@@ -1093,9 +1093,9 @@ SpellsList["finger of death"] = {
     duration: "",
 };
 
-SpellsList["regenerate"] = {
-    name: "Regenerate",
-    classes: ["monk"],
+SpellsList["regenerate qi"] = {
+    name: "Regenerate Qi",
+    classes: ["qigongMonk"],
     level: 8,
     source: ["QG", 0],
     description: "Stimulate healing and restore hit points.",
@@ -1111,9 +1111,9 @@ SpellsList["regenerate"] = {
     components: "8",
 };
 
-SpellsList["dominate monster"] = {
-    name: "Dominate Monster",
-    classes: ["monk"],
+SpellsList["dominate monster qi"] = {
+    name: "Dominate Monster Qi",
+    classes: ["qigongMonk"],
     level: 9,
     source: ["QG", 0],
     description: "Dominate a monster's actions.",
@@ -1130,9 +1130,9 @@ SpellsList["dominate monster"] = {
     components: "9",
 };
 
-SpellsList["feeblemind"] = {
-    name: "Feeblemind",
-    classes: ["monk"],
+SpellsList["feeblemind qi"] = {
+    name: "Feeblemind Qi",
+    classes: ["qigongMonk"],
     level: 9,
     source: ["QG", 0],
     description: "Shatter a creature's intellect and personality.",
@@ -1150,9 +1150,9 @@ SpellsList["feeblemind"] = {
     duration: "",
 };
 
-SpellsList["mind blank"] = {
-    name: "Mind Blank",
-    classes: ["monk"],
+SpellsList["mind blank qi"] = {
+    name: "Mind Blank Qi",
+    classes: ["qigongMonk"],
     level: 9,
     source: ["QG", 0],
     description: "Become immune to psychic damage and mind effects.",
@@ -1166,9 +1166,9 @@ SpellsList["mind blank"] = {
     components: "1/9",
 };
 
-SpellsList["power attack stun"] = {
-    name: "Power Attack Stun",
-    classes: ["monk"],
+SpellsList["power attack stun qi"] = {
+    name: "Power Attack Stun Qi",
+    classes: ["qigongMonk"],
     level: 9,
     source: ["QG", 0],
     description: "Overwhelm a target's mind and body.",
@@ -1183,9 +1183,9 @@ SpellsList["power attack stun"] = {
     components: "9",
 };
 
-SpellsList["power attack kill"] = {
-    name: "Power Attack Kill",
-    classes: ["monk"],
+SpellsList["power attack kill qi"] = {
+    name: "Power Attack Kill Qi",
+    classes: ["qigongMonk"],
     level: 10,
     source: ["QG", 0],
     description: "Devastating attack that can cause instant death.",
@@ -1198,7 +1198,3 @@ SpellsList["power attack kill"] = {
     range: "Touch/Range",
     components: "10",
 };
-
-[
-    "detect poison and disease", "resistance", "spare the dying", "cure wounds", "inflict wounds", "sleep", "blindness deafness", "calm emotions", "increase ability", "hold person", "lesser restoration", "protection from poison", "weakness", "shatter", "bestow curse", "dispel magic", "haste", "hypnotic kata", "protection from energy", "remove curse", "revivify", "slow", "dominate person", "hold monster", "disintegrate - advanced shatter", "harm", "heal", "finger of death", "regenerate", "dominate monster", "feeblemind", "mind blank", "power attack stun", "power attack kill"
-    ].forEach(function (s) {if(SpellsList[s] && SpellsList[s].classes && SpellsList[s].classes.indexOf("qigongMonk") === -1) SpellsList[s].classes.push("qigongMonk");});
