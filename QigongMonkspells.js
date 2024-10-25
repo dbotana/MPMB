@@ -49,7 +49,7 @@ ClassList["qigongMonk"] = {
         "\n \u2022 A dungeoneer's pack -or- an explorer's pack;" +
         "\n \u2022 10 darts." +
         "\n\nAlternatively, choose 5d4 gp worth of starting equipment instead of both the class' and the background's starting equipment.",
-    subclasses : ["Monastic Tradition", ["qigong-way of inner peace"]],
+    subclasses : ["Monastic Tradition", []],
     attacks : [1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
     features : {
        "studied enemy": {
@@ -456,7 +456,7 @@ ClassList["qigongMonk"] = {
         },
     };
 // Defne the Qigong Monk subclass
-AddSubClass("monk", "path of the five fingers", {
+AddSubClass("qigongMonk", "path of the five fingers", {
     regExpSearch: /^(?=.*path)(?=.*five)(?=.*fingers).*$/i,
     subname: "Path of the Five Fingers",
     source: ["QG", 0],
