@@ -119,10 +119,9 @@ ClassList["qigongMonk"] = {
             minlevel: 1,
             description: desc([
                 "Mastery of a singular style using unarmed strikes and pressure points",
-                "Use Dexterity instead of Strength for attack and damage rolls of unarmed strikes and improvisational weapons",
-                "Roll a d6 in place of normal damage for unarmed strikes or improvisational weapons",
-                "Damage die increases at levels 5, 11, and 17",
-                "Follow-through Attack: After using Attack action with unarmed strike or improvisational weapon, make another unarmed strike as a bonus action"
+                "Use Dexterity instead of Strength for attack/damage  of unarmed strikes and improvisational weapons",
+                "Roll a dx in place of normal damage for unarmed strikes or improvisational weapons",
+                "Follow-through Attack: After using Attack action with unarmed strike or improvisational weapon, make unarmed strike as a bonus action"
             ]),
             additional: levels.map(function(n) {
                 return n < 5 ? "1d6" : n < 11 ? "1d8" : n < 17 ? "1d10" : "1d12";
@@ -213,7 +212,6 @@ ClassList["qigongMonk"] = {
             [{
                 name: "Backlash Table",
                 source: ["Qi", 0],
-                popupName: "Backlash Table",
                 note: desc([
                     "Roll 1d6 for Backlash from a Critical Fail while using Qi:",
                     "1 = Can't spend more qi until end of next round.",
