@@ -157,7 +157,7 @@ ClassList["qigongMonk"] = {
                 name: "Improvisational Armor Cover",
                 source: ["Qi", 0],
                 popupName: "Improvisational Armor Cover",
-                note: [
+                note: desc([
                     "Walls, trees, creatures, and other obstacles can provide cover during combat, making a target more difficult to harm.",
                     "A target benefits from cover only when an attack or effect originates from the opposite side.",
                     "A Qigong Monk can temporarily improve their AC with improvisational items.",
@@ -170,7 +170,7 @@ ClassList["qigongMonk"] = {
                     "Three-Quarter Cover: Add 5 + proficiency to AC and Dex saves if 3/4 of your body is covered.",
                     "Full Cover: Can't be targeted directly; add proficiency to saves vs. AoE effects if fully concealed.",
                     "Critical Damage: Items used for cover or attack that are critically hit are considered damaged and unusable until after a short rest."
-                ]
+                ])
             }],
             // Add the "Entangle and Pin" section to the notes page for the Qigong Monk
             toNotesPage: [{
@@ -230,7 +230,7 @@ ClassList["qigongMonk"] = {
                 name: "Backlash Table",
                 source: ["Qi", 0],
                 popupName: "Backlash Table",
-                note: [
+                note: desc([
                     "Roll 1d6 for Backlash from a Critical Fail while using Qi:",
                     "1 = Can't spend more qi until end of next round.",
                     "2 = Must take an Action/Reaction/Bonus action to unblock before spending more qi.",
@@ -238,7 +238,7 @@ ClassList["qigongMonk"] = {
                     "4 = Efforts against target interrupted; nothing happens if not in action.",
                     "5 = Nothing happens, just fail.",
                     "6 = Spend same qi cost to re-roll attack; if fail again, treat as rolling a 1 again."
-                ]
+                ])
             }]
         },
         "ability score improvement damage type": {
