@@ -7,9 +7,9 @@
 
 /*	-INFORMATION-
 	Subject:	Class
-	Effect:		This script adds a class called "Spell Sword" and its subclasses.
+	Effect:		This script adds the "Spell Sword" class and its subclasses available at https://www.dmsguild.com/product/489979/The-Spellsword
 	Code by:	Rocky
-	Date:		2024-10-16 (sheet v13)
+	Date:		2024-10-25 (sheet v13)
 */
 var iFileName = "SpellSword.js";
 
