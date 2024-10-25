@@ -18,7 +18,7 @@ SourceList["Qi"] = {
     name : "Qigong Monk Homebrew",
     abbreviation : "Qi",
     group : "Homebrew Classes",
-    date : "2024/10/22"
+    date : "2024/10/25"
 };
 
 ClassList["qigongMonk"] = {
@@ -48,7 +48,7 @@ ClassList["qigongMonk"] = {
         "\n \u2022 A shortsword -or- any simple weapon;" +
         "\n \u2022 A dungeoneer's pack -or- an explorer's pack;" +
         "\n \u2022 10 darts." +
-        "\n\nAlternatively, choose 5d4 gp worth of starting equipment instead of both the class' and the background's starting equipment.",
+        "\n Alternatively, choose 5d4 gp worth of starting equipment instead of both the class' and the background's starting equipment.",
     subclasses : ["Monastic Tradition", []],
     attacks : [1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
     features : {
@@ -221,9 +221,10 @@ ClassList["qigongMonk"] = {
                 RemoveString('Extra.Notes', 'Qi Abilities:\n\u25C6 Spend qi points to fuel various qi features.\n\u25C6 Qi save DC = 8 + proficiency bonus + Wisdom modifier.\n\u25C6 One-shot effects prevent repeated conditions until a long rest.\n\u25C6 Attack Label adds unarmed attack damage.\n\u25C6 Backlash on natural 1: Roll on Backlash Table for effects.');
             }
         },
-        // Define the Backlash Table for rolling a natural 1
         "backlash table": {
             name: "Backlash Table",
+            source: ["Qi", 0],
+            minlevel: 2,
             toNotesPage:
             [{
                 name: "Backlash Table",
@@ -260,7 +261,7 @@ ClassList["qigongMonk"] = {
                 return n < 8 ? 0 : n < 12 ? 1 : n < 16 ? 2 : n < 19 ? 3 : 4;
             }),
         },
-        "Mitigating Qi": {
+        "mitigating qi": {
             name: "Mitigating Qi",
             source: ["Qi", 0],
             minlevel: 4,
