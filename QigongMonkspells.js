@@ -188,7 +188,7 @@ ClassList["qigongMonk"] = {
                 ])
             }]
         },
-        "Qi": {
+        "qi": {
             name: "Aiqido (Qi Martial Art)",
             source: ["Qi", 0],
             minlevel: 2,
@@ -236,15 +236,12 @@ ClassList["qigongMonk"] = {
             ]),
             extraname: "Damage Type Choice",
             extrachoices: [
-                "Poison (8)", "Necrotic (8)", "Acid (8)",
-                "Cold (12)", "Fire (12)", "Lightning (12)",
-                "Force (16)", "Thunder (16)",
-                "Psychic (19)", "Radiant (19)"
+                "poison", "necrotic", "acid", "cold", "fire", "lightning", "force", "thunder", "psychic", "radiant"
             ],
             extraTimes: levels.map(function (n) {
                 return n < 8 ? 0 : n < 12 ? 1 : n < 16 ? 2 : n < 19 ? 3 : 4;
             }),
-            "Poison (8)" : {
+            "poison" : {
                 name: "Poison",
                 source: ["Qi", 0],
                 popupName: "Poison Damage",
@@ -255,7 +252,7 @@ ClassList["qigongMonk"] = {
                     note: desc("My attacks can deal Poison damage.")
                 }]
                 },
-            "Necrotic (8)" : {
+            "necrotic" : {
                 name: "Necrotic",
                 source: ["Qi", 0],
                 popupName: "Necrotic Damage",
@@ -266,7 +263,7 @@ ClassList["qigongMonk"] = {
                     note: desc("My attacks can deal Necrotic damage.")
                 }]
                 },
-            "Acid (8)" : {
+            "acid" : {
                 name: "Acid",
                 source: ["Qi", 0],
                 popupName: "Acid Damage",
@@ -277,7 +274,7 @@ ClassList["qigongMonk"] = {
                     note: desc("My attacks can deal Acid damage.")
                 }]
                 },
-            "Cold (12)" : {
+            "cold" : {
                 name: "Cold",
                 source: ["Qi", 0],
                 popupName: "Cold Damage",
@@ -288,7 +285,7 @@ ClassList["qigongMonk"] = {
                     note: desc("My attacks can deal Cold damage.")
                 }]
                 },
-            "Fire (12)" : {
+            "fire" : {
                 name: "Fire",
                 source: ["Qi", 0],
                 popupName: "Fire Damage",
@@ -299,7 +296,7 @@ ClassList["qigongMonk"] = {
                     note: desc("My attacks can deal Fire damage.")
                 }]
                 },
-            "Lightning (12)" : {
+            "lightning" : {
                 name: "Lightning",
                 source: ["Qi", 0],
                 popupName: "Lightning Damage",
@@ -310,7 +307,7 @@ ClassList["qigongMonk"] = {
                     note: desc("My attacks can deal Lightning damage.")
                 }]
                 },
-            "Force (16)" : {
+            "force" : {
                 name: "Force",
                 source: ["Qi", 0],
                 popupName: "Force Damage",
@@ -321,7 +318,7 @@ ClassList["qigongMonk"] = {
                     note: desc("My attacks can deal Force damage.")
                 }]
                 },
-            "Thunder (16)" : {
+            "thunder" : {
                 name: "Thunder",
                 source: ["Qi", 0],
                 popupName: "Thunder Damage",
@@ -332,7 +329,7 @@ ClassList["qigongMonk"] = {
                     note: desc("My attacks can deal Thunder damage.")
                 }]
                 },
-            "Psychic (19)" : {
+            "psychic" : {
                 name: "Psychic",
                 source: ["Qi", 0],
                 popupName: "Psychic Damage",
@@ -343,7 +340,7 @@ ClassList["qigongMonk"] = {
                     note: desc("My attacks can deal Psychic damage.")
                 }]
                 },
-            "Radiant (19)" : {
+            "radiant" : {
                 name: "Radiant",
                 source: ["Qi", 0],
                 popupName: "Radiant Damage",
