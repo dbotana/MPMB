@@ -241,7 +241,6 @@ ClassList["qigongMonk"] = {
             "poison" : {
                 name: "Poison",
                 source: ["Qi", 0],
-                minlevel: 8,
                 toNotesPage:            [{
                     name: "Poison Damage",
                     source: ["Qi", 0],
@@ -251,7 +250,6 @@ ClassList["qigongMonk"] = {
             "necrotic" : {
                 name: "Necrotic",
                 source: ["Qi", 0],
-                minlevel: 8,
                 toNotesPage:            [{
                     name: "Necrotic Damage",
                     source: ["Qi", 0],
@@ -261,7 +259,6 @@ ClassList["qigongMonk"] = {
             "acid" : {
                 name: "Acid",
                 source: ["Qi", 0],
-                minlevel: 8,
                 toNotesPage:            [{
                     name: "Acid Damage",
                     source: ["Qi", 0],
