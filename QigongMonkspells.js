@@ -21,7 +21,7 @@ SourceList["Qi"] = {
     date : "2024/10/22"
 };
 
-ClassList["qigong monk"] = {
+ClassList["qigongMonk"] = {
     regExpSearch : /^(?=.*qigong)(?=.*monk).*$/i,
     name : "Qigong Monk",
     source : ["Qi", 0],
@@ -812,7 +812,6 @@ SpellsList["haste"] = {
 	duration : "",
 };
 
-// Define Qi features as spells with concise descriptions
 SpellsList["hypnotic kata"] = {
     name: "Hypnotic Kata",
     classes: ["monk"],
@@ -930,7 +929,6 @@ SpellsList["hold monster"] = {
 	duration : ""
 };
 
-// Define Qi features as spells with concise descriptions
 SpellsList["disintegrate - advanced shatter"] = {
     name: "Disintegrate - Advanced Shatter",
     classes: ["monk"],
@@ -1108,3 +1106,7 @@ SpellsList["power attack kill"] = {
     range: "Touch/Range",
     components: "10",
 };
+
+[
+    "detect poison and disease", "resistance", "spare the dying", "cure wounds", "inflict wounds", "sleep", "blindness deafness", "calm emotions", "increase ability", "hold person", "lesser restoration", "protection from poison", "weakness", "shatter", "bestow curse", "dispel magic", "haste", "hypnotic kata", "protection from energy", "remove curse", "revivify", "slow", "dominate person", "hold monster", "disintegrate - advanced shatter", "harm", "heal", "finger of death", "regenerate", "dominate monster", "feeblemind", "mind blank", "power attack stun", "power attack kill"
+    ].forEach(function (s) {if(SpellsList[s] && SpellsList[s].classes && SpellsList[s].classes.indexOf("qigongMonk") === -1) SpellsList[s].classes.push("qigongMonk");});
