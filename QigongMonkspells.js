@@ -171,13 +171,11 @@ ClassList["qigongMonk"] = {
                     "Full Cover: Can't be targeted directly; add proficiency to saves vs. AoE effects if fully concealed.",
                     "Critical Damage: Items used for cover or attack that are critically hit are considered damaged and unusable until after a short rest."
                 ])
-            }],
-            // Add the "Entangle and Pin" section to the notes page for the Qigong Monk
-            toNotesPage: [{
+            },{
                 name: "Entangle and Pin",
                 source: ["Qi", 0],
                 minlevel: 1,
-                description: desc([
+                note: desc([
                     "Use improvisational weapons/armor to entangle or pin opponents instead of dealing damage.",
                     "Entangle: Sacrifice AC/weapon to restrain target's limb/weapon for 1 round if you let go.",
                     "Pin: Maintain control of object to restrain target; requires a surface to pin against.",
@@ -187,14 +185,7 @@ ClassList["qigongMonk"] = {
                     "- Leg(s)/Foot: Speed 0; disadvantage on attacks and DEX saves.",
                     "- Body/Hips: Combine arm and leg restrictions; weapon use depends on Storyteller.",
                     "Escape: STR save DC = 8 + monk proficiency + item size bonus (handheld +1, medium +2, large +3)."
-                ]),
-                eval: function() {
-                    AddString('Extra.Notes', 'Entangle and Pin:\n\u25C6 Use improvisational items to entangle/pin.\n\u25C6 Entangle sacrifices AC/weapon for one round.\n\u25C6 Pin requires maintaining control and a surface.\n\u25C6 Effects vary based on what is restrained.\n\u25C6 Escape requires STR save with item size modifiers.', '\n');
-                    show3rdPageNotes();
-                },
-                removeeval: function() {
-                    RemoveString('Extra.Notes', 'Entangle and Pin:\n\u25C6 Use improvisational items to entangle/pin.\n\u25C6 Entangle sacrifices AC/weapon for one round.\n\u25C6 Pin requires maintaining control and a surface.\n\u25C6 Effects vary based on what is restrained.\n\u25C6 Escape requires STR save with item size modifiers.');
-                }
+                ])
             }]
         },
         "Qi": {
@@ -212,14 +203,7 @@ ClassList["qigongMonk"] = {
             ]),
             action: [["action", ""], ["bonus action", ""]],
             usages: levels.map(function(n) { return n < 2 ? "" : n; }),
-            recovery: "short rest",
-            eval: function() {
-                AddString('Extra.Notes', 'Qi Abilities:\n\u25C6 Spend qi points to fuel various qi features.\n\u25C6 Qi save DC = 8 + proficiency bonus + Wisdom modifier.\n\u25C6 One-shot effects prevent repeated conditions until a long rest.\n\u25C6 Attack Label adds unarmed attack damage.\n\u25C6 Backlash on natural 1: Roll on Backlash Table for effects.', '\n');
-                show3rdPageNotes();
-            },
-            removeeval: function() {
-                RemoveString('Extra.Notes', 'Qi Abilities:\n\u25C6 Spend qi points to fuel various qi features.\n\u25C6 Qi save DC = 8 + proficiency bonus + Wisdom modifier.\n\u25C6 One-shot effects prevent repeated conditions until a long rest.\n\u25C6 Attack Label adds unarmed attack damage.\n\u25C6 Backlash on natural 1: Roll on Backlash Table for effects.');
-            }
+            recovery: "short rest"
         },
         "backlash table": {
             name: "Backlash Table",
@@ -260,6 +244,116 @@ ClassList["qigongMonk"] = {
             extraTimes: levels.map(function (n) {
                 return n < 8 ? 0 : n < 12 ? 1 : n < 16 ? 2 : n < 19 ? 3 : 4;
             }),
+            "Poison (8)" : {
+                name: "Poison",
+                source: ["Qi", 0],
+                popupName: "Poison Damage",
+                minlevel: 8,
+                toNotesPage:            [{
+                    name: "Poison Damage",
+                    source: ["Qi", 0],
+                    note: desc("My attacks can deal Poison damage.")
+                }]
+                },
+            "Necrotic (8)" : {
+                name: "Necrotic",
+                source: ["Qi", 0],
+                popupName: "Necrotic Damage",
+                minlevel: 8,
+                toNotesPage:            [{
+                    name: "Necrotic Damage",
+                    source: ["Qi", 0],
+                    note: desc("My attacks can deal Necrotic damage.")
+                }]
+                },
+            "Acid (8)" : {
+                name: "Acid",
+                source: ["Qi", 0],
+                popupName: "Acid Damage",
+                minlevel: 8,
+                toNotesPage:            [{
+                    name: "Acid Damage",
+                    source: ["Qi", 0],
+                    note: desc("My attacks can deal Acid damage.")
+                }]
+                },
+            "Cold (12)" : {
+                name: "Cold",
+                source: ["Qi", 0],
+                popupName: "Cold Damage",
+                minlevel: 12,
+                toNotesPage:            [{
+                    name: "Cold Damage",
+                    source: ["Qi", 0],
+                    note: desc("My attacks can deal Cold damage.")
+                }]
+                },
+            "Fire (12)" : {
+                name: "Fire",
+                source: ["Qi", 0],
+                popupName: "Fire Damage",
+                minlevel: 12,
+                toNotesPage:            [{
+                    name: "Fire Damage",
+                    source: ["Qi", 0],
+                    note: desc("My attacks can deal Fire damage.")
+                }]
+                },
+            "Lightning (12)" : {
+                name: "Lightning",
+                source: ["Qi", 0],
+                popupName: "Lightning Damage",
+                minlevel: 12,
+                toNotesPage:            [{
+                    name: "Lightning Damage",
+                    source: ["Qi", 0],
+                    note: desc("My attacks can deal Lightning damage.")
+                }]
+                },
+            "Force (16)" : {
+                name: "Force",
+                source: ["Qi", 0],
+                popupName: "Force Damage",
+                minlevel: 16,
+                toNotesPage:            [{
+                    name: "Force Damage",
+                    source: ["Qi", 0],
+                    note: desc("My attacks can deal Force damage.")
+                }]
+                },
+            "Thunder (16)" : {
+                name: "Thunder",
+                source: ["Qi", 0],
+                popupName: "Thunder Damage",
+                minlevel: 16,
+                toNotesPage:            [{
+                    name: "Thunder Damage",
+                    source: ["Qi", 0],
+                    note: desc("My attacks can deal Thunder damage.")
+                }]
+                },
+            "Psychic (19)" : {
+                name: "Psychic",
+                source: ["Qi", 0],
+                popupName: "Psychic Damage",
+                minlevel: 19,
+                toNotesPage:            [{
+                    name: "Psychic Damage",
+                    source: ["Qi", 0],
+                    note: desc("My attacks can deal Psychic damage.")
+                }]
+                },
+            "Radiant (19)" : {
+                name: "Radiant",
+                source: ["Qi", 0],
+                popupName: "Radiant Damage",
+                minlevel: 19,
+                toNotesPage:            [{
+                    name: "Radiant Damage",
+                    source: ["Qi", 0],
+                    note: desc("My attacks can deal Radiant damage.")
+                }]
+                }
         },
         "mitigating qi": {
             name: "Mitigating Qi",
