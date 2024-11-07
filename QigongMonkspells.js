@@ -533,7 +533,7 @@ ClassList["qigongMonk"] = {
     };
 // Define the Qigong Monk subclass "Path of the Five Fingers"
 AddSubClass("qigongMonk", "path of the five fingers", {
-    regExpSearch: /^(?=.*path)(?=.*five)(?=.*fingers).*$/i,
+    regExpSearch: /path of the five fingers/i,
     subname: "Path of the Five Fingers",
     source: ["QG", 0],
     features: {
