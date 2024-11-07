@@ -49,7 +49,7 @@ ClassList["qigongMonk"] = {
         "\n \u2022 A dungeoneer's pack -or- an explorer's pack;" +
         "\n \u2022 10 darts." +
         "\n Alternatively, choose 5d4 gp worth of starting equipment instead of both the class' and the background's starting equipment.",
-    subclasses : ["Monastic Tradition", []],
+    subclasses : ["QiGong Tradition", []],
     attacks : [1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
     features : {
        "studied enemy": {
@@ -374,7 +374,6 @@ ClassList["qigongMonk"] = {
             ]),
             usages: levels.map(function(n) { return n < 5 ? "" : n; }),
             recovery: "short rest",
-            action: [["action", ""]],
             calcChanges: {
                 atkAdd: [
                     function(fields, v) {
