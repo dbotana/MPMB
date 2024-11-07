@@ -578,7 +578,7 @@ AddSubClass("qigongMonk", "path of the five fingers", {
         }
     }
 });
-
+/*
 // Define Qi features as spells with concise descriptions
 SpellsList["detect poison and disease qi"] = {
     name: "Detect Poison and Disease Qi",
@@ -1181,4 +1181,4 @@ SpellsList["power attack kill qi"] = {
     action: [["attack", ""]],
     range: "Touch/Range",
     components: "10",
-};
+};*/
