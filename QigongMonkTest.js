@@ -51,7 +51,7 @@ ClassList["qigongMonk"] = {
         "\n Alternatively, choose 5d4 gp worth of starting equipment instead of both the class' and the background's starting equipment.",
     subclasses : ["QiGong Tradition", []],
     attacks : [1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
-    spellcastingFactor : 0,
+    spellcastingFactor : 1,
     features : {
        "studied enemy": {
             name: "Studied Enemy",
