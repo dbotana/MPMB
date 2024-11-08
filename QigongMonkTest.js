@@ -49,7 +49,6 @@ ClassList["qigongMonk"] = {
         "\n \u2022 A dungeoneer's pack -or- an explorer's pack;" +
         "\n \u2022 10 darts." +
         "\n Alternatively, choose 5d4 gp worth of starting equipment instead of both the class' and the background's starting equipment.",
-    subclasses : ["QiGong Tradition", []],
     attacks : [1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
     spellcastingFactor : 1,
     features : {
@@ -133,7 +132,7 @@ ClassList["qigongMonk"] = {
                     function(fields, v) {
                         if (v.isMeleeWeapon && (v.baseWeaponName == "unarmed strike" || v.theWea.improvised)) {
                             fields.Mod = v.StrDex;
-                            var monkDie = function(n) { return n < 5 ? 6 : n < 11 ? 8 : n < 17 ? 10 : 12; }(classes.known["qigong monk"].level);
+                            var monkDie = function(n) { return n < 5 ? 6 : n < 11 ? 8 : n < 17 ? 10 : 12; }(classes.known["qigongMonk"].level);
                             if (fields.Damage_Die.replace('d', '*') < monkDie) {
                                 fields.Damage_Die = '1d' + monkDie;
                             }
@@ -476,7 +475,7 @@ ClassList["qigongMonk"] = {
             source: ["QG", 0],
             minlevel : 13,
             description: desc([
-                "If someone gains advantage against you you can choose to gain advantage against them on your next roll against them (attack or save) or put them at a disadvantage on their next roll (attack or save)"
+                "If someone gains advantage against you, you can choose to gain advantage against them on your next roll against them (attack or save) or put them at a disadvantage on their next roll (attack or save)"
             ]),
         },
         "diamond soul" : {
