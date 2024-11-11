@@ -17,9 +17,9 @@
 var iFileName = "Qigong Monk and the Path of Kyusho Jitsu.js";
 RequiredSheetVersion("13.2.0");
 
-SourceList["JJ:QH"] = {
+SourceList["QH"] = {
     name : "John J's Qigong Monk Homebrew (v1.0)",
-    abbreviation : "JJ:QH",
+    abbreviation : "QH",
     group : "Homebrew Classes",
     date : "2024/11/08"
 };
@@ -27,7 +27,7 @@ SourceList["JJ:QH"] = {
 ClassList["qigong monk"] = {
     regExpSearch : /^(?=.*qigong)(?=.*monk).*$/i,
     name : "Qigong Monk",
-    source : ["JJ:QH", 0],
+    source : ["QH", 0],
     primaryAbility : "Dexterity and Wisdom",
     abilitySave : 5,
     prereqs : "Dexterity 13 and Wisdom 13",
@@ -209,7 +209,7 @@ ClassList["qigong monk"] = {
 		
         "Qi" : {
             name : "Aiqido (Qi Martial Art)",
-            source : ["Qi", 0],
+            source : ["QH", 0],
             minlevel : 2,
             description : desc([
                 "Activate Aiqido with an action or spend 1 qi point to activate as a bonus action",
@@ -273,7 +273,7 @@ ClassList["qigong monk"] = {
         },
         "Mitigating Qi" : {
             name : "Mitigating Qi",
-            source : ["Qi", 0],
+            source : ["QH", 0],
             minlevel : 4,
             description : desc([
                 "Spend 1 qi to negate a critical hit against you, rolling normal damage instead."
@@ -409,7 +409,7 @@ ClassList["qigong monk"] = {
         },
         "diamond soul" : {
 			name : "Diamond Soul",
-			source : [["SRD", 28], ["P", 79]],
+			source : ["QH", 0],
 			minlevel : 14,
 			description : desc("I am proficient with all saves; I can reroll a failed save once by spending 1 ki point"),
 			additional : "1 ki point to reroll failed saving throw",
@@ -417,7 +417,7 @@ ClassList["qigong monk"] = {
 		},
         "timeless body" : {
 			name : "Timeless Body",
-			source : [["SRD", 28], ["P", 79]],
+			source : ["QH", 0],
 			minlevel : 15,
 			description : desc("I don't require food or water; I don't suffer age penalties and can't be aged magically")
 		},
@@ -459,9 +459,6 @@ ClassList["qigong monk"] = {
         }
     },
 };
-
-
-// Add subclass data
 
 AddSubClass("qigong monk", "path of kyusho jitsu", {
     regExpSearch : /^(?=.*path)(?=.*kyusho)(?=.*jitsu).*$/i,
@@ -534,7 +531,7 @@ SpellsList["detect poison and disease"] = {
     name: "Detect Poison and Disease",
     classes: ["qigong monk"],
     level: 0, // Level equivalent: 0 (Cantrip)
-    source: ["KJ", 0],
+    source: ["QH", 0],
     action: [["action", ""]],
     range: "5 ft",
     components: "1 qi",
@@ -555,7 +552,7 @@ SpellsList["resistance"] = {
     name: "Resistance",
     classes: ["qigong monk"],
     level: 0, // Level equivalent: 0 (Cantrip)
-    source: ["KJ", 0],
+    source: ["QH", 0],
     action: [["action", ""]],
     range: "Touch",
     components: "1 qi",
@@ -576,7 +573,7 @@ SpellsList["spare the dying"] = {
     name: "Spare the Dying",
     classes: ["qigong monk"],
     level: 0, // Level equivalent: 0 (Cantrip)
-    source: ["KJ", 0],
+    source: ["QH", 0],
     action: [["action", ""]],
     range: "Touch",
     components: "1 qi",
@@ -594,7 +591,7 @@ SpellsList["cure wounds"] = {
     name: "Cure Wounds",
     classes: ["qigong monk"],
     level: 0, // Level equivalent: 1
-    source: ["KJ", 0],
+    source: ["QH", 0],
     action: [["action", ""]],
     range: "Touch",
     components: "1 qi",
@@ -613,7 +610,7 @@ SpellsList["inflict wounds"] = {
     name: "Inflict Wounds",
     classes: ["qigong monk"],
     level: 0, // Level equivalent: 1
-    source: ["KJ", 0],
+    source: ["QH", 0],
     action: [["attack", ""]],
     range: "Touch",
     components: "1 qi",
@@ -630,7 +627,7 @@ SpellsList["sleep"] = {
     name: "Sleep",
     classes: ["qigong monk"],
     level: 0, // Level equivalent: 1
-    source: ["KJ", 0],
+    source: ["QH", 0],
     action: [["attack", ""]],
     range: "Touch/Ranged",
     components: "1 qi",
@@ -651,7 +648,7 @@ SpellsList["blindness deafness"] = {
     name: "Blindness Deafness",
     classes: ["qigong monk"],
     level: 0, // Level equivalent: 2
-    source: ["KJ", 0],
+    source: ["QH", 0],
     action: [["attack", ""]],
     range: "Touch/Ranged",
     components: "2 qi",
@@ -672,7 +669,7 @@ SpellsList["calm emotions"] = {
     name: "Calm Emotions",
     classes: ["qigong monk"],
     level: 0, // Level equivalent: 3
-    source: ["KJ", 0],
+    source: ["QH", 0],
     action: [["attack", ""], ["action", ""]],
     range: "Touch",
     components: "3 qi",
@@ -689,7 +686,7 @@ SpellsList["increase ability"] = {
     name: "Increase Ability",
     classes: ["qigong monk"],
     level: 0, // Level equivalent: 3
-    source: ["KJ", 0],
+    source: ["QH", 0],
     action: [["action", ""]],
     range: "Touch",
     components: "3 qi",
@@ -706,7 +703,7 @@ SpellsList["hold person"] = {
     name: "Hold Person",
     classes: ["qigong monk"],
     level: 0, // Level equivalent: 3
-    source: ["KJ", 0],
+    source: ["QH", 0],
     action: [["attack", ""]],
     range: "Touch",
     components: "3 qi",
@@ -723,7 +720,7 @@ SpellsList["lesser restoration"] = {
 	name : "Lesser Restoration",
 	classes : ["monk"],
     level: 0, // Level equivalent: 3
-	source : ["KJ", 0],
+	source : ["QH", 0],
 	action : [["action", ""]],
 	range : "Touch",
 	components : "3 qi",
@@ -740,7 +737,7 @@ SpellsList["protection from poison"] = {
     name: "Protection from Poison",
     classes: ["qigong monk"],
     level: 0, // Level equivalent: 3
-    source: ["KJ", 0],
+    source: ["QH", 0],
     action: [["action", ""], ["ritual", ""]],
     range: "Touch",
     components: "3 qi",
@@ -760,7 +757,7 @@ SpellsList["weakness"] = {
     name: "Weakness",
     classes: ["qigong monk"],
     level: 0, // Level equivalent: 3
-    source: ["KJ", 0],
+    source: ["QH", 0],
     action: [["attack", ""]],
     range: "Touch/Range",
     components: "3 qi",
@@ -777,7 +774,7 @@ SpellsList["shatter"] = {
     name: "Shatter",
     classes: ["qigong monk"],
     level: 0, // Level equivalent: 3
-    source: ["KJ", 0],
+    source: ["QH", 0],
     action: [["action", ""], ["attack", ""]],
     range: "Varies",
     components: "3 qi",
@@ -795,7 +792,7 @@ SpellsList["bestow curse"] = {
     name: "Bestow Curse",
     classes: ["qigong monk"],
     level: 0, // Level equivalent: 4
-    source: ["KJ", 0],
+    source: ["QH", 0],
     action: [["attack", ""]],
     range: "Touch/Range",
     components: "4 qi",
@@ -817,7 +814,7 @@ SpellsList["dispel magic"] = {
 	name : "Dispel Magic",
 	classes : ["monk"],
     level: 0, // Level equivalent: 4
-	source : ["KJ", 0],
+	source : ["QH", 0],
 	action : [["action", ""]],
 	range : "Touch",
 	components : "4 qi",
@@ -834,7 +831,7 @@ SpellsList["haste"] = {
 	name : "Haste",
 	classes : ["monk"],
     level: 0, // Level equivalent: 4
-	source : ["KJ", 0],
+	source : ["QH", 0],
 	action : [["delayed action", ""]],
 	range : "Touch",
 	components : "4 qi",
@@ -851,7 +848,7 @@ SpellsList["hypnotic kata"] = {
     name: "Hypnotic Kata",
     classes: ["qigong monk"],
     level: 0, // Level equivalent: 4
-    source: ["KJ", 0],
+    source: ["QH", 0],
     action: [["action", ""]],
     range: "120 ft",
     components: "4 qi",
@@ -871,7 +868,7 @@ SpellsList["protection from energy"] = {
     name: "Protection from Energy",
     classes: ["qigong monk"],
     level: 0, // Level equivalent: 4
-    source: ["KJ", 0],
+    source: ["QH", 0],
     action: [["action", ""]],
     range: "Touch",
     components: "4 qi",
@@ -888,7 +885,7 @@ SpellsList["remove curse"] = {
     name: "Remove Curse",
     classes: ["qigong monk"],
     level: 0, // Level equivalent: 4
-    source: ["KJ", 0],
+    source: ["QH", 0],
     action: [["ritual", ""]],
     range: "Touch/Close Proximity",
     components: "4 qi",
@@ -905,7 +902,7 @@ SpellsList["revivify"] = {
     name: "Revivify",
     classes: ["qigong monk"],
     level: 0, // Level equivalent: 4
-    source: ["KJ", 0],
+    source: ["QH", 0],
     action: [["ritual", ""], ["concentration", ""]],
     range: "Touch",
     components: "4 qi",
@@ -923,7 +920,7 @@ SpellsList["slow"] = {
 	name : "Slow",
 	classes : ["monk"],
     level: 0, // Level equivalent: 4
-	source : ["KJ", 0],
+	source : ["QH", 0],
 	action : [["attack", ""]],
 	range : "Touch/Range",
 	components : "4 qi",
@@ -940,7 +937,7 @@ SpellsList["dominate person"] = {
 	name : "Dominate Person",
 	classes : ["monk"],
     level: 0, // Level equivalent: 6
-	source : ["KJ", 0],
+	source : ["QH", 0],
 	action : [["ritual", ""], ["concentration", ""]],
 	range : "",
 	components : "6 qi",
@@ -957,7 +954,7 @@ SpellsList["hold monster"] = {
 	name : "Hold Monster",
 	classes : ["monk"],
     level: 0, // Level equivalent: 6
-	source : ["KJ", 0],
+	source : ["QH", 0],
 	action : [["attack", ""]],
 	range : "Touch",
 	components : "6 qi",
@@ -974,7 +971,7 @@ SpellsList["disintegrate - advanced shatter"] = {
     name: "Disintegrate - Advanced Shatter",
     classes: ["qigong monk"],
     level: 0, // Level equivalent: 7
-    source: ["KJ", 0],
+    source: ["QH", 0],
     action: [["attack", ""]],
     range: "Touch",
     components: "7 qi",
@@ -983,4 +980,6 @@ SpellsList["disintegrate - advanced shatter"] = {
     description: "Disintegrate a target with force damage.",
     descriptionFull: 
         "The target of this ability can be a creature, an object, or a creation of magical force, such as the wall created by Wall of Force." + "\n   " +
-        "You must declare you are using this ability and cannot use any other qi abilities or use improvisational weapons... (10 KB left)
+        "You must declare you are using this ability and cannot use any other qi abilities or use improvisational weapons"
+};
+
