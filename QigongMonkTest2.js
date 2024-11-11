@@ -23,7 +23,31 @@ SourceList["QH"] = {
     group : "Homebrew Classes",
     date : "2024/11/08"
 };
+// Define the Spell Sword spell list
+[
+    // Cantrips (0 Level)
+    "acid splash", "blade ward", "booming blade", "control flames", "dancing lights", "fire bolt", "frostbite", "green-flame blade", "light", "mage hand", "message", "minor illusion", "poison spray", "prestidigitation", "ray of frost", "shocking grasp", "sword burst", "thunderclap", "true strike",
 
+    // 1st Level
+    "alarm", "arcane needle", "blazing ring", "burning hands", "chromatic orb", "color spray", "comprehend languages", "detect magic", "expeditious retreat", "false life", "feather fall", "flame thrust", "frostbite beam", "grease", "ice knife", "identify", "jump", "longstrider", "mage armor", "ray of sickness", "shield", "silent image", "sleep", "snare", "thunderwave", "witch bolt",
+
+    // 2nd Level
+    "aganazzar's scorcher", "arcane lock", "arcane javelin", "blindness/deafness", "blur", "cloud of daggers", "darkness", "darkvision", "detect thoughts", "dragon's breath", "enlarge/reduce", "glacial shroud", "gust of wind", "invisibility", "knock", "levitate", "locate object", "magic weapon", "mind spike", "mirror image", "phantom strike", "poisonous wave", "ray of enfeeblement", "rope trick", "scorching ray", "see invisibility", "shadow blade", "shatter", "silence", "spider climb", "web",
+
+    // 3rd Level
+    "blink", "counterspell", "dispel magic", "fear", "fireball", "fly", "frost lance", "gaseous form", "haste", "hypnotic pattern", "lightning bolt", "major image", "melf's minute meteors", "phantom steed", "protection from energy", "shadowblight claw", "sleet storm", "slow", "sonic burst", "thunder step", "tidal wave", "tongues", "vampiric touch", "wall of sand", "water breathing",
+
+    // 4th Level
+    "arcane chains", "banishment", "chaotic blastwave", "control water", "dimension door", "elemental bane", "fire shield", "greater invisibility", "hallucinatory terrain", "ice storm", "lightning arc", "phantasmal killer", "polymorph", "sickening radiance", "stoneskin", "storm sphere", "wall of fire",
+
+    // 5th Level
+    "animate object", "chthonic fissure", "cloudkill", "cone of cold", "ethereal strike", "far step", "immolation", "mislead", "modify memory", "skill empowerment", "steel wind strike", "synaptic static", "telekinesis", "teleportation circle", "wall of stone"
+].forEach(function (s) {if(SpellsList[s] && SpellsList[s].classes && SpellsList[s].classes.indexOf("spellsword") === -1) SpellsList[s].classes.push("spellsword");});
+
+//define monk spell list based on qi powers
+[
+    "detect poison and disease", 
+]
 ClassList["qigong monk"] = {
     regExpSearch : /^(?=.*qigong)(?=.*monk).*$/i,
     name : "Qigong Monk",
@@ -43,6 +67,7 @@ ClassList["qigong monk"] = {
     armorProfs : {
         primary : [false, false, false, false]
     },
+    
 
 	// Edit this to any simple weapon or add change to quarterstaff - thoughts? There was a reason why I chose shortsword but I can't remember.
     weaponProfs : {
@@ -513,18 +538,9 @@ AddSubClass("qigong monk", "path of kyusho jitsu", {
 	Subject:    Spell-like abilities
 	Effect:     This section adds several spell-like abilities available exclusively to the Qigong Monk Path of Kyusho Jitsu.
 */
-
-// I noticed that this didn't have a regExpSearch : /^(?=.* line so I assume that's intentional
-SourceList["JJ:KJ"] = {
-	name : "Qigong Monk Path of Kyusho Jitsu List of Spell-like Abilities",
-    abbreviation : "JJ:KJ",
-    group : "Homebrew Classes",
-    date : "2024/11/08"
-};
-
-// Having the action after the second description caused a syntax error, moving it before fixed it, making the change globally, using , as a line delimeter caused an error, replacing with  + "\n   " + fixes the problem
-// Set all level equivalents to 0 as it doesn't use traditional spell slots to alleviate errors on import
-// Added "qi" to the component number for context
+[
+    "detect poison and disease", "resistance", "spare the dying", "cure wounds", "inflict wounds", "hypnotic kata", "protection from energy", "remove curse", "revivify", "slow", "sleep", "blindness deafness", "calm emotions", "increase ability", "hold monster", "lesser restoration", "dispel magic", "haste", "dominate monster", "shatter", "finger of death", "regenerate"
+].forEach(function (s) {if(SpellsList[s] && SpellsList[s].classes && SpellsList[s].classes.indexOf("qigong monk") === -1) SpellsList[s].classes.push("qigong monk");});
 
 // Define Qi features as spells with concise descriptions
 SpellsList["detect poison and disease"] = {
