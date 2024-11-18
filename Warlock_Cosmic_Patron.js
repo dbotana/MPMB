@@ -64,7 +64,7 @@ AddSubClass("warlock", "cosmic patron", {
                 spells: ["guidance", "augury"],
                 selection: ["guidance", "augury"],
                 times : 2,
-                firstCol: ['atwill', 'oncelr']
+                firstCol: 'atwill'
             }
         },
         // 6th-level feature
