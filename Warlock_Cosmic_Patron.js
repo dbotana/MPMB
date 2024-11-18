@@ -61,16 +61,11 @@ AddSubClass("warlock", "cosmic patron", {
             languageProfs: ["Celestial", "Deep Speech"],
             spellcastingBonus: {
                 name: "Cosmic Guidance",
-                spells: ["guidance"],
-                selection: ["guidance"],
-                firstCol: 'atwill'
-            },
-            spellcastingBonus: {
-                name: "Cosmic Guidance Augury",
-                spells: ["augury"],
-                selection: ["augury"],
-                firstCol: 'oncelr'
-            },
+                spells: ["guidance", "augury"],
+                selection: ["guidance", "augury"],
+                times : 2,
+                firstCol: ['atwill', 'oncelr']
+            }
         },
         // 6th-level feature
         "subclassfeature6": {
