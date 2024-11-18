@@ -60,17 +60,17 @@ AddSubClass("warlock", "cosmic patron", {
                          "\n   Additionally, I may cast Augury once without expending a spell slot. I can't do so again until I finish a long rest.",
             languageProfs: ["Celestial", "Deep Speech"],
             spellcastingBonus: {
-                name: "Cosmic Guidance (Guidance)",
+                name: "Cosmic Guidance",
                 spells: ["guidance"],
                 selection: ["guidance"],
                 firstCol: 'atwill'
             },
-            spellcastingExtra : [{
-                name : "Augury",
-                spells : ["augury"],
-                selection : ["augury"],
-                firstCol : 'oncelr'
-            }]
+            spellcastingBonus: {
+                name: "Cosmic Guidance Augury",
+                spells: ["augury"],
+                selection: ["augury"],
+                firstCol: 'oncelr'
+            },
         },
         // 6th-level feature
         "subclassfeature6": {
