@@ -30,7 +30,7 @@ AddSubClass("paladin", "oath of the sword saint", {
 
     features: {
         "subclassfeature3": {
-            name: "Channel Divinity",
+            name: "Channel Divinity: Sword Saint",
             source: ["OSS", 0],
             minlevel: 3,
             description: desc([
