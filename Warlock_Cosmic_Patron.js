@@ -78,10 +78,10 @@ AddSubClass("warlock", "cosmic patron", {
             source: [["TCP", 1]],
             minlevel: 6,
             description: "\n   When I miss a creature with Eldritch Blast, it returns as an orbiting comet." + 
-                        "\n Cosmic Power. Once on your turn when you cast eldritch blast, you can consume one orbiting comet to fire an additional beam." +
-                        "\n Interception. You can use your reaction to intercept a melee or ranged attack, gaining resistance to the damage from that attack." + 
-                        "\n Lightspeed. As a bonus action, you can consume a comet to teleport 30 feet to an unoccupied space you can see." +
-                        "\n As long as you have comets, you glow (bright light 20 feet, dim light 10 feet. The comets last until you finish a short or long rest, or until you dismiss them (no action).",
+                        "\n   Cosmic Power. Once on your turn when you cast eldritch blast, you can consume one orbiting comet to fire an additional beam." +
+                        "\n   Interception. You can use your reaction to intercept a melee or ranged attack, gaining resistance to the damage from that attack." + 
+                        "\n   Lightspeed. As a bonus action, you can consume a comet to teleport 30 feet to an unoccupied space you can see." +
+                        "\n   As long as you have comets, you glow (bright light 20 feet, dim light 10 feet. The comets last until you finish a short or long rest, or until you dismiss them (no action).",
             additional: ["Max comets = Proficiency Bonus"],
         },
         // 10th-level feature
