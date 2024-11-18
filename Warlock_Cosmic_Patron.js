@@ -7,9 +7,9 @@
 
 /*	-INFORMATION-
 	Subject:	Class
-	Effect:		This script adds the Cosmic Patron, a Warlock subclass from Sebastien Crow's Guide to Drakenheim
+	Effect:		This script adds the Cosmic Patron, a Warlock subclass from Sebastien Crow's Guide to Drakenheim available at https://ghostfiregaming.com/product/sebastian-crowes-guide-to-drakkenheim-hardcover-book/
 	Code by:	Rocky
-	Date:		2024-10-25 (sheet v13)
+	Date:		2024-11-18 (sheet v13)
 */
 var iFileName = "Warlock_Cosmic_Patron.js";
 
@@ -19,7 +19,8 @@ SourceList["TCP"] = {
     name: "Warlock - The Cosmic Patron",
     abbreviation: "TCP",
     group: "Homebrew",
-    date: "2024/11/18"
+    date: "2024/11/18",
+    url: "https://ghostfiregaming.com/product/sebastian-crowes-guide-to-drakkenheim-hardcover-book/"
 };
 
 AddSubClass("warlock", "cosmic patron", {
