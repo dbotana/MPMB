@@ -31,7 +31,7 @@ AddSubClass("paladin", "oath of the grail knight", {
             source: ["OoGK", 1],
             minlevel: 3,
             description: desc([
-                "As an action, I can ignite a foe within 30 feet with hellfire, dealing 3d6 plus 1d6 per four paladin levels.",
+                "As an action, I can ignite a foe within 30 feet with hellfire, dealing fire damage.",
                 "Lasts for proficiency bonus rounds. The target may make a Dexterity save to put it out with a DC equal to 8 + your proficiency bonus + your Constitution modifier."
             ]),
             additional : levels.map(function (n) {
