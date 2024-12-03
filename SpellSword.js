@@ -74,9 +74,8 @@ ClassList["spellsword"] = {
             source : ["SSH", 0],
             minlevel : 1,
             description : "\n   I can cast spells using my mental codex; Intelligence is my spellcasting ability.",
-            additional : levels.map(function (n, idx) {
-                return [2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4][idx] + " cantrips known";
-            })
+            
+            
         },
         "spellstrike" : {
             name : "Spellstrike",
