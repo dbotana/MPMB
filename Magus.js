@@ -81,7 +81,7 @@ ClassList["magus"] = {
             name: "Fighting Style",
             source: ["MGH", 0],
             minlevel: 1,
-            description: "\n   Choose a Fighting Style:\n   \u2022 Archery: +2 bonus to attack rolls with ranged weapons.\n   \u2022 Thrown Weapon: Draw thrown weapons as part of the attack, +2 bonus to damage on hit.",
+            description: "\n   Choose a Fighting Style",
             choices: ["Archery", "Thrown Weapon", "Classical Swordplay", "Defensive Fighting", "Dual Wielding", "Dueling", "Protector", "Shield Warrior", "Versatile Fighting"],
             "archery": FightingStyles.archery,
 
