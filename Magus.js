@@ -41,11 +41,13 @@ SourceList["MGH"] = {
     // 5th Level
     "animate objects", "cone of cold", "contagion", "dispel evil & good", "far step", "hold monster", "immolation", "passwall", "scrying", "skill empowerment", "steel wind strike", "teleportation circle", "vorpal blade", "wall of force", "wall of light", "wall of stone"
 ].forEach(function (s) { if (SpellsList[s] && SpellsList[s].classes && SpellsList[s].classes.indexOf("magus") === -1) SpellsList[s].classes.push("magus"); });
+
 ClassList["magus"] = {
     regExpSearch: /magus/i,
     name: "Magus",
     source: ["MGH", 0],
-    primaryAbility: "4",
+    primaryAbility : "4",
+    abilitySave : 4,
     prereqs: "Intelligence 13",
     die: 10,
     saves: ["Con", "Int"],
@@ -80,7 +82,7 @@ ClassList["magus"] = {
             source: ["MGH", 0],
             minlevel: 1,
             description: "\n   Choose a Fighting Style:\n   \u2022 Archery: +2 bonus to attack rolls with ranged weapons.\n   \u2022 Thrown Weapon: Draw thrown weapons as part of the attack, +2 bonus to damage on hit.",
-            choices: ["Archery", "Thrown Weapon"],
+            choices: ["Archery", "Thrown Weapon", "Classical Swordplay", "Defensive Fighting", "Dual Wielding", "Dueling", "Protector", "Shield Warrior", "Versatile Fighting"],
             "archery": FightingStyles.archery,
 
             "classical swordplay": {
@@ -92,7 +94,7 @@ ClassList["magus"] = {
 
             "defensive fighting": FightingStyles.defense,
 
-            "dual wielding": FightingStyles.duelwielding,
+            "dual wielding": FightingStyles.two_weapon,
 
             "dueling": FightingStyles.dueling,
 
