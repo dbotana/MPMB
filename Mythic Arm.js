@@ -11,7 +11,7 @@
 	Code by:	Rocky
 	Date:		2024-12-03 (sheet v13)
 */
-SourceList["Pointy Hat - Scion"] = {
+SourceList["PHS"] = {
     name: "Pointy Hat Scion",
     abbreviation: "PHS",
     group: "Homebrew",
