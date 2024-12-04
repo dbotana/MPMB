@@ -19,6 +19,7 @@ SourceList["MGH"] = {
     name: "Magus Homebrew",
     abbreviation: "MGH",
     group: "Homebrew",
+    url: "https://www.gmbinder.com/share/-Mslo6ktmq1Yg5WTSjDQ",
     date: "2024/12/02"
 };
 // Define the Magus spell list
@@ -76,7 +77,7 @@ ClassList["magus"] = {
                 "\n   Use my intelligence instead of dexterity when calculating armor class from this armor. Your Arcane Armory can hold a number of items equal to your Intelligence modifier +1 (minimum of one), with at least one being a weapon.",
             action: [["bonus action", " (Summon/Shunt)"]],
         },
-
+/*
         "fighting style": {
             name: "Fighting Style",
             source: ["MGH", 0],
@@ -122,7 +123,7 @@ ClassList["magus"] = {
                     "\n   While doing so, you can also use your bonus action to make a single grapple or shove attack," +
                     "\n   or to take the Use an Object action."
             }
-        },
+        },*/
 
         "spellstrike": {
             name: "Spellstrike",
@@ -276,7 +277,7 @@ AddSubClass("magus", "order of arcane archers", {
         }
     }
 });
-
+/*
 AddSubClass("magus", "order of blade dancers", {
     regExpSearch: /blade dancer/i,
     subname: "Order of Blade Dancers",
@@ -560,4 +561,4 @@ AddSubClass("magus", "order of warders", {
         }
     }
 });
-
+*/
