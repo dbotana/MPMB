@@ -23,7 +23,7 @@ SourceList["MGH"] = {
 };
 // Define the Magus spell list
 [
-    // Cantrips (0 Level)
+    // Cantrips
     "acid splash", "blade ward", "booming blade", "chill touch", "dancing lights", "firebolt", "frostbite", "glitterbeam", "green-flame blade", "light", "lightning lure", "mage hand", "minor illusion", "poison spray", "prestidigitation", "ray of frost", "shocking grasp", "sword burst", "tempestuous blade", "true strike",
 
     // 1st Level
@@ -342,11 +342,11 @@ AddSubClass("magus", "order of blade dancers", {
 AddSubClass("magus", "order of dragon knights", {
     regExpSearch: /dragon knight/i,
     subname: "Order of Dragon Knights",
-    source: ["Custom", 0],
+    source: ["MGH", 0],
     features: {
         "subclassfeature3": {
             name: "Draconic Companion",
-            source: ["Custom", 0],
+            source: ["MGH", 0],
             minlevel: 3,
             description: desc([
                 "As an action, summon your Draconic Companion to an unoccupied space within 30 feet",
@@ -364,7 +364,7 @@ AddSubClass("magus", "order of dragon knights", {
             creaturesAdd: [["Draconic Companion", true]],
             creatureOptions: [{
                 name: "Draconic Companion",
-                source: ["Custom", 0],
+                source: ["MGH", 0],
                 size: 3, // Small
                 type: "Dragon",
                 alignment: "Lawful",
@@ -397,7 +397,7 @@ AddSubClass("magus", "order of dragon knights", {
 
         "subclassfeature3.1": {
             name: "Wyrmsoul",
-            source: ["Custom", 0],
+            source: ["MGH", 0],
             minlevel: 3,
             description: desc([
                 "Learn Draconic language; spells can deal your Companion's Essence type damage"
@@ -408,7 +408,7 @@ AddSubClass("magus", "order of dragon knights", {
 
         "subclassfeature7": {
             name: "Greater Companion",
-            source: ["Custom", 0],
+            source: ["MGH", 0],
             minlevel: 7,
             description: desc([
                 "Companion becomes Medium and can bear you as a rider if you are Medium or smaller",
@@ -418,7 +418,7 @@ AddSubClass("magus", "order of dragon knights", {
 
         "subclassfeature15": {
             name: "Elemental Breath",
-            source: ["Custom", 0],
+            source: ["MGH", 0],
             minlevel: 15,
             description: desc([
                 "\n Companion can exhale a cone of elemental breath (30 ft.) as an action",
@@ -429,7 +429,7 @@ AddSubClass("magus", "order of dragon knights", {
 
         "subclassfeature20": {
             name: "Mythic Companion",
-            source: ["Custom", 0],
+            source: ["MGH", 0],
             minlevel: 20,
             description: desc([
                 "Companion can change size (Small, Medium, Large); if Large, its flying speed isn't halved while bearing you",
@@ -441,12 +441,11 @@ AddSubClass("magus", "order of dragon knights", {
 AddSubClass("magus", "order of spellbreakers", {
     regExpSearch: /spellbreaker/i,
     subname: "Order of Spellbreakers",
-    source: ["Custom", 0],
-
+    source: ["MGH", 0],
     features: {
         "subclassfeature3": {
             name: "Baleful Mark",
-            source: ["Custom", 0],
+            source: ["MGH", 0],
             minlevel: 3,
             description: desc([
                 "As a bonus action, place a Baleful Mark on a creature within 60 feet",
@@ -462,7 +461,7 @@ AddSubClass("magus", "order of spellbreakers", {
 
         "subclassfeature3.1": {
             name: "Spellbreaker Spells",
-            source: ["Custom", 0],
+            source: ["MGH", 0],
             minlevel: 3,
             description: "\n   You learn specific spells at certain levels that do not count against your Spells Known.",
             spellcastingExtra: ["bane", "detect evil and good", "blindness/deafness", "silence", "counterspell", "magic circle", "banishment", "resilient sphere", "dispel evil and good", "planar binding"],
@@ -470,7 +469,7 @@ AddSubClass("magus", "order of spellbreakers", {
 
         "subclassfeature7": {
             name: "Crippling Mark",
-            source: ["Custom", 0],
+            source: ["MGH", 0],
             minlevel: 7,
             description: desc([
                 "Use your reaction to end your Baleful Mark when the marked creature makes a saving throw",
@@ -481,7 +480,7 @@ AddSubClass("magus", "order of spellbreakers", {
 
         "subclassfeature15": {
             name: "Reflective Spellsunder",
-            source: ["Custom", 0],
+            source: ["MGH", 0],
             minlevel: 15,
             description: desc([
                 "When you use Spellsunder, you can choose to reflect the spell back at the caster",
@@ -491,7 +490,7 @@ AddSubClass("magus", "order of spellbreakers", {
 
         "subclassfeature20": {
             name: "Master Spellbreaker",
-            source: ["Custom", 0],
+            source: ["MGH", 0],
             minlevel: 20,
             description: desc([
                 "You can mark a creature you can see with Baleful Mark without using an action",
@@ -504,26 +503,20 @@ AddSubClass("magus", "order of spellbreakers", {
 AddSubClass("magus", "order of warders", {
     regExpSearch: /warder/i,
     subname: "Order of Warders",
-    source: ["Custom", 0],
+    source: ["MGH", 0],
 
     features: {
         "subclassfeature3": {
             name: "Warder Spells",
-            source: ["Custom", 0],
+            source: ["MGH", 0],
             minlevel: 3,
             description: "\n   You learn specific spells at certain levels that do not count against your Spells Known.",
-            spellcastingExtra: ["compelled duel", "sanctuary"],
-            spellcastingExtraAdditional: [
-                [5, "aid", "warding bond"],
-                [9, "beacon of hope", "life transference"],
-                [13, "faithful hound", "death ward"],
-                [17, "antilife shell", "circle of power"]
-            ]
+            spellcastingExtra: ["compelled duel", "sanctuary", "aid", "warding bond", "beacon of hope", "life transference", "faithful hound", "death ward", "antilife shell", "circle of power"]
         },
 
         "subclassfeature3.1": {
             name: "Warder’s Bond",
-            source: ["Custom", 0],
+            source: ["MGH", 0],
             minlevel: 3,
             description: desc([
                 "Gain proficiency in heavy armor",
@@ -537,7 +530,7 @@ AddSubClass("magus", "order of warders", {
 
         "subclassfeature7": {
             name: "Arcane Aegis",
-            source: ["Custom", 0],
+            source: ["MGH", 0],
             minlevel: 7,
             description: desc([
                 "Expend a spell slot to reduce damage taken by your Ward by 2d8 per spell slot level",
@@ -547,7 +540,7 @@ AddSubClass("magus", "order of warders", {
 
         "subclassfeature15": {
             name: "Bond Perfected",
-            source: ["Custom", 0],
+            source: ["MGH", 0],
             minlevel: 15,
             description: desc([
                 "You and your Ward are immune to charmed and frightened conditions when within 10 feet of each other",
@@ -557,7 +550,7 @@ AddSubClass("magus", "order of warders", {
 
         "subclassfeature20": {
             name: "High Warder",
-            source: ["Custom", 0],
+            source: ["MGH", 0],
             minlevel: 20,
             description: desc([
                 "Bond with up to two willing creatures as Wards at the end of each long rest",
