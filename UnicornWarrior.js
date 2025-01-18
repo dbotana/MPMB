@@ -217,8 +217,9 @@ AddSubClass("unicornwarrior", "path of the red unicorn", {
             calcChanges: {
                 atkAdd: [
                     function (fields, v) {
+                        var colorHorn = levels.map(function (n) { return n < 11 ? "1" : "2"; }); // Calculate dice scaling
                         if (v.WeaponTextName.match(/horn/i)) {
-                            fields.Description += (fields.Description ? "; " : "") + "+1d6 fire damage (2d6 at level 11)";
+                            fields.Description += (fields.Description ? "; " : "") + colorHorn + "d6 fire damage";
                         }
                     },
                     "My horn attacks deal an additional +1d6 fire damage, increasing to +2d6 at level 11."
@@ -329,46 +330,46 @@ AddSubClass("unicornwarrior", "path of the yellow unicorn", {
             calcChanges: {
                 atkAdd: [
                     function (fields, v) {
-                        if ((/horn/i).test(v.WeaponTextName)) {
-                            fields.Description += (fields.Description ? "; " : "") + "+1d6 lightning damage (2d6 at level 11)";
+                        var colorHorn = levels.map(function (n) { return n < 11 ? "1" : "2"; }); // Calculate dice scaling
+                        if (v.WeaponTextName.match(/horn/i)) {
+                            fields.Description += (fields.Description ? "; " : "") + "lightning +" + colorHorn + "d6 lightning damage";
                         }
                     },
-                    "My horn attacks deal an additional +1d6 lightning damage, increasing to +2d6 at level 11."
+                    "My horn attacks deal an additional +1d6 fire damage, increasing to +2d6 at level 11."
                 ]
             }
+        },
 
-        },
-        "subclassfeature7": {
-            name: "Thunderous Charge",
-            source: ["UW", 0],
-            minlevel: 7,
-            description: "\n   When you use your Charge feature and hit with a horn attack, all creatures within 10 feet of the target must make a Constitution saving throw (DC = 8 + your proficiency bonus + your Wisdom modifier)." +
-                "\n   On a failed save, they take thunder damage equal to half your Unicorn Warrior level and are knocked prone.",
-        },
-        "subclassfeature15": {
-            name: "Storm Aura",
-            source: ["UW", 0],
-            minlevel: 15,
-            description: "\n   You emit an aura charged with electricity. At the start of each of your turns, creatures within 10 feet take lightning damage equal to your Wisdom modifier (minimum of 1)." +
-                "\n   Additionally, you have resistance to lightning damage.",
-            dmgres: [["Lightning", "Lightning"]]
-        },
-        "subclassfeature20": {
-            name: "Avatar of Storms",
-            source: ["UW", 0],
-            minlevel: 20,
-            description: "\n   As an action, you can transform into a storm avatar for 1 minute. While in this form:" +
-                "\n    - Your movement speed increases by 30 feet." +
-                "\n    - You can cast Call Lightning without expending a spell slot." +
-                "\n    - Your horn attacks deal an additional +2d8 lightning damage." +
-                "\n   You can use this feature once per long rest.",
-            usages: 1,
-            recovery: "long rest",
-            action: [["action", " (Activate Avatar of Storms)"]]
-        }
+    },
+    "subclassfeature7": {
+        name: "Thunderous Charge",
+        source: ["UW", 0],
+        minlevel: 7,
+        description: "\n   When you use your Charge feature and hit with a horn attack, all creatures within 10 feet of the target must make a Constitution saving throw (DC = 8 + your proficiency bonus + your Wisdom modifier)." +
+            "\n   On a failed save, they take thunder damage equal to half your Unicorn Warrior level and are knocked prone.",
+    },
+    "subclassfeature15": {
+        name: "Storm Aura",
+        source: ["UW", 0],
+        minlevel: 15,
+        description: "\n   You emit an aura charged with electricity. At the start of each of your turns, creatures within 10 feet take lightning damage equal to your Wisdom modifier (minimum of 1)." +
+            "\n   Additionally, you have resistance to lightning damage.",
+        dmgres: [["Lightning", "Lightning"]]
+    },
+    "subclassfeature20": {
+        name: "Avatar of Storms",
+        source: ["UW", 0],
+        minlevel: 20,
+        description: "\n   As an action, you can transform into a storm avatar for 1 minute. While in this form:" +
+            "\n    - Your movement speed increases by 30 feet." +
+            "\n    - You can cast Call Lightning without expending a spell slot." +
+            "\n    - Your horn attacks deal an additional +2d8 lightning damage." +
+            "\n   You can use this feature once per long rest.",
+        usages: 1,
+        recovery: "long rest",
+        action: [["action", " (Activate Avatar of Storms)"]]
     }
 });
-
 AddSubClass("unicornwarrior", "path of the green unicorn", {
     regExpSearch: /^(?=.*green)(?=.*unicorn).*$/i,
     subname: "Path of the Green Unicorn (The Lifebringer)",
@@ -393,11 +394,12 @@ AddSubClass("unicornwarrior", "path of the green unicorn", {
             calcChanges: {
                 atkAdd: [
                     function (fields, v) {
+                        var colorHorn = levels.map(function (n) { return n < 11 ? "1" : "2"; }); // Calculate dice scaling
                         if (v.WeaponTextName.match(/horn/i)) {
-                            fields.Description += (fields.Description ? "; " : "") + "+1d6 piercing damage (2d6 at level 11)";
+                            fields.Description += (fields.Description ? "; " : "") + colorHorn + "d6 piercing damage";
                         }
                     },
-                    "My horn attacks deal an additional +1d6 piercing damage, increasing to +2d6 at level 11. Targets must make a Strength save or be restrained by vines."
+                    "My horn attacks deal an additional +1d6 piercing damage, increasing to +2d6 at level 11."
                 ]
             }
         },
@@ -456,11 +458,12 @@ AddSubClass("unicornwarrior", "path of the blue unicorn", {
             calcChanges: {
                 atkAdd: [
                     function (fields, v) {
+                        var colorHorn = levels.map(function (n) { return n < 11 ? "1" : "2"; }); // Calculate dice scaling
                         if (v.WeaponTextName.match(/horn/i)) {
-                            fields.Description += (fields.Description ? "; " : "") + "+1d6 cold damage (2d6 at level 11); reduces speed by 10 ft";
+                            fields.Description += (fields.Description ? "; " : "") + colorHorn + "d6 cold damage";
                         }
                     },
-                    "My horn attacks deal an additional +1d6 cold damage, increasing to +2d6 at level 11. Cold damage reduces target's speed by 10 feet until the end of my next turn."
+                    "My horn attacks deal an additional +1d6 cold damage, increasing to +2d6 at level 11."
                 ]
             }
         },
@@ -519,16 +522,17 @@ AddSubClass("unicornwarrior", "path of the indigo unicorn", {
             minlevel: 3,
             description: "\n   Your horn strikes are infused with shadow energy. When you hit with a horn attack, it deals an additional 1d6 necrotic damage. This increases to 2d6 at level 11.",
             additional: levels.map(function (n) {
-                return n < 11 ? "+1d6 necrotic damage" : "+2d6 necrotic damage";
+                return n < 11 ? "+1d6 cold damage" : "+2d6 cold damage";
             }),
             calcChanges: {
                 atkAdd: [
                     function (fields, v) {
+                        var colorHorn = levels.map(function (n) { return n < 11 ? "1" : "2"; }); // Calculate dice scaling
                         if (v.WeaponTextName.match(/horn/i)) {
-                            fields.Description += (fields.Description ? "; " : "") + "+1d6 necrotic damage (2d6 at level 11)";
+                            fields.Description += (fields.Description ? "; " : "") + colorHorn + "d6 cold damage";
                         }
                     },
-                    "My horn attacks deal an additional +1d6 necrotic damage, increasing to +2d6 at level 11."
+                    "My horn attacks deal an additional +1d6 cold damage, increasing to +2d6 at level 11."
                 ]
             }
         },
@@ -588,13 +592,15 @@ AddSubClass("unicornwarrior", "path of the violet unicorn", {
             calcChanges: {
                 atkAdd: [
                     function (fields, v) {
+                        var colorHorn = levels.map(function (n) { return n < 11 ? "1" : "2"; }); // Calculate dice scaling
                         if (v.WeaponTextName.match(/horn/i)) {
-                            fields.Description += (fields.Description ? "; " : "") + "+1d6 psychic damage (2d6 at level 11)";
+                            fields.Description += (fields.Description ? "; " : "") + colorHorn + "d6 psychic damage";
                         }
                     },
                     "My horn attacks deal an additional +1d6 psychic damage, increasing to +2d6 at level 11."
                 ]
             }
+        },
         },
         "subclassfeature7": {
             name: "Mental Assault",
@@ -623,4 +629,4 @@ AddSubClass("unicornwarrior", "path of the violet unicorn", {
             action: [["action", "(Activate Avatar of Thought)"]]
         }
     }
-});
+);
