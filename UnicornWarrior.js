@@ -25,20 +25,20 @@ SourceList["UW"] = {
 
 // Tell the sheet the spells on the Unicorn Warrior's spell list
 [
-	// Cantrips (0 Level)
-	"booming blade", "dancing lights", "guidance", "light", "mage hand", "minor illusion", "prestidigitation", "shocking grasp", "thunderclap",
-	// 1st Level
-	"burning hands", "chromatic orb", "expeditious retreat", "feather fall", "jump", "longstrider", "magic missile", "thunderwave", "witch bolt",
-	// 2nd Level
-	"blur", "darkness", "dragon's breath", "gust of wind", "mirror image", "misty step", "scorching ray", "shatter",
-	// 3rd Level
-	"call lightning", "counterspell", "daylight", "fireball", "fly", "haste", "lightning bolt", "thunder step",
-	// 4th Level
-	"dimension door", "freedom of movement", "ice storm", "storm sphere",
-	// 5th Level
-	"cone of cold", "destructive wave", "far step", "steel wind strike"
+    // Cantrips (0 Level)
+    "booming blade", "dancing lights", "guidance", "light", "mage hand", "minor illusion", "prestidigitation", "shocking grasp", "thunderclap",
+    // 1st Level
+    "burning hands", "chromatic orb", "expeditious retreat", "feather fall", "jump", "longstrider", "magic missile", "thunderwave", "witch bolt",
+    // 2nd Level
+    "blur", "darkness", "dragon's breath", "gust of wind", "mirror image", "misty step", "scorching ray", "shatter",
+    // 3rd Level
+    "call lightning", "counterspell", "daylight", "fireball", "fly", "haste", "lightning bolt", "thunder step",
+    // 4th Level
+    "dimension door", "freedom of movement", "ice storm", "storm sphere",
+    // 5th Level
+    "cone of cold", "destructive wave", "far step", "steel wind strike"
 ].forEach(function (s) {
-	if (SpellsList[s] && SpellsList[s].classes && SpellsList[s].classes.indexOf("unicornwarrior") === -1) SpellsList[s].classes.push("unicornwarrior");
+    if (SpellsList[s] && SpellsList[s].classes && SpellsList[s].classes.indexOf("unicornwarrior") === -1) SpellsList[s].classes.push("unicornwarrior");
 });
 
 // Define Unicorn Warrior Class
@@ -54,11 +54,11 @@ ClassList["unicornwarrior"] = {
     armorProfs: [false, false, false],
     weaponProfs: [false, false, ["natural weapons"]],
     toolProfs: [],
-    spellcastingFactor : 2,
-		spellcastingKnown : {
-			spells : "list",
-			prepared : true
-		},
+    spellcastingFactor: 2,
+    spellcastingKnown: {
+        spells: "list",
+        prepared: true
+    },
     attacks: [1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
     subclasses: ["Colors of the Rainbow ", []],
     features: {
@@ -69,9 +69,9 @@ ClassList["unicornwarrior"] = {
             description: desc("Without armor, my AC is 10 + Dexterity modifier + Wisdom modifier + shield"),
             armorOptions: [{
                 regExpSearch: /justToAddToDropDownAndEffectWildShape/,
-                name: "Unarmored Defense (Con)",
+                name: "Unarmored Defense (Wis)",
                 source: [["SRD", 8], ["P", 48]],
-                ac: "10+Con",
+                ac: "10+Wis",
                 affectsWildShape: true,
                 selectNow: true
             }]
@@ -90,7 +90,6 @@ ClassList["unicornwarrior"] = {
                 type: "Natural",
                 damage: [1, 6, "piercing"],
                 range: "Melee",
-                description: "Only in rage; On a hit once on my turn, regain Prof Bonus in HP (if below 1/2 HP)",
                 abilitytodamage: true,
                 bestialNaturalWeapon: true,
                 selectNow: true
@@ -103,7 +102,6 @@ ClassList["unicornwarrior"] = {
                 type: "Natural",
                 damage: [1, 6, "bludgeoning"],
                 range: "Melee",
-                description: "Only in rage; On a hit once on my turn, regain Prof Bonus in HP (if below 1/2 HP)",
                 abilitytodamage: true,
                 bestialNaturalWeapon: true,
                 selectNow: true
@@ -114,14 +112,14 @@ ClassList["unicornwarrior"] = {
             source: ["UW", 0],
             minlevel: 2,
             description: "\n   You are a half-caster using Wisdom as your spellcasting ability." +
-                "\n   You prepare spells from the Paladin spell list equal to your Wisdom modifier + half your level (rounded down)."
+                "\n   You prepare spells from your spell list equal to your Wisdom modifier + half your level (rounded down)."
         },
         "rainbow smite": {
             name: "Rainbow Smite",
             source: ["UW", 0],
             minlevel: 2,
             description: "\n   When you hit with a horn attack, you can expend a spell slot to deal radiant damage equal to" +
-                "\n   your spell slot level × d8."
+                "\n   your spell slot level d8."
         },
         "extra attack": {
             name: "Extra Attack",
@@ -131,14 +129,28 @@ ClassList["unicornwarrior"] = {
         },
         "charge": {
             name: "Charge",
-            source: ["UW", 0],
+            source: ["UW", 39],
             minlevel: 6,
             description:
                 "\n   You can use your bonus action to Dash. Once per turn if you move at least" +
                 "\n   20 feet straight toward a creature and hit it with a horn attack on the same turn," +
                 "\n   the target takes extra piercing damage equal to your Charge dice." +
                 "\n   Additionally, you do not provoke attacks of opportunity until the end of your turn.",
-            action: [["bonus action", " (Dash)"]]
+            additional: levels.map(function (n) {
+                return Math.ceil(n / 3) + "d6";
+            }),
+            calcChanges: {
+                atkAdd: [
+                    function (fields, v) {
+                        if (classes.known.unicornwarrior && classes.known.unicornwarrior.level && !v.isSpell && !v.isDC && (v.WeaponTextName.match(/horn|hoof/i)).test(fields.Description)) {
+                            v.charge = Math.ceil(classes.known.unicornwarrior.level / 3);
+                            fields.Description += (fields.Description ? '; ' : '') + 'Charge ' + v.charge + 'd6';
+                        };
+                    },
+                    "Once per turn if you move at least 20 feet straight toward a creature and hit it with a horn attack on the same turn , I can add my sneak attack damage to the attack.",
+                    700
+                ]
+            },
         },
         "radiant smite": {
             name: "Radiant Smite",
@@ -182,7 +194,7 @@ ClassList["unicornwarrior"] = {
         }
     }
 };
-    
+
 AddSubClass("unicornwarrior", "path of the red unicorn", {
     regExpSearch: /^(?=.*red)(?=.*unicorn).*$/i,
     subname: "Path of the Red Unicorn (The Flamebringer)",

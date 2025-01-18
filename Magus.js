@@ -2,7 +2,7 @@
     This file adds optional material to "MPMB's Character Record Sheet" found at https://flapkan.com/mpmb/charsheets
     Import this file using the "Add Extra Materials" bookmark.
     -KEEP IN MIND-
-    It is recommended to enter the code in a fresh sheet before adding any other information (i.e. before making your character with it).
+    It is recommended to enter the code in a fresh sheet be`fore adding any other information (i.e. before making your character with it).
 */
 
 /*	-INFORMATION-
