@@ -129,28 +129,26 @@ ClassList["unicornwarrior"] = {
         },
         "charge": {
             name: "Charge",
-            source: ["UW", 39],
+            source: ["UW", 0],
             minlevel: 6,
-            description:
-                "\n   You can use your bonus action to Dash. Once per turn if you move at least" +
-                "\n   20 feet straight toward a creature and hit it with a horn attack on the same turn," +
-                "\n   the target takes extra piercing damage equal to your Charge dice." +
-                "\n   Additionally, you do not provoke attacks of opportunity until the end of your turn.",
+            description: desc([
+                "You can use your bonus action to Dash. Once per turn, if you move at least 20 feet straight toward a creature and hit it with a horn attack on the same turn, the target takes extra piercing damage.",
+                "The additional damage equals your Charge dice, which scales with your level."
+            ]),
             additional: levels.map(function (n) {
-                return Math.ceil(n / 3) + "d6";
+                return Math.ceil(n / 3) + "d6"; // Scales as per the given progression
             }),
             calcChanges: {
                 atkAdd: [
                     function (fields, v) {
-                        if (classes.known.unicornwarrior && classes.known.unicornwarrior.level && !v.isSpell && !v.isDC && (v.WeaponTextName.match(/horn|hoof/i)).test(fields.Description)) {
-                            v.charge = Math.ceil(classes.known.unicornwarrior.level / 3);
-                            fields.Description += (fields.Description ? '; ' : '') + 'Charge ' + v.charge + 'd6';
-                        };
+                        if (classes.known.unicornwarrior && classes.known.unicornwarrior.level && (/\bcharge\b/i).test(fields.Description)) {
+                            var chargeDice = Math.ceil(classes.known.unicornwarrior.level / 3); // Calculate Charge dice scaling
+                            fields.Description += (fields.Description ? "; " : "") + "Charge +" + chargeDice + "d6 piercing damage";
+                        }
                     },
-                    "Once per turn if you move at least 20 feet straight toward a creature and hit it with a horn attack on the same turn , I can add my sneak attack damage to the attack.",
-                    700
+                    "My Charge feature adds extra piercing damage to my horn attacks when I move at least 20 feet straight toward a creature and hit it on the same turn. The damage scales with my Unicorn Warrior level."
                 ]
-            },
+            }
         },
         "radiant smite": {
             name: "Radiant Smite",
@@ -331,13 +329,14 @@ AddSubClass("unicornwarrior", "path of the yellow unicorn", {
             calcChanges: {
                 atkAdd: [
                     function (fields, v) {
-                        if (v.WeaponTextName.match(/horn/i)) {
+                        if ((/horn/i).test(v.WeaponTextName)) {
                             fields.Description += (fields.Description ? "; " : "") + "+1d6 lightning damage (2d6 at level 11)";
                         }
                     },
                     "My horn attacks deal an additional +1d6 lightning damage, increasing to +2d6 at level 11."
                 ]
             }
+
         },
         "subclassfeature7": {
             name: "Thunderous Charge",
