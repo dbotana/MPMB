@@ -330,12 +330,12 @@ AddSubClass("unicornwarrior", "path of the yellow unicorn", {
             calcChanges: {
                 atkAdd: [
                     function (fields, v) {
-                        var colorHorn = levels.map(function (n) { return n < 11 ? "1" : "2"; }); // Calculate dice scaling
                         if (v.WeaponTextName.match(/horn/i)) {
-                            fields.Description += (fields.Description ? "; " : "") + "lightning +" + colorHorn + "d6 lightning damage";
+                            var colorHorn = classes.known.unicornwarrior ? classes.known.unicornwarrior.level : classes.known.unicornwarrior.level;
+					        fields.Description += (fields.Description ? '; ' : '') + (colorHorn < 11 ? 1 : 2) + 'd6 lightning damage';
                         }
                     },
-                    "My horn attacks deal an additional +1d6 fire damage, increasing to +2d6 at level 11."
+                    "My horn attacks deal an additional +1d6 lightning damage, increasing to +2d6 at level 11."
                 ]
             }
         },
