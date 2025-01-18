@@ -1,17 +1,15 @@
-/* -WHAT IS THIS?-
-
-This file adds the "Unicorn Warrior" class to MPMB's Character Record Sheet.
-Import this file using the "Add Extra Materials" bookmark.
-
+/*	-WHAT IS THIS?-
+    This file adds optional material to "MPMB's Character Record Sheet" found at https://flapkan.com/mpmb/charsheets
+    Import this file using the "Add Extra Materials" bookmark.
+    -KEEP IN MIND-
+    It is recommended to enter the code in a fresh sheet before adding any other information (i.e. before making your character with it).
 */
 
-/* -INFORMATION-
-
-Subject: Class
-Effect: Adds the "Unicorn Warrior" class and its subclasses.
-Code by: [Your Name]
-Date: 2025-01-18
-
+/*	-INFORMATION-
+    Subject:	Class
+    Effect:		This script adds my homebrew Unicorn Warrior class and its subclasses
+    Code by:	Rocky
+    Date:		2025-1-18 (sheet v13)
 */
 
 var iFileName = "UnicornWarrior.js";
@@ -24,6 +22,24 @@ SourceList["UW"] = {
     group: "Homebrew Classes",
     date: "2025/01/18"
 };
+
+// Tell the sheet the spells on the Unicorn Warrior's spell list
+[
+	// Cantrips (0 Level)
+	"booming blade", "dancing lights", "guidance", "light", "mage hand", "minor illusion", "prestidigitation", "shocking grasp", "thunderclap",
+	// 1st Level
+	"burning hands", "chromatic orb", "expeditious retreat", "feather fall", "jump", "longstrider", "magic missile", "thunderwave", "witch bolt",
+	// 2nd Level
+	"blur", "darkness", "dragon's breath", "gust of wind", "mirror image", "misty step", "scorching ray", "shatter",
+	// 3rd Level
+	"call lightning", "counterspell", "daylight", "fireball", "fly", "haste", "lightning bolt", "thunder step",
+	// 4th Level
+	"dimension door", "freedom of movement", "ice storm", "storm sphere",
+	// 5th Level
+	"cone of cold", "destructive wave", "far step", "steel wind strike"
+].forEach(function (s) {
+	if (SpellsList[s] && SpellsList[s].classes && SpellsList[s].classes.indexOf("unicornwarrior") === -1) SpellsList[s].classes.push("unicornwarrior");
+});
 
 // Define Unicorn Warrior Class
 ClassList["unicornwarrior"] = {
@@ -38,8 +54,11 @@ ClassList["unicornwarrior"] = {
     armorProfs: [false, false, false],
     weaponProfs: [false, false, ["natural weapons"]],
     toolProfs: [],
-    spellcastingFactor: 2,
-    //spell table
+    spellcastingFactor : 2,
+		spellcastingKnown : {
+			spells : "list",
+			prepared : true
+		},
     attacks: [1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
     subclasses: ["Colors of the Rainbow ", []],
     features: {
