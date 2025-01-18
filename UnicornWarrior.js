@@ -19,7 +19,7 @@ RequiredSheetVersion("13.2.0");
 SourceList["UW"] = {
     name: "Unicorn Warrior Homebrew",
     abbreviation: "UW",
-    group: "Homebrew Classes",
+    group: "Rocky's Homebrew",
     date: "2025/01/18"
 };
 
@@ -141,7 +141,7 @@ ClassList["unicornwarrior"] = {
             calcChanges: {
                 atkAdd: [
                     function (fields, v) {
-                        if (classes.known.unicornwarrior && classes.known.unicornwarrior.level && (/\bcharge\b/i).test(fields.Description)) {
+                        if (classes.known.unicornwarrior && classes.known.unicornwarrior.level && (/charge/i).test(v.WeaponTextName)) {
                             var chargeDice = Math.ceil(classes.known.unicornwarrior.level / 3); // Calculate Charge dice scaling
                             fields.Description += (fields.Description ? "; " : "") + "Charge +" + chargeDice + "d6 piercing damage";
                         }
