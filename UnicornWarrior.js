@@ -106,6 +106,24 @@ ClassList["unicornwarrior"] = {
                 bestialNaturalWeapon: true,
                 selectNow: true
             }],
+            calcChanges : {
+					atkAdd : [
+						function (fields, v) {
+							if (classes.known.unicornwarrior && classes.known.unicornwarrior.level && (v.baseWeaponName == "horn" || v.baseWeaponName == "hoof")) {
+								var aUnicornDie = function (n) { return n < 5 ? 6 : n < 11 ? 8 : n < 17 ? 10 : 12; }(classes.known.unicornwarrior.level);
+								try {
+									var curDie = eval_ish(fields.Damage_Die.replace('d', '*'));
+								} catch (e) {
+									var curDie = 'x';
+								};
+								if (isNaN(curDie) || curDie < aUnicornDie) {
+									fields.Damage_Die = '1d' + aUnicornDie;
+								};
+							};
+						},
+                        5
+					]
+				}
         },
         "rainbow smite": {
             name: "Rainbow Smite",
@@ -119,7 +137,6 @@ ClassList["unicornwarrior"] = {
             minlevel: 6,
             description: desc([
                 "You can use your bonus action to Dash. Once per turn, if you move at least 20 feet straight toward a creature and hit it with a horn attack on the same turn, the target takes extra piercing damage.",
-                "The additional damage equals your Charge dice, which scales with your level."
             ]),
             additional: levels.map(function (n) {
                 return Math.ceil(n / 3) + "d6";
@@ -196,7 +213,7 @@ AddSubClass("unicornwarrior", "path of the red unicorn", {
             source: ["UW", 0],
             minlevel: 3,
             description: "\n   When you hit a creature with your horn attack, you can choose to deal an additional 1d6 fire damage." +
-                "\n   This damage increases to 2d6 at level 11.",
+                "This damage increases to 2d6 at level 11.",
             additional: levels.map(function (n) {
                 return n < 11 ? "+1d6 fire damage" : "+2d6 fire damage";
             }),
@@ -270,7 +287,7 @@ AddSubClass("unicornwarrior", "path of the orange unicorn", {
             source: ["UW", 0],
             minlevel: 7,
             description: "\n   You emit an aura that invigorates your allies. Allies within 10 feet of you regain hit points equal to your Wisdom modifier whenever they start their turn within the aura." +
-                "\n   This aura increases to 30 feet at level 18."
+                "This aura increases to 30 feet at level 18."
         },
         "subclassfeature15": {
             name: "Empowering Radiance",
@@ -309,7 +326,7 @@ AddSubClass("unicornwarrior", "path of the yellow unicorn", {
             source: ["UW", 0],
             minlevel: 3,
             description: "\n   Your horn attacks crackle with lightning energy. When you hit with a horn attack, it deals an additional 1d6 lightning damage." +
-                "\n   This increases to 2d6 at level 11.",
+                "This increases to 2d6 at level 11.",
             additional: levels.map(function (n) {
                 return n < 11 ? "+1d6 lightning damage" : "+2d6 lightning damage";
             }),
@@ -615,3 +632,35 @@ AddSubClass("unicornwarrior", "path of the violet unicorn", {
         }
     }
 );
+
+
+RaceList["unicorn"] = {
+    regExpSearch : /unicorn/i,
+    name : "Unicorn",
+    sortname : "Unicorn",
+    source : [["Custom", 0]],
+    plural : "Unicorns",
+    size : 3, // Medium size
+    speed : {
+        walk : { spd : 40, enc : 30 } // Base walking speed of 40 feet
+    },
+    languageProfs : ["Common", "Celestial"], // Languages: Common and Celestial
+    scoresGeneric : true, // Ability score increase: +2/+1 or +1/+1/+1
+    trait : "Unicorn" +
+        "\n \u2022 Fey: My creature type is fey, rather than humanoid." +
+        "\n \u2022 Limited Telepathy: I can telepathically speak to any creature I can see within 30 feet." +
+        "\n \u2022 Charge: If I move 30 ft straight toward a creature and then hit it with a melee weapon attack on the same turn, I can make a hooves attack against it as a bonus action." +
+        "\n \u2022 Equine Build: I count as one size larger for my carrying capacity and the weight I can push, drag, or lift. Because of my hooves, 1 ft of movement while climbing costs me 4 ft.",
+    skillstxt : "Choose one from Animal Handling, Medicine, Nature, or Survival", // Skill proficiency options
+    weaponOptions : [{
+        baseWeapon : "unarmed strike",
+        regExpSearch : /\b(hoofs?|hooves)\b/i,
+        name : "Hooves",
+        source : [["Custom", 0]],
+        damage : [1, 6, "bludgeoning"], // Hooves deal 1d6 bludgeoning damage
+        description : "Use as bonus action after charge 30 ft", // Bonus action after Charge ability
+        selectNow : true
+    }],
+    action : [["bonus action", "Hooves (after charge)"]], // Bonus action for Hooves attack after Charge
+    carryingCapacity : 2 // Counts as one size larger for carrying capacity
+};
