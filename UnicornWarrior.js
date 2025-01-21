@@ -211,7 +211,7 @@ AddSubClass("unicornwarrior", "path of the red unicorn", {
                     function (fields, v) {
                         var colorHorn = levels.map(function (n) { return n < 11 ? "1" : "2"; }); // Calculate dice scaling
                         if (v.WeaponTextName.match(/horn/i)) {
-                            fields.Description += (fields.Description ? "; " : "") + colorHorn + "d6 fire damage";
+                            fields.Description + (fields.Description ? "; " : "") + '+' + colorHorn + "d6 fire damage";
                         }
                     },
                     "My horn attacks deal an additional +1d6 fire damage, increasing to +2d6 at level 11."
@@ -324,7 +324,7 @@ AddSubClass("unicornwarrior", "path of the yellow unicorn", {
                     function (fields, v) {
                         if (v.WeaponTextName.match(/horn/i)) {
                             var colorHorn = classes.known.unicornwarrior ? classes.known.unicornwarrior.level : classes.known.unicornwarrior.level;
-					        fields.Description = (fields.Description ? '; ' : '') + (colorHorn < 11 ? 1 : 2) + 'd6 lightning damage';
+					        fields.Description = (fields.Description ? '; ' : '') + '+' + (colorHorn < 11 ? 1 : 2) + 'd6 lightning damage';
                         }
                     },
                     "My horn attacks deal an additional +1d6 lightning damage, increasing to +2d6 at level 11."
@@ -387,7 +387,7 @@ AddSubClass("unicornwarrior", "path of the green unicorn", {
                     function (fields, v) {
                         var colorHorn = levels.map(function (n) { return n < 11 ? "1" : "2"; }); // Calculate dice scaling
                         if (v.WeaponTextName.match(/horn/i)) {
-                            fields.Description += (fields.Description ? "; " : "") + colorHorn + "d6 piercing damage";
+                            fields.Description = (fields.Description ? "; " : "") + '+' + colorHorn + "d6 piercing damage";
                         }
                     },
                     "My horn attacks deal an additional +1d6 piercing damage, increasing to +2d6 at level 11."
@@ -451,7 +451,7 @@ AddSubClass("unicornwarrior", "path of the blue unicorn", {
                     function (fields, v) {
                         var colorHorn = levels.map(function (n) { return n < 11 ? "1" : "2"; }); // Calculate dice scaling
                         if (v.WeaponTextName.match(/horn/i)) {
-                            fields.Description += (fields.Description ? "; " : "") + colorHorn + "d6 cold damage";
+                            fields.Description = (fields.Description ? "; " : "") + '+' + colorHorn + "d6 cold damage";
                         }
                     },
                     "My horn attacks deal an additional +1d6 cold damage, increasing to +2d6 at level 11."
@@ -520,7 +520,7 @@ AddSubClass("unicornwarrior", "path of the indigo unicorn", {
                     function (fields, v) {
                         var colorHorn = levels.map(function (n) { return n < 11 ? "1" : "2"; }); // Calculate dice scaling
                         if (v.WeaponTextName.match(/horn/i)) {
-                            fields.Description += (fields.Description ? "; " : "") + colorHorn + "d6 cold damage";
+                            fields.Description = (fields.Description ? "; " : "") + '+' + colorHorn + "d6 cold damage";
                         }
                     },
                     "My horn attacks deal an additional +1d6 cold damage, increasing to +2d6 at level 11."
@@ -585,7 +585,7 @@ AddSubClass("unicornwarrior", "path of the violet unicorn", {
                     function (fields, v) {
                         var colorHorn = levels.map(function (n) { return n < 11 ? "1" : "2"; }); // Calculate dice scaling
                         if (v.WeaponTextName.match(/horn/i)) {
-                            fields.Description += (fields.Description ? "; " : "") + colorHorn + "d6 psychic damage";
+                            fields.Description = (fields.Description ? "; " : "") + '+' + colorHorn + "d6 psychic damage";
                         }
                     },
                     "My horn attacks deal an additional +1d6 psychic damage, increasing to +2d6 at level 11."
