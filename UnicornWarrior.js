@@ -107,19 +107,11 @@ ClassList["unicornwarrior"] = {
                 selectNow: true
             }],
         },
-        "spellcasting": {
-            name: "Spellcasting",
-            source: ["UW", 0],
-            minlevel: 2,
-            description: "\n   You are a half-caster using Wisdom as your spellcasting ability." +
-                "\n   You prepare spells from your spell list equal to your Wisdom modifier + half your level (rounded down)."
-        },
         "rainbow smite": {
             name: "Rainbow Smite",
             source: ["UW", 0],
             minlevel: 2,
-            description: "\n   When you hit with a horn attack, you can expend a spell slot to deal radiant damage equal to" +
-                "\n   your spell slot level d8."
+            description: "\n   When you hit with a horn attack, you can expend a spell slot to deal 1d8/SL radiant damage"
         },
         "extra attack": {
             name: "Extra Attack",
@@ -136,7 +128,7 @@ ClassList["unicornwarrior"] = {
                 "The additional damage equals your Charge dice, which scales with your level."
             ]),
             additional: levels.map(function (n) {
-                return Math.ceil(n / 3) + "d6"; // Scales as per the given progression
+                return Math.ceil(n / 3) + "d6";
             }),
             calcChanges: {
                 atkAdd: [
@@ -332,14 +324,13 @@ AddSubClass("unicornwarrior", "path of the yellow unicorn", {
                     function (fields, v) {
                         if (v.WeaponTextName.match(/horn/i)) {
                             var colorHorn = classes.known.unicornwarrior ? classes.known.unicornwarrior.level : classes.known.unicornwarrior.level;
-					        fields.Description += (fields.Description ? '; ' : '') + (colorHorn < 11 ? 1 : 2) + 'd6 lightning damage';
+					        fields.Description = (fields.Description ? '; ' : '') + (colorHorn < 11 ? 1 : 2) + 'd6 lightning damage';
                         }
                     },
                     "My horn attacks deal an additional +1d6 lightning damage, increasing to +2d6 at level 11."
                 ]
             }
         },
-
     },
     "subclassfeature7": {
         name: "Thunderous Charge",
