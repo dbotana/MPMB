@@ -113,12 +113,6 @@ ClassList["unicornwarrior"] = {
             minlevel: 2,
             description: "\n   When you hit with a horn attack, you can expend a spell slot to deal 1d8/SL radiant damage"
         },
-        "extra attack": {
-            name: "Extra Attack",
-            source: ["UW", 0],
-            minlevel: 5,
-            description: "\n   You can attack twice whenever you take the Attack action on your turn."
-        },
         "charge": {
             name: "Charge",
             source: ["UW", 0],
@@ -154,7 +148,7 @@ ClassList["unicornwarrior"] = {
                 atkAdd: [
                     function (fields, v) {
                         if (v.WeaponTextName.match(/horn|hoof/i)) {
-                            fields.Description +=
+                            fields.Description =
                                 (fields.Description ? "; " : "") + "+1d8 radiant damage";
                         }
                     },
