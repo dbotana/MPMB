@@ -92,7 +92,8 @@ ClassList["unicornwarrior"] = {
                 range: "Melee",
                 abilitytodamage: true,
                 bestialNaturalWeapon: true,
-                selectNow: true
+                selectNow: true,
+                unicornWeapon: true
             },
             {
                 regExpSearch: /^(?=.*(hoof)).*$/i,
@@ -104,26 +105,18 @@ ClassList["unicornwarrior"] = {
                 range: "Melee",
                 abilitytodamage: true,
                 bestialNaturalWeapon: true,
-                selectNow: true
-            }],
-            calcChanges : {
-					atkAdd : [
-						function (fields, v) {
-							if (classes.known.unicornwarrior && classes.known.unicornwarrior.level && (v.baseWeaponName == "horn" || v.baseWeaponName == "hoof")) {
-								var aUnicornDie = function (n) { return n < 5 ? 6 : n < 11 ? 8 : n < 17 ? 10 : 12; }(classes.known.unicornwarrior.level);
-								try {
-									var curDie = eval_ish(fields.Damage_Die.replace('d', '*'));
-								} catch (e) {
-									var curDie = 'x';
-								};
-								if (isNaN(curDie) || curDie < aUnicornDie) {
-									fields.Damage_Die = '1d' + aUnicornDie;
-								};
-							};
-						},
-                        5
-					]
-				}
+                selectNow: true,
+                unicornWeapon: true
+            }],///not currently working
+            calcChanges: {
+                atkCalc: [
+                    function (fields, v, output) {
+                        if (v.theWea.unicornWeapon) {
+                            fields.Damage_Die = '1d' + (classes.known.unicornwarrior.level < 5 ? 6 : classes.known.unicornwarrior.level < 11 ? 10 : 12);
+                        };
+                    }
+                ]
+            }
         },
         "rainbow smite": {
             name: "Rainbow Smite",
@@ -159,8 +152,7 @@ ClassList["unicornwarrior"] = {
             minlevel: 10,
             description:
                 "\n   Your horn and hoof attacks deal an additional +1d8 radiant damage." +
-                "\n   If you hit with both a horn and hoof attack in the same turn," +
-                "\n   you can knock the target prone if they fail a Strength saving throw (DC =8 + Prof. Bonus + Wis mod).",
+                "\n   If you hit with both a horn and hoof attack in the same turn, you can knock the target prone if they fail a Strength save.",
             calcChanges: {
                 atkAdd: [
                     function (fields, v) {
@@ -178,9 +170,7 @@ ClassList["unicornwarrior"] = {
             source: ["UW", 0],
             minlevel: 14,
             description:
-                "\n   When you use your Charge feature and successfully hit with a horn attack" +
-                "\n   after moving at least 20 feet toward a target," +
-                "\n   you can teleport up to 20 feet after the attack as part of the same action."
+                "\n   When you use your Charge feature and successfully hit with a horn attack after moving at least 20 feet toward a target, you can teleport up to 20 feet after the attack as part of the same action."
         },
         "aura of grace": {
             name: "Aura of Grace",
@@ -222,7 +212,7 @@ AddSubClass("unicornwarrior", "path of the red unicorn", {
                     function (fields, v) {
                         var colorHorn = levels.map(function (n) { return n < 11 ? "1" : "2"; }); // Calculate dice scaling
                         if (v.WeaponTextName.match(/horn/i)) {
-                            fields.Description + (fields.Description ? "; " : "") + '+' + colorHorn + "d6 fire damage";
+                            fields.Description += (fields.Description ? "; " : "") + '+' + colorHorn + "d6 fire damage";
                         }
                     },
                     "My horn attacks deal an additional +1d6 fire damage, increasing to +2d6 at level 11."
@@ -335,7 +325,7 @@ AddSubClass("unicornwarrior", "path of the yellow unicorn", {
                     function (fields, v) {
                         if (v.WeaponTextName.match(/horn/i)) {
                             var colorHorn = classes.known.unicornwarrior ? classes.known.unicornwarrior.level : classes.known.unicornwarrior.level;
-					        fields.Description = (fields.Description ? '; ' : '') + '+' + (colorHorn < 11 ? 1 : 2) + 'd6 lightning damage';
+                            fields.Description = (fields.Description ? '; ' : '') + '+' + (colorHorn < 11 ? 1 : 2) + 'd6 lightning damage';
                         }
                     },
                     "My horn attacks deal an additional +1d6 lightning damage, increasing to +2d6 at level 11."
@@ -603,64 +593,64 @@ AddSubClass("unicornwarrior", "path of the violet unicorn", {
                 ]
             }
         },
-        },
-        "subclassfeature7": {
-            name: "Mental Assault",
-            source: ["UW", 0],
-            minlevel: 7,
-            description: "\n   When using your Charge feature against a creature that has taken psychic damage since your last turn, they must make a Wisdom saving throw (DC = 8 + proficiency bonus + Wisdom modifier) or be stunned until the end of their next turn.",
-        },
-        "subclassfeature15": {
-            name: "Psychic Aura",
-            source: ["UW", 0],
-            minlevel: 15,
-            description: "\n   You emit an aura that disrupts enemy concentration within range. Enemies within this aura have disadvantage on concentration checks when maintaining spells or effects that require concentration while inside it." +
-                "\n   Additionally, any creature that fails its saving throw against one of your psychic spells takes additional psychic damage equal to half your Unicorn Warrior level (rounded down)."
-        },
-        "subclassfeature20": {
-            name: "Avatar of Thought",
-            source: ["UW", 0],
-            minlevel: 20,
-            description: "\n   As an action, you transform into pure psionic energy for one minute. While in this form:" +
-                "\n    - You are immune to psychic damage and gain the effects of the Mind Blank spell." +
-                "\n    - You gain telepathy out to a range of up to one mile." +
-                "\n    - You can cast Synaptic Static once per turn without expending a spell slot." +
-                "\n   Once you use this feature, you cannot do so again until you finish a long rest.",
-            usages: 1,
-            recovery: "long rest",
-            action: [["action", "(Activate Avatar of Thought)"]]
-        }
+    },
+    "subclassfeature7": {
+        name: "Mental Assault",
+        source: ["UW", 0],
+        minlevel: 7,
+        description: "\n   When using your Charge feature against a creature that has taken psychic damage since your last turn, they must make a Wisdom saving throw (DC = 8 + proficiency bonus + Wisdom modifier) or be stunned until the end of their next turn.",
+    },
+    "subclassfeature15": {
+        name: "Psychic Aura",
+        source: ["UW", 0],
+        minlevel: 15,
+        description: "\n   You emit an aura that disrupts enemy concentration within range. Enemies within this aura have disadvantage on concentration checks when maintaining spells or effects that require concentration while inside it." +
+            "\n   Additionally, any creature that fails its saving throw against one of your psychic spells takes additional psychic damage equal to half your Unicorn Warrior level (rounded down)."
+    },
+    "subclassfeature20": {
+        name: "Avatar of Thought",
+        source: ["UW", 0],
+        minlevel: 20,
+        description: "\n   As an action, you transform into pure psionic energy for one minute. While in this form:" +
+            "\n    - You are immune to psychic damage and gain the effects of the Mind Blank spell." +
+            "\n    - You gain telepathy out to a range of up to one mile." +
+            "\n    - You can cast Synaptic Static once per turn without expending a spell slot." +
+            "\n   Once you use this feature, you cannot do so again until you finish a long rest.",
+        usages: 1,
+        recovery: "long rest",
+        action: [["action", "(Activate Avatar of Thought)"]]
     }
+}
 );
 
 
 RaceList["unicorn"] = {
-    regExpSearch : /unicorn/i,
-    name : "Unicorn",
-    sortname : "Unicorn",
-    source : [["Custom", 0]],
-    plural : "Unicorns",
-    size : 3, // Medium size
-    speed : {
-        walk : { spd : 40, enc : 30 } // Base walking speed of 40 feet
+    regExpSearch: /unicorn/i,
+    name: "Unicorn",
+    sortname: "Unicorn",
+    source: [["Custom", 0]],
+    plural: "Unicorns",
+    size: 3, // Medium size
+    speed: {
+        walk: { spd: 40, enc: 30 } // Base walking speed of 40 feet
     },
-    languageProfs : ["Common", "Celestial"], // Languages: Common and Celestial
-    scoresGeneric : true, // Ability score increase: +2/+1 or +1/+1/+1
-    trait : "Unicorn" +
+    languageProfs: ["Common", "Celestial"], // Languages: Common and Celestial
+    scoresGeneric: true, // Ability score increase: +2/+1 or +1/+1/+1
+    trait: "Unicorn" +
         "\n \u2022 Fey: My creature type is fey, rather than humanoid." +
         "\n \u2022 Limited Telepathy: I can telepathically speak to any creature I can see within 30 feet." +
         "\n \u2022 Charge: If I move 30 ft straight toward a creature and then hit it with a melee weapon attack on the same turn, I can make a hooves attack against it as a bonus action." +
         "\n \u2022 Equine Build: I count as one size larger for my carrying capacity and the weight I can push, drag, or lift. Because of my hooves, 1 ft of movement while climbing costs me 4 ft.",
-    skillstxt : "Choose one from Animal Handling, Medicine, Nature, or Survival", // Skill proficiency options
-    weaponOptions : [{
-        baseWeapon : "unarmed strike",
-        regExpSearch : /\b(hoofs?|hooves)\b/i,
-        name : "Hooves",
-        source : [["Custom", 0]],
-        damage : [1, 6, "bludgeoning"], // Hooves deal 1d6 bludgeoning damage
-        description : "Use as bonus action after charge 30 ft", // Bonus action after Charge ability
-        selectNow : true
+    skillstxt: "Choose one from Animal Handling, Medicine, Nature, or Survival", // Skill proficiency options
+    weaponOptions: [{
+        baseWeapon: "unarmed strike",
+        regExpSearch: /\b(hoofs?|hooves)\b/i,
+        name: "Hooves",
+        source: [["Custom", 0]],
+        damage: [1, 6, "bludgeoning"], // Hooves deal 1d6 bludgeoning damage
+        description: "Use as bonus action after charge 30 ft", // Bonus action after Charge ability
+        selectNow: true
     }],
-    action : [["bonus action", "Hooves (after charge)"]], // Bonus action for Hooves attack after Charge
-    carryingCapacity : 2 // Counts as one size larger for carrying capacity
+    action: [["bonus action", "Hooves (after charge)"]], // Bonus action for Hooves attack after Charge
+    carryingCapacity: 2 // Counts as one size larger for carrying capacity
 };
