@@ -6,8 +6,8 @@
 */
 
 /*	-INFORMATION-
-    Subject:	Class
-    Effect:		This script adds my homebrew Unicorn Warrior class and its subclasses
+    Subject:	Class and Race
+    Effect:		This script adds my homebrew Unicorn Warrior class and its subclasses and accompanying homebrew Unicorn race
     Code by:	Rocky
     Date:		2025-1-18 (sheet v13)
 */
@@ -46,8 +46,9 @@ ClassList["unicornwarrior"] = {
     regExpSearch: /^(?=.*unicorn)(?=.*warrior).*$/i,
     name: "Unicorn Warrior",
     source: ["UW", 0],
-    primaryAbility: 5,
+    primaryAbility: "Dexterity and Wisdom",
     prereqs: "Dexterity 13 and Wisdom 13",
+    abilitySave : 5,
     die: 10,
     saves: ["Dex", "Wis"],
     improvements: [0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 5],
@@ -80,8 +81,7 @@ ClassList["unicornwarrior"] = {
             name: "Horn and Hoof",
             source: ["UW", 0],
             minlevel: 1,
-            description: "\n   Your horn and hooves are natural weapons. Use Dexterity or Strength for attack rolls." +
-                "\n   Horn attacks deal piercing damage (1d6), and hoof attacks deal bludgeoning damage (1d6).",
+            description: "\n   Your horn and hooves are natural weapons. Use Dexterity or Strength for attack rolls.",
             weaponOptions: [{
                 regExpSearch: /^(?=.*(horn)).*$/i,
                 name: "Horn",
@@ -92,31 +92,33 @@ ClassList["unicornwarrior"] = {
                 range: "Melee",
                 abilitytodamage: true,
                 bestialNaturalWeapon: true,
-                selectNow: true,
-                unicornWeapon: true
+                unicornWeapon: true,
+                selectNow: true
             },
             {
                 regExpSearch: /^(?=.*(hoof)).*$/i,
                 name: "Hoof",
                 source: [["UW", 24]],
-                ability: 1,
+                ability: 2,
                 type: "Natural",
                 damage: [1, 6, "bludgeoning"],
                 range: "Melee",
                 abilitytodamage: true,
                 bestialNaturalWeapon: true,
-                selectNow: true,
-                unicornWeapon: true
-            }],///not currently working
-            calcChanges: {
-                atkCalc: [
-                    function (fields, v, output) {
+                unicornWeapon: true,
+                selectNow: true
+            }],
+            calcChanges : {
+                atkAdd : [
+                    function (fields, v) {
                         if (v.theWea.unicornWeapon) {
-                            fields.Damage_Die = '1d' + (classes.known.unicornwarrior.level < 5 ? 6 : classes.known.unicornwarrior.level < 11 ? 10 : 12);
+                            fields.Damage_Die = '1d' + (classes.known.unicornwarrior.level < 5 ? '6' : classes.known.unicornwarrior.level < 11 ? '8' : classes.known.unicornwarrior.level < 17 ? '10' : '12');
                         };
-                    }
+                    },
+                    "",
+                    1
                 ]
-            }
+            },
         },
         "rainbow smite": {
             name: "Rainbow Smite",
@@ -139,7 +141,7 @@ ClassList["unicornwarrior"] = {
                     function (fields, v) {
                         if (classes.known.unicornwarrior && classes.known.unicornwarrior.level && (/charge/i).test(v.WeaponTextName)) {
                             var chargeDice = Math.ceil(classes.known.unicornwarrior.level / 3); // Calculate Charge dice scaling
-                            fields.Description += (fields.Description ? "; " : "") + "Charge +" + chargeDice + "d6 piercing damage";
+                            fields.Description += (fields.Description ? ";" : "") + "Charge +" + chargeDice + "d6 piercing damage";
                         }
                     },
                     "My Charge feature adds extra piercing damage to my horn attacks when I move at least 20 feet straight toward a creature and hit it on the same turn. The damage scales with my Unicorn Warrior level."
@@ -158,7 +160,7 @@ ClassList["unicornwarrior"] = {
                     function (fields, v) {
                         if (v.WeaponTextName.match(/horn|hoof/i)) {
                             fields.Description =
-                                (fields.Description ? "; " : "") + "+1d8 radiant damage";
+                                (fields.Description ? ";" : "") + "+1d8 radiant damage";
                         }
                     },
                     "My horn and hoof attacks deal an additional +1d8 radiant damage."
@@ -212,7 +214,7 @@ AddSubClass("unicornwarrior", "path of the red unicorn", {
                     function (fields, v) {
                         var colorHorn = levels.map(function (n) { return n < 11 ? "1" : "2"; }); // Calculate dice scaling
                         if (v.WeaponTextName.match(/horn/i)) {
-                            fields.Description += (fields.Description ? "; " : "") + '+' + colorHorn + "d6 fire damage";
+                            fields.Description += (fields.Description ? ";" : "") + '+' + colorHorn + "d6 fire damage";
                         }
                     },
                     "My horn attacks deal an additional +1d6 fire damage, increasing to +2d6 at level 11."
@@ -305,10 +307,10 @@ AddSubClass("unicornwarrior", "path of the yellow unicorn", {
     source: ["UW", 0],
     spellcastingExtra: [
         "thunderwave", "witch bolt",
-        "shatter", "dragon's breath (lightning)",
+        "shatter", "dragon's breath",
         "call lightning", "lightning bolt",
         "storm sphere", "freedom of movement",
-        "destructive wave (lightning)", "chain lightning"
+        "destructive wave", "chain lightning"
     ],
     features: {
         "subclassfeature3": {
@@ -388,7 +390,7 @@ AddSubClass("unicornwarrior", "path of the green unicorn", {
                     function (fields, v) {
                         var colorHorn = levels.map(function (n) { return n < 11 ? "1" : "2"; }); // Calculate dice scaling
                         if (v.WeaponTextName.match(/horn/i)) {
-                            fields.Description = (fields.Description ? "; " : "") + '+' + colorHorn + "d6 piercing damage";
+                            fields.Description = (fields.Description ? ";" : "") + '+' + colorHorn + "d6 piercing damage";
                         }
                     },
                     "My horn attacks deal an additional +1d6 piercing damage, increasing to +2d6 at level 11."
@@ -452,7 +454,7 @@ AddSubClass("unicornwarrior", "path of the blue unicorn", {
                     function (fields, v) {
                         var colorHorn = levels.map(function (n) { return n < 11 ? "1" : "2"; }); // Calculate dice scaling
                         if (v.WeaponTextName.match(/horn/i)) {
-                            fields.Description = (fields.Description ? "; " : "") + '+' + colorHorn + "d6 cold damage";
+                            fields.Description = (fields.Description ? ";" : "") + '+' + colorHorn + "d6 cold damage";
                         }
                     },
                     "My horn attacks deal an additional +1d6 cold damage, increasing to +2d6 at level 11."
@@ -521,7 +523,7 @@ AddSubClass("unicornwarrior", "path of the indigo unicorn", {
                     function (fields, v) {
                         var colorHorn = levels.map(function (n) { return n < 11 ? "1" : "2"; }); // Calculate dice scaling
                         if (v.WeaponTextName.match(/horn/i)) {
-                            fields.Description = (fields.Description ? "; " : "") + '+' + colorHorn + "d6 cold damage";
+                            fields.Description = (fields.Description ? ";" : "") + '+' + colorHorn + "d6 cold damage";
                         }
                     },
                     "My horn attacks deal an additional +1d6 cold damage, increasing to +2d6 at level 11."
@@ -586,7 +588,7 @@ AddSubClass("unicornwarrior", "path of the violet unicorn", {
                     function (fields, v) {
                         var colorHorn = levels.map(function (n) { return n < 11 ? "1" : "2"; }); // Calculate dice scaling
                         if (v.WeaponTextName.match(/horn/i)) {
-                            fields.Description = (fields.Description ? "; " : "") + '+' + colorHorn + "d6 psychic damage";
+                            fields.Description = (fields.Description ? ";" : "") + '+' + colorHorn + "d6 psychic damage";
                         }
                     },
                     "My horn attacks deal an additional +1d6 psychic damage, increasing to +2d6 at level 11."
@@ -639,7 +641,7 @@ RaceList["unicorn"] = {
     trait: "Unicorn" +
         "\n \u2022 Fey: My creature type is fey, rather than humanoid." +
         "\n \u2022 Limited Telepathy: I can telepathically speak to any creature I can see within 30 feet." +
-        "\n \u2022 Charge: If I move 30 ft straight toward a creature and then hit it with a melee weapon attack on the same turn, I can make a hooves attack against it as a bonus action." +
+        "\n \u2022 Charge: If I move 30 ft straight toward a creature and then hit it with a melee weapon attack on the same turn, I can make a bonus action hooves attack against it." +
         "\n \u2022 Equine Build: I count as one size larger for my carrying capacity and the weight I can push, drag, or lift. Because of my hooves, 1 ft of movement while climbing costs me 4 ft.",
     skillstxt: "Choose one from Animal Handling, Medicine, Nature, or Survival", // Skill proficiency options
     weaponOptions: [{
@@ -651,6 +653,7 @@ RaceList["unicorn"] = {
         description: "Use as bonus action after charge 30 ft", // Bonus action after Charge ability
         selectNow: true
     }],
-    action: [["bonus action", "Hooves (after charge)"]], // Bonus action for Hooves attack after Charge
+    action: [["bonus action", "Hoof (after 30ft charge)"]], // Bonus action for Hooves attack after Charge
     carryingCapacity: 2 // Counts as one size larger for carrying capacity
 };
+
