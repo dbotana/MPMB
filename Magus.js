@@ -15,12 +15,12 @@ var iFileName = "Magus.js";
 
 RequiredSheetVersion("13.2.0");
 
-SourceList["MGH"] = {
-    name: "Magus Homebrew",
-    abbreviation: "MGH",
-    group: "Homebrew",
+SourceList["LLM"] = {
+    name: "Llaserllama Magus",
+    abbreviation: "LLM",
+    group: "Llaserllama",
     url: "https://www.gmbinder.com/share/-Mslo6ktmq1Yg5WTSjDQ",
-    date: "2024/12/02"
+    date: "2024/11/14"
 };
 // Define the Magus spell list
 [
@@ -44,53 +44,89 @@ SourceList["MGH"] = {
 ].forEach(function (s) { if (SpellsList[s] && SpellsList[s].classes && SpellsList[s].classes.indexOf("magus") === -1) SpellsList[s].classes.push("magus"); });
 
 ClassList["magus"] = {
-    regExpSearch: /magus/i,
-    name: "Magus",
-    source: ["MGH", 0],
-    primaryAbility : "4",
+    name: "Magus LLM",
+    regExpSearch: /^(?=.*magus)(?=.*llm).*$/i,
+    source: ["LLM", 3],
+    primaryAbility : "Intelligence",
     abilitySave : 4,
-    prereqs: "Intelligence 13",
+    prereqs: "Intelligence 13, Strength or Dexterity 13", // Multi-class prerequisites: Int13, Str or Dex 13
     die: 10,
     saves: ["Con", "Int"],
     improvements: [0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 5],
     armor: [
-        [true, true, false, false],
+        [true, true, false, true],  // Light armor, medium armor, shields
     ],
     weaponProfs: [
-        [true, true]
+        [true, true], // Simple weapons, martial weapons
     ],
+    skillstxt: { primary: "Choose two from Acrobatics, Arcana, Athletics, History, Investigation, Nature, or Performance." },
     spellcastingFactor: 2,
-    spellcastingFactorRoundupMulti: true,
+    spellcastingFactorRoundMulti: true,
     spellcastingKnown: {
-        cantrips: [2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
-        spells: [3, 4, 5, 5, 6, 6, 7, 7, 9, 9, 10, 10, 11, 11, 12, 12, 14, 14, 15, 15]
+        cantrips: [0, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
+        spells: [0, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11]
     },
     attacks: [1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+    equipment: "Magus starting equipment: " +
+        "\n \u2022 (a) martial weapon and shield or (b) two martial weapons;" +
+        "\n \u2022 (a) scale mail or (b) leather armor;" +
+        "\n \u2022 (a) a light crossbow and 20 bolts or (b) five javelins;" +
+        "\n \u2022 (a) a dungeoneers pack or (b) an explorer's pack;" +
+        "\n \u2022 Leather armor and a dagger",
     subclasses: ["Esoteric Order", []],
     features: {
         "arcane armory": {
             name: "Arcane Armory",
-            source: ["MGH", 0],
+            source: ["LLM", 3],
             minlevel: 1,
-            description: "\n   You can perform a ritual over one hour to add a melee weapon, shield, or set of armor to your Arcane Armory." +
-                "\n   These items count as magical and are stored in extradimensional space. Bonus action to summon or shunt these items." +
-                "\n   Use my intelligence instead of dexterity when calculating armor class from this armor. Your Arcane Armory can hold a number of items equal to your Intelligence modifier +1 (minimum of one), with at least one being a weapon.",
+            description: "\n   \u2010You can perform a ritual over one hour to add a melee weapon, shield, or set of armor to\n   your Arcane Armory. " +
+                "These items count as magical and are stored in extradimensional space. \n   \u2010Bonus action to summon or shunt these items." +
+                "\n   \u2010Uses Intelligence instead of Dexterity when calculating Armor Class from this armor. Your\n   Arcane Armory can hold a number of items equal to your Intelligence modifier +1 (min. +1),\n   with at least one being a weapon.",
             action: [["bonus action", " (Summon/Shunt)"]],
+            additional: (What('Int Mod') + 1) + " Arcane Armory Items",
         },
-/*
+
         "fighting style": {
             name: "Fighting Style",
-            source: ["MGH", 0],
+            source: ["LLM", 4],
             minlevel: 1,
-            description: "\n   Choose a Fighting Style",
-            choices: ["Archery", "Thrown Weapon", "Classical Swordplay", "Defensive Fighting", "Dual Wielding", "Dueling", "Protector", "Shield Warrior", "Versatile Fighting"],
+            description: "\n   " + 'Select a Fighting Style using the "Choose Feature" button above',
+            choices: ["Arcane Warrior", "Archery", "Thrown Weapon", "Classical Swordplay", "Defensive Fighting", "Dual Wielding", "Dueling", "Protector", "Shield Warrior", "Versatile Fighting"],
+            "arcane warrior": {
+                name: "Arcane Warrior",
+                description : desc([
+		            "I learn two Wizard cantrips that count as Magus spells for me and use Int for spellcasting.",
+		            "They do not count against the total number of cantrips I know."
+	            ]),
+	            spellcastingBonus : [{
+		            name : "Arcane Warrior",
+		            "class" : "wizard",
+		            level : [0, 0],
+                    firstCol : "atwill",
+		            times : 2,
+                    spellcastingExtraApplyNonconform : true,
+	            }]           
+            },
             "archery": FightingStyles.archery,
 
             "classical swordplay": {
                 name: "Classical Swordplay Fighting Style",
-                description: "\n   While wielding a finesse weapon and no other weapons," +
-                    "\n   you gain a +2 bonus to weapon attack rolls and a +1 to Armor Class," +
-                    "\n   so long as you are not using heavy armor or a shield."
+                description: "\n   +2 to attack rolls and +1 to Armor Class when wielding a finesse weapon in one hand and no" +
+                    "\n   other weapons, and not using heavy armor or a shield.",
+                calcChanges: {
+                    atkCalc: [
+                    function (fields, v, output) {
+                            if (v.isMeleeWeapon && (/\bfinesse\b/i).test(fields.Description)) output.extraHit += 2;
+                    },
+                    "When I'm wielding a finesse weapon in one hand and no weapon in my other hand, +2 to hit with that weapon.",
+                    ],
+                    stopeval : function (v) { return v.heavyArmor || v.usingShield; }
+                },
+                extraAC: [{ 
+                    mod: 1, 
+                    text: "While wielding a finesse weapon, no other weapons, heavy armor or shield.",
+                    stopeval : function (v) { return v.heavyArmor || v.usingShield; }
+                }],
             },
 
             "defensive fighting": FightingStyles.defense,
@@ -101,129 +137,157 @@ ClassList["magus"] = {
 
             "protector": {
                 name: "Protector Fighting Style",
-                description: "\n   When a creature you can see attacks you or a target within 5 feet," +
-                    "\n   you can use a reaction to add your proficiency bonus to the target's Armor Class against that attack." +
-                    "\n   You must be wielding a shield or melee weapon to gain this benefit."
+                description: "\n   When a creature you can see attacks you or a target within 5 feet, you can use a Reaction to" +
+                    "\n   add your proficiency bonus to the target's Armor Class against that attack. You must be" +
+                    "\n   wielding a shield or melee weapon to gain this benefit.",
+                action: [["reaction", "Protect (Protector)"]],
             },
 
-            "shield warrior": {
+            "shield warrior": { //need stop eval for any weapon other than shield
                 name: "Shield Warrior Fighting Style",
-                description: "\n   You gain proficiency with shields as martial melee weapons," +
-                    "\n   and on hit your shield deals 2d4 bludgeoning damage." +
-                    "\n   If you are wielding a shield and nothing else," +
-                    "\n   you gain a +1 bonus to attack rolls with your shield and to your Armor Class."
+                description: "\n   You gain proficiency with shields as a martial weapon, and on hit your shield deals 2d4" +
+                    "\n   bludgeoning damage. If you are wielding a shield and nothing else, you gain +1 bonus to" +
+                    "\n   attack rolls with your shield and to you Armor Class",
+                weaponOptions: [{
+                    regExpSearch: /^(?=.*shield).*$/i,
+                    name: "Shield (Shield Warrior)",
+                    source: [["LLM", 4]],
+                    ability: 1,
+                    type: 'AlwaysProf',
+                    damage: ['2', '4', 'bludgeoning'],
+                    range: "Melee",
+                    description: "2d4 bludgeoning dmg; +1 to attack and AC when only weapon",
+                    abilitytodamage: true,
+                    isNotWeapon: true,
+                    modifiers: [1,""],
+                    selectNow: true
+                }],
+                extraAC: [{ mod: 1, text: "While wielding a shield and no other weapons" }]
             },
 
             "thrown weapon": ClassList.fighter.features["fighting style"]["thrown weapon fighting"],
 
+
             "versatile fighting": {
                 name: "Versatile Fighting Style",
-                description: "\n   While wielding a single versatile weapon and no shield," +
-                    "\n   you gain a +1 bonus to your attack rolls with that weapon." +
-                    "\n   While doing so, you can also use your bonus action to make a single grapple or shove attack," +
-                    "\n   or to take the Use an Object action."
+                description: "\n   While wielding a single versatile weapon and no shield, you gain +1 bonus to attack rolls" +
+                    "\n   with that weapon. You can also use your Bonus action to make a grapple or shove attack, or\n   to use an object.",
+                action: [["bonus action", " (Grapple/Shove/Use Object)"]],
+                calcChanges: {
+                    atkCalc: [
+                    function (fields, v, output) {
+                            if (v.isMeleeWeapon && (/versatile/i).test(fields.Description)) output.extraHit += 1;
+                    },
+                    "When wielding a single versatile weapon and no shield, +1 to hit with that weapon."
+                    ],
+                    stopeval : function (v) { return v.usingShield; }
+                },  
             }
-        },*/
+        },
 
         "spellstrike": {
             name: "Spellstrike",
-            source: ["MGH", 0],
+            source: ["LLM", 5],
             minlevel: 2,
             description: desc([
                 "Once per turn, when you make an attack, you can cast a Magus spell using a spell slot",
                 "Make an attack with a melee Arcane Armory weapon; if the attack hits, the spell takes effect",
-                "The spell must have a casting time of 1 action and require a single spell attack roll,",
+                "The spell must have a casting time of 1a and require a single spell attack roll,",
                 "force a saving throw, or affect a number of hit points worth of creatures (like sleep)",
                 "If your attack misses, the spell fails and has no effect. On a hit, apply the spell's effects:",
                 "- Area of Effect: If targeting an area >10 ft cube, it becomes a 15-ft cone from you",
                 "- Cantrips: Weapon deals the damage type of the cantrip; apply additional effects on hit",
                 "- Concentration: You must concentrate as soon as it takes effect on hit",
-                "- Saving Throws: Target makes initial save at disadvantage; critical hits auto-fail save"
+                "- Saving Throws: Target makes initial save at disadvantage; critical hits auto-fail save",
+                "- Spell Attacks: If spell requires spell attack roll, takes effect when weapon hits",
             ])
         },
 
         "arcane regeneration": {
             name: "Arcane Regeneration",
-            source: ["MGH", 0],
+            source: ["LLM", 5],
             minlevel: 3,
             description: "\n   During a short rest, recover spell slots of combined level equal to your Intelligence modifier.",
             recovery: "long rest",
-            usages: 1
+            usages: 1,
+            additional: ["Recover " + What("Int Mod") + " spell slots"],
         },
 
         "esoteric order": {
             name: "Esoteric Order",
-            source: ["MGH", 0],
+            source: ["LLM", 5],
             minlevel: 3,
             description: "\n   Choose an Esoteric Order that grants additional features at higher levels.",
         },
 
         "extra attack": {
             name: "Extra Attack",
-            source: ["MGH", 0],
+            source: ["LLM", 5],
             minlevel: 5,
             description: "\n   Attack twice when taking the Attack action.",
         },
 
         "spellsight": {
             name: "Spellsight",
-            source: ["MGH", 0],
+            source: ["LLM", 5],
             minlevel: 5,
-            description: "\n   Detect magic and identify objects within range for one minute.",
+            description: "\n   Detect magic (30ft) and identify objects (touch) within range for one minute.",
+            recovery: "long rest",
+            usages: "Int Mod per ",
+            usagescalc: "event.value = Math.max(1, What('Int Mod'));"
         },
 
-        "ethereal jaunt": {
+        "ethereal jaunt": { 
             name: "Ethereal Jaunt",
-            source: ["MGH", 0],
+            source: ["LLM", 6],
             minlevel: 6,
-            description: "\n   Teleport up to a certain distance before or after casting a spell.",
+            description: "\n   On your turn, before or after casting a spell or Spellstrike, teleport to unoccupied space you\n   can see within 10-ft, plus 10-ft per each spell slot level expended (max 60-ft).",
         },
 
         "spellsunder": {
             name: "Spellsunder",
-            source: ["MGH", 0],
+            source: ["LLM", 6],
             minlevel: 9,
-            description: "\n   Use Spellstrike to counter spells targeting you by expending a spell slot.",
+            description: "\n   Use Spellstrike to counter spells targeting you by expending a spell slot and using weapon\n   from Arcane Armory to attack the spell. If cast spell level is equal or lower than spell slot\n   expended, spell fails and no effect. If cast at level higher than your expended spell slot, make\n   attack roll with your weapon. If attack roll > 12 + twice level of spell, fail and no effect.",
         },
 
         "mystical ward": {
             name: "Mystical Ward",
-            source: ["MGH", 0],
+            source: ["LLM", 6],
             minlevel: 10,
             description: "\n   Become immune to the effects of your own Magus spells unless you choose otherwise.",
+            savetxt: { immune: ["My spell effects(choice);"] },
         },
 
-        "arcane conservation": {
+        "arcane conservation": { 
             name: "Arcane Conservation",
-            source: ["MGH", 0],
+            source: ["LLM", 6],
             minlevel: 11,
-            description: "\n   When you use Spellstrike and miss with your weapon attack, you can regain one expended spell slot." +
-                "\n   The spell slot you regain must be a lower level than the slot you expended as part of your Spellstrike.",
-            usages: 1,
-            recovery: "long rest"
+            description: levels.map(function (n) {
+                var descr = desc(["When you use Spellstrike and miss with weapon attack, regain one expended spell slot; " +
+                "\n   cannot use Ethereal Jaunt. Regained slot must be lower level than slot used for Spellstrike."]);
+                if (n >= 18) {
+                    descr += desc(["At 18th level, regain the same spell slot you expended."]);
+                }
+                return descr;
+            })
         },
 
-        "prismatic strikes": {
+        "prismatic strikes": {// need to add code for "Arcane Weapons"; if weapon has arcane in the name...etc....
             name: "Prismatic Strikes",
-            source: ["MGH", 0],
+            source: ["LLM", 6],
             minlevel: 11,
             description: "\n   Your attacks with Arcane Armory weapons deal a bonus 1d8 damage on hit." +
-                "\n   This bonus damage must be the damage type dealt by a Magus spell you know, chosen on hit."
+                "\n   This bonus damage must be a type dealt by a Magus spell you know, chosen on hit."
         },
 
         "superior spellsunder": {
             name: "Superior Spellsunder",
-            source: ["MGH", 0],
+            source: ["LLM", 6],
             minlevel: 14,
-            description: "\n   When a creature within 30 feet is targeted by a spell, you can use a reaction to teleport to an unoccupied space within 5 feet of it." +
-                "\n   Use your Spellsunder reaction against the triggering spell."
-        },
-
-        "improved arcane conservation": {
-            name: "Improved Arcane Conservation",
-            source: ["MGH", 0],
-            minlevel: 18,
-            description: "\n   When you use Spellstrike and miss with your weapon attack, you regain the same spell slot you expended."
+            description: "\n   When a creature within 30-ft is targeted by a spell, you can use reaction to teleport to an\n   unoccupied space within 5-ft. " +
+                "Use your Spellsunder reaction against the spell.",
+            action: [["reaction", " (Teleport)"]]
         },
     },
 };
