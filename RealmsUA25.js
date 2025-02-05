@@ -78,7 +78,7 @@ AddSubClass("bard", "college of the moon", {
 
 AddSubClass("cleric", "knowledge domain", {
     regExpSearch : /^(?=.*(cleric|priest|clergy|acolyte))(?=.*(knowledge|wisdom|learning)).*$/i,
-    subname : "Knowledge Domain",
+    subname : "UA Knowledge Domain",
     source : [["UA2025", 1]],
     spellcastingExtra : [
         "command", "comprehend languages", "detect magic", "detect thoughts", 
@@ -125,7 +125,7 @@ AddSubClass("cleric", "knowledge domain", {
 
 AddSubClass("fighter", "purple dragon knight", {
     regExpSearch: /^(?=.*purple)(?=.*dragon)(?=.*knight).*$/i,
-    subname: "Purple Dragon Knight",
+    subname: "UA Purple Dragon Knight",
     source: [["U25", 0]],
     features: {
         "subclassfeature3": {
@@ -588,7 +588,7 @@ AddSubClass("sorcerer", "spellfire", {
 
 AddSubClass("wizard", "bladesinging", {
     regExpSearch: /(bladesinging|bladesinger)/i,
-    subname: "Tradition of Bladesinging",
+    subname: "UA Tradition of Bladesinging",
     source: [["U25", 0]],
     features: {
         "subclassfeature3": {
