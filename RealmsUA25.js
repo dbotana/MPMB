@@ -16,7 +16,7 @@ var iFileName = "RealmsSubclasses.js";
 
 RequiredSheetVersion("13.2.0");
 
-SourceList["UAR"] = {
+SourceList["U25"] = {
     name: "UA Realms",
     abbreviation: "UAR",
     group: "Rocky's Homebrew",
@@ -26,11 +26,11 @@ SourceList["UAR"] = {
 AddSubClass("bard", "college of the moon", {
     regExpSearch : /^(?=.*(college|bard|minstrel|troubadour|jongleur))(?=.*moon).*$/i,
     subname : "College of the Moon",
-    source : [["UA2025", 1]],
+    source : [["U25", 1]],
     features : {
         "subclassfeature3" : {
             name : "Moonshae Folktales",
-            source : [["UA2025", 1]],
+            source : [["U25", 1]],
             minlevel : 3,
             description : "\n   " + "As a Magic action, invoke a folktale's power. Choose one of the following tales:" +
                           "\n    - Tale of Life: When restoring Hit Points with a spell, expend a Bardic Inspiration die to add its roll to healing (once per turn)." +
@@ -42,7 +42,7 @@ AddSubClass("bard", "college of the moon", {
         },
         "subclassfeature3.1" : {
             name : "Primal Lorist",
-            source : [["UA2025", 1]],
+            source : [["U25", 1]],
             minlevel : 3,
             description : "\n   " + "Learn Druidic and one cantrip from the Druid spell list (counts as a Bard spell)." +
                           "\n   " + "Gain proficiency in one skill: Animal Handling, Insight, Medicine, Nature, Perception, or Survival.",
@@ -51,7 +51,7 @@ AddSubClass("bard", "college of the moon", {
         },
         "subclassfeature6" : {
             name : "Blessing of the Moonwells",
-            source : [["UA2025", 1]],
+            source : [["U25", 1]],
             minlevel : 6,
             description : "\n   " + "Always have Moonbeam prepared." +
                           "\n   " + "As a Bonus Action, cast Moonbeam without expending a spell slot. While concentrating on it:" +
@@ -71,7 +71,7 @@ AddSubClass("bard", "college of the moon", {
         },
         "subclassfeature14" : {
             name : "Bolstered Folktales",
-            source : [["UA2025", 1]],
+            source : [["U25", 1]],
             minlevel : 14,
             description : "\n   " + "Your Moonshae Folktales improve:" +
                           "\n    - Tale of Life or Mirth: Roll 1d6 instead of expending a Bardic Inspiration die." +
@@ -83,12 +83,12 @@ AddSubClass("bard", "college of the moon", {
 AddSubClass("fighter", "knightly envoy", {
     regExpSearch: /^(?=.*knightly)(?=.*envoy).*$/i,
     subname: "Knightly Envoy",
-    source: [["Custom", 0]],
+    source: [["U25", 0]],
     fullname: "Knightly Envoy",
     features: {
         "subclassfeature3": {
             name: "Knightly Envoy",
-            source: [["Custom", 0]],
+            source: [["U25", 0]],
             minlevel: 3,
             description: desc([
                 "I learn one language of my choice",
@@ -104,7 +104,7 @@ AddSubClass("fighter", "knightly envoy", {
         },
         "subclassfeature3.1": {
             name: "Purple Dragon Companion",
-            source: [["Custom", 0]],
+            source: [["U25", 0]],
             minlevel: 3,
             description: desc([
                 "I am bonded with an amethyst dragon hatchling as my companion",
@@ -115,7 +115,7 @@ AddSubClass("fighter", "knightly envoy", {
             action: [["bonus action", "Command Dragon"]],
             creatureOptions: [{
                 name: "Purple Dragon Companion",
-                source: [["Custom", 0]],
+                source: [["U25", 0]],
                 size: 4, // Small
                 type: "Dragon",
                 alignment: "Neutral",
@@ -160,7 +160,7 @@ AddSubClass("fighter", "knightly envoy", {
         },
         "subclassfeature7": {
             name: "Dragon Rider",
-            source: [["Custom", 0]],
+            source: [["U25", 0]],
             minlevel: 7,
             description: desc([
                 "The dragon grows to Medium size and can serve as a mount if I am Medium or smaller",
@@ -178,7 +178,7 @@ AddSubClass("fighter", "knightly envoy", {
         },
         "subclassfeature10": {
             name: "Rallying Surge",
-            source: [["Custom", 0]],
+            source: [["U25", 0]],
             minlevel: 10,
             description: desc([
                 "When I use my Action Surge, I can choose up to three allies within a 30-ft emanation",
@@ -194,7 +194,7 @@ AddSubClass("fighter", "knightly envoy", {
 
         "subclassfeature15": {
             name: "Amethyst Pinnacle",
-            source: [["Custom", 0]],
+            source: [["U25", 0]],
             minlevel: 15,
             description: desc([
                 "My purple dragon grows to Large size and its Speed and Fly Speed increase to 40 ft",
@@ -217,7 +217,7 @@ AddSubClass("fighter", "knightly envoy", {
 
         "subclassfeature18": {
             name: "Enduring Commander",
-            source: [["Custom", 0]],
+            source: [["U25", 0]],
             minlevel: 18,
             description: desc([
                 "I and my purple dragon gain Resistance to Force and Psychic damage"
@@ -230,11 +230,11 @@ AddSubClass("fighter", "knightly envoy", {
 AddSubClass("paladin", "oath of the genie", {
     regExpSearch: /^(?=.*genie)(?=.*paladin|oath).*$/i,
     subname: "Oath of the Genie",
-    source: [["Custom", 0]],
+    source: [["U25", 0]],
     features: {
         "subclassfeature3": {
             name: "Elemental Smite",
-            source: [["Custom", 0]],
+            source: [["U25", 0]],
             minlevel: 3,
             description: desc([
                 "After casting Divine Smite, I can use Channel Divinity for one of these effects:",
@@ -247,13 +247,13 @@ AddSubClass("paladin", "oath of the genie", {
         },
         "subclassfeature3.1": {
             name: "Genie Spells",
-            source: [["Custom", 0]],
+            source: [["U25", 0]],
             minlevel: 3,
             spellcastingExtra: ["chromatic orb", "elementalism", "thunderous smite", "mirror image", "phantasmal force", "fly", "gaseous form", "conjure minor elementals", "summon elemental", "banishing smite", "contact other plane"]
         },
         "subclassfeature3.2": {
             name: "Genie's Splendor",
-            source: [["Custom", 0]],
+            source: [["U25", 0]],
             minlevel: 3,
             description: desc([
                 "When not wearing Medium or Heavy armor, I add my Charisma modifier to AC (min +1)",
@@ -268,7 +268,7 @@ AddSubClass("paladin", "oath of the genie", {
         },
         "subclassfeature7": {
             name: "Aura of Elemental Shielding",
-            source: [["Custom", 0]],
+            source: [["U25", 0]],
             minlevel: 7,
             description: desc([
                 "Choose Acid, Cold, Fire, Lightning, or Thunder damage",
@@ -279,7 +279,7 @@ AddSubClass("paladin", "oath of the genie", {
         },
         "subclassfeature15": {
             name: "Elemental Rebuke",
-            source: [["Custom", 0]],
+            source: [["U25", 0]],
             minlevel: 15,
             description: desc([
                 "As a reaction when hit by an attack, I can halve the damage against myself",
@@ -293,7 +293,7 @@ AddSubClass("paladin", "oath of the genie", {
         },
         "subclassfeature20": {
             name: "Noble Scion",
-            source: [["Custom", 0]],
+            source: [["U25", 0]],
             minlevel: 20,
             description: desc([
                 "As a bonus action, for 10 minutes, I gain:",
@@ -310,11 +310,11 @@ AddSubClass("paladin", "oath of the genie", {
 AddSubClass("ranger", "winter walker", {
     regExpSearch: /^(?=.*winter)(?=.*walker).*$/i,
     subname: "Winter Walker",
-    source: [["Custom", 0]],
+    source: [["U25", 0]],
     features: {
         "subclassfeature3": {
             name: "Frigid Explorer",
-            source: [["Custom", 0]],
+            source: [["U25", 0]],
             minlevel: 3,
             description: desc([
                 "I have resistance to Cold damage",
@@ -328,7 +328,7 @@ AddSubClass("ranger", "winter walker", {
         },
         "subclassfeature3.1": {
             name: "Hunter's Rime",
-            source: [["Custom", 0]],
+            source: [["U25", 0]],
             minlevel: 3,
             description: desc([
                 "When I cast Hunter's Mark, I gain temporary HP equal to 1d10 + ranger level",
@@ -337,7 +337,7 @@ AddSubClass("ranger", "winter walker", {
         },
         "subclassfeature3.2": {
             name: "Winter Walker Magic",
-            source: [["Custom", 0]],
+            source: [["U25", 0]],
             minlevel: 3,
             description: "\n   I get bonus spells known, which do not count against the number of spells I can know",
             spellcastingExtra: ["ice knife", "pass without trace", "remove curse", "ice storm", "cone of cold"],
@@ -345,7 +345,7 @@ AddSubClass("ranger", "winter walker", {
         },
         "subclassfeature7": {
             name: "Fortifying Soul",
-            source: [["Custom", 0]],
+            source: [["U25", 0]],
             minlevel: 7,
             description: desc([
                 "After a short rest, I can choose creatures I see (equal to Wis mod, min 1)",
@@ -357,7 +357,7 @@ AddSubClass("ranger", "winter walker", {
         },
         "subclassfeature11": {
             name: "Chilling Retribution",
-            source: [["Custom", 0]],
+            source: [["U25", 0]],
             minlevel: 11,
             description: desc([
                 "As a reaction when hit by an attack, I can force the attacker to make a Wisdom save",
@@ -370,7 +370,7 @@ AddSubClass("ranger", "winter walker", {
         },
         "subclassfeature15": {
             name: "Frozen Haunt",
-            source: [["Custom", 0]],
+            source: [["U25", 0]],
             minlevel: 15,
             description: desc([
                 "When I cast Hunter's Mark, I can adopt a ghostly, snowy form until the spell ends:",
@@ -389,11 +389,11 @@ AddSubClass("ranger", "winter walker", {
 AddSubClass("rogue", "scion of the three", {
     regExpSearch: /^(?=.*scion)(?=.*three).*$/i,
     subname: "Scion of the Three",
-    source: [["Custom", 0]],
+    source: [["U25", 0]],
     features: {
         "subclassfeature3": {
             name: "Bloodthirst",
-            source: [["Custom", 0]],
+            source: [["U25", 0]],
             minlevel: 3,
             description: desc([
                 "My Sneak Attack deals extra weapon damage vs. Bloodied equal to half my rogue level (round up)",
@@ -417,7 +417,7 @@ AddSubClass("rogue", "scion of the three", {
         },
         "subclassfeature3.1": {
             name: "Dread Allegiance",
-            source: [["Custom", 0]],
+            source: [["U25", 0]],
             minlevel: 3,
             description: desc([
                 "After a long rest, I choose one of the Dead Three and gain its benefits:",
@@ -462,7 +462,7 @@ AddSubClass("rogue", "scion of the three", {
         },
         "subclassfeature9": {
             name: "Strike Fear",
-            source: [["Custom", 0]],
+            source: [["U25", 0]],
             minlevel: 9,
             description: desc([
                 "I gain the Terrify Cunning Strike option:",
@@ -472,7 +472,7 @@ AddSubClass("rogue", "scion of the three", {
         },
         "subclassfeature13": {
             name: "Aura of Malevolence",
-            source: [["Custom", 0]],
+            source: [["U25", 0]],
             minlevel: 13,
             description: desc([
                 "At the start of my turn, chosen creatures within 10 ft take damage equal to my Int mod (min 1)",
@@ -482,7 +482,7 @@ AddSubClass("rogue", "scion of the three", {
         },
         "subclassfeature17": {
             name: "Dread Incarnate",
-            source: [["Custom", 0]],
+            source: [["U25", 0]],
             minlevel: 17,
             description: desc([
                 "I gain the following benefits:",
@@ -496,11 +496,11 @@ AddSubClass("rogue", "scion of the three", {
 AddSubClass("sorcerer", "spellfire", {
     regExpSearch: /^(?=.*spellfire).*$/i,
     subname: "Spellfire",
-    source: [["Custom", 0]],
+    source: [["U25", 0]],
     features: {
         "subclassfeature3": {
             name: "Spellfire Burst",
-            source: [["Custom", 0]],
+            source: [["U25", 0]],
             minlevel: 3,
             description: desc([
                 "When I spend Sorcery Points during my turn, I can use one of these effects once per turn:",
@@ -514,7 +514,7 @@ AddSubClass("sorcerer", "spellfire", {
         },
         "subclassfeature3.1": {
             name: "Spellfire Spells",
-            source: [["Custom", 0]],
+            source: [["U25", 0]],
             minlevel: 3,
             description: "\n   I learn additional spells, which do not count against my number of spells known",
             spellcastingExtra: ["cure wounds", "guiding bolt", "lesser restoration", "scorching ray", "aura of vitality", "dispel magic", "fire shield", "wall of fire", "greater restoration", "flame strike"],
@@ -522,7 +522,7 @@ AddSubClass("sorcerer", "spellfire", {
         },
         "subclassfeature6": {
             name: "Absorb Spells",
-            source: [["Custom", 0]],
+            source: [["U25", 0]],
             minlevel: 6,
             description: desc([
                 "I always have Counterspell prepared",
@@ -537,7 +537,7 @@ AddSubClass("sorcerer", "spellfire", {
         },
         "subclassfeature14": {
             name: "Honed Spellfire",
-            source: [["Custom", 0]],
+            source: [["U25", 0]],
             minlevel: 14,
             description: desc([
                 "My Spellfire Burst improves:",
@@ -547,7 +547,7 @@ AddSubClass("sorcerer", "spellfire", {
         },
         "subclassfeature18": {
             name: "Crown of Spellfire",
-            source: [["Custom", 0]],
+            source: [["U25", 0]],
             minlevel: 18,
             description: desc([
                 "As a bonus action, I gain these benefits for 1 minute:",
@@ -569,11 +569,11 @@ AddSubClass("sorcerer", "spellfire", {
 AddSubClass("wizard", "bladesinging", {
     regExpSearch: /(bladesinging|bladesinger)/i,
     subname: "Tradition of Bladesinging",
-    source: [["Custom", 0]],
+    source: [["U25", 0]],
     features: {
         "subclassfeature3": {
             name: "Training in War and Song",
-            source: [["Custom", 0]],
+            source: [["U25", 0]],
             minlevel: 3,
             description: desc([
                 "I gain proficiency with all melee martial weapons without Two-Handed or Heavy properties",
@@ -585,7 +585,7 @@ AddSubClass("wizard", "bladesinging", {
         },
         "subclassfeature3.1": {
             name: "Bladesong",
-            source: [["Custom", 0]],
+            source: [["U25", 0]],
             minlevel: 3,
             description: desc([
                 "As a bonus action, I can start the Bladesong for 1 minute if not wearing armor/shield",
@@ -608,7 +608,7 @@ AddSubClass("wizard", "bladesinging", {
         },
         "subclassfeature6": {
             name: "Extra Attack",
-            source: [["Custom", 0]],
+            source: [["U25", 0]],
             minlevel: 6,
             description: desc([
                 "I can attack twice instead of once when I take the Attack action on my turn",
@@ -617,7 +617,7 @@ AddSubClass("wizard", "bladesinging", {
         },
         "subclassfeature10": {
             name: "Song of Defense",
-            source: [["Custom", 0]],
+            source: [["U25", 0]],
             minlevel: 10,
             description: desc([
                 "As a reaction while Bladesong is active, I can expend a spell slot to reduce damage",
@@ -627,7 +627,7 @@ AddSubClass("wizard", "bladesinging", {
         },
         "subclassfeature14": {
             name: "Song of Victory",
-            source: [["Custom", 0]],
+            source: [["U25", 0]],
             minlevel: 14,
             description: "\n   After I cast a spell with a casting time of an action, I can make one weapon attack as a bonus action",
             action: [["bonus action", "Attack (after spell)"]]
