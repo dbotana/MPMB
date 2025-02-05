@@ -32,32 +32,29 @@ AddSubClass("bard", "college of the moon", {
             name : "Moonshae Folktales",
             source : [["U25", 1]],
             minlevel : 3,
-            description : "\n   " + "As a Magic action, invoke a folktale's power. Choose one of the following tales:" +
+            description : "\n   " + "As a Magic action, invoke a folktale's power until you use the feature again." +
                           "\n    - Tale of Life: When restoring Hit Points with a spell, expend a Bardic Inspiration die to add its roll to healing (once per turn)." +
                           "\n    - Tale of Gloam: When giving Bardic Inspiration as a Bonus Action, take the Disengage or Hide action as part of that Bonus Action." +
                           "\n    - Tale of Mirth: As a Reaction, expend a Bardic Inspiration die when an enemy succeeds on a saving throw. Subtract the die roll from their save, potentially causing failure.",
-            usages : 1,
-            recovery : "long rest",
             action : [["action", " (invoke tale)"]]
         },
         "subclassfeature3.1" : {
             name : "Primal Lorist",
             source : [["U25", 1]],
             minlevel : 3,
-            description : "\n   " + "Learn Druidic and one cantrip from the Druid spell list (counts as a Bard spell)." +
-                          "\n   " + "Gain proficiency in one skill: Animal Handling, Insight, Medicine, Nature, Perception, or Survival.",
-            spellcastingExtra : ["druidcraft", "guidance", "produce flame"], // Example cantrips; adjust based on player choice
+            spellcastingBonus : [{
+                name : "Primal Lorist",
+                "class" : "druid",
+                level : [0, 0],
+                firstCol : 'atwill'
+            }],
             skillProfs : [["Animal Handling", "Insight", "Medicine", "Nature", "Perception", "Survival"], 1]
         },
         "subclassfeature6" : {
             name : "Blessing of the Moonwells",
             source : [["U25", 1]],
             minlevel : 6,
-            description : "\n   " + "Always have Moonbeam prepared." +
-                          "\n   " + "As a Bonus Action, cast Moonbeam without expending a spell slot. While concentrating on it:" +
-                          "\n    - Glow faintly (shed dim light in a 5-ft radius)." +
-                          "\n    - When a creature fails its saving throw against Moonbeam, another creature you see within 60 ft regains 2d4 Hit Points." +
-                          "\n   " + "Once per Long Rest or by expending a level 3+ spell slot (no action required).",
+            description : "When concentrating on moon beam cast with this feature, I glow faintly (dim light, 5-ft) and when a creature fails its saving throw against Moonbeam, another creature you see within 60 ft regains 2d4 Hit Points.",
             spellcastingBonus : {
                 name : "Blessing of the Moonwells",
                 spells : ["moonbeam"],
@@ -66,25 +63,72 @@ AddSubClass("bard", "college of the moon", {
             },
             usages : 1,
             recovery : ["long rest"],
-            additionalRecovery: { spellSlotLevel: 3 },
+            altResource: "SS 3+",
             action : [["bonus action", " (cast Moonbeam)"]]
         },
         "subclassfeature14" : {
             name : "Bolstered Folktales",
             source : [["U25", 1]],
             minlevel : 14,
-            description : "\n   " + "Your Moonshae Folktales improve:" +
-                          "\n    - Tale of Life or Mirth: Roll 1d6 instead of expending a Bardic Inspiration die." +
+            description : "\n    - Tale of Life or Mirth: Can roll 1d6 instead of expending a Bardic Inspiration die." +
                           "\n    - Tale of Gloam: Teleport up to 30 ft to an unoccupied space you can see as part of the Bonus Action.",
         }
     }
 }),
 
-AddSubClass("fighter", "knightly envoy", {
-    regExpSearch: /^(?=.*knightly)(?=.*envoy).*$/i,
-    subname: "Knightly Envoy",
+AddSubClass("cleric", "knowledge domain", {
+    regExpSearch : /^(?=.*(cleric|priest|clergy|acolyte))(?=.*(knowledge|wisdom|learning)).*$/i,
+    subname : "Knowledge Domain",
+    source : [["UA2025", 1]],
+    spellcastingExtra : [
+        "command", "comprehend languages", "detect magic", "detect thoughts", 
+        "identify", "mind spike", "dispel magic", "nondetection", 
+        "tongues", "arcane eye", "banishment", "confusion",
+        "legend lore", "scrying", "synaptic static"
+    ],
+    features : {
+        "subclassfeature3" : {
+            name : "Blessings of Knowledge",
+            source : [["UA2025", 1]],
+            minlevel : 3,
+            description : "\n   " + "Gain proficiency with one type of Artisan's Tools and two skills from Arcana, History, Nature, or Religion." +
+                          "\n   " + "You have Expertise in the two chosen skills.",
+            skillstxt : "Choose two from Arcana, History, Nature, and Religion. You also gain Expertise in these skills.",
+            toolProfs : [["Artisan's Tools", 1]]
+        },
+        "subclassfeature3.1" : {
+            name : "Mind Magic",
+            source : [["UA2025", 1]],
+            minlevel : 3,
+            description : "\n   " + 
+                          `As a Magic action, expend one use of Channel Divinity to cast a prepared Knowledge Domain spell without expending a spell slot or needing material components.`,
+            action : [["action (magic)", "(Channel Divinity)"]]
+        },
+        "subclassfeature6" : {
+            name : "Unfettered Mind",
+            source : [["UA2025", 1]],
+            minlevel : 6,
+            description : "\n   Gain telepathy out to 60 feet. Contact a number of creatures equal to your Wisdom modifier simultaneously." +
+                          "\n   If your total for an Intelligence check is lower than your Wisdom score, you can use that score instead."
+        },
+        "subclassfeature17" : {
+            name : "Divine Foreknowledge",
+            source : [["UA2025", 1]],
+            minlevel : 17,
+            description : "\n   Oncer per long rest (or SS 6+) use a Bonus Action to gain Advantage on all D20 Tests for one hour.",
+            usages: 1,
+            recovery: ["long rest"],
+            altResource: "SS 6+",
+            action: [["bonus action"]]
+        }
+    }
+});
+
+
+AddSubClass("fighter", "purple dragon knight", {
+    regExpSearch: /^(?=.*purple)(?=.*dragon)(?=.*knight).*$/i,
+    subname: "Purple Dragon Knight",
     source: [["U25", 0]],
-    fullname: "Knightly Envoy",
     features: {
         "subclassfeature3": {
             name: "Knightly Envoy",
@@ -94,12 +138,12 @@ AddSubClass("fighter", "knightly envoy", {
                 "I learn one language of my choice",
                 "I can cast the Comprehend Languages spell as a ritual using Intelligence as my spellcasting ability"
             ]),
-            languageProfs: [1], // Allows selection of one language
+            languageProfs: [1],
             spellcastingBonus: [{
                 name: "Comprehend Languages (Ritual)",
                 spells: ["comprehend languages"],
                 selection: ["comprehend languages"],
-                firstCol: "ritual"
+                firstCol: "R"
             }]
         },
         "subclassfeature3.1": {
@@ -109,8 +153,7 @@ AddSubClass("fighter", "knightly envoy", {
             description: desc([
                 "I am bonded with an amethyst dragon hatchling as my companion",
                 "The dragon is friendly to me and my allies and obeys my commands",
-                "In combat, it acts during my turn, taking only the Dodge action unless commanded otherwise",
-                "I can use a Bonus Action to command it to take another action"
+                "In combat, it acts during my turn, taking only the Dodge action unless I use a bonus action to command otherwise"
             ]),
             action: [["bonus action", "Command Dragon"]],
             creatureOptions: [{
@@ -128,7 +171,7 @@ AddSubClass("fighter", "knightly envoy", {
                 senses: "Darkvision 60 ft",
                 passivePerception: 11,
                 languages: "Understands the languages you know; telepathy 30 ft",
-                challengeRating: "None (XP 0; PB equals your Proficiency Bonus)",
+                challengeRating: "0",
                 proficiencyBonus: 2,
                 proficiencyBonusLinked: true,
                 attacksAction: 1,
@@ -141,6 +184,15 @@ AddSubClass("fighter", "knightly envoy", {
                     modifiers: ["+3", "", ""], // Attack, Damage, Range
                     abilitytodamage: false
                 }],
+                attacks : [{
+					name : "Bite",
+					ability : 1,
+					damage : [1, 6, "piercing"],
+					modifiers : ["", "Prof"],
+					range : "Melee (5 ft)",
+					description : "", //+1d6 damage of the chosen Draconic Essense type
+					abilitytodamage : false
+				}],
                 features: [{
                     name: "Amphibious",
                     description: "The dragon can breathe both air and water."
@@ -152,10 +204,16 @@ AddSubClass("fighter", "knightly envoy", {
                     name: "Gravity Breath (2/Day)",
                     description: "Constitution Saving Throw: DC 8 + Proficiency Bonus + Intelligence modifier, each creature in a 15-foot Cone. Failure: The target is pulled up to 15 feet straight toward the dragon or pushed 15 feet straight away from the dragon (your choice)."
                 }],
-                traits: [{
-                    name: "Companion",
-                    description: "The dragon acts during your turn. It can move and use its Reaction on its own, but only takes the Dodge action unless you use a Bonus Action to command it to take another action."
-                }]
+                calcChanges : {
+					hp : function (totalHD, HDobj, prefix) {
+						if (!classes.known.fighter) return;
+						var fighterLvl = classes.known.fighter ? classes.known.fighter.level : classes.known.fighter.level;
+						var fighterLvlM = 5 * fighterLvl;
+						HDobj.alt.push(5 + fighterLvlM);
+						HDobj.altStr.push(" = 5 as a base\n + 5 \xD7 " + fighterLvl + " from five times its rider's fighter level (" + fighterLvl + ")");
+					},
+					setAltHp : true
+				}
             }]            
         },
         "subclassfeature7": {
@@ -181,17 +239,11 @@ AddSubClass("fighter", "knightly envoy", {
             source: [["U25", 0]],
             minlevel: 10,
             description: desc([
-                "When I use my Action Surge, I can choose up to three allies within a 30-ft emanation",
-                "Each ally can take a Reaction to either Advance or Retreat:",
+                "When I use my Action Surge, I can choose up to three allies within a 30-ft emanation who can take a Reaction to either Advance or Retreat:",
                 " - Advance: Make one weapon attack or Unarmed Strike (dragon can make a Rend attack)",
                 " - Retreat: Move up to half their Speed without provoking Opportunity Attacks"
-            ]),
-            additional: "choose up to three allies",
-            action: [["reaction", " (allies' reactions)"]],
-            usages: 1,
-            recovery: "Action Surge",
+            ])
         },
-
         "subclassfeature15": {
             name: "Amethyst Pinnacle",
             source: [["U25", 0]],
@@ -214,7 +266,6 @@ AddSubClass("fighter", "knightly envoy", {
                 Value(prefix + "Comp.Use.Speed", What(prefix + "Comp.Use.Speed").replace(sMoveStr, ""));
             },
         },
-
         "subclassfeature18": {
             name: "Enduring Commander",
             source: [["U25", 0]],
@@ -243,15 +294,10 @@ AddSubClass("paladin", "oath of the genie", {
                 " \u2022 Efreeti's Fury: Deal extra 2d4 Fire damage",
                 " \u2022 Marid's Surge: 10-ft emanation Str save or pushed 15 ft and knocked prone"
             ]),
-            action: [["reaction", "Elemental Smite (after Divine Smite)"]]
-        },
-        "subclassfeature3.1": {
-            name: "Genie Spells",
-            source: [["U25", 0]],
-            minlevel: 3,
+            action: [["reaction", "Elemental Smite (after Divine Smite)"]],
             spellcastingExtra: ["chromatic orb", "elementalism", "thunderous smite", "mirror image", "phantasmal force", "fly", "gaseous form", "conjure minor elementals", "summon elemental", "banishing smite", "contact other plane"]
         },
-        "subclassfeature3.2": {
+        "subclassfeature3.1": {
             name: "Genie's Splendor",
             source: [["U25", 0]],
             minlevel: 3,
@@ -271,11 +317,9 @@ AddSubClass("paladin", "oath of the genie", {
             source: [["U25", 0]],
             minlevel: 7,
             description: desc([
-                "Choose Acid, Cold, Fire, Lightning, or Thunder damage",
-                "Allies in my Aura of Protection have resistance to that damage type",
-                "I can change the damage type at the start of each of my turns (no action required)"
-            ]),
-            additional: ["", "", "", "", "", "", "10-foot aura", "10-foot aura", "10-foot aura", "10-foot aura", "10-foot aura", "10-foot aura", "10-foot aura", "10-foot aura", "10-foot aura", "10-foot aura", "10-foot aura", "30-foot aura", "30-foot aura", "30-foot aura"]
+                "At the start of my turn, choose Acid, Cold, Fire, Lightning, or Thunder damage",
+                "Allies in my Aura of Protection have resistance to that damage type"
+            ])
         },
         "subclassfeature15": {
             name: "Elemental Rebuke",
@@ -296,13 +340,13 @@ AddSubClass("paladin", "oath of the genie", {
             source: [["U25", 0]],
             minlevel: 20,
             description: desc([
-                "As a bonus action, for 10 minutes, I gain:",
+                "As a bonus action (or SS 5+), for 10 minutes, I gain:",
                 " \u2022 Flight: 60 ft flying speed and hover",
-                " \u2022 Minor Wish: As a reaction, I can turn an ally's failed D20 Test in my aura into a success",
-                "I can also restore one use by expending a 5th-level spell slot (no action required)"
+                " \u2022 Minor Wish: As a reaction, I can turn an ally's failed D20 Test in my aura into a success"
             ]),
             action: [["bonus action", ""], ["reaction", "Minor Wish"]],
             recovery: "long rest",
+            altResource: "SS 5+",
             usages: 1
         }
     }
@@ -317,14 +361,13 @@ AddSubClass("ranger", "winter walker", {
             source: [["U25", 0]],
             minlevel: 3,
             description: desc([
-                "I have resistance to Cold damage",
-                "When I hit with a weapon, I can deal +1d4 Cold damage once per target's turn",
-                "This extra damage ignores Cold resistance and increases to 1d6 at 11th level"
+                "I have resistance to Cold damage. When I hit with a weapon, I can deal additional Cold damage once per target's turn. This extra damage ignores Cold resistance"
             ]),
             additional: levels.map(function(n) {
                 return n < 11 ? "1d4" : "1d6";
             }),
-            dmgres: ["Cold"]
+            dmgres: ["Cold"],
+            spellcastingExtra: ["ice knife", "pass without trace", "remove curse", "ice storm", "cone of cold"]
         },
         "subclassfeature3.1": {
             name: "Hunter's Rime",
@@ -333,15 +376,10 @@ AddSubClass("ranger", "winter walker", {
             description: desc([
                 "When I cast Hunter's Mark, I gain temporary HP equal to 1d10 + ranger level",
                 "While a creature is marked by my Hunter's Mark, it can't take the Disengage action"
-            ])
-        },
-        "subclassfeature3.2": {
-            name: "Winter Walker Magic",
-            source: [["U25", 0]],
-            minlevel: 3,
-            description: "\n   I get bonus spells known, which do not count against the number of spells I can know",
-            spellcastingExtra: ["ice knife", "pass without trace", "remove curse", "ice storm", "cone of cold"],
-            spellcastingExtraApplyNonconform: true
+            ]),
+            additional : levels.map(function (n) {
+				return "1d10+" + n;
+			})   
         },
         "subclassfeature7": {
             name: "Fortifying Soul",
@@ -353,15 +391,17 @@ AddSubClass("ranger", "winter walker", {
                 "They also have advantage on saves vs. Frightened for 1 hour"
             ]),
             usages: 1,
-            recovery: "long rest"
+            recovery: "long rest",
+            additional : levels.map(function (n) {
+				return "1d10+" + n;
+			})   
         },
         "subclassfeature11": {
             name: "Chilling Retribution",
             source: [["U25", 0]],
             minlevel: 11,
             description: desc([
-                "As a reaction when hit by an attack, I can force the attacker to make a Wisdom save",
-                "On a failed save, it is frightened until the end of my next turn with 0 speed"
+                "As a reaction when hit by an attack, I can force the attacker to make a Wisdom savec or be frightened until the end of my next turn with 0 speed"
             ]),
             action: [["reaction", ""]],
             usages: "Wisdom modifier per ",
@@ -375,8 +415,7 @@ AddSubClass("ranger", "winter walker", {
             description: desc([
                 "When I cast Hunter's Mark, I can adopt a ghostly, snowy form until the spell ends:",
                 " \u2022 Frozen Soul: I'm immune to Cold damage and deal 2d4 Cold damage in 15-ft emanation",
-                " \u2022 Partially Incorporeal: Immune to grappled/prone/restrained; move through creatures",
-                "Moving through creatures/objects treats them as difficult terrain",
+                " \u2022 Partially Incorporeal: Immune to grappled/prone/restrained; move through creatures/object as difficult terrain",
                 "Take 1d10 Force damage if ending turn inside a creature/object"
             ]),
             usages: 1,
@@ -425,40 +464,27 @@ AddSubClass("rogue", "scion of the three", {
                 "\u2022 Bhaal: Poison resistance and Blade Ward cantrip",
                 "\u2022 Myrkul: Necrotic resistance and Chill Touch cantrip"
             ]),
-            choices: ["Bane", "Bhaal", "Myrkul"],
-            "bane": {
-                name: "Dread Allegiance: Bane",
-                description: "\n   I have resistance to psychic damage and can cast Minor Illusion (Int) as a cantrip",
-                dmgres: ["Psychic"],
-                spellcastingBonus: [{
-                    name: "Bane's Gift",
-                    spells: ["minor illusion"],
-                    selection: ["minor illusion"],
-                    firstCol: "atwill"
-                }]
+            spellcastingBonus: [{
+                name: "Dread Allegiance",
+                spells: ["minor illusion", "blade ward", "chill touch"],
+                selection: ["minor illusion", "blade ward", "chill touch"],
+                firstCol: "checkbox",
+            }],
+            spellChanges : {
+                "minor illusion" : {
+                    name : "Minor Illusion (Bane)",
+                    changes :  "Gained from Bane"
+                },
+                "blade ward" : {
+                    name : "Blade Ward (Bhaal)",
+                    changes :  "Gained from Bhaal"
+                },
+                "chill touch" : {
+                    name : "Chill Touch (Myrkul)",
+                    changes :  "Gained from Myrkul"
+                }
             },
-            "bhaal": {
-                name: "Dread Allegiance: Bhaal",
-                description: "\n   I have resistance to poison damage and can cast Blade Ward (Int) as a cantrip",
-                dmgres: ["Poison"],
-                spellcastingBonus: [{
-                    name: "Bhaal's Gift",
-                    spells: ["blade ward"],
-                    selection: ["blade ward"],
-                    firstCol: "atwill"
-                }]
-            },
-            "myrkul": {
-                name: "Dread Allegiance: Myrkul",
-                description: "\n   I have resistance to necrotic damage and can cast Chill Touch (Int) as a cantrip",
-                dmgres: ["Necrotic"],
-                spellcastingBonus: [{
-                    name: "Myrkul's Gift",
-                    spells: ["chill touch"],
-                    selection: ["chill touch"],
-                    firstCol: "atwill"
-                }]
-            }
+            dmgres: ["Psychic (Bane)", "Poison (Bhaal)", "Necrotic (Myrkul)"],
         },
         "subclassfeature9": {
             name: "Strike Fear",
@@ -506,27 +532,21 @@ AddSubClass("sorcerer", "spellfire", {
                 "When I spend Sorcery Points during my turn, I can use one of these effects once per turn:",
                 "\u2022 Bolstering Flames: Grant 1d4 + Cha mod temp HP to self or creature within 30 ft",
                 "\u2022 Radiant Fire: Force Dex save on creature within 30 ft or take 1d6 Fire/Radiant damage"
-            ]),
-            additional: levels.map(function(n) {
-                if (n < 14) return "1d4 + Cha mod/1d6 damage";
-                return "1d4 + Cha mod + level/3d6 damage";
-            })
+            ])
         },
         "subclassfeature3.1": {
             name: "Spellfire Spells",
             source: [["U25", 0]],
             minlevel: 3,
             description: "\n   I learn additional spells, which do not count against my number of spells known",
-            spellcastingExtra: ["cure wounds", "guiding bolt", "lesser restoration", "scorching ray", "aura of vitality", "dispel magic", "fire shield", "wall of fire", "greater restoration", "flame strike"],
-            spellcastingExtraApplyNonconform: true
+            spellcastingExtra: ["cure wounds", "guiding bolt", "lesser restoration", "scorching ray", "aura of vitality", "dispel magic", "fire shield", "wall of fire", "greater restoration", "flame strike"]
         },
         "subclassfeature6": {
             name: "Absorb Spells",
             source: [["U25", 0]],
             minlevel: 6,
             description: desc([
-                "I always have Counterspell prepared",
-                "When a target fails its save against my Counterspell, I regain 1d4 Sorcery Points"
+                "I always have Counterspell prepared. When a target fails its save against my Counterspell, I regain 1d4 Sorcery Points"
             ]),
             spellcastingBonus: [{
                 name: "Absorb Spells",
@@ -580,7 +600,7 @@ AddSubClass("wizard", "bladesinging", {
                 "I can use a melee weapon I'm proficient with as a spellcasting focus for wizard spells",
                 "I gain proficiency in one skill: Acrobatics, Athletics, Performance, or Persuasion"
             ]),
-            weaponProfs: [false, true],
+            weaponProfs: [false, true, "melee martial (no Two-Handed or Heavy)"],
             skillstxt: "Choose one from: Acrobatics, Athletics, Performance, or Persuasion"
         },
         "subclassfeature3.1": {
@@ -604,15 +624,24 @@ AddSubClass("wizard", "bladesinging", {
                 mod: "Int",
                 text: "While Bladesong is active, I add my Intelligence modifier to AC.",
                 stopeval: function(v) { return v.heavyArmor || v.mediumArmor || v.usingShield; }
-            }
+            },
+            calcChanges : {
+				atkAdd : [
+					function (fields, v) {
+						if (What('Int Mod') > What(AbilityScores.abbreviations[fields.Mod - 1] + ' Mod') && fields.Proficiency && /^(?=.*bladesong)(?!.*((^|[^+-]\b)2|\btwo).?hand(ed)?s?\b)|\bheavy\b.*$/i.test(v.WeaponText)) {
+							fields.Mod = 4;
+						};
+					},
+					"If I include the word 'bladesong' in the name of a weapon that is not two-handed or heavy, it will use intelligence for its attack and damage rolls."
+				]
+			}
         },
         "subclassfeature6": {
             name: "Extra Attack",
             source: [["U25", 0]],
             minlevel: 6,
             description: desc([
-                "I can attack twice instead of once when I take the Attack action on my turn",
-                "I can cast a wizard cantrip in place of one of those attacks"
+                "I can attack twice when I take the Attack action on my turn and I can cast a wizard cantrip in place of an attack"
             ])
         },
         "subclassfeature10": {
