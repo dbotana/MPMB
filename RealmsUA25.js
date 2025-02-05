@@ -154,6 +154,7 @@ AddSubClass("fighter", "purple dragon knight", {
                 "In combat, it acts during my turn, taking only the Dodge action unless I use a bonus action to command otherwise"
             ]),
             action: [["bonus action", "Command Dragon"]],
+            creaturesAdd : [["Purple Dragon Companion", true]],
             creatureOptions: [{
                 name: "Purple Dragon Companion",
                 source: [["U25", 0]],
