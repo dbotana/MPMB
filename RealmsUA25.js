@@ -74,7 +74,7 @@ AddSubClass("bard", "college of the moon", {
                           "\n    - Tale of Gloam: Teleport up to 30 ft to an unoccupied space you can see as part of the Bonus Action.",
         }
     }
-}),
+});
 
 AddSubClass("cleric", "knowledge domain", {
     regExpSearch : /^(?=.*(cleric|priest|clergy|acolyte))(?=.*(knowledge|wisdom|learning)).*$/i,
@@ -100,8 +100,7 @@ AddSubClass("cleric", "knowledge domain", {
             name : "Mind Magic",
             source : [["UA2025", 1]],
             minlevel : 3,
-            description : "\n   " + 
-                          `As a Magic action, expend one use of Channel Divinity to cast a prepared Knowledge Domain spell without expending a spell slot or needing material components.`,
+            description : "\n As a Magic action, expend one use of Channel Divinity to cast a prepared Knowledge Domain spell without expending a spell slot or needing material components.",
             action : [["action (magic)", "(Channel Divinity)"]]
         },
         "subclassfeature6" : {
@@ -123,7 +122,6 @@ AddSubClass("cleric", "knowledge domain", {
         }
     }
 });
-
 
 AddSubClass("fighter", "purple dragon knight", {
     regExpSearch: /^(?=.*purple)(?=.*dragon)(?=.*knight).*$/i,
@@ -278,6 +276,7 @@ AddSubClass("fighter", "purple dragon knight", {
 
     }
 });
+
 AddSubClass("paladin", "oath of the genie", {
     regExpSearch: /^(?=.*genie)(?=.*paladin|oath).*$/i,
     subname: "Oath of the Genie",
@@ -351,6 +350,7 @@ AddSubClass("paladin", "oath of the genie", {
         }
     }
 });
+
 AddSubClass("ranger", "winter walker", {
     regExpSearch: /^(?=.*winter)(?=.*walker).*$/i,
     subname: "Winter Walker",
