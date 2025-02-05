@@ -6,9 +6,9 @@
 */
 
 /*	-INFORMATION-
-    Subject:	2025 UA Realms Subclasses
-    Effect:		This script adds the 2025 UA Realms Subclasses
-    Code by:	Rocky
+    Subject:	2025 UA Realms Subclasses https://media.dndbeyond.com/compendium-images/ua/forgotten-realms-subclasses/OXcW3UjTCurUcQy7/UA2025-RealmsSubclasses.pdf
+    Effect:		This script adds the 2025 UA Realms Subclasses. It should be added after PokeSimmer's 2024 scripts https://github.com/thepokesimmer/2024-PHB.
+    Code by:	Rocky, special thanks to Trackatnite for help with Bladesinger and Three Scion, and PokeSimmer for 2024 scripts.
     Date:		2025-2-4 (sheet v13)
 */
 
@@ -20,6 +20,7 @@ SourceList["U25"] = {
     name: "UA Realms",
     abbreviation: "UAR",
     group: "Rocky's Homebrew",
+    url: "https://media.dndbeyond.com/compendium-images/ua/forgotten-realms-subclasses/OXcW3UjTCurUcQy7/UA2025-RealmsSubclasses.pdf",
     date: "2025/02/4"
 };
 
