@@ -496,6 +496,7 @@ AddSubClass("wildspark mascot", "pactbound spirit", {
     }
   }
 });
+//cleric substitute
 AddSubClass("wildspark mascot", "beacon of the divine", {
   regExpSearch: /^(?=.*beacon)(?=.*divine).*$/i,
   subname: "Beacon of the Divine",
@@ -613,7 +614,8 @@ RaceList["familiar-born"] = {
     "Magical Form:\n   - You cannot make weapon attacks.\n   - You can manipulate objects as if you had hands but cannot wield weapons or shields.\n   - You can cast spells without requiring verbal or somatic components.",
     "Fey Nature:\n   - Advantage on saving throws against being charmed.\n   - Immune to magical sleep effects.\n   - You do not require food or drink but must still rest as normal.",
     "Tiny Trickster:\n   - You can move through the space of any creature larger than you.\n   - You can take the Disengage action as a bonus action."
-  ]
+  ],
+  action : [["bonus action", "Tiny Trickster Disengage"]],
 };
 /*WIP adding only nondamaging spells to spell list
     All 3 attributes (eval, removeeval, and calcChanges) go in the same class feature.
