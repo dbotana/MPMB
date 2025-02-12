@@ -15,9 +15,9 @@ var iFileName = "Oath of the Abandoned.js";
 
 RequiredSheetVersion(13);
 
-SourceList["HB:OtA"] = {
-    name: "Homebrew: Oath of the Abandoned",
-    abbreviation: "HB:OtA",
+SourceList["OtA"] = {
+    name: "Oath of the Abandoned",
+    abbreviation: "OtA",
     group: "Rocky's Homebrew",
     url: "https://www.gmbinder.com/share/-MFJKGR760Ww9Wz5vt8p",
     date: "2025-02-11"
@@ -26,12 +26,12 @@ SourceList["HB:OtA"] = {
 AddSubClass("paladin", "oath of the abandoned", {
     regExpSearch: /^(?=.*paladin)(?=.*abandoned).*$/i,
     subname: "Oath of the Abandoned",
-    source: ["HB:OtA", 0],
+    source: ["OtA", 0],
     spellcastingExtra: ["grease", "unseen servant", "pass without trace", "misty step", "beacon of hope", "nondetection", "dimension door", "divination", "creation", "modify memory"],
     features: {
         "subclassfeature3": {
             name: "Channel Divinity: Oath of the Abandoned",
-            source: ["HB:OtA", 0],
+            source: ["OtA", 0],
             minlevel: 3,
             description: desc([
                 "I gain two Channel Divinity options:",
@@ -42,11 +42,10 @@ AddSubClass("paladin", "oath of the abandoned", {
         },
         "subclassfeature7": {
             name: "Aura of Resourcefulness",
-            source: ["HB:OtA", 0],
+            source: ["OtA", 0],
             minlevel: 7,
             description: desc([
-                "I and friendly creatures within range can find useful objects in strange places.",
-                "Range is 100 ft at level 7, increasing to 300 ft at level 18."
+                "I and friendly creatures within range can find useful objects in strange places."
             ]),
             additional: levels.map(function (n) {
                 return (n < 7 ? "" : (n < 18 ? "100-foot radius" : "300-foot radius"));
@@ -54,7 +53,7 @@ AddSubClass("paladin", "oath of the abandoned", {
         },
         "subclassfeature15": {
             name: "Gone But Not Forgotten",
-            source: ["HB:OtA", 0],
+            source: ["OtA", 0],
             minlevel: 15,
             description: desc([
                 "When reduced to 0 HP but not killed outright, I can make a death save immediately.",
@@ -64,7 +63,7 @@ AddSubClass("paladin", "oath of the abandoned", {
         },
         "subclassfeature20": {
             name: "Lost Affection",
-            source: ["HB:OtA", 0],
+            source: ["OtA", 0],
             minlevel: 20,
             description: desc([
                 "As an action, I can call upon Klugto to return a valued lost object to its owner.",
