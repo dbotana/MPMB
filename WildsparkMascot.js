@@ -613,36 +613,6 @@ AddSubClass("wildspark mascot", "circle of borrowed strength", {
       "Magical Form:\n   - You cannot make weapon attacks.\n   - You can manipulate objects as if you had hands but cannot wield weapons or shields.\n   - You can cast spells without requiring verbal or somatic components.",
       "Fey Nature:\n   - Advantage on saving throws against being charmed.\n   - Immune to magical sleep effects.\n   - You do not require food or drink but must still rest as normal.",
       "Tiny Trickster:\n   - You can move through the space of any creature larger than you.\n   - You can take the Disengage action as a bonus action."
-    ],
-  
-    // Subrace Options
-    subraces: [
-      {
-        regExpSearch: /arcane familiar/i,
-        name: "Arcane Familiar",
-        source: ["WSM", 0],
-        spellcastingBonus: {
-          name: "Arcane Knowledge",
-          spells: ["any"],
-          selection: ["any"],
-          times: 1,
-          firstCol: "atwill"
-        },
-        featuresAdd: {
-          spellStorageFeature :{
-            name : "Spell Storage",
-            source : ["WSM", 0],
-            minlevel : 1,
-            description : desc([
-              "You can store one spell of 1st level or higher in your familiar form.",
-              "When you cast this spell, it does not count against your spells known.",
-              "You can use this feature once per long rest."
-            ]),
-            usages: 1,
-            recovery: "long rest"
-          }
-        }
-      },
     ]
   };
 /*WIP adding only nondamaging spells to spell list
