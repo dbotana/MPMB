@@ -140,7 +140,7 @@ AddSubClass("wildspark mascot", "circle of borrowed strength", {
       // Level 2 Features
       "subclassfeature2": {
         name: "Wildspark Rage",
-        source: ["Custom", 0],
+        source: ["WSM", 0],
         minlevel: 2,
         description: desc([
           "Enter a rage as a bonus action, gaining the following benefits:",
@@ -154,7 +154,7 @@ AddSubClass("wildspark mascot", "circle of borrowed strength", {
       },
       "subclassfeature2.1": {
         name: "Reckless Attack",
-        source: ["Custom", 0],
+        source: ["WSM", 0],
         minlevel: 2,
         description: desc([
           "When you make your first attack on your turn, you can decide to attack recklessly.",
@@ -166,7 +166,7 @@ AddSubClass("wildspark mascot", "circle of borrowed strength", {
       // Level 5 Features
       "subclassfeature5": {
         name: "Extra Attack",
-        source: ["Custom", 0],
+        source: ["WSM", 0],
         minlevel: 5,
         description: desc([
           "You can attack twice instead of once whenever you take the Attack action on your turn."
@@ -174,7 +174,7 @@ AddSubClass("wildspark mascot", "circle of borrowed strength", {
       },
       "subclassfeature5.1": {
         name: "Primal Critical",
-        source: ["Custom", 0],
+        source: ["WSM", 0],
         minlevel: 5,
         description: desc([
           "While raging, your melee weapon attacks score a critical hit on a roll of 19 or 20."
@@ -184,7 +184,7 @@ AddSubClass("wildspark mascot", "circle of borrowed strength", {
       // Level 10 Feature
       "subclassfeature10": {
         name: "Relentless Rage",
-        source: ["Custom", 0],
+        source: ["WSM", 0],
         minlevel: 10,
         description: desc([
           "While raging, if you drop to 0 hit points, you can make a DC 10 Constitution saving throw.",
@@ -197,7 +197,7 @@ AddSubClass("wildspark mascot", "circle of borrowed strength", {
       // Level 20 Feature
       "subclassfeature20": {
         name: "Unstoppable Fury",
-        source: ["Custom", 0],
+        source: ["WSM", 0],
         minlevel: 20,
         description: desc([
           "The duration of your rage becomes indefinite while you are conscious.",
@@ -210,12 +210,12 @@ AddSubClass("wildspark mascot", "circle of borrowed strength", {
   AddSubClass("wildspark mascot", "divine oath", {
     regExpSearch: /^(?=.*divine)(?=.*oath).*$/i,
     subname: "Divine Oath",
-    source: ["Custom", 0],
+    source: ["WSM", 0],
     features: {
       // Level 2 Features
       "subclassfeature2": {
         name: "Channel Divinity",
-        source: ["Custom", 0],
+        source: ["WSM", 0],
         minlevel: 2,
         description: desc([
           "You gain the ability to channel divine energy to fuel magical effects.",
@@ -226,7 +226,7 @@ AddSubClass("wildspark mascot", "circle of borrowed strength", {
       },
       "subclassfeature2.1": {
         name: "Favored Enemy",
-        source: ["Custom", 0],
+        source: ["WSM", 0],
         minlevel: 2,
         description: desc([
           "You always have the Hunter's Mark spell prepared, and it doesn't count against your spells known.",
@@ -244,7 +244,7 @@ AddSubClass("wildspark mascot", "circle of borrowed strength", {
       },
       "subclassfeature2.2": {
         name: "Divine Smite",
-        source: ["Custom", 0],
+        source: ["WSM", 0],
         minlevel: 2,
         description: desc([
           "When you hit a creature with a melee weapon attack, you can expend a spell slot to deal radiant damage.",
@@ -255,7 +255,7 @@ AddSubClass("wildspark mascot", "circle of borrowed strength", {
       // Level 5 Features
       "subclassfeature5": {
         name: "Aura of Conviction",
-        source: ["Custom", 0],
+        source: ["WSM", 0],
         minlevel: 5,
         description: desc([
           "You and allies within 10 feet of you add your Charisma modifier to their saving throws.",
@@ -264,7 +264,7 @@ AddSubClass("wildspark mascot", "circle of borrowed strength", {
       },
       "subclassfeature5.1": {
         name: "Extra Attack",
-        source: ["Custom", 0],
+        source: ["WSM", 0],
         minlevel: 5,
         description: desc([
           "You can attack twice, instead of once, whenever you take the Attack action on your turn."
@@ -274,7 +274,7 @@ AddSubClass("wildspark mascot", "circle of borrowed strength", {
       // Level 10 Feature
       "subclassfeature10": {
         name: "Improved Smite",
-        source: ["Custom", 0],
+        source: ["WSM", 0],
         minlevel: 10,
         description: desc([
           "Your melee weapon attacks deal an extra 1d8 radiant damage while you are raging or in combat."
@@ -284,7 +284,7 @@ AddSubClass("wildspark mascot", "circle of borrowed strength", {
       // Level 20 Feature
       "subclassfeature20": {
         name: "Avatar of War",
-        source: ["Custom", 0],
+        source: ["WSM", 0],
         minlevel: 20,
         description: desc([
           "As an action, you can transform into an Avatar of War for one minute. While transformed:",
@@ -308,12 +308,12 @@ AddSubClass("wildspark mascot", "circle of borrowed strength", {
   AddSubClass("wildspark mascot", "arcane duelist", {
     regExpSearch: /^(?=.*arcane)(?=.*duelist).*$/i,
     subname: "Arcane Duelist",
-    source: ["Custom", 0],
+    source: ["WSM", 0],
     features: {
       // Level 2 Features
       "subclassfeature2": {
         name: "Arcane Reserves",
-        source: ["Custom", 0],
+        source: ["WSM", 0],
         minlevel: 2,
         description: desc([
           "You gain access to two special abilities:",
@@ -332,7 +332,7 @@ AddSubClass("wildspark mascot", "circle of borrowed strength", {
       // Level 5 Features
       "subclassfeature5": {
         name: "Spellbreaker Strikes",
-        source: ["Custom", 0],
+        source: ["WSM", 0],
         minlevel: 5,
         description: desc([
           "When you hit a creature with a melee weapon attack, you can disrupt its concentration.",
@@ -342,7 +342,7 @@ AddSubClass("wildspark mascot", "circle of borrowed strength", {
       },
       "subclassfeature5.1": {
         name: "Extra Attack",
-        source: ["Custom", 0],
+        source: ["WSM", 0],
         minlevel: 5,
         description: desc([
           "You can attack twice whenever you take the Attack action on your turn."
@@ -352,7 +352,7 @@ AddSubClass("wildspark mascot", "circle of borrowed strength", {
       // Level 10 Feature
       "subclassfeature10": {
         name: "Countermagic Evasion",
-        source: ["Custom", 0],
+        source: ["WSM", 0],
         minlevel: 10,
         description: desc([
           "When you succeed on a saving throw against a spell, you can use your reaction to do one of the following:",
@@ -365,7 +365,7 @@ AddSubClass("wildspark mascot", "circle of borrowed strength", {
       // Level 20 Feature
       "subclassfeature20": {
         name: "Arcane Apotheosis",
-        source: ["Custom", 0],
+        source: ["WSM", 0],
         minlevel: 20,
         description: desc([
           "You gain unparalleled mastery over arcane combat:",
@@ -389,12 +389,12 @@ AddSubClass("wildspark mascot", "circle of borrowed strength", {
   AddSubClass("wildspark mascot", "pactbound spirit", {
     regExpSearch: /^(?=.*pactbound)(?=.*spirit).*$/i,
     subname: "Pactbound Spirit",
-    source: ["Custom", 0],
+    source: ["WSM", 0],
     features: {
       // Level 2 Features
       "subclassfeature2": {
         name: "Eldritch Pact",
-        source: ["Custom", 0],
+        source: ["WSM", 0],
         minlevel: 2,
         description: desc([
           "You forge a pact with an otherworldly entity, gaining one of the following abilities:",
@@ -442,7 +442,7 @@ AddSubClass("wildspark mascot", "circle of borrowed strength", {
       // Level 5 Features
       "subclassfeature5": {
         name: "Eldritch Surge",
-        source: ["Custom", 0],
+        source: ["WSM", 0],
         minlevel: 5,
         description: desc([
           "When you hit with an attack or cast a spell that forces a saving throw, roll on the Wildspark Surge table.",
@@ -454,7 +454,7 @@ AddSubClass("wildspark mascot", "circle of borrowed strength", {
       },
       "subclassfeature5.1": {
         name: "Extra Attack",
-        source: ["Custom", 0],
+        source: ["WSM", 0],
         minlevel: 5,
         description: desc([
           "You can attack twice whenever you take the Attack action on your turn."
@@ -464,7 +464,7 @@ AddSubClass("wildspark mascot", "circle of borrowed strength", {
       // Level 10 Feature
       "subclassfeature10": {
         name: "Mystic Shield",
-        source: ["Custom", 0],
+        source: ["WSM", 0],
         minlevel: 10,
         description: desc([
           "When hit by an attack or fail a save against magic, use your reaction to:",
@@ -480,7 +480,7 @@ AddSubClass("wildspark mascot", "circle of borrowed strength", {
       // Level 20 Feature
       "subclassfeature20": {
         name: "Avatar of Chaos",
-        source: ["Custom", 0],
+        source: ["WSM", 0],
         minlevel: 20,
         description: desc([
           "As an action, transform into an Avatar of Chaos for one minute. While transformed:",
@@ -499,12 +499,12 @@ AddSubClass("wildspark mascot", "circle of borrowed strength", {
   AddSubClass("wildspark mascot", "beacon of the divine", {
     regExpSearch: /^(?=.*beacon)(?=.*divine).*$/i,
     subname: "Beacon of the Divine",
-    source: ["Custom", 0],
+    source: ["WSM", 0],
     features: {
       // Level 2 Features
       "subclassfeature2": {
         name: "Divine Conduit",
-        source: ["Custom", 0],
+        source: ["WSM", 0],
         minlevel: 2,
         description: desc([
           "You gain the ability to channel divine energy, granting you the following abilities:",
@@ -527,7 +527,7 @@ AddSubClass("wildspark mascot", "circle of borrowed strength", {
       // Level 5 Features
       "subclassfeature5": {
         name: "Aura of Serenity",
-        source: ["Custom", 0],
+        source: ["WSM", 0],
         minlevel: 5,
         description: desc([
           "You and allies within 10 feet gain the following benefits:",
@@ -537,7 +537,7 @@ AddSubClass("wildspark mascot", "circle of borrowed strength", {
       },
       "subclassfeature5.1": {
         name: "Extra Attack",
-        source: ["Custom", 0],
+        source: ["WSM", 0],
         minlevel: 5,
         description: desc([
           "You can attack twice whenever you take the Attack action on your turn."
@@ -547,7 +547,7 @@ AddSubClass("wildspark mascot", "circle of borrowed strength", {
       // Level 10 Feature
       "subclassfeature10": {
         name: "Divine Intercession",
-        source: ["Custom", 0],
+        source: ["WSM", 0],
         minlevel: 10,
         description: desc([
           "When a creature within 30 feet is hit by an attack or fails a saving throw, use your reaction to:",
@@ -563,7 +563,7 @@ AddSubClass("wildspark mascot", "circle of borrowed strength", {
       // Level 20 Feature
       "subclassfeature20": {
         name: "Avatar of Divinity",
-        source: ["Custom", 0],
+        source: ["WSM", 0],
         minlevel: 20,
         description: desc([
           "As an action, transform into an Avatar of Divinity for one minute. While transformed:",
@@ -584,7 +584,67 @@ AddSubClass("wildspark mascot", "circle of borrowed strength", {
     }
   });
     
-
+  RaceList["familiar-born"] = {
+    regExpSearch: /^(?=.*familiar)(?=.*born).*$/i,
+    name: "Familiar-Born",
+    source: ["WSM", 0],
+    plural: "Familiar-Born",
+    size: 5, // Tiny
+    speed: {
+      walk: { spd: 20, enc: 15 },
+      climb: { spd: "20", enc: "15" },
+      fly: { spd: "20", enc: "0" } // Choose climb or fly at creation
+    },
+    languageProfs: ["Common", "Sylvan"],
+    vision: [["Darkvision", 60]],
+    savetxt: {
+      text: ["Adv. on saves vs. being charmed"],
+      immune: ["magic sleep"]
+    },
+    weaponOptions: false, // Cannot wield weapons
+    armorProfs: [false, false, false, false], // No armor proficiency
+    skillstxt: "Choose one from Arcana, Insight, Nature, or Stealth",
+    
+    abilitySave: 6, // Charisma-based abilities
+    abilityScores: [0, 0, 0, 0, 0, 2], // +2 Charisma
+    scorestxt: "+2 Charisma and +1 to one other ability score of your choice",
+  
+    traits: [
+      "Magical Form:\n   - You cannot make weapon attacks.\n   - You can manipulate objects as if you had hands but cannot wield weapons or shields.\n   - You can cast spells without requiring verbal or somatic components.",
+      "Fey Nature:\n   - Advantage on saving throws against being charmed.\n   - Immune to magical sleep effects.\n   - You do not require food or drink but must still rest as normal.",
+      "Tiny Trickster:\n   - You can move through the space of any creature larger than you.\n   - You can take the Disengage action as a bonus action."
+    ],
+  
+    // Subrace Options
+    subraces: [
+      {
+        regExpSearch: /arcane familiar/i,
+        name: "Arcane Familiar",
+        source: ["WSM", 0],
+        spellcastingBonus: {
+          name: "Arcane Knowledge",
+          spells: ["any"],
+          selection: ["any"],
+          times: 1,
+          firstCol: "atwill"
+        },
+        featuresAdd: {
+          spellStorageFeature :{
+            name : "Spell Storage",
+            source : ["WSM", 0],
+            minlevel : 1,
+            description : desc([
+              "You can store one spell of 1st level or higher in your familiar form.",
+              "When you cast this spell, it does not count against your spells known.",
+              "You can use this feature once per long rest."
+            ]),
+            usages: 1,
+            recovery: "long rest"
+          }
+        }
+      },
+    ]
+  };
 /*WIP adding only nondamaging spells to spell list
     All 3 attributes (eval, removeeval, and calcChanges) go in the same class feature.
     We have to create a custom CurrentSpells entry to do what we need to.
@@ -658,3 +718,4 @@ calcChanges : {
     ]
 }
 */
+//
