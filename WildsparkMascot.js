@@ -61,7 +61,7 @@ ClassList["wildspark mascot"] = {
       minlevel: 1,
       description:
         "\nYou are permanently bound to a Tiny beast form with fey magic. You cannot make attacks in this form." +
-        "\nYou can cast druid spells without verbal/somatic/material components (except costly ones)." +
+        "\nYou can cast spells without verbal/somatic/material components (except costly ones)." +
         "\nIf you die in this form, your body remains as a beast. You can only be revived in beast form.",
     },
     "unarmored defense": {
@@ -84,7 +84,7 @@ ClassList["wildspark mascot"] = {
       minlevel: 1,
       description:
         "\nYou know only non-damaging spells from Sorcerer/Druid/Bard lists." +
-        "\nWhen casting a spell of level one or higher, trigger a Wild Surge."
+        "\nWhen casting a spell of level one or higher, roll 1d20, on a 1-10 trigger a Wild Magic Surge."
     },
     // Chaotic Empowerment (6th Level)
     "chaotic empowerment": {
@@ -93,9 +93,9 @@ ClassList["wildspark mascot"] = {
       minlevel: 6,
       description: desc([
         "When allies benefit from your spells, they gain +1d4 to their next d20 roll before your next turn.",
-        "Roll on the Wildspark Surge table without expending a spell slot."
+        "Once on your turn, you can choose to roll on the Wild Magic table without expending a spell slot."
       ]),
-      additional: "+1d4 to allies' rolls; triggers Wild Surge"
+      additional: "+1d4 to allies' rolls"
     },
     // Reality Warp (14th Level)
     "reality warp": {
@@ -119,14 +119,14 @@ ClassList["wildspark mascot"] = {
       minlevel: 18,
       description: desc([
         "Gain additional benefits in your familiar form:",
-        "- Fey Step: Teleport up to 60 ft as a bonus action, three times per day.",
+        "- Fey Step: Teleport up to 60 ft as a bonus action, CHA modifier per day.",
         "- Uncontainable Spark: Cast *dispel magic* on yourself without expending a spell slot.",
         "- Living Ward: Allies within 30 ft gain resistance to one damage type of your choice, changing at dawn."
       ]),
-      usages: 3,
-      recovery: "dawn",
+      usagescalc: "event.value = Math.max(1, What('Cha Mod'));",
+      recovery: "long rest",
       action: [["bonus action", "Fey Step"], ["action", "Dispel Magic"]],
-      additional: "Resistance aura for allies"
+      additional: "Resistance aura"
     }
   }
 };
@@ -143,11 +143,13 @@ AddSubClass("wildspark mascot", "circle of borrowed strength", {
       source: ["WSM", 0],
       minlevel: 2,
       description: desc([
-        "Enter a rage as a bonus action, gaining the following benefits:",
+        "Transform into a raging barbarian as a bonus action, gaining the following benefits:",
+        "- Gain level*6 temporary hit points.",
         "- Resistance to bludgeoning, piercing, and slashing damage.",
         "- Add your Strength modifier (minimum +1) to melee weapon damage rolls.",
         "- Rage lasts for 1 minute or until you are incapacitated or end it early.",
       ]),
+      additional: levels.map(function (n) { return (n < 2 ? "" : n * 6 + " temp HP"); }),
       usagescalc: "event.value = Math.max(1, What('Cha Mod'));",
       recovery: "long rest",
       action: [["bonus action", " (Enter Rage)"]]
@@ -214,15 +216,22 @@ AddSubClass("wildspark mascot", "divine oath", {
   features: {
     // Level 2 Features
     "subclassfeature2": {
-      name: "Channel Divinity",
+      name: "Divine Champion",
       source: ["WSM", 0],
       minlevel: 2,
       description: desc([
-        "You gain the ability to channel divine energy to fuel magical effects.",
-        "You can use this ability once per long rest."
+        "As a bonus action, you can transform into a humanoid divine paladin for 1 minute, gaining:",
+        "- Temporary hit points equal to 5 × your Wildspark Mascot level.",
+        "- The ability to wield weapons and shields and use subclass features.",
+        "- You cannot cast spells while in this form.",
+        "The transformation ends early if you are reduced to 0 hit points or choose to end it as a bonus action."
       ]),
-      usages: 1,
-      recovery: "long rest"
+      additional: levels.map(function (n) {
+        return n < 2 ? "" : (n * 5) + " temp HP";
+      }),
+      usagescalc: "event.value = Math.max(1, What('Cha Mod'));",
+      recovery: "long rest",
+      action: [["bonus action", " (Transform)"]]
     },
     "subclassfeature2.1": {
       name: "Favored Enemy",
@@ -328,7 +337,31 @@ AddSubClass("wildspark mascot", "arcane duelist", {
         firstCol: "atwill"
       }
     },
-
+    "subclassfeature2.1": {
+      name: "Arcane Duelist Form",
+      source: ["WSM", 0],
+      minlevel: 2,
+      description: desc([
+        "As a bonus action, you can transform into a humanoid arcane duelist for 1 minute, gaining:",
+        "- Temporary hit points equal to 4 × your Wildspark Mascot level.",
+        "- The ability to wield weapons and shields, using your normal proficiencies.",
+        "- You can cast the Booming Blade cantrip during this transformation.",
+        "- You cannot cast other spells while in this form.",
+        "The transformation ends early if you are reduced to 0 hit points or choose to end it as a bonus action."
+      ]),
+      additional: levels.map(function (n) {
+        return n < 2 ? "" : (n * 4) + " temp HP ";
+      }),
+      usagescalc: "event.value = Math.max(1, What('Cha Mod'));",
+      recovery: "long rest",
+      action: [["bonus action", " (Transform)"]],
+      spellcastingBonus: {
+        name: "Arcane Duelist Form",
+        spells: ["booming blade"],
+        selection: ["booming blade"],
+        firstCol: "atwill"
+      }
+    },
     // Level 5 Features
     "subclassfeature5": {
       name: "Spellbreaker Strikes",
@@ -438,7 +471,31 @@ AddSubClass("wildspark mascot", "pactbound spirit", {
         action: [["bonus action", "Summon Weapon"]]
       }
     },
-
+    "subclassfeature2.1": {
+      name: "Eldritch Avatar",
+      source: ["WSM", 0],
+      minlevel: 2,
+      description: desc([
+        "As a bonus action, you can transform into a humanoid eldritch avatar for 1 minute, gaining:",
+        "- Temporary hit points equal to 4 × your Wildspark Mascot level.",
+        "- The ability to wield weapons and shields, using your normal proficiencies.",
+        "- You can cast the Eldritch Blast cantrip during this transformation.",
+        "- You cannot cast other spells while in this form.",
+        "The transformation ends early if you are reduced to 0 hit points or choose to end it as a bonus action."
+      ]),
+      additional: levels.map(function (n) {
+        return n < 2 ? "" : "4 × level temp HP (" + (n * 4) + " at level " + n + ")";
+      }),
+      usagescalc: "event.value = Math.max(1, What('Cha Mod'));",
+      recovery: "long rest",
+      action: [["bonus action", " (Transform)"]],
+      spellcastingBonus: {
+        name: "Eldritch Avatar Form",
+        spells: ["eldritch blast"],
+        selection: ["eldritch blast"],
+        firstCol: "atwill"
+      }
+    },
     // Level 5 Features
     "subclassfeature5": {
       name: "Eldritch Surge",
@@ -524,7 +581,25 @@ AddSubClass("wildspark mascot", "beacon of the divine", {
       },
       action: [["action", "Channel Divinity"]]
     },
-
+    "subclassfeature2.1": {
+      name: "Divine Vessel",
+      source: ["WSM", 0],
+      minlevel: 2,
+      description: desc([
+        "As a bonus action, you can transform into a humanoid divine cleric for 1 minute, gaining:",
+        "- Temporary hit points equal to 5 × your Wildspark Mascot level.",
+        "- The ability to wield weapons and shields, using your normal proficiencies.",
+        "- Access to your subclass features (e.g., Channel Divinity, Aura of Serenity).",
+        "- You cannot cast spells while in this form.",
+        "The transformation ends early if you are reduced to 0 hit points or choose to end it as a bonus action."
+      ]),
+      additional: levels.map(function (n) {
+        return n < 2 ? "" : (n * 5) + " temp hp ";
+      }),
+      usagescalc: "event.value = Math.max(1, What('Cha Mod'));",
+      recovery: "long rest",
+      action: [["bonus action", " (Transform)"]]
+    },
     // Level 5 Features
     "subclassfeature5": {
       name: "Aura of Serenity",
@@ -615,11 +690,11 @@ RaceList["familiar-born"] = {
     "Fey Nature:\n   - Advantage on saving throws against being charmed.\n   - Immune to magical sleep effects.\n   - You do not require food or drink but must still rest as normal.",
     "Tiny Trickster:\n   - You can move through the space of any creature larger than you.\n   - You can take the Disengage action as a bonus action."
   ],
-  action : [["bonus action", "Tiny Trickster Disengage"]],
+  action: [["bonus action", "Tiny Trickster Disengage"]],
 };
 /*WIP adding only nondamaging spells to spell list
     All 3 attributes (eval, removeeval, and calcChanges) go in the same class feature.
-    We have to create a custom CurrentSpells entry to do what we need to.
+    We have to create a WSM CurrentSpells entry to do what we need to.
     A calcChanges.spellList function will then dynamically determine the eligible cantrips.
 
     This script was made assuming the base class is ClassList['spellblade'].
@@ -627,7 +702,7 @@ RaceList["familiar-born"] = {
 */
 /*
 eval : function () {
-    // Create custom CurrentSpells entry
+    // Create WSM CurrentSpells entry
     CurrentSpells['spellblade-borrowed power'] = {
         name : 'Wildspark Spells (Wildspark Mascot)',
         ability : "wildspark mascot", // use the same spellcasting ability as the main class
@@ -651,7 +726,7 @@ eval : function () {
     SetStringifieds('spells'); CurrentUpdates.types.push('spells');
 },
 removeeval : function () {
-    // Remove custom CurrentSpells entry
+    // Remove WSM CurrentSpells entry
     delete CurrentSpells['spellblade-borrowed power'];
     SetStringifieds('spells'); CurrentUpdates.types.push('spells');
 },
