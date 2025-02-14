@@ -1,13 +1,15 @@
-/* -WHAT IS THIS?-
-This file adds the "Wildspark Mascot" class to "MPMB's Character Record Sheet."
-Import this file using the "Add Extra Materials" bookmark.
+/*	-WHAT IS THIS?-
+	This file adds optional material to "MPMB's Character Record Sheet" found at https://flapkan.com/mpmb/charsheets
+	Import this file using the "Add Extra Materials" bookmark.
+	-KEEP IN MIND-
+	It is recommended to enter the code in a fresh sheet before adding any other information (i.e. before making your character with it).
 */
 
-/* -INFORMATION-
-Subject: Class
-Effect: Adds the Wildspark Mascot class and its features.
-Code by: [Your Name]
-Date: 2025-02-11
+/*	-INFORMATION-
+	Subject:	Class
+	Effect:		This script adds my homebrew "Wildspark Mascot" class and its subclasses
+	Code by:	Rocky
+	Date:		2025-02-14
 */
 
 var iFileName = "WildsparkMascot.js";
@@ -143,7 +145,7 @@ ClassList["wildspark mascot"] = {
         name: 'Wildspark Mascot',
         ability: "wildspark mascot", // use the same spellcasting ability as the main class
         list: { spells: [] }, // will be filled by the calcChanges.spellList function
-        known: { cantrips: 0, spells: 'list' },
+        known: { cantrips: [2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], spells: [1, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11]},
         bonus: {
           bon1: {
             name: 'Just select "Full List"',
@@ -192,7 +194,7 @@ ClassList["wildspark mascot"] = {
             for (var i = 0; i < spells.length; i++) {
               var oCantrip = SpellsList[spells[i]];
               if (!/dmg|damage/i.test(oCantrip.description) && allCantripsKnown.indexOf(spells[i]) === -1) {
-                spList.spells.push(cantrips[i]);
+                spList.spells.push(spells[i]);
               }
             }
           }
