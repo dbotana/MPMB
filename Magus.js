@@ -109,7 +109,7 @@ ClassList["magus"] = {
             },
             "archery": FightingStyles.archery,
 
-            "classical swordplay": {
+            "classical swordplay": { 
                 name: "Classical Swordplay Fighting Style",
                 description: "\n   +2 to attack rolls and +1 to Armor Class when wielding a finesse weapon in one hand and no" +
                     "\n   other weapons, and not using heavy armor or a shield.",
@@ -143,27 +143,43 @@ ClassList["magus"] = {
                 action: [["reaction", "Protect (Protector)"]],
             },
 
-            "shield warrior": { //need stop eval for any weapon other than shield
-                name: "Shield Warrior Fighting Style",
-                description: "\n   You gain proficiency with shields as a martial weapon, and on hit your shield deals 2d4" +
-                    "\n   bludgeoning damage. If you are wielding a shield and nothing else, you gain +1 bonus to" +
-                    "\n   attack rolls with your shield and to you Armor Class",
-                weaponOptions: [{
-                    regExpSearch: /^(?=.*shield).*$/i,
-                    name: "Shield (Shield Warrior)",
-                    source: [["LLM", 4]],
-                    ability: 1,
-                    type: 'AlwaysProf',
-                    damage: ['2', '4', 'bludgeoning'],
-                    range: "Melee",
-                    description: "2d4 bludgeoning dmg; +1 to attack and AC when only weapon",
-                    abilitytodamage: true,
-                    isNotWeapon: true,
-                    modifiers: [1,""],
-                    selectNow: true
-                }],
-                extraAC: [{ mod: 1, text: "While wielding a shield and no other weapons" }]
-            },
+            "shieldwarrior" : { // From CalypsoMoonlace (Selena)
+		name : "Shield Warrior Fighting Style",
+		description : desc(["I gain proficiency with shields as martial melee weapon, which deal 2d4 bludg. damage on hit",
+						"When I'm wielding a shield and nothing else, +1 to AC and attack rolls with that shield"]),
+		extraAC : {
+			name : "Shield Warrior Fighting Style",
+			mod : 1,
+			text : "I gain a +1 bonus to AC while wielding a shield and nothing else.",
+			stopeval : function (v) { return !v.usingShield; }
+		},
+		weaponOptions : {
+			regExpSearch : /(shield|bash)/i,
+			name : "Shield Melee Attack",
+			ability : 1,
+			type : "shield melee attack",
+			damage : [2, 4, "bludgeoning"],
+			range : "Melee",
+			list: "melee",
+			abilitytodamage : true
+		},
+		weaponsAdd : ["Shield Melee Attack"],
+		weaponProfs : [false, false, ["shield melee attack"]],
+		calcChanges : {
+			atkCalc : [
+				function (fields, v, output) {
+					for (var i = 1; i <= FieldNumbers.actions; i++) {
+						if ((/off.hand.attack/i).test(What('Bonus Action ' + i))) return;
+					}
+
+					if ((/shield melee attack/i).test(v.baseWeaponName)) {
+						output.extraHit += 1;
+					}
+				},
+				"When wielding a shield and nothing else, my shield attacks get a +1 bonus on the To Hit. This condition will always be false if the bonus action 'Off-hand Attack' exists."
+			]
+		}
+	    },
 
             "thrown weapon": ClassList.fighter.features["fighting style"]["thrown weapon fighting"],
 
