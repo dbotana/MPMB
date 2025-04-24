@@ -46,26 +46,22 @@ AddSubClass("sorcerer", "giant soul", {
                 hp: function (totalHD, HDobj, prefix) {
                     if (classes.known.sorcerer) {
                         return [classes.known.sorcerer.level, "Jötunn Bloodline (Sorcerer)"];
+                        extrahp += classes.known.sorcerer.level;
                     }
                 },
                 hpForceRecalc: true
             },
-            spellcastingBonus: {
-                name: "Thaumaturgy",
-                spells: ["thaumaturgy"],
-                selection: ["thaumaturgy"]
-            },
+            spellcastingExtra: ["thaumaturgy"],
             armorOptions: [{
                 regExpSearch: /^(?=.*jötunn)(?=.*bloodline).*$/i,
                 name: "Jötunn Bloodline",
                 source: [["HB:GS", 0]],
-                ac: "10+Cha+Dex",
-                dex: -10,
+                ac: "10+Cha",
                 selectNow: true
             }],
-            choices: ["Hill Giant", "Stone Giant", "Frost Giant", "Fire Giant", "Cloud Giant", "Storm Giant"],
-            "Hill Giant": {
-                name: "Hill Giant Bloodline",
+            choices: ["Hill Giant", "Stone Giant", "Frost Giant", "Fire Giant", "Cloud Giant", "Storm Giant", "Desert Giant", "Jungle Giant", "Reef Giant", "Sun Giant", "Moon Giant", "Eclipse Giant"],
+            "hill giant": {
+                name: "Hill Giant",
                 description: desc([
                     "I gain additional spells from the Hill Giant Ordning Mark Spell List",
                     "During Fury of the Titans, I regain 1d6 temporary HP at the end of my turn",
@@ -73,16 +69,16 @@ AddSubClass("sorcerer", "giant soul", {
                 ]),
                 spellcastingExtra: ["sleep", "enhance ability", "slow", "stoneskin", "hold monster"],
             },
-            "Stone Giant": {
-                name: "Stone Giant Bloodline",
+            "stone giant": {
+                name: "Stone Giant",
                 description: desc([
                     "I gain additional spells from the Stone Giant Ordning Mark Spell List",
                     "During Fury of the Titans, I gain a climbing speed equal to my walking speed"
                 ]),
                 spellcastingExtra: ["entangle", "spike growth", "meld into stone", "stone shape", "wall of stone"],
             },
-            "Frost Giant": {
-                name: "Frost Giant Bloodline",
+            "frost giant": {
+                name: "Frost Giant",
                 description: desc([
                     "I gain additional spells from the Frost Giant Ordning Mark Spell List",
                     "During Fury of the Titans, I gain resistance to cold damage",
@@ -90,8 +86,8 @@ AddSubClass("sorcerer", "giant soul", {
                 ]),
                 spellcastingExtra: ["fog cloud", "snilloc's snowball swarm", "sleet storm", "ice storm", "cone of cold"],
             },
-            "Fire Giant": {
-                name: "Fire Giant Bloodline",
+            "fire giant": {
+                name: "Fire Giant",
                 description: desc([
                     "I gain additional spells from the Fire Giant Ordning Mark Spell List",
                     "During Fury of the Titans, I gain resistance to fire damage",
@@ -99,24 +95,24 @@ AddSubClass("sorcerer", "giant soul", {
                 ]),
                 spellcastingExtra: ["burning hands", "scorching ray", "fireball", "wall of fire", "immolation"],
             },
-            "Cloud Giant": {
-                name: "Cloud Giant Bloodline",
+            "cloud giant": {
+                name: "Cloud Giant",
                 description: desc([
                     "I gain additional spells from the Cloud Giant Ordning Mark Spell List",
                     "During Fury of the Titans, I gain resistance to thunder damage"
                 ]),
                 spellcastingExtra: ["fog cloud", "misty step", "thunder step", "storm sphere", "control winds"],
             },
-            "Storm Giant": {
-                name: "Storm Giant Bloodline",
+            "storm giant": {
+                name: "Storm Giant",
                 description: desc([
                     "I gain additional spells from the Storm Giant Ordning Mark Spell List",
                     "During Fury of the Titans, I gain resistance to lightning damage"
                 ]),
                 spellcastingExtra: ["thunderwave", "gust of wind", "call lightning", "storm sphere", "control weather"],
             },
-            "Desert Giant": {
-                name: "Desert Giant Bloodline",
+            "desert giant": {
+                name: "Desert Giant",
                 description: desc([
                     "I gain additional spells from the Desert Giant Ordning Mark Spell List",
                     "During Fury of the Titans, I gain immunity to the blind condition",
@@ -124,8 +120,8 @@ AddSubClass("sorcerer", "giant soul", {
                 ]),
                 spellcastingExtra: ["silent image", "blur", "major image", "hallucinatory terrain", "mirage arcane"],
             },
-            "Jungle Giant": {
-                name: "Jungle Giant Bloodline",
+            "jungle giant": {
+                name: "Jungle Giant",
                 description: desc([
                     "I gain additional spells from the Jungle Giant Ordning Mark Spell List",
                     "During Fury of the Titans, I gain resistance to poison damage",
@@ -133,8 +129,8 @@ AddSubClass("sorcerer", "giant soul", {
                 ]),
                 spellcastingExtra: ["ray of sickness", "protection from poison", "stinking cloud", "vitriolic sphere", "contagion"],
             },
-            "Reef Giant": {
-                name: "Reef Giant Bloodline",
+            "reef giant": {
+                name: "Reef Giant",
                 description: desc([
                     "I gain additional spells from the Reef Giant Ordning Mark Spell List",
                     "During Fury of the Titans, I gain a swim speed equal to my walking speed",
@@ -142,8 +138,8 @@ AddSubClass("sorcerer", "giant soul", {
                 ]),
                 spellcastingExtra: ["create or destroy water", "blur", "water breathing", "control water", "maelstrom"],
             },
-            "Sun Giant": {
-                name: "Sun Giant Bloodline",
+            "sun giant": {
+                name: "Sun Giant",
                 description: desc([
                     "I gain additional spells from the Sun Giant Ordning Mark Spell List",
                     "During Fury of the Titans, I gain immunity to the blind condition",
@@ -151,8 +147,8 @@ AddSubClass("sorcerer", "giant soul", {
                 ]),
                 spellcastingExtra: ["faerie fire", "scorching ray", "daylight", "wall of fire", "dawn"],
             },
-            "Moon Giant": {
-                name: "Moon Giant Bloodline",
+            "moon giant": {
+                name: "Moon Giant",
                 description: desc([
                     "I gain additional spells from the Moon Giant Ordning Mark Spell List",
                     "During Fury of the Titans, I gain resistance to cold damage",
@@ -160,8 +156,8 @@ AddSubClass("sorcerer", "giant soul", {
                 ]),
                 spellcastingExtra: ["sleep", "calm emotions", "hypnotic pattern", "confusion", "modify memory"],
             },
-            "Eclipse Giant": {
-                name: "Eclipse Giant Bloodline",
+            "eclipse giant": {
+                name: "Eclipse Giant",
                 description: desc([
                     "I gain additional spells from the Eclipse Giant Ordning Mark Spell List",
                     "During Fury of the Titans, I gain resistance to cold and radiant damage"
