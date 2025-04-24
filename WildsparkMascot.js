@@ -1,15 +1,15 @@
 /*	-WHAT IS THIS?-
-	This file adds optional material to "MPMB's Character Record Sheet" found at https://flapkan.com/mpmb/charsheets
-	Import this file using the "Add Extra Materials" bookmark.
-	-KEEP IN MIND-
-	It is recommended to enter the code in a fresh sheet before adding any other information (i.e. before making your character with it).
+  This file adds optional material to "MPMB's Character Record Sheet" found at https://flapkan.com/mpmb/charsheets
+  Import this file using the "Add Extra Materials" bookmark.
+  -KEEP IN MIND-
+  It is recommended to enter the code in a fresh sheet before adding any other information (i.e. before making your character with it).
 */
 
 /*	-INFORMATION-
-	Subject:	Class
-	Effect:		This script adds my homebrew "Wildspark Mascot" class and its subclasses
-	Code by:	Rocky
-	Date:		2025-02-14
+  Subject:	Class
+  Effect:		This script adds my homebrew "Wildspark Mascot" class and its subclasses
+  Code by:	Rocky
+  Date:		2025-02-14
 */
 
 var iFileName = "WildsparkMascot.js";
@@ -86,7 +86,78 @@ ClassList["wildspark mascot"] = {
       minlevel: 1,
       description:
         "\nYou know only non-damaging spells from Sorcerer/Druid/Bard lists." +
-        "\nWhen casting a spell of level one or higher, roll 1d20, on a 1-10 trigger a Wild Magic Surge."
+        "\nWhen casting a spell of level one or higher, roll 1d20, on a 1-10 trigger a Wild Magic Surge.",
+      /* WIP adding only nondamaging spells to spell list
+      All 3 attributes (eval, removeeval, and calcChanges) go in the same class feature.
+      We have to create a WSM CurrentSpells entry to do what we need to.
+      A calcChanges.spellList function will then dynamically determine the eligible cantrips.
+
+      This script was made assuming the base class is ClassList['spellblade'].
+      If not, adjust the below accordingly
+      */
+
+      eval: function () {
+        // Create custom CurrentSpells entry
+        CurrentSpells['wildspark mascot'] = {
+          name: 'Wildspark Mascot',
+          ability: "wildspark mascot", // use the same spellcasting ability as the main class
+          list: { spells: [] }, // will be filled by the calcChanges.spellList function
+          known: { cantrips: [2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], spells: [1, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11] },
+          bonus: {
+            bon1: {
+              name: 'Just select "Full List"',
+              spells: []
+            },
+            bon2: {
+              name: 'on the bottom left',
+              spells: []
+            }
+          },
+          typeList: 4,
+          refType: "class",
+          allowUpCasting: true,
+          firstCol: ""
+        };
+        SetStringifieds('spells'); CurrentUpdates.types.push('spells');
+      },
+      removeeval: function () {
+        // Remove custom CurrentSpells entry
+        delete CurrentSpells['wildspark mascot'];
+        SetStringifieds('spells'); CurrentUpdates.types.push('spells');
+      },
+      calcChanges: {
+        spellList: [
+          function (spList, spName, spType) {
+            // Only do this for the above defined CurrentSpells object
+            if (spName === 'wildspark mascot') {
+              // First get all the cantrips known by other spellcasting sources
+              var allSpellsKnown = [];
+              for (var sCast in CurrentSpells) {
+                if (sCast.refType === "item" || sCast === spName) continue; // skip magic items and the current entry
+                var oCast = CurrentSpells[sCast];
+                if (oCast.selectCa) allSpellsKnown = allSpellsKnown.concat(oCast.selectCa);
+                if (oCast.selectBo) allSpellsKnown = allSpellsKnown.concat(oCast.selectBo);
+              }
+              // Get just the cantrips
+              var allCantripsKnown = OrderSpells(allSpellsKnown, "single", false, false, 9);
+              // Make sure the array is empty
+              spList.spells = [];
+              // First get all the cantrips from all the classes (this way, the excluded/included sources are respected)
+              var spells = CreateSpellList({ "class": ["druid", "sorcerer", "bard"] });
+              /*  loop through these cantrips and push the ones that meet the criteria
+                  of not having 'dmg' or 'damage' in the short description
+                  and not being a cantrip known by any other spellcasting source.
+              */
+              for (var i = 0; i < spells.length; i++) {
+                var oCantrip = SpellsList[spells[i]];
+                if (!/dmg|damage/i.test(oCantrip.description) && allCantripsKnown.indexOf(spells[i]) === -1) {
+                  spList.spells.push(spells[i]);
+                }
+              }
+            }
+          }
+        ]
+      },
     },
     // Chaotic Empowerment (6th Level)
     "chaotic empowerment": {
@@ -129,77 +200,6 @@ ClassList["wildspark mascot"] = {
       recovery: "long rest",
       action: [["bonus action", "Fey Step"], ["action", "Dispel Magic"]],
       additional: "Resistance aura"
-    },
-    /* WIP adding only nondamaging spells to spell list
-    All 3 attributes (eval, removeeval, and calcChanges) go in the same class feature.
-    We have to create a WSM CurrentSpells entry to do what we need to.
-    A calcChanges.spellList function will then dynamically determine the eligible cantrips.
-
-    This script was made assuming the base class is ClassList['spellblade'].
-    If not, adjust the below accordingly
-    */
-
-    eval: function () {
-      // Create custom CurrentSpells entry
-      CurrentSpells['wildspark mascot'] = {
-        name: 'Wildspark Mascot',
-        ability: "wildspark mascot", // use the same spellcasting ability as the main class
-        list: { spells: [] }, // will be filled by the calcChanges.spellList function
-        known: { cantrips: [2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], spells: [1, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11]},
-        bonus: {
-          bon1: {
-            name: 'Just select "Full List"',
-            spells: []
-          },
-          bon2: {
-            name: 'on the bottom left',
-            spells: []
-          }
-        },
-        typeList: 4,
-        refType: "class",
-        allowUpCasting: true,
-        firstCol: ""
-      };
-      SetStringifieds('spells'); CurrentUpdates.types.push('spells');
-    },
-    removeeval: function () {
-      // Remove custom CurrentSpells entry
-      delete CurrentSpells['wildspark mascot'];
-      SetStringifieds('spells'); CurrentUpdates.types.push('spells');
-    },
-    calcChanges: {
-      spellList: [
-        function (spList, spName, spType) {
-          // Only do this for the above defined CurrentSpells object
-          if (spName === 'wildspark mascot') {
-            // First get all the cantrips known by other spellcasting sources
-            var allSpellsKnown = [];
-            for (var sCast in CurrentSpells) {
-              if (sCast.refType === "item" || sCast === spName) continue; // skip magic items and the current entry
-              var oCast = CurrentSpells[sCast];
-              if (oCast.selectCa) allSpellsKnown = allSpellsKnown.concat(oCast.selectCa);
-              if (oCast.selectBo) allSpellsKnown = allSpellsKnown.concat(oCast.selectBo);
-            }
-            // Get just the cantrips
-            var allCantripsKnown = OrderSpells(allSpellsKnown, "single", false, false, 9);
-            // Make sure the array is empty
-            spList.spells = [];
-            // First get all the cantrips from all the classes (this way, the excluded/included sources are respected)
-            var spells = CreateSpellList({ "class": ["druid", "sorcerer", "bard"] });
-            /*  loop through these cantrips and push the ones that meet the criteria
-                of not having 'dmg' or 'damage' in the short description
-                and not being a cantrip known by any other spellcasting source.
-            */
-            for (var i = 0; i < spells.length; i++) {
-              var oCantrip = SpellsList[spells[i]];
-              if (!/dmg|damage/i.test(oCantrip.description) && allCantripsKnown.indexOf(spells[i]) === -1) {
-                spList.spells.push(spells[i]);
-              }
-            }
-          }
-        }
-      ]
     },
   }
 };
