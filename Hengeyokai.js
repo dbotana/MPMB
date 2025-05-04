@@ -146,7 +146,7 @@ AddRacialVariant("hengeyokai", "fox", {
     plural : "Fox Hengeyokai",
     skills : [["Deception", "full"], "Persuasion"],
     scores : [0, 1, 0, 0, 0, 2], // +1 Dex, +1 Cha (total +2 Cha with base)
-    vision : [["Keen Smell and Hearing", 0]],
+    vision : [["Keen Smell and Hearing", 0], ["Darkvision", 60]],
     weaponOptions : [{
         baseWeapon : "unarmed strike",
         regExpSearch : /^(?=.*fox)(?=.*bite).*$/i,
