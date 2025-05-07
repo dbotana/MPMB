@@ -66,6 +66,7 @@ AddSubClass("artificer", "reanimator", {
                 alignment: "Neutral",
                 ac: "10+Int",
                 hp: "4",
+                hd : [1, 4],
                 hdLinked: ["artificer", "artificerUA"],
                 speed: "30 ft",
                 scores: [14, 10, 16, 4, 10, 6], // STR, DEX, CON, INT, WIS, CHA
@@ -96,13 +97,15 @@ AddSubClass("artificer", "reanimator", {
                     description: "Whenever the companion is subjected to lightning damage, it regains a number of hit points equal to the lightning damage dealt."
                 }],
                 calcChanges : {
-                    hp : function (totalHD, HDobj, prefix) {
-                        if (!classes.known.artificer) return;
-                        var artLvl = classes.known.artificer.level;
-                        HDobj.alt.push(4 * artLvl);
-                    },
-                    setAltHp : true
-                }
+					hp : function (totalHD, HDobj, prefix) {
+						if (!classes.known.artificer) return;
+						var artLvl = classes.known.artificer.level;
+						var artLvl4 = 4 * artLvl;
+						HDobj.alt.push(artLvl4);
+					},
+					setAltHp : true,
+					hpForceRecalc : true
+				},
             }]
         },
         "subclassfeature5": {
