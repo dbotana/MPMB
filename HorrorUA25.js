@@ -564,6 +564,7 @@ AddSubClass("warlock", "hexblade patron", {
                 "    before my next turn, it takes necrotic damage equal to my Charisma modifier",
                 "  - Stymying Mark: Target has disadvantage on next save before my next turn"
             ]),
+            limfeaname : "Hexblade's Curse",
             usages : "Charisma modifier per ",
             usagescalc : "event.value = Math.max(1, What('Cha Mod'));",
             recovery : "long rest",
