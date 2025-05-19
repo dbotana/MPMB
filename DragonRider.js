@@ -493,7 +493,6 @@ DragonManeuversList = {
         name : "Charging Strike",
         source : ["DR", 0],
         description : "Action while mounted; Dragon charges; if moved 10+ ft straight, +2d8 damage; target Str save or prone",
-        prereqeval : function(v) { return true; },
         tier : 1,
         points : 1,
         action : ["action", ""],
@@ -503,7 +502,6 @@ DragonManeuversList = {
         name : "Coordinated Flank",
         source : ["DR", 0],
         description : "Bonus action while unmounted; If within 5 ft of same creature, advantage on attacks until next turn",
-        prereqeval : function(v) { return true; },
         tier : 1,
         points : 1,
         action : ["bonus action", ""]
