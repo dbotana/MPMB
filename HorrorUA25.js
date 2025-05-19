@@ -64,9 +64,9 @@ AddSubClass("artificer", "reanimator", {
                 size: 4, // Small
                 type: "Undead",
                 alignment: "Neutral",
-                ac: "10+Int",
+                ac: "10",
                 hp: "4",
-                hd : [1, 4],
+                hd : [1, 6],
                 hdLinked: ["artificer", "artificerUA"],
                 speed: "30 ft",
                 scores: [14, 10, 16, 4, 10, 6], // STR, DEX, CON, INT, WIS, CHA
@@ -94,16 +94,17 @@ AddSubClass("artificer", "reanimator", {
                     description: "When the companion dies, it explodes. Each creature within 10 ft must make a Dex save (DC = spell save DC) or take 2d6 necrotic damage."
                 }, {
                     name: "Lightning Absorption",
-                    description: "Whenever the companion is subjected to lightning damage, it regains a number of hit points equal to the lightning damage dealt."
+                    description: "Whenever the companion is subjected to lightning damage, it regains a number of hit points equal to the lightning damage dealt.",
+                    addMod : [{ type : "", field : "Comp.Use.AC", mod : 4 }],
                 }],
                 calcChanges : {
 					hp : function (totalHD, HDobj, prefix) {
 						if (!classes.known.artificer) return;
 						var artLvl = classes.known.artificer.level;
 						var artLvl4 = 4 * artLvl;
-						HDobj.alt.push(artLvl4);
+						HDobj.alt.push(4+artLvl4);
 					},
-					setAltHp : true,
+                    setAltHp : true,
 					hpForceRecalc : true
 				},
             }]
