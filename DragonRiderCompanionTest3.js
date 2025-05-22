@@ -19,7 +19,7 @@ RequiredSheetVersion('13');
 SourceList["DR"] = {
     name : "Dragon Rider",
     abbreviation : "DR", 
-    group : "Homebrew",
+    group : "Rocky's Homebrew",
     date : "2025/05/22"
 };
 
@@ -33,26 +33,26 @@ var createDragonRiderCompanion = function (colour) {
             description : "This dragon's scales are bright red, progressing to darker crimson with age. Breathes intense heat."
         },
         'sapphire' : {
-            energy : "lightning", 
-            breathRange : "30-ft line",
+            energy : "lightning",
+            breathRange : "5-ft × 30-ft line",
             breathSave : "Dex",
             description : "This dragon's scales begin sky blue with cloudy white flecks, aging to deep oceanic blue. Breathes electrical energy."
         },
         'emerald' : {
             energy : "poison",
-            breathRange : "15-ft cone", 
+            breathRange : "15-ft cone",
             breathSave : "Con",
             description : "This dragon's scales begin light grassy green, aging to verdant forest green. Breathes toxic poison gas."
         },
         'opal' : {
             energy : "cold",
             breathRange : "15-ft cone",
-            breathSave : "Con", 
+            breathSave : "Con",
             description : "This dragon's scales begin gleaming white with phosphorescent flecks, aging to grey with ashy undertones. Breathes frigid ice."
         },
         'obsidian' : {
             energy : "acid",
-            breathRange : "30-ft line",
+            breathRange : "5-ft × 30-ft line",
             breathSave : "Dex",
             description : "This dragon's scales appear dark gray at birth, becoming black as night. Breathes virulent acid."
         }
@@ -60,7 +60,7 @@ var createDragonRiderCompanion = function (colour) {
 
     var type = types[colour];
     if (!type) return false;
-
+    
     var colourUC = colour.capitalize();
 
     var creature = {
@@ -99,7 +99,7 @@ var createDragonRiderCompanion = function (colour) {
             description : "+1d4 " + type.energy + " damage",
             abilitytodamage : true
         }, {
-            name : "Tail", 
+            name : "Tail",
             ability : 1,
             damage : [1, 8, "bludgeoning"],
             range : "Melee (5 ft)",
@@ -107,11 +107,19 @@ var createDragonRiderCompanion = function (colour) {
             abilitytodamage : true
         }, {
             name : "Claw",
-            ability : 1, 
+            ability : 1,
             damage : [1, 4, "slashing"],
             range : "Melee (5 ft)",
             description : "",
             abilitytodamage : true
+        }, {
+            name : "Breath Weapon (1× per SR)",
+            ability : 3,
+            damage : [2, 6, type.energy],
+            range : type.breathRange,
+            description : type.breathSave + " save for half damage",
+            abilitytodamage : false,
+            dc : true
         }],
         features : [{
             name : "Darkvision",
@@ -123,23 +131,13 @@ var createDragonRiderCompanion = function (colour) {
             description : "The dragon gains a breath weapon that recharges on a short or long rest.",
             eval : function(prefix, lvl) {
                 var crea = CurrentCompRace[prefix];
-                var breathAttack = {
-                    name : "Breath Attack (1/rest)",
-                    ability : 3,
-                    damage : [2, 6, type.energy],
-                    range : type.breathRange,
-                    description : type.breathSave + " save, DC 12, for half damage",
-                    abilitytodamage : false,
-                    dc : true
-                };
-                crea.attacks.push(breathAttack);
-                Value(prefix + "Comp.Use.Attack.2.Weapon Selection", breathAttack.name);
+                Value(prefix + "Comp.Use.Attack.2.Weapon Selection", crea.attacks[3].name);
             },
             removeeval : function(prefix, lvl) {
                 Value(prefix + "Comp.Use.Attack.2.Weapon Selection", "");
             }
         }, {
-            name : "Size Increase", 
+            name : "Size Increase",
             minlevel : 3,
             description : "At 3rd level, the dragon's size increases to Large. At 15th level, it increases to Huge.",
             eval : function(prefix, lvl) {
@@ -148,7 +146,7 @@ var createDragonRiderCompanion = function (colour) {
                     PickDropdown(prefix + "Comp.Desc.Size", 1); // Huge
                     Value(prefix + "Comp.Use.Speed", "35 ft, fly 70 ft");
                 } else if (drLvl >= 3) {
-                    PickDropdown(prefix + "Comp.Desc.Size", 2); // Large  
+                    PickDropdown(prefix + "Comp.Desc.Size", 2); // Large
                     Value(prefix + "Comp.Use.Speed", "25 ft, fly 30 ft");
                 }
             },
@@ -200,6 +198,7 @@ var createDragonRiderCompanion = function (colour) {
 
     return [creature];
 };
+
 
 // Main Dragon Rider Class
 ClassList["dragon rider"] = {
