@@ -200,6 +200,7 @@ var createDragonRiderCompanion = function (colour) {
 };
 
 
+
 // Main Dragon Rider Class
 ClassList["dragon rider"] = {
     regExpSearch : /^(?=.*dragon)(?=.*rider).*$/i,
@@ -616,3 +617,218 @@ AddSubClass("dragon rider", "dragon outrider", {
         }
     }
 });
+
+function AddDragonManeuverOptions() {
+    // Extract all maneuvers from the list
+    var maneuverArray = [];
+    for (var maneuver in DragonManeuversList) {
+        if (DragonManeuversList.hasOwnProperty(maneuver)) {
+            maneuverArray.push({
+                name: DragonManeuversList[maneuver].name,
+                feature: maneuver,
+                prerequisite: DragonManeuversList[maneuver].prereqeval,
+                tier: DragonManeuversList[maneuver].tier
+            });
+        }
+    }
+
+    // Sort maneuvers by tier
+    maneuverArray.sort(function(a, b) {
+        return a.tier - b.tier || a.name.localeCompare(b.name);
+    });
+
+    // Add the maneuvers as feature choices
+    for (var i = 0; i < maneuverArray.length; i++) {
+        var curMan = maneuverArray[i];
+        var maneuverObject = DragonManeuversList[curMan.feature];
+
+        // Create a feature object for each maneuver
+        var featureObj = {
+            name : maneuverObject.name,
+            source : maneuverObject.source,
+            description : maneuverObject.description,
+            prereqeval : maneuverObject.prereqeval
+        };
+
+        // Add action if present
+        if (maneuverObject.action) {
+            featureObj.action = maneuverObject.action;
+        }
+
+        // Add to dragon maneuvers feature
+        AddFeatureChoice(ClassList["dragon rider"].features["dragon maneuvers"], true, maneuverObject.name, featureObj, "Dragon Maneuvers (Tier " + maneuverObject.tier + ")");
+    }
+}
+// Dragon Rider Maneuvers List
+DragonManeuversList = {
+    // Tier 1 Maneuvers (1 Point)
+    "charging strike" : {
+        name : "Charging Strike",
+        source : ["DR", 0],
+        description : "Action while mounted; Dragon charges; if moved 10+ ft straight, +2d8 damage; target Str save or prone",
+        tier : 1,
+        points : 1,
+        action : ["action", ""],
+        dragon_form_only : true
+    },
+    "coordinated flank" : {
+        name : "Coordinated Flank",
+        source : ["DR", 0],
+        description : "Bonus action while unmounted; If within 5 ft of same creature, advantage on attacks until next turn",
+        tier : 1,
+        points : 1,
+        action : ["bonus action", ""]
+    },
+    "swipe the legs" : {
+        name : "Swipe the Legs",
+        source : ["DR", 0],
+        description : "Bonus action; Dragon makes tail attack; if hit, target makes Str save or is knocked prone",
+        tier : 1,
+        points : 1,
+        action : ["bonus action", ""],
+        dragon_form_only : true
+    },
+    "take the hit" : {
+        name : "Take the Hit",
+        source : ["DR", 0],
+        description : "Reaction when hit by attack; Dragon takes hit for you or you take hit for Dragon; must be within 5 ft",
+        tier : 1,
+        points : 1,
+        action : ["reaction", ""]
+    },
+    "evasive maneuvers" : {
+        name : "Evasive Maneuvers",
+        source : ["DR", 0],
+        description : "Bonus action while riding Dragon; Take Dodge action for both you and your Dragon companion",
+        tier : 1,
+        points : 1,
+        action : ["bonus action", ""],
+        dragon_form_only : true
+    },
+    "create an opening" : {
+        name : "Create an Opening",
+        source : ["DR", 0],
+        description : "Reaction; Dragon creates gust with wings; allies within 20 ft can move without opportunity attacks",
+        tier : 1,
+        points : 1,
+        action : ["reaction", ""],
+        dragon_form_only : true
+    },
+    "bolstered defense" : {
+        name : "Bolstered Defense",
+        source : ["DR", 0],
+        description : "Bonus action; Increase AC by Dragon's Con modifier until beginning of next turn",
+        prereqeval : function(v) {
+		    return classes.known.dragonrider && classes.known.dragonrider.subclass.indexOf("knight") !== -1 ? true : "skip";
+	    },
+        tier : 1,
+        points : 1,
+        action : ["bonus action", ""],
+    },
+    "scan the perimeter" : {
+        name : "Scan the Perimeter",
+        source : ["DR", 0],
+        description : "Bonus action; Invisible or hidden creatures within 60 ft revealed only to you until next turn",
+        prereqeval : function(v) {
+		    return classes.known.dragonrider && classes.known.dragonrider.subclass.indexOf("outrider") !== -1 ? true : "skip";
+	    },
+        tier : 1,
+        points : 1,
+        action : ["bonus action", ""],
+    },
+    
+    // Tier 2 Maneuvers (2 Points)
+    "drag 'n drop" : {
+        name : "Drag 'n Drop",
+        source : ["DR", 0],
+        description : "If bite hits medium or smaller creature; Str save or grappled & restrained; Dragon moves at half speed",
+        prereqeval : function(v) { return classes.known["dragon rider"].level >= 5; },
+        tier : 2,
+        points : 2,
+        dragon_form_only : true
+    },
+    "channeled breath" : {
+        name : "Channeled Breath",
+        source : ["DR", 0],
+        description : "Action; 15 ft cone save vs breath; 4d8 dmg or half on save; +1d8 per extra 2 points spent",
+        prereqeval : function(v) { return classes.known["dragon rider"].level >= 5; },
+        tier : 2,
+        points : 2,
+        action : ["action", ""],
+        additional_points : true
+    },
+    "fury strikes" : {
+        name : "Fury Strikes",
+        source : ["DR", 0],
+        description : "Action; Dragon makes bite and two claw attacks; if all 3 hit, regain 1 maneuver point",
+        prereqeval : function(v) { return classes.known["dragon rider"].level >= 5; },
+        tier : 2,
+        points : 2,
+        action : ["action", ""],
+        dragon_form_only : true
+    },
+    "diving strike" : {
+        name : "Diving Strike",
+        source : ["DR", 0],
+        description : "Action; Dismount mid-air; attack with adv. + fall damage; Dex save (DC 15+) to avoid fall damage",
+        prereqeval : function(v) { return classes.known["dragon rider"].level >= 5; },
+        tier : 2,
+        points : 2,
+        action : ["action", ""],
+        dragon_form_only : true
+    },
+    "manifestation knight" : {
+        name : "Manifestation (Knight)",
+        source : ["DR", 0],
+        description : "Bonus action; Draconic claw; 1d10+Str slashing & 1d8 elemental; +1d8 per extra 2 points spent",
+        prereqeval : function(v) {
+		    return classes.known.dragonrider >=5 && classes.known.dragonrider.subclass.indexOf("knight") !== -1 ? true : "skip";
+	    },
+        tier : 2,
+        points : 2,
+        action : ["bonus action", ""],
+        additional_points : true
+    },
+    "manifestation outrider" : {
+        name : "Manifestation (Outrider)",
+        source : ["DR", 0],
+        description : "Bonus action; Manifest draconic wings; gain fly speed equal to Dragon's for 1 minute",
+        prereqeval : function(v) {
+		    return classes.known.dragonrider >=5 && classes.known.dragonrider.subclass.indexOf("outrider") !== -1 ? true : "skip";
+	    },
+        tier : 2,
+        points : 2,
+        action : ["bonus action", ""],
+    },
+    
+    // Tier 3 Maneuvers (5 Points)
+    "ravage" : {
+        name : "Ravage",
+        source : ["DR", 0],
+        description : "If Dragon's bite hits; target Str save or takes bite damage + 10d6 slashing damage",
+        prereqeval : function(v) { return classes.known["dragon rider"].level >= 10; },
+        tier : 3,
+        points : 5,
+        dragon_form_only : true
+    },
+    "recharge" : {
+        name : "Recharge",
+        source : ["DR", 0],
+        description : "Action; Funnel energy into Dragon to immediately recharge its breath attack",
+        prereqeval : function(v) { return classes.known["dragon rider"].level >= 10; },
+        tier : 3,
+        points : 5,
+        action : ["action", ""]
+    },
+    "unleash" : {
+        name : "Unleash",
+        source : ["DR", 0],
+        description : "Action; Dragon enters fury for 1 min; 2 attacks, extra damage die, breath recharge 5+ on d6, DC 12 check at end",
+        prereqeval : function(v) { return classes.known["dragon rider"].level >= 10; },
+        tier : 3,
+        points : 5,
+        action : ["action", ""]
+    }
+};
+
+AddDragonManeuverOptions();
