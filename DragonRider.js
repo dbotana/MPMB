@@ -8,7 +8,7 @@ It is recommended to enter the code in a fresh sheet before adding any other inf
 
 /* -INFORMATION-
 Subject: Class
-Effect: This script adds the "Dragon Rider" class and its subclasses
+Effect: This script adds the "Dragon Rider" class and its subclasses as described in Legendary Dragons - A Compendium of Epic Dragons by Aaron Hubrich et al. https://jetpack7.com/product/legendary-dragons/
 Code by: Rocky
 Date: 2025-05-22 (sheet v13)
 */
@@ -20,6 +20,7 @@ SourceList["DR"] = {
     name: "Dragon Rider",
     abbreviation: "DR",
     group: "Rocky's Homebrew",
+    url : "https://jetpack7.com/product/legendary-dragons/",
     date: "2025/05/22"
 };
 
