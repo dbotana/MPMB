@@ -23,7 +23,6 @@ SourceList["LL:AR"] = {
     abbreviationSpellsheet: "AR",
     group: "Rocky's Homebrew",
     source: "https://www.gmbinder.com/share/-M7iu19Af89SH2G_5RGa",
-    date: "2025/5/23"
 };
 
 ClassList["ranger(laserllama)"] = {
