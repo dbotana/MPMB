@@ -24,6 +24,34 @@ SourceList["LL:AR"] = {
     group: "Rocky's Homebrew",
     source: "https://www.gmbinder.com/share/-M7iu19Af89SH2G_5RGa",
 };
+[
+        // 1st Level
+        "absorb elements", "alarm", "animal friendship", "beast bond", "cure wounds", 
+        "detect magic", "detect poison and disease", "ensnaring strike", "entangle", 
+        "expeditious retreat", "fog cloud", "goodberry", "hail of thorns", "jump", 
+        "longstrider", "purify food and drink", "snare", "speak with animals", "zephyr strike",
+        
+        // 2nd Level  
+        "aid", "animal messenger", "barkskin", "beast sense", "continual flame", 
+        "cordon of arrows", "darkvision", "enhance ability", "find traps", "gust of wind", 
+        "healing spirit", "locate creature", "magic weapon", "pass without trace", 
+        "protection from poison", "restoration", "silence", "spike growth", "summon beast",
+        
+        // 3rd Level
+        "conjure animals", "conjure volley", "daylight", "dispel magic", "elemental weapon", 
+        "flame arrows", "lightning arrows", "meld into stone", "nondetection", "plant growth", 
+        "revivify", "speak with plants", "summon fey", "tiny hut", "water breathing", 
+        "water walk", "wind wall",
+        
+        // 4th Level
+        "conjure woodland beings", "death ward", "divination", "dominate beast", 
+        "freedom of movement", "grasping vine", "guardian of nature", "stoneskin", 
+        "summon elemental",
+        
+        // 5th Level
+        "awaken", "commune with nature", "contagion", "steel wind strike", "swift quiver", 
+        "tree stride", "wrath of nature"
+].forEach(function (s) { if (SpellsList[s] && SpellsList[s].classes && SpellsList[s].classes.indexOf("ranger(laserllama)") === -1) SpellsList[s].classes.push("ranger(laserllama)"); });
 
 ClassList["ranger(laserllama)"] = {
     regExpSearch: /^(?=.*ranger)(?=.*alt|alternate).*$/i,
@@ -49,29 +77,6 @@ ClassList["ranger(laserllama)"] = {
     spellcastingKnown: {
         prepared: true
     },
-    spellcastingTable: [
-        [0, 0, 0, 0, 0], // lvl 0
-        [0, 0, 0, 0, 0], // lvl 1
-        [2, 0, 0, 0, 0], // lvl 2
-        [3, 0, 0, 0, 0], // lvl 3
-        [3, 0, 0, 0, 0], // lvl 4
-        [4, 2, 0, 0, 0], // lvl 5
-        [4, 2, 0, 0, 0], // lvl 6
-        [4, 3, 0, 0, 0], // lvl 7
-        [4, 3, 0, 0, 0], // lvl 8
-        [4, 3, 2, 0, 0], // lvl 9
-        [4, 3, 2, 0, 0], // lvl 10
-        [4, 3, 3, 0, 0], // lvl 11
-        [4, 3, 3, 0, 0], // lvl 12
-        [4, 3, 3, 1, 0], // lvl 13
-        [4, 3, 3, 1, 0], // lvl 14
-        [4, 3, 3, 2, 0], // lvl 15
-        [4, 3, 3, 2, 0], // lvl 16
-        [4, 3, 3, 3, 1], // lvl 17
-        [4, 3, 3, 3, 1], // lvl 18
-        [4, 3, 3, 3, 2], // lvl 19
-        [4, 3, 3, 3, 2]  // lvl 20
-    ],
     features: {
         "fighting style": {
             name: "Fighting Style",
