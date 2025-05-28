@@ -19,8 +19,7 @@ SourceList["LLM"] = {
     name: "Llaserllama Magus",
     abbreviation: "LLM",
     group: "Llaserllama",
-    url: "https://www.gmbinder.com/share/-Mslo6ktmq1Yg5WTSjDQ",
-    date: "2024/11/14"
+    url: "https://www.gmbinder.com/share/-Mslo6ktmq1Yg5WTSjDQ"
 };
 // Define the Magus spell list
 [
