@@ -7,7 +7,7 @@ It is recommended to enter the code in a fresh sheet before adding any other inf
 */
 
 /* -INFORMATION-
-Subject: Class
+Subject: Subclass
 Effect: This script adds the "Gunsmith" Artificer subclass as described in The Sharpest Tools by /u/3athompson
 Code by: Rocky
 Date: 2025-05-23 (sheet v13)
@@ -22,8 +22,7 @@ SourceList["Gun"] = {
     abbreviation: "Gun",
     abbreviationSpellsheet: "GS",
     group: "Rocky's Homebrew",
-    source: "https://drive.google.com/file/d/1VHRDnNszuU_iz7AXWLhdvA8axy7GPOB6/view",
-    date: "2025/5/23"
+    url: "https://drive.google.com/file/d/1VHRDnNszuU_iz7AXWLhdvA8axy7GPOB6/view",
 };
 
 AddSubClass("artificer", "gunsmith", {
