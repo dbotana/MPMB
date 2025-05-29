@@ -74,9 +74,34 @@ ClassList["ranger(laserllama)"] = {
     subclasses: ["Ranger Conclave", []],
     attacks: [1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
     spellcastingFactor: 3,
-    spellcastingKnown: {
-        prepared: true
-    },
+	spellcastingFactorRoundupMulti: false,
+	spellcastingTable: [
+        [0, 0, 0, 0, 0, 0, 0, 0, 0], // lvl 0
+        [0, 0, 0, 0, 0, 0, 0, 0, 0], // lvl 1
+        [2, 0, 0, 0, 0, 0, 0, 0, 0], // lvl 2
+        [3, 0, 0, 0, 0, 0, 0, 0, 0], // lvl 3
+        [3, 0, 0, 0, 0, 0, 0, 0, 0], // lvl 4
+        [4, 2, 0, 0, 0, 0, 0, 0, 0], // lvl 5
+        [4, 2, 0, 0, 0, 0, 0, 0, 0], // lvl 6
+        [4, 3, 0, 0, 0, 0, 0, 0, 0], // lvl 7
+        [4, 3, 0, 0, 0, 0, 0, 0, 0], // lvl 8
+        [4, 3, 2, 0, 0, 0, 0, 0, 0], // lvl 9
+        [4, 3, 2, 0, 0, 0, 0, 0, 0], // lvl 10
+        [4, 3, 3, 0, 0, 0, 0, 0, 0], // lvl 11
+        [4, 3, 3, 0, 0, 0, 0, 0, 0], // lvl 12
+        [4, 3, 3, 1, 0, 0, 0, 0, 0], // lvl 13
+        [4, 3, 3, 1, 0, 0, 0, 0, 0], // lvl 14
+        [4, 3, 3, 2, 0, 0, 0, 0, 0], // lvl 15
+        [4, 3, 3, 2, 0, 0, 0, 0, 0], // lvl 16
+        [4, 3, 3, 3, 1, 0, 0, 0, 0], // lvl 17
+        [4, 3, 3, 3, 1, 0, 0, 0, 0], // lvl 18
+        [4, 3, 3, 3, 2, 0, 0, 0, 0], // lvl 19
+        [4, 3, 3, 3, 2, 0, 0, 0, 0]  // lvl 20
+    ],
+	spellcastingKnown: {
+		spells: "list",
+		prepared : true
+	},
     features: {
         "fighting style": {
             name: "Fighting Style",
