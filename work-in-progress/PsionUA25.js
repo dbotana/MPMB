@@ -304,21 +304,6 @@ AddSubClass("psion", "metamorph", {
     source: ["UA25P", 0],
     features: {
         "subclassfeature3": {
-            name: "Metamorph Spells",
-            source: ["UA25P", 0],
-            minlevel: 3,
-            description: desc([
-                "I always have certain spells prepared that don't count against spells prepared"
-            ]),
-            spellcastingBonus: [{
-                name: "Metamorph Spells",
-                spells: ["alter self", "cure wounds", "inflict wounds", "lesser restoration", "aura of vitality", "haste", "polymorph", "stoneskin", "contagion", "mass cure wounds"],
-                selection: ["alter self", "cure wounds", "inflict wounds", "lesser restoration", "aura of vitality", "haste", "polymorph", "stoneskin", "contagion", "mass cure wounds"],
-                times : 10,
-                prepared: true,
-            }]
-        },
-        "subclassfeature3.1": {
             name: "Organic Weapons",
             source: ["UA25P", 0],
             minlevel: 3,
@@ -326,6 +311,8 @@ AddSubClass("psion", "metamorph", {
                 "When I Attack or make opportunity attacks, I can reform my hand into an organic weapon: Bone Blade, Flesh Maul, or Viscera Launcher",
                 "I can use Int for attack and damage rolls, and choose psychic or normal damage type"
             ]),
+            spellcastingExtra: ["alter self", "cure wounds", "inflict wounds", "lesser restoration", "aura of vitality", "haste", "polymorph", "stoneskin", "contagion", "mass cure wounds"],
+            spellcastingExtraApplyNonConform: true,
             weaponOptions: [{
                 regExpSearch: /^(?=.*organic)(?=.*bone)(?=.*blade).*$/i,
                 name: "Organic Bone Blade",
@@ -424,15 +411,6 @@ AddSubClass("psion", "psi warper", {
     source: ["UA25P", 0],
     features: {
         "subclassfeature3": {
-            name: "Psi Warper Spells",
-            source: ["UA25P", 0],
-            minlevel: 3,
-            description: desc([
-                "I always have certain spells prepared that don't count against spells prepared"
-            ]),
-            spellcastingExtra: ["expeditious retreat", "feather fall", "misty step", "shatter", "blink", "haste", "banishment", "dimension door", "steel wind strike", "teleportation circle"]
-        },
-        "subclassfeature3.1": {
             name: "Teleportation",
             source: ["UA25P", 0],
             minlevel: 3,
@@ -440,6 +418,8 @@ AddSubClass("psion", "psi warper", {
                 "I can cast Misty Step once without expending a spell slot per long rest",
                 "I can restore this use by expending 1 Psionic Energy Die (no action required)"
             ]),
+            spellcastingExtra: ["expeditious retreat", "feather fall", "misty step", "shatter", "blink", "haste", "banishment", "dimension door", "steel wind strike", "teleportation circle"],
+            spellcastingExtraApplyNonConform: true,
             spellcastingBonus: {
                 name: "Teleportation",
                 spells: ["misty step"],
@@ -506,15 +486,6 @@ AddSubClass("psion", "psykinetic", {
     source: ["UA25P", 0],
     features: {
         "subclassfeature3": {
-            name: "Psykinetic Spells",
-            source: ["UA25P", 0],
-            minlevel: 3,
-            description: desc([
-                "I always have certain spells prepared that don't count against spells prepared"
-            ]),
-            spellcastingExtra: ["cloud of daggers", "levitate", "shield", "thunderwave", "slow", "telekinetic crush", "otiluke's resilient sphere", "stone shape", "telekinesis", "wall of force"]
-        },
-        "subclassfeature3.1": {
             name: "Telekinetic Techniques",
             source: ["UA25P", 0],
             minlevel: 3,
@@ -523,7 +494,9 @@ AddSubClass("psion", "psykinetic", {
                 "Boost: Target's speed increases by 10 ft until start of my next turn",
                 "Disorient: Target can't make opportunity attacks until start of its next turn",
                 "Telekinetic Bolt: If target fails save, takes force damage = die roll"
-            ])
+            ]),
+            spellcastingExtra: ["cloud of daggers", "levitate", "shield", "thunderwave", "slow", "telekinetic crush", "otiluke's resilient sphere", "stone shape", "telekinesis", "wall of force"],
+            spellcastingExtraApplyNonConform: true
         },
         "subclassfeature6": {
             name: "Empowered Attack Mode",
@@ -574,15 +547,6 @@ AddSubClass("psion", "telepath", {
     source: ["UA25P", 0],
     features: {
         "subclassfeature3": {
-            name: "Telepath Spells",
-            source: ["UA25P", 0],
-            minlevel: 3,
-            description: desc([
-                "I always have certain spells prepared that don't count against spells prepared"
-            ]),
-            spellcastingExtra: ["bane", "command", "detect thoughts", "mind spike", "counterspell", "speak with plants", "compulsion", "confusion", "awaken", "modify memory"]
-        },
-        "subclassfeature3.1": {
             name: "Mind Infiltrator",
             source: ["UA25P", 0],
             minlevel: 3,
@@ -590,9 +554,11 @@ AddSubClass("psion", "telepath", {
                 "When I cast Detect Thoughts, I can expend 2 Psionic Energy Dice:",
                 "Spell requires no components or concentration",
                 "Target doesn't know I'm probing if it fails the Wisdom save"
-            ])
+            ]),
+            spellcastingExtra: ["bane", "command", "detect thoughts", "mind spike", "counterspell", "speak with plants", "compulsion", "confusion", "awaken", "modify memory"],
+            spellcastingExtraApplyNonConform: true,
         },
-        "subclassfeature3.2": {
+        "subclassfeature3.1": {
             name: "Telepathic Hub",
             source: ["UA25P", 0],
             minlevel: 3,
