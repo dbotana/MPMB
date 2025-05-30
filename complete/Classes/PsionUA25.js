@@ -3,7 +3,7 @@ This file adds the Psion class from Unearthed Arcana 2025 to "MPMB's Character R
 Import this file using the "Add Extra Materials" bookmark.
 
 Subject: Class
-Effect: This script adds the "Psion" class and its subclasses from UA 2025
+Effect: This script adds the "Psion" class and its subclasses from UA 2025 https://media.dndbeyond.com/compendium-images/ua/the-psion/mXCPWlh2yy5tBKqP/UA2025-ThePsion.pdf
 Code by: Rocky
 Date: 2025-05-30 (sheet v13)
 */
@@ -17,7 +17,7 @@ SourceList["UA25P"] = {
     abbreviationSpellsheet: "P",
     group: "Unearthed Arcana",
     date: "2025/05/30",
-    url: "https://media.wizards.com/2025/dnd/downloads/UA25P_Psion.pdf",
+    url: "https://media.dndbeyond.com/compendium-images/ua/the-psion/mXCPWlh2yy5tBKqP/UA2025-ThePsion.pdf",
 };
 
 // Add spells to Psion spell list
