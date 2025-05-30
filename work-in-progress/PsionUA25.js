@@ -312,7 +312,7 @@ AddSubClass("psion", "metamorph", {
                 "I can use Int for attack and damage rolls, and choose psychic or normal damage type"
             ]),
             spellcastingExtra: ["alter self", "cure wounds", "inflict wounds", "lesser restoration", "aura of vitality", "haste", "polymorph", "stoneskin", "contagion", "mass cure wounds"],
-            spellcastingExtraApplyNonConform: true,
+            spellcastingExtraApplyNonconform: true,
             weaponOptions: [{
                 regExpSearch: /^(?=.*organic)(?=.*bone)(?=.*blade).*$/i,
                 name: "Organic Bone Blade",
@@ -419,7 +419,7 @@ AddSubClass("psion", "psi warper", {
                 "I can restore this use by expending 1 Psionic Energy Die (no action required)"
             ]),
             spellcastingExtra: ["expeditious retreat", "feather fall", "misty step", "shatter", "blink", "haste", "banishment", "dimension door", "steel wind strike", "teleportation circle"],
-            spellcastingExtraApplyNonConform: true,
+            spellcastingExtraApplyNonconform: true,
             spellcastingBonus: {
                 name: "Teleportation",
                 spells: ["misty step"],
@@ -496,7 +496,7 @@ AddSubClass("psion", "psykinetic", {
                 "Telekinetic Bolt: If target fails save, takes force damage = die roll"
             ]),
             spellcastingExtra: ["cloud of daggers", "levitate", "shield", "thunderwave", "slow", "telekinetic crush", "otiluke's resilient sphere", "stone shape", "telekinesis", "wall of force"],
-            spellcastingExtraApplyNonConform: true
+            spellcastingExtraApplyNonconform: true
         },
         "subclassfeature6": {
             name: "Empowered Attack Mode",
@@ -556,7 +556,7 @@ AddSubClass("psion", "telepath", {
                 "Target doesn't know I'm probing if it fails the Wisdom save"
             ]),
             spellcastingExtra: ["bane", "command", "detect thoughts", "mind spike", "counterspell", "speak with plants", "compulsion", "confusion", "awaken", "modify memory"],
-            spellcastingExtraApplyNonConform: true,
+            spellcastingExtraApplyNonconform: true,
         },
         "subclassfeature3.1": {
             name: "Telepathic Hub",

@@ -8,7 +8,7 @@ It is recommended to enter the code in a fresh sheet before adding any other inf
 
 /* -INFORMATION-
 Subject: Class
-Effect: This script adds Alternative Ranger class as described by LaserLlama https://www.gmbinder.com/share/-M7iu19Af89SH2G_5RGa
+Effect: This script adds version 4.3.0 of Alternative Ranger class as described by LaserLlama https://www.gmbinder.com/share/-M7iu19Af89SH2G_5RGa
 Code by: Rocky
 Date: 2025-05-28 (sheet v13)
 */
@@ -20,7 +20,7 @@ SourceList["LL:AR"] = {
     name: "LaserLlama - Alternate Ranger",
     abbreviation: "LL:AR",
     abbreviationSpellsheet: "AR",
-    group: "Rocky's Homebrew",
+    group: "GM Binder",
     source: "https://www.gmbinder.com/share/-M7iu19Af89SH2G_5RGa",
 };
 [
