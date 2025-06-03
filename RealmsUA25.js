@@ -80,11 +80,10 @@ AddSubClass("bard", "college of the moon", {
     }
 }),
 
-AddSubClass("fighter", "knightly envoy", {
-    regExpSearch: /^(?=.*knightly)(?=.*envoy).*$/i,
-    subname: "Knightly Envoy",
+AddSubClass("fighter", "purple dragon knight", {
+    regExpSearch: /^(?=.*purple)(?=.*dragon)(?=.*knight).*$/i,
+    subname: "Purple Dragon Knight",
     source: [["U25", 0]],
-    fullname: "Knightly Envoy",
     features: {
         "subclassfeature3": {
             name: "Knightly Envoy",
