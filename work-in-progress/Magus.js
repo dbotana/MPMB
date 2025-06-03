@@ -19,8 +19,7 @@ SourceList["LLM"] = {
     name: "Llaserllama Magus",
     abbreviation: "LLM",
     group: "Llaserllama",
-    url: "https://www.gmbinder.com/share/-Mslo6ktmq1Yg5WTSjDQ",
-    date: "2024/11/14"
+    url: "https://www.gmbinder.com/share/-Mslo6ktmq1Yg5WTSjDQ"
 };
 // Define the Magus spell list
 [
@@ -109,7 +108,7 @@ ClassList["magus"] = {
             },
             "archery": FightingStyles.archery,
 
-            "classical swordplay": {
+            "classical swordplay": { 
                 name: "Classical Swordplay Fighting Style",
                 description: "\n   +2 to attack rolls and +1 to Armor Class when wielding a finesse weapon in one hand and no" +
                     "\n   other weapons, and not using heavy armor or a shield.",
@@ -143,27 +142,43 @@ ClassList["magus"] = {
                 action: [["reaction", "Protect (Protector)"]],
             },
 
-            "shield warrior": { //need stop eval for any weapon other than shield
-                name: "Shield Warrior Fighting Style",
-                description: "\n   You gain proficiency with shields as a martial weapon, and on hit your shield deals 2d4" +
-                    "\n   bludgeoning damage. If you are wielding a shield and nothing else, you gain +1 bonus to" +
-                    "\n   attack rolls with your shield and to you Armor Class",
-                weaponOptions: [{
-                    regExpSearch: /^(?=.*shield).*$/i,
-                    name: "Shield (Shield Warrior)",
-                    source: [["LLM", 4]],
-                    ability: 1,
-                    type: 'AlwaysProf',
-                    damage: ['2', '4', 'bludgeoning'],
-                    range: "Melee",
-                    description: "2d4 bludgeoning dmg; +1 to attack and AC when only weapon",
-                    abilitytodamage: true,
-                    isNotWeapon: true,
-                    modifiers: [1,""],
-                    selectNow: true
-                }],
-                extraAC: [{ mod: 1, text: "While wielding a shield and no other weapons" }]
-            },
+            "shieldwarrior" : { // From CalypsoMoonlace (Selena)
+		name : "Shield Warrior Fighting Style",
+		description : desc(["I gain proficiency with shields as martial melee weapon, which deal 2d4 bludg. damage on hit",
+						"When I'm wielding a shield and nothing else, +1 to AC and attack rolls with that shield"]),
+		extraAC : {
+			name : "Shield Warrior Fighting Style",
+			mod : 1,
+			text : "I gain a +1 bonus to AC while wielding a shield and nothing else.",
+			stopeval : function (v) { return !v.usingShield; }
+		},
+		weaponOptions : {
+			regExpSearch : /(shield|bash)/i,
+			name : "Shield Melee Attack",
+			ability : 1,
+			type : "shield melee attack",
+			damage : [2, 4, "bludgeoning"],
+			range : "Melee",
+			list: "melee",
+			abilitytodamage : true
+		},
+		weaponsAdd : ["Shield Melee Attack"],
+		weaponProfs : [false, false, ["shield melee attack"]],
+		calcChanges : {
+			atkCalc : [
+				function (fields, v, output) {
+					for (var i = 1; i <= FieldNumbers.actions; i++) {
+						if ((/off.hand.attack/i).test(What('Bonus Action ' + i))) return;
+					}
+
+					if ((/shield melee attack/i).test(v.baseWeaponName)) {
+						output.extraHit += 1;
+					}
+				},
+				"When wielding a shield and nothing else, my shield attacks get a +1 bonus on the To Hit. This condition will always be false if the bonus action 'Off-hand Attack' exists."
+			]
+		}
+	    },
 
             "thrown weapon": ClassList.fighter.features["fighting style"]["thrown weapon fighting"],
 
@@ -273,12 +288,22 @@ ClassList["magus"] = {
             })
         },
 
-        "prismatic strikes": {// need to add code for "Arcane Weapons"; if weapon has arcane in the name...etc....
+        "prismatic strikes": {
             name: "Prismatic Strikes",
             source: ["LLM", 6],
             minlevel: 11,
             description: "\n   Your attacks with Arcane Armory weapons deal a bonus 1d8 damage on hit." +
-                "\n   This bonus damage must be a type dealt by a Magus spell you know, chosen on hit."
+                "\n   This bonus damage must be a type dealt by a Magus spell you know, chosen on hit.",
+            calcChanges : {
+                atkCalc : [
+                    function (fields, v, output) {
+                        if (classes.known.magus && classes.known.magus.level && /\barcane armory\b/i.test(v.WeaponTextName)) {
+                            fields.Description += "1d8 spell damage (choose on hit); ";
+                        }
+                    },
+                    "If I include the phrase 'Arcane Armory' in a melee weapon's name that uses Strength or Dexterity, the calculation will add my Rage's bonus damage to it. Be aware that if the weapon is used to make a ranged attack, the rage bonus damage shouldn't be added (eg when using a thrown weapon)."
+                ]
+            },
         },
 
         "superior spellsunder": {
@@ -296,22 +321,21 @@ ClassList["magus"] = {
 AddSubClass("magus", "order of arcane archers", {
     regExpSearch: /arcane archer/i,
     subname: "Order of Arcane Archers",
-    source: ["MGH", 0],
+    source: ["LLM", 0],
 
     features: {
         "subclassfeature3": {
             name: "Arcane Quiver",
-            source: ["MGH", 0],
+            source: ["LLM", 0],
             minlevel: 3,
             description: "\n   Add ranged weapons and quivers with up to 20 pieces of ammo each to your Arcane Armory." +
                 "\n   Use Spellstrike with ranged weapons; AOE spells affect only your target.",
             spellcastingExtra: ["ensnaring strike", "hail of thorns", "acid arrow", "cordon of arrows", "conjure volley", "lightning arrow", "arcane eye", "elemental bane", "scrying", "swift quiver"],
-
         },
 
         "subclassfeature7": {
             name: "Enchanted Shot",
-            source: ["MGH", 0],
+            source: ["LLM", 0],
             minlevel: 7,
             description: "\n   When you miss with a ranged Arcane Armory weapon attack, use a reaction to reroll against a different target within 60 feet.",
             action: [["reaction", "(Reroll)"]]
@@ -319,7 +343,7 @@ AddSubClass("magus", "order of arcane archers", {
 
         "subclassfeature15": {
             name: "Ranged Transposition",
-            source: ["MGH", 0],
+            source: ["LLM", 0],
             minlevel: 15,
             description: "\n   Enchant ammo with conjuration magic; fire it and teleport to an unoccupied space within 5 feet of where it lands." +
                 "\n   Once per short or long rest; expend a spell slot to use again if needed.",
@@ -330,7 +354,7 @@ AddSubClass("magus", "order of arcane archers", {
 
         "subclassfeature20": {
             name: "Elite Archer",
-            source: ["MGH", 0],
+            source: ["LLM", 0],
             minlevel: 20,
             description: "\n   As a bonus action, enter a heightened state for 1 minute. Ranged attacks deal force damage." +
                 "\n   Use Ethereal Jaunt after each ranged attack. Expend spell slot for extra force damage (2d4 per slot level)." +
@@ -345,12 +369,12 @@ AddSubClass("magus", "order of arcane archers", {
 AddSubClass("magus", "order of blade dancers", {
     regExpSearch: /blade dancer/i,
     subname: "Order of Blade Dancers",
-    source: ["MGH", 0],
+    source: ["LLM", 0],
 
     features: {
         "subclassfeature3": {
             name: "Blade Dance",
-            source: ["MGH", 0],
+            source: ["LLM", 0],
             minlevel: 3,
             description: desc([
                 "You gain proficiency in Performance and can use Strength or Dexterity for Performance checks",
@@ -371,7 +395,7 @@ AddSubClass("magus", "order of blade dancers", {
 
         "subclassfeature7": {
             name: "Fluid Steps",
-            source: ["MGH", 0],
+            source: ["LLM", 0],
             minlevel: 7,
             description: desc([
                 "Gain proficiency in Dexterity saving throws and add proficiency bonus to initiative rolls",
@@ -383,7 +407,7 @@ AddSubClass("magus", "order of blade dancers", {
 
         "subclassfeature15": {
             name: "Deadly Dance",
-            source: ["MGH", 0],
+            source: ["LLM", 0],
             minlevel: 15,
             description: desc([
                 "While in Blade Dance, gain additional benefits:",
@@ -395,7 +419,7 @@ AddSubClass("magus", "order of blade dancers", {
 
         "subclassfeature20": {
             name: "Master of Blades",
-            source: ["MGH", 0],
+            source: ["LLM", 0],
             minlevel: 20,
             description: desc([
                 "Always considered under effects of Blade Dance unless wearing heavy armor or wielding a heavy weapon",
@@ -407,11 +431,11 @@ AddSubClass("magus", "order of blade dancers", {
 AddSubClass("magus", "order of dragon knights", {
     regExpSearch: /dragon knight/i,
     subname: "Order of Dragon Knights",
-    source: ["MGH", 0],
+    source: ["LLM", 0],
     features: {
         "subclassfeature3": {
             name: "Draconic Companion",
-            source: ["MGH", 0],
+            source: ["LLM", 0],
             minlevel: 3,
             description: desc([
                 "As an action, summon your Draconic Companion to an unoccupied space within 30 feet",
@@ -429,7 +453,7 @@ AddSubClass("magus", "order of dragon knights", {
             creaturesAdd: [["Draconic Companion", true]],
             creatureOptions: [{
                 name: "Draconic Companion",
-                source: ["MGH", 0],
+                source: ["LLM", 0],
                 size: 3, // Small
                 type: "Dragon",
                 alignment: "Lawful",
@@ -462,7 +486,7 @@ AddSubClass("magus", "order of dragon knights", {
 
         "subclassfeature3.1": {
             name: "Wyrmsoul",
-            source: ["MGH", 0],
+            source: ["LLM", 0],
             minlevel: 3,
             description: desc([
                 "Learn Draconic language; spells can deal your Companion's Essence type damage"
@@ -473,7 +497,7 @@ AddSubClass("magus", "order of dragon knights", {
 
         "subclassfeature7": {
             name: "Greater Companion",
-            source: ["MGH", 0],
+            source: ["LLM", 0],
             minlevel: 7,
             description: desc([
                 "Companion becomes Medium and can bear you as a rider if you are Medium or smaller",
@@ -483,7 +507,7 @@ AddSubClass("magus", "order of dragon knights", {
 
         "subclassfeature15": {
             name: "Elemental Breath",
-            source: ["MGH", 0],
+            source: ["LLM", 0],
             minlevel: 15,
             description: desc([
                 "\n Companion can exhale a cone of elemental breath (30 ft.) as an action",
@@ -494,7 +518,7 @@ AddSubClass("magus", "order of dragon knights", {
 
         "subclassfeature20": {
             name: "Mythic Companion",
-            source: ["MGH", 0],
+            source: ["LLM", 0],
             minlevel: 20,
             description: desc([
                 "Companion can change size (Small, Medium, Large); if Large, its flying speed isn't halved while bearing you",
@@ -506,11 +530,11 @@ AddSubClass("magus", "order of dragon knights", {
 AddSubClass("magus", "order of spellbreakers", {
     regExpSearch: /spellbreaker/i,
     subname: "Order of Spellbreakers",
-    source: ["MGH", 0],
+    source: ["LLM", 0],
     features: {
         "subclassfeature3": {
             name: "Baleful Mark",
-            source: ["MGH", 0],
+            source: ["LLM", 0],
             minlevel: 3,
             description: desc([
                 "As a bonus action, place a Baleful Mark on a creature within 60 feet",
@@ -526,7 +550,7 @@ AddSubClass("magus", "order of spellbreakers", {
 
         "subclassfeature3.1": {
             name: "Spellbreaker Spells",
-            source: ["MGH", 0],
+            source: ["LLM", 0],
             minlevel: 3,
             description: "\n   You learn specific spells at certain levels that do not count against your Spells Known.",
             spellcastingExtra: ["bane", "detect evil and good", "blindness/deafness", "silence", "counterspell", "magic circle", "banishment", "resilient sphere", "dispel evil and good", "planar binding"],
@@ -534,7 +558,7 @@ AddSubClass("magus", "order of spellbreakers", {
 
         "subclassfeature7": {
             name: "Crippling Mark",
-            source: ["MGH", 0],
+            source: ["LLM", 0],
             minlevel: 7,
             description: desc([
                 "Use your reaction to end your Baleful Mark when the marked creature makes a saving throw",
@@ -545,7 +569,7 @@ AddSubClass("magus", "order of spellbreakers", {
 
         "subclassfeature15": {
             name: "Reflective Spellsunder",
-            source: ["MGH", 0],
+            source: ["LLM", 0],
             minlevel: 15,
             description: desc([
                 "When you use Spellsunder, you can choose to reflect the spell back at the caster",
@@ -555,7 +579,7 @@ AddSubClass("magus", "order of spellbreakers", {
 
         "subclassfeature20": {
             name: "Master Spellbreaker",
-            source: ["MGH", 0],
+            source: ["LLM", 0],
             minlevel: 20,
             description: desc([
                 "You can mark a creature you can see with Baleful Mark without using an action",
@@ -568,12 +592,12 @@ AddSubClass("magus", "order of spellbreakers", {
 AddSubClass("magus", "order of warders", {
     regExpSearch: /warder/i,
     subname: "Order of Warders",
-    source: ["MGH", 0],
+    source: ["LLM", 0],
 
     features: {
         "subclassfeature3": {
             name: "Warder Spells",
-            source: ["MGH", 0],
+            source: ["LLM", 0],
             minlevel: 3,
             description: "\n   You learn specific spells at certain levels that do not count against your Spells Known.",
             spellcastingExtra: ["compelled duel", "sanctuary", "aid", "warding bond", "beacon of hope", "life transference", "faithful hound", "death ward", "antilife shell", "circle of power"]
@@ -581,7 +605,7 @@ AddSubClass("magus", "order of warders", {
 
         "subclassfeature3.1": {
             name: "Warder’s Bond",
-            source: ["MGH", 0],
+            source: ["LLM", 0],
             minlevel: 3,
             description: desc([
                 "Gain proficiency in heavy armor",
@@ -595,7 +619,7 @@ AddSubClass("magus", "order of warders", {
 
         "subclassfeature7": {
             name: "Arcane Aegis",
-            source: ["MGH", 0],
+            source: ["LLM", 0],
             minlevel: 7,
             description: desc([
                 "Expend a spell slot to reduce damage taken by your Ward by 2d8 per spell slot level",
@@ -605,7 +629,7 @@ AddSubClass("magus", "order of warders", {
 
         "subclassfeature15": {
             name: "Bond Perfected",
-            source: ["MGH", 0],
+            source: ["LLM", 0],
             minlevel: 15,
             description: desc([
                 "You and your Ward are immune to charmed and frightened conditions when within 10 feet of each other",
@@ -615,7 +639,7 @@ AddSubClass("magus", "order of warders", {
 
         "subclassfeature20": {
             name: "High Warder",
-            source: ["MGH", 0],
+            source: ["LLM", 0],
             minlevel: 20,
             description: desc([
                 "Bond with up to two willing creatures as Wards at the end of each long rest",
