@@ -98,7 +98,7 @@ ClassList["psion"] = {
     spellcastingFactor: 1,
     spellcastingFactorRoundupMulti: false,
     spellcastingKnown: {
-        cantrips: [2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
+        cantrips: [2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4],
         spells: [4, 5, 6, 7, 9, 10, 11, 12, 14, 15, 16, 16, 17, 17, 18, 18, 19, 20, 21, 22],
     },
     features: {
@@ -581,8 +581,17 @@ AddSubClass("psion", "telepath", {
             name: "Potent Thoughts",
             source: ["UA25P", 0],
             minlevel: 6,
-            description: "I add my Intelligence modifier to damage from psion cantrips",
-            calcChanges : GenericClassFeatures["potent spellcasting"].calcChanges
+            description: desc(["I add my Intelligence modifier to damage from psion cantrips"]),
+            calcChanges: {
+                atkCalc: [
+                    function (fields, v, output) {
+                        if (v.thisWeapon[3] && /\bpsion\b/.test(v.thisWeapon[4]) && SpellsList[v.thisWeapon[3]].level === 0 && /\d/.test(fields.Damage_Die)) {
+                            output.extraDmg += What('Int Mod');
+                        };
+                    },
+                    "My Psion cantrips get my Intelligence modifier added to their damage."
+                ],
+            }
         },
         "subclassfeature10": {
             name: "Telepathic Bolstering",
