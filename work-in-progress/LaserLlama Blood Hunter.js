@@ -505,107 +505,101 @@ ClassList["blood hunter(laserllama)"] = {
                 usages: 1,
                 recovery: "short rest"
             }
-        }
-
-    },
-    "crimson offering": {
-        name: "Crimson Offering",
-        source: ["LL:BH", 0],
-        minlevel: 2,
-        description: desc([
-            "As a bonus action, I can make a Vital Sacrifice to empower one weapon for 1 hour",
-            "Choose acid, cold, fire, lightning, or poison",
-            "Attacks with that weapon deal bonus damage of that type equal to one Rite Die"
-        ]),
-        action: ["bonus action", " (empower weapon)"]
-    },
-    "subclassfeature3": {
-        name: "Occult Order",
-        source: ["LL:BH", 0],
-        minlevel: 3,
-        description: desc("I choose an Occult Order that shapes my blood magic abilities")
-    },
-    "extra attack": {
-        name: "Extra Attack",
-        source: ["LL:BH", 0],
-        minlevel: 5,
-        description: desc("I can attack twice when I take the Attack action on my turn")
-    },
-    "grim psychometry": {
-        name: "Grim Psychometry",
-        source: ["LL:BH", 0],
-        minlevel: 5,
-        description: desc([
-            "I can use alchemist's supplies to cast identify as a ritual (also reveals curses)",
-            "At 9th level: can cast legend lore by making Vital Sacrifice, targeting objects/creatures/locations with evil/violent/cursed history"
-        ]),
-        spellcastingBonus: {
+        },
+        "crimson offering": {
+            name: "Crimson Offering",
+            source: ["LL:BH", 0],
+            minlevel: 2,
+            description: desc([
+                "As a bonus action, I can make a Vital Sacrifice to empower one weapon for 1 hour",
+                "Choose acid, cold, fire, lightning, or poison",
+                "Attacks with that weapon deal bonus damage of that type equal to one Rite Die"
+            ]),
+            action: ["bonus action", " (empower weapon)"]
+        },
+        "extra attack": {
+            name: "Extra Attack",
+            source: ["LL:BH", 0],
+            minlevel: 5,
+            description: desc("I can attack twice when I take the Attack action on my turn"),
+            action: [["attack", " (2 attacks)"]]
+        },
+        "grim psychometry": {
             name: "Grim Psychometry",
-            spells: ["identify"],
-            selection: ["identify"],
-            firstCol: "(R)"
+            source: ["LL:BH", 0],
+            minlevel: 5,
+            description: desc([
+                "I can use alchemist's supplies to cast identify as a ritual (also reveals curses)",
+                "At 9th level: can cast legend lore by making Vital Sacrifice, targeting objects/creatures/locations with evil/violent/cursed history"
+            ]),
+            spellcastingBonus: {
+                name: "Grim Psychometry",
+                spells: ["identify"],
+                selection: ["identify"],
+                firstCol: "(R)"
+            }
+        },
+        "crimson brand": {
+            name: "Crimson Brand",
+            source: ["LL:BH", 0],
+            minlevel: 6,
+            description: desc([
+                "I can make a Crimson Offering once per short/long rest without Vital Sacrifice",
+                "When I damage a creature with Crimson Offering weapon attack, I can Brand it:",
+                "While Branded: I know its direction, when it damages me/ally within 15 ft it takes Rite Die damage",
+                "Brand lasts until creature dies, I Brand another, or remove curse is cast"
+            ]),
+            usages: 1,
+            recovery: "short rest"
+        },
+        "dark augmentation": {
+            name: "Dark Augmentation",
+            source: ["LL:BH", 0],
+            minlevel: 10,
+            description: desc("On Strength, Dexterity, or Constitution checks/saves, I add one Rite Die to the roll")
+        },
+        "improved crimson offering": {
+            name: "Improved Crimson Offering",
+            source: ["LL:BH", 0],
+            minlevel: 11,
+            description: desc("Crimson Offering bonus damage can also be necrotic, psychic, or thunder")
+        },
+        "vital control": {
+            name: "Vital Control",
+            source: ["LL:BH", 0],
+            minlevel: 11,
+            description: desc([
+                "When making Vital Sacrifice, I roll Rite Die twice and choose which result to use",
+                "Once per long rest, I can use one Blood Rite without making Vital Sacrifice"
+            ]),
+            usages: 1,
+            recovery: "long rest"
+        },
+        "crimson anchor": {
+            name: "Crimson Anchor",
+            source: ["LL:BH", 0],
+            minlevel: 14,
+            description: desc([
+                "Branded creature must make Charisma save to teleport or leave plane",
+                "On failure: ability fails and takes 4 Rite Dice Crimson Offering damage",
+                "Crimson Brand damage increases to 2 Rite Dice when Branded target damages me/ally"
+            ])
+        },
+        "hardened soul": {
+            name: "Hardened Soul",
+            source: ["LL:BH", 0],
+            minlevel: 15,
+            description: desc("On Intelligence, Wisdom, or Charisma saves, I add one Rite Die to the roll")
+        },
+        "sanguine mastery": {
+            name: "Sanguine Mastery",
+            source: ["LL:BH", 0],
+            minlevel: 20,
+            description: desc([
+                "When rolling Rite Die for Blood Rites/abilities, I roll twice and choose which result",
+                "When making Vital Sacrifice, I subtract Con modifier (min 1) from the roll (min 1 damage)"
+            ])
         }
-    },
-    "crimson brand": {
-        name: "Crimson Brand",
-        source: ["LL:BH", 0],
-        minlevel: 6,
-        description: desc([
-            "I can make a Crimson Offering once per short/long rest without Vital Sacrifice",
-            "When I damage a creature with Crimson Offering weapon attack, I can Brand it:",
-            "While Branded: I know its direction, when it damages me/ally within 15 ft it takes Rite Die damage",
-            "Brand lasts until creature dies, I Brand another, or remove curse is cast"
-        ]),
-        usages: 1,
-        recovery: "short rest"
-    },
-    "dark augmentation": {
-        name: "Dark Augmentation",
-        source: ["LL:BH", 0],
-        minlevel: 10,
-        description: desc("On Strength, Dexterity, or Constitution checks/saves, I add one Rite Die to the roll")
-    },
-    "improved crimson offering": {
-        name: "Improved Crimson Offering",
-        source: ["LL:BH", 0],
-        minlevel: 11,
-        description: desc("Crimson Offering bonus damage can also be necrotic, psychic, or thunder")
-    },
-    "vital control": {
-        name: "Vital Control",
-        source: ["LL:BH", 0],
-        minlevel: 11,
-        description: desc([
-            "When making Vital Sacrifice, I roll Rite Die twice and choose which result to use",
-            "Once per long rest, I can use one Blood Rite without making Vital Sacrifice"
-        ]),
-        usages: 1,
-        recovery: "long rest"
-    },
-    "crimson anchor": {
-        name: "Crimson Anchor",
-        source: ["LL:BH", 0],
-        minlevel: 14,
-        description: desc([
-            "Branded creature must make Charisma save to teleport or leave plane",
-            "On failure: ability fails and takes 4 Rite Dice Crimson Offering damage",
-            "Crimson Brand damage increases to 2 Rite Dice when Branded target damages me/ally"
-        ])
-    },
-    "hardened soul": {
-        name: "Hardened Soul",
-        source: ["LL:BH", 0],
-        minlevel: 15,
-        description: desc("On Intelligence, Wisdom, or Charisma saves, I add one Rite Die to the roll")
-    },
-    "sanguine mastery": {
-        name: "Sanguine Mastery",
-        source: ["LL:BH", 0],
-        minlevel: 20,
-        description: desc([
-            "When rolling Rite Die for Blood Rites/abilities, I roll twice and choose which result",
-            "When making Vital Sacrifice, I subtract Con modifier (min 1) from the roll (min 1 damage)"
-        ])
     }
 };
 
