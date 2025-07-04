@@ -19,7 +19,7 @@ RequiredSheetVersion("13.2.0");
 SourceList["U25"] = {
     name: "UA Realms",
     abbreviation: "UAR",
-    group: "Rocky's Homebrew",
+    group: "Unearthed Arcana",
     url: "https://media.dndbeyond.com/compendium-images/ua/forgotten-realms-subclasses/OXcW3UjTCurUcQy7/UA2025-RealmsSubclasses.pdf",
     date: "2025/02/4"
 };
@@ -77,11 +77,6 @@ AddSubClass("bard", "college of the moon", {
     }
 });
 
-<<<<<<< HEAD:RealmsUA25.js
-AddSubClass("fighter", "purple dragon knight", {
-    regExpSearch: /^(?=.*purple)(?=.*dragon)(?=.*knight).*$/i,
-    subname: "Purple Dragon Knight",
-=======
 AddSubClass("cleric", "knowledge domain", {
     regExpSearch : /^(?=.*(cleric|priest|clergy|acolyte))(?=.*(knowledge|wisdom|learning)).*$/i,
     subname : "UA Knowledge Domain",
@@ -132,7 +127,6 @@ AddSubClass("cleric", "knowledge domain", {
 AddSubClass("fighter", "purple dragon knight", {
     regExpSearch: /^(?=.*purple)(?=.*dragon)(?=.*knight).*$/i,
     subname: "UA Purple Dragon Knight",
->>>>>>> adea8200dec670ce4bfeba6b8ebf03242753a2f3:complete/UA/RealmsUA25.js
     source: [["U25", 0]],
     features: {
         "subclassfeature3": {
