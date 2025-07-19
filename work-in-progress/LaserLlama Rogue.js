@@ -8,14 +8,16 @@ Effect: Implements the Alternate Rogue class v2.2.1 by LaserLlama (https://www.g
 Code by: [Your Name]
 Date: 2025-07-19
 */
+// to do: fix prereq evals for skills. fix prereqs for class level                 
+// example: prereqeval: function (v) { return v.skillProfs.indexOf("Arcana") == -1; },
 
 var iFileName = "LaserLlama Alternate Rogue.js";
 RequiredSheetVersion(13);
 
-SourceList["LL:AROGUE"] = {
+SourceList["LL:AR"] = {
     name: "LaserLlama - Alternate Rogue",
-    abbreviation: "LL:AROGUE",
-    abbreviationSpellsheet: "AROGUE",
+    abbreviation: "LL:AR",
+    abbreviationSpellsheet: "AR",
     group: "LaserLlama",
     date: "2025/03/16",
     source: "https://www.gmbinder.com/share/-N8o6KduyOA2qhUGBQqA"
