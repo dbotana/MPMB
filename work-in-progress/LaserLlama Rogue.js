@@ -25,8 +25,8 @@ SourceList["LL:AR"] = {
 
 ClassList["rogue(laserllama)"] = {
     regExpSearch: /^(?=.*rogue)(?=.*alt|alternate).*$/i,
-    name: "Rogue (Alternate)",
-    source: ["LL:AROGUE", 0],
+    name: "Rogue(laserllama)",
+    source: ["LL:AR", 0],
     primaryAbility: "Dexterity",
     die: 8,
     improvements: [0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 5],
@@ -36,23 +36,13 @@ ClassList["rogue(laserllama)"] = {
     weaponProfs: { primary: [true, true] },
     toolProfs: { primary: [["One tool set", 1]] },
     equipment: "Rogue starting equipment:\n- (a) a rapier, (b) a scimitar, or (c) a shortsword\n- (a) a shortbow and 20 arrows, or (b) a shortsword\n- (a) a burglar's pack or (b) a dungeoneer's pack\n- Leather armor, two daggers, and a tool set of your choice",
-    subclasses: ["Roguish Archetype", [
-        "arcane trickster",
-        "assassin",
-        "burglar",
-        "investigator",
-        "mastermind",
-        "phantom",
-        "psiknife",
-        "scout",
-        "swashbuckler"
-    ]],
+    subclasses: ["Roguish Archetype", []],
     attacks: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     // No spellcasting except for Arcane Trickster
     features: {
         "expertise": {
             name: "Expertise",
-            source: ["LL:AROGUE", 0],
+            source: ["LL:AR", 0],
             minlevel: 1,
             description: desc([
                 "Choose two skills or tools; double proficiency bonus for them. Choose two more (one at 6th, 10th, 15th, 18th levels)."
@@ -60,7 +50,7 @@ ClassList["rogue(laserllama)"] = {
         },
         "sneak attack": {
             name: "Sneak Attack",
-            source: ["LL:AROGUE", 0],
+            source: ["LL:AR", 0],
             minlevel: 1,
             description: desc([
                 "Once per turn, when I hit with a finesse or ranged weapon and have advantage OR an ally is within 5 ft and I don't have disadvantage, I deal bonus damage. Increases with Rogue level."
@@ -71,7 +61,7 @@ ClassList["rogue(laserllama)"] = {
         },
         "thieves' cant": {
             name: "Thieves' Cant",
-            source: ["LL:AROGUE", 0],
+            source: ["LL:AR", 0],
             minlevel: 1,
             description: desc([
                 "Learn Thieves' Cant for secret messages. Alternatively, learn two extra languages."
@@ -79,7 +69,7 @@ ClassList["rogue(laserllama)"] = {
         },
         "cunning action": {
             name: "Cunning Action",
-            source: ["LL:AROGUE", 0],
+            source: ["LL:AR", 0],
             minlevel: 2,
             description: desc([
                 "Bonus action: Dash, Disengage, Hide, or Use an Object. At 11th level: can take second bonus action (but not the same action twice)."
@@ -87,7 +77,7 @@ ClassList["rogue(laserllama)"] = {
         },
         "devious exploits": {
             name: "Devious Exploits",
-            source: ["LL:AROGUE", 0],
+            source: ["LL:AR", 0],
             minlevel: 2,
             description: desc([
                 "Access to Devious Exploits and Exploit Dice. Track Exploits Known, Exploit Dice, and Exploit Die Size per Rogue level."
@@ -96,7 +86,7 @@ ClassList["rogue(laserllama)"] = {
         },
         "roguish archetype": {
             name: "Roguish Archetype",
-            source: ["LL:AROGUE", 0],
+            source: ["LL:AR", 0],
             minlevel: 3,
             description: desc([
                 "Choose a Roguish Archetype that shapes my rogue features."
@@ -104,7 +94,7 @@ ClassList["rogue(laserllama)"] = {
         },
         "ability score improvement": {
             name: "Ability Score Improvement",
-            source: ["LL:AROGUE", 0],
+            source: ["LL:AR", 0],
             minlevel: 4,
             description: desc([
                 "Increase one ability score by 2, or two ability scores by 1 (no max > 20). More at 8th, 12th, 16th, 19th."
@@ -114,7 +104,7 @@ ClassList["rogue(laserllama)"] = {
         // Example: Cunning Strike
         "cunning strike": {
             name: "Cunning Strike",
-            source: ["LL:AROGUE", 0],
+            source: ["LL:AR", 0],
             minlevel: 5,
             description: desc([
                 "When I Sneak Attack, forgo some d6s to use a Devious Exploit without using Exploit Dice (see PDF for details)."
@@ -122,7 +112,7 @@ ClassList["rogue(laserllama)"] = {
         },
         "uncanny dodge": {
             name: "Uncanny Dodge",
-            source: ["LL:AROGUE", 0],
+            source: ["LL:AR", 0],
             minlevel: 6,
             description: desc([
                 "Use my reaction to halve the damage from an attack that I can see when it hits me.",
@@ -132,7 +122,7 @@ ClassList["rogue(laserllama)"] = {
         },
         "evasion": {
             name: "Evasion",
-            source: ["LL:AROGUE", 0],
+            source: ["LL:AR", 0],
             minlevel: 9,
             description: desc([
                 "If subjected to an effect that allows a Dexterity save for half damage (e.g., fireball):",
@@ -142,7 +132,7 @@ ClassList["rogue(laserllama)"] = {
         },
         "reliable talent": {
             name: "Reliable Talent",
-            source: ["LL:AROGUE", 0],
+            source: ["LL:AR", 0],
             minlevel: 10,
             description: desc([
                 "When I make an ability check that adds my proficiency bonus or an Exploit Die,",
@@ -151,7 +141,7 @@ ClassList["rogue(laserllama)"] = {
         },
         "ruthless": {
             name: "Ruthless",
-            source: ["LL:AROGUE", 0],
+            source: ["LL:AR", 0],
             minlevel: 11,
             description: desc([
                 "When I use a Devious Exploit as part of an attack that also includes Sneak Attack,",
@@ -161,7 +151,7 @@ ClassList["rogue(laserllama)"] = {
         },
         "blindsense": {
             name: "Blindsense",
-            source: ["LL:AROGUE", 0],
+            source: ["LL:AR", 0],
             minlevel: 14,
             description: desc([
                 "I am aware of the location of any hidden or invisible creature within 10 ft if I can hear.",
@@ -175,7 +165,7 @@ ClassList["rogue(laserllama)"] = {
         },
         "slippery mind": {
             name: "Slippery Mind",
-            source: ["LL:AROGUE", 0],
+            source: ["LL:AR", 0],
             minlevel: 15,
             description: desc([
                 "Whenever I make an Intelligence, Wisdom, or Charisma saving throw,",
@@ -184,7 +174,7 @@ ClassList["rogue(laserllama)"] = {
         },
         "elusive": {
             name: "Elusive",
-            source: ["LL:AROGUE", 0],
+            source: ["LL:AR", 0],
             minlevel: 18,
             description: desc([
                 "No attack roll can have advantage against me unless I am Incapacitated."
@@ -192,7 +182,7 @@ ClassList["rogue(laserllama)"] = {
         },
         "stroke of luck": {
             name: "Stroke of Luck",
-            source: ["LL:AROGUE", 0],
+            source: ["LL:AR", 0],
             minlevel: 20,
             description: desc([
                 "When I roll a d20 for an ability check, attack roll, or saving throw,",
@@ -207,7 +197,7 @@ ClassList["rogue(laserllama)"] = {
 // Add Exploits to the LaserLlama Alternate Rogue
 ClassList["rogue(laserllama)"].features["exploits"] = {
     name: "Devious Exploits",
-    source: ["LL:AROGUE", 0],
+    source: ["LL:AR", 0],
     minlevel: 2,
     description: desc([
         "I learn Devious Exploits that enhance my roguish skills",
@@ -292,12 +282,12 @@ ClassList["rogue(laserllama)"].features["exploits"] = {
 
 
     "aerial maneuver": {
-        name: "Aerial Maneuver (Dex >= 11, Acrobatics)",
+        name: "Aerial Maneuver",
         description: desc([
             "When falling, can use a reaction and expend an Exploit Die to reduce falling damage by 5×my level and land on my feet."
         ]),
         action: ["reaction", " (falling)"],
-        prereqeval: function (v) { return What('Dex') >= 11; }
+        prereqeval: function (v) { return What('Dex') >= 11 && v.skillProfs.indexOf("Acrobatics") == 1; }
     },
     "alchemical adept": {
         name: "Alchemical Adept",
@@ -632,7 +622,7 @@ ClassList["rogue(laserllama)"].features["exploits"] = {
             "Speed can't be reduced, opportunity attacks vs you have disadvantage, and you're immune to Grappled, Paralyzed, and Restrained."
         ]),
         prereqeval: function (v) {
-            return GetClassLevel('rogue(laserllama)') >= 13 && What('Dex') >= 17;
+            return GetClassLevel("rogue(laserllama)") >= 13 && What('Dex') >= 17;
         },
         prereqeval: function (v) { if (!classes.known["rogue(laserllama)"] || classes.known["rogue(laserllama)"].level < 13 || What('Dex') < 17) return false },
         action: ["bonus action", ""]
@@ -674,7 +664,7 @@ ClassList["rogue(laserllama)"].features["exploits"] = {
 AddSubClass("rogue(laserllama)", "assassin", {
     regExpSearch: /assassin/,
     subname: "Assassin",
-    source: [["LL:AROGUE", 0]],
+    source: [["LL:AR", 0]],
     features: {
         "subclassfeature3": {
             name: "Assassinate",
@@ -797,7 +787,7 @@ AddSubClass("rogue(laserllama)", "burglar", {
                     "5th level, Dex 13+.",
                     "When you hit with a melee weapon, expend Die. Target Con save or add Die to damage, falls prone, and can't take reactions until start of next turn."
                 ]),
-                prereqeval: function (v) { return What('Dex') >= 13 && classes.known['rogue(laserllama)'] && classes.known['rogue(laserllama)'].level >= 5; }
+                prereqeval: function (v) { return What('Dex') >= 13 && classes.known["rogue(laserllama)"] && classes.known["rogue(laserllama)"].level >= 5; }
             },
             "survey dungeon": {
                 name: "Survey Dungeon",
@@ -805,7 +795,7 @@ AddSubClass("rogue(laserllama)", "burglar", {
                     "5th level, Dex or Int 13+.",
                     "Expend Die to spend 10 min surveying current room: learn about 1 trap, spell, or secret feature. Can use once/long rest per room."
                 ]),
-                prereqeval: function (v) { return (What('Dex') >= 13 || What('Int') >= 13) && classes.known['rogue(laserllama)'] && classes.known['rogue(laserllama)'].level >= 5; }
+                prereqeval: function (v) { return (What('Dex') >= 13 || What('Int') >= 13) && classes.known["rogue(laserllama)"] && classes.known["rogue(laserllama)"].level >= 5; }
             },
             "forgotten knowledge": {
                 name: "Forgotten Knowledge",
@@ -813,7 +803,7 @@ AddSubClass("rogue(laserllama)", "burglar", {
                     "9th level, History proficiency.",
                     "Expend Die to spend 10 min focused on a person, place, or thing; remember a secret or obscure piece of lore about the subject."
                 ]),
-                prereqeval: function (v) { return classes.known['rogue(laserllama)'] && classes.known['rogue(laserllama)'].level >= 9; }
+                prereqeval: function (v) { return classes.known["rogue(laserllama)"] && classes.known["rogue(laserllama)"].level >= 9; }
             }
         },
         "subclassfeature3.1": {
@@ -914,7 +904,7 @@ AddSubClass("rogue(laserllama)", "investigator", {
                     "5th+: When you hit with weapon, expend Die. Next attack vs. it before your next turn has advantage, add Die to its damage if that hits."
                 ]),
                 prereqeval: function (v) {
-                    return classes.known['rogue(laserllama)'] && classes.known['rogue(laserllama)'].level >= 5;
+                    return classes.known["rogue(laserllama)"] && classes.known["rogue(laserllama)"].level >= 5;
                 }
             },
             "survey dungeon": {
@@ -923,7 +913,7 @@ AddSubClass("rogue(laserllama)", "investigator", {
                     "5th+, Dex or Int 13+: Expend Die and spend 10 min to learn about one of: a trap, a spell, or secret feature in the room. 1/long rest per room."
                 ]),
                 prereqeval: function (v) {
-                    return (What('Dex') >= 13 || What('Int') >= 13) && classes.known['rogue(laserllama)'] && classes.known['rogue(laserllama)'].level >= 5;
+                    return (What('Dex') >= 13 || What('Int') >= 13) && classes.known["rogue(laserllama)"] && classes.known["rogue(laserllama)"].level >= 5;
                 }
             },
             "survey settlement": {
@@ -932,7 +922,7 @@ AddSubClass("rogue(laserllama)", "investigator", {
                     "9th+, Dex or Cha 15+: Expend Die, spend 1hr for 3 facts about local area: factions, authority, secrets, etc. 1/long rest per area."
                 ]),
                 prereqeval: function (v) {
-                    return (What('Dex') >= 15 || What('Cha') >= 15) && classes.known['rogue(laserllama)'] && classes.known['rogue(laserllama)'].level >= 9;
+                    return (What('Dex') >= 15 || What('Cha') >= 15) && classes.known["rogue(laserllama)"] && classes.known["rogue(laserllama)"].level >= 9;
                 }
             }
         },
@@ -1035,7 +1025,7 @@ AddSubClass("rogue(laserllama)", "mastermind", {
                     "5th+: On hit with weapon, expend Die. First attack against the target before your turn has advantage; if hit, add Die to its damage."
                 ]),
                 prereqeval: function (v) {
-                    return classes.known['rogue(laserllama)'] && classes.known['rogue(laserllama)'].level >= 5;
+                    return classes.known["rogue(laserllama)"] && classes.known["rogue(laserllama)"].level >= 5;
                 }
             },
             "soothing speech": {
@@ -1044,7 +1034,7 @@ AddSubClass("rogue(laserllama)", "mastermind", {
                     "5th+, Persuasion prof: As an action, expend Die; all creatures in 20 ft make Cha save or become indifferent to any creature they see for 10 min unless harmed."
                 ]),
                 prereqeval: function (v) {
-                    return classes.known['rogue(laserllama)'] && classes.known['rogue(laserllama)'].level >= 5;
+                    return classes.known["rogue(laserllama)"] && classes.known["rogue(laserllama)"].level >= 5;
                 }
             },
             "recruit informant": {
@@ -1053,7 +1043,7 @@ AddSubClass("rogue(laserllama)", "mastermind", {
                     "9th+, Cha or Int 15+: Expend Die & 1hr in a settlement to gain a loyal informant while you’re in the area; see exploit for more."
                 ]),
                 prereqeval: function (v) {
-                    return (What('Cha') >= 15 || What('Int') >= 15) && classes.known['rogue(laserllama)'] && classes.known['rogue(laserllama)'].level >= 9;
+                    return (What('Cha') >= 15 || What('Int') >= 15) && classes.known["rogue(laserllama)"] && classes.known["rogue(laserllama)"].level >= 9;
                 }
             }
         },
@@ -1154,7 +1144,7 @@ AddSubClass("rogue(laserllama)", "phantom", {
                     "5th+: On hit with weapon, expend Die. First attack made against that target before your next turn has advantage, and on hit, add Die to its damage."
                 ]),
                 prereqeval: function (v) {
-                    return classes.known['rogue(laserllama)'] && classes.known['rogue(laserllama)'].level >= 5;
+                    return classes.known["rogue(laserllama)"] && classes.known["rogue(laserllama)"].level >= 5;
                 }
             },
             "grasp of night": {
@@ -1163,7 +1153,7 @@ AddSubClass("rogue(laserllama)", "phantom", {
                     "5th+, Wis 13+: In place of an attack, expend up to Prof Bonus Exploit Dice to touch a creature. If HP <= 3 × Dice + Wis mod, it falls asleep (Unconscious, 10 min)."
                 ]),
                 prereqeval: function (v) {
-                    return What('Wis') >= 13 && classes.known['rogue(laserllama)'] && classes.known['rogue(laserllama)'].level >= 5;
+                    return What('Wis') >= 13 && classes.known["rogue(laserllama)"] && classes.known["rogue(laserllama)"].level >= 5;
                 }
             },
             "forgotten knowledge": {
@@ -1172,7 +1162,7 @@ AddSubClass("rogue(laserllama)", "phantom", {
                     "9th+, History prof: Spend 10 min focusing on a person, object, or place. Expend Exploit Die to recall forgotten/secret lore about that subject."
                 ]),
                 prereqeval: function (v) {
-                    return classes.known['rogue(laserllama)'] && classes.known['rogue(laserllama)'].level >= 9;
+                    return classes.known["rogue(laserllama)"] && classes.known["rogue(laserllama)"].level >= 9;
                 }
             }
         },
@@ -1261,7 +1251,7 @@ AddSubClass("rogue(laserllama)", "psiknife", {
                 "Telekinetic Leap: As a bonus action, spend 1 Psi Point and 10 ft movement to jump 30 ft in a line, even if it exceeds current speed",
                 "Telepathic Link: As an action, spend Psi Points to link you + 1 creature per point; everyone is telepathically linked for Int mod hours (same plane)",
             ]),
-            usages : classes.known['rogue(laserllama)'].level
+            usages : classes.known["rogue(laserllama)"].level
 
         },
         "subclassfeature3.1": {
