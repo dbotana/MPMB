@@ -38,7 +38,6 @@ ClassList["rogue(laserllama)"] = {
     equipment: "Rogue starting equipment:\n- (a) a rapier, (b) a scimitar, or (c) a shortsword\n- (a) a shortbow and 20 arrows, or (b) a shortsword\n- (a) a burglar's pack or (b) a dungeoneer's pack\n- Leather armor, two daggers, and a tool set of your choice",
     subclasses: ["Roguish Archetype", []],
     attacks: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    // No spellcasting except for Arcane Trickster
     features: {
         "expertise": {
             name: "Expertise",
@@ -100,8 +99,6 @@ ClassList["rogue(laserllama)"] = {
                 "Increase one ability score by 2, or two ability scores by 1 (no max > 20). More at 8th, 12th, 16th, 19th."
             ])
         },
-        // Add all other class features (Cunning Strike, Uncanny Dodge, Evasion, etc) from table!
-        // Example: Cunning Strike
         "cunning strike": {
             name: "Cunning Strike",
             source: ["LL:AR", 0],
@@ -342,7 +339,8 @@ ClassList["rogue(laserllama)"].features["exploits"] = {
         description: desc([
             "Action: touch willing living creature, expend up to PB Exploit Dice. For each, it regains that many Hit Dice + Con mod (minimum 0)."
         ]),
-        action: ["action", ""]
+        action: ["action", ""],
+        prereqeval: function (v) { return v.skillProfs.indexOf("Medicine") == 1; }
     },
     "inquisitive eye": {
         name: "Inquisitive Eye",
@@ -406,7 +404,7 @@ ClassList["rogue(laserllama)"].features["exploits"] = {
         description: desc([
             "As an action, expend Die, force creature within 10 ft to Wis save, advantage if hostile. On fail, charmed 1 hr (treats me as friend, ends if harmed, then knows it was deceived). One success = immune 24 hrs."
         ]),
-        prereqeval: function (v) { return What('Cha') >= 11; },
+        prereqeval: function (v) { return What('Cha') >= 11 && v.skillProfs.indexOf("Persuasion") == 1; },
         action: ["action", ""]
     },
     "rustic intuition": {
@@ -529,7 +527,7 @@ ClassList["rogue(laserllama)"].features["exploits"] = {
             "Action: expend Die; speak to creatures who can hear/understand within 20 ft. Charisma save.",
             "On fail: Indifferent toward all creatures they see, 10 minutes; ends if damage, forced save, or see ally harmed."
         ]),
-        prereqeval: function (v) { if (!classes.known["rogue(laserllama)"] || classes.known["rogue(laserllama)"].level < 5) return false },
+        prereqeval: function (v) { if (!classes.known["rogue(laserllama)"] || classes.known["rogue(laserllama)"].level < 5 || v.skillProfs.indexOf("Acrobatics") == -1) return false },
         action: ["action", ""]
     },
     "survey dungeon": {
@@ -571,7 +569,7 @@ ClassList["rogue(laserllama)"].features["exploits"] = {
             "Expend Die and spend 10 minutes focused on a person, object, or location you can see; remember lore about subject.",
             "The more info you have, the more precise; DM determines specifics."
         ]),
-        prereqeval: function (v) { if (!classes.known["rogue(laserllama)"] || classes.known["rogue(laserllama)"].level < 9) return false },
+        prereqeval: function (v) { if (!classes.known["rogue(laserllama)"] || classes.known["rogue(laserllama)"].level < 9 || v.skillProfs.indexOf("History") == -1) return false },
     },
     "recruit informant": {
         name: "Recruit Informant",
