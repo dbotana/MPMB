@@ -21,7 +21,7 @@ SourceList["LL:AR"] = {
     name: "LaserLlama - Alternate Ranger",
     abbreviation: "LL:AR",
     abbreviationSpellsheet: "AR",
-    group: "Rocky's Homebrew",
+    group: "LaserLlama",
     source: "https://www.gmbinder.com/share/-M7iu19Af89SH2G_5RGa",
 };
 [

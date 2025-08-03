@@ -3,7 +3,7 @@ This file adds the Psion class from Unearthed Arcana 2025 to "MPMB's Character R
 Import this file using the "Add Extra Materials" bookmark.
 
 Subject: Class
-Effect: This script adds the "Psion" class and its subclasses from UA 2025 https://media.dndbeyond.com/compendium-images/ua/the-psion/mXCPWlh2yy5tBKqP/UA2025-ThePsion.pdf
+Effect: This script adds the "Psion" class and its subclasses from UA 2025
 Code by: Rocky
 Date: 2025-05-30 (sheet v13)
 */
@@ -17,7 +17,7 @@ SourceList["UA25P"] = {
     abbreviationSpellsheet: "P",
     group: "Unearthed Arcana",
     date: "2025/05/30",
-    url: "https://media.dndbeyond.com/compendium-images/ua/the-psion/mXCPWlh2yy5tBKqP/UA2025-ThePsion.pdf",
+    url: "https://media.wizards.com/2025/dnd/downloads/UA25P_Psion.pdf",
 };
 
 // Add spells to Psion spell list
@@ -98,7 +98,7 @@ ClassList["psion"] = {
     spellcastingFactor: 1,
     spellcastingFactorRoundupMulti: false,
     spellcastingKnown: {
-        cantrips: [2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
+        cantrips: [2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4],
         spells: [4, 5, 6, 7, 9, 10, 11, 12, 14, 15, 16, 16, 17, 17, 18, 18, 19, 20, 21, 22],
     },
     features: {
@@ -581,8 +581,17 @@ AddSubClass("psion", "telepath", {
             name: "Potent Thoughts",
             source: ["UA25P", 0],
             minlevel: 6,
-            description: "I add my Intelligence modifier to damage from psion cantrips",
-            calcChanges : GenericClassFeatures["potent spellcasting"].calcChanges
+            description: desc(["I add my Intelligence modifier to damage from psion cantrips"]),
+            calcChanges: {
+                atkCalc: [
+                    function (fields, v, output) {
+                        if (v.thisWeapon[3] && /\bpsion\b/.test(v.thisWeapon[4]) && SpellsList[v.thisWeapon[3]].level === 0 && /\d/.test(fields.Damage_Die)) {
+                            output.extraDmg += What('Int Mod');
+                        };
+                    },
+                    "My Psion cantrips get my Intelligence modifier added to their damage."
+                ],
+            }
         },
         "subclassfeature10": {
             name: "Telepathic Bolstering",
@@ -712,4 +721,221 @@ SpellsList["psychic scream"] = {
     save: "Int",
     description: "10 creatures Int>2: 14d6 psychic dmg, stunned; save halves, no stunned; repeat save at end of turn; 0 HP = head explodes",
     descriptionFull: "You unleash the power of your mind to blast the intellect of up to ten creatures of your choice that you can see within range. Creatures that have an Intelligence score of 2 or lower are unaffected.\n\nEach target must make an Intelligence saving throw. On a failed save, a target takes 14d6 psychic damage and has the stunned condition. On a successful save, a target takes half as much damage only. If the target is reduced to 0 hit points by this damage, its head explodes, assuming it has one.\n\nAt the end of each of its turns, the stunned target repeats the save, ending the condition on itself on a success."
+};
+
+// New Wild Talent Feats
+
+FeatsList["atmokinesis"] = {
+    name: "Atmokinesis",
+    source: ["UA25P", 0],
+    description: "Lightning Jolt: Once per turn when casting a spell or hitting with an attack that deals bludgeoning, piercing, slashing, or psychic damage, I can change the damage type to lightning. I know Shocking Grasp and always have Fog Cloud prepared. I can cast Fog Cloud once per long rest without a spell slot. At 3rd level, I also have Gust of Wind prepared. These spells require no verbal or material components.",
+    spellcastingBonus: [{
+        name: "Atmokinesis",
+        spells: ["shocking grasp"],
+        selection: ["shocking grasp"],
+        firstCol: "atwill"
+    }, 
+    {
+        name: "Atmokinesis Fog Cloud",
+        spells: ["fog cloud"],
+        selection: ["fog cloud"],
+        firstCol: "oncelr"
+    },
+    {
+        name: "Atmokinesis Gust of Wind",
+        spells: ["gust of wind"],
+        selection: ["gust of wind"],
+        firstCol: "oncelr",
+        times: levels.map(function (n) {return n < 3 ? 0 : 1;})
+    }]
+};
+FeatsList["biokinesis"] = {
+    name: "Biokinesis",
+    source: ["UA25P", 0],
+    description: "Bend Life Energy: When a spell I cast restores hit points, I can roll 1d4 and add it to the total hit points restored. I can do this Prof Bonus times per long rest. I know Spare the Dying and always have Healing Word prepared. I can cast Healing Word once per long rest without a spell slot. At 3rd level, I also have Arcane Vigor prepared. These spells require no verbal or material components.",
+    spellcastingBonus: [{
+        name: "Biokinesis",
+        spells: ["spare the dying"],
+        selection: ["spare the dying"],
+        firstCol: "atwill"
+    }, 
+    {
+        name: "Biokinesis Healing Word",
+        spells: ["healing word"],
+        selection: ["healing word"],
+        firstCol: "oncelr"
+    },
+    {
+        name: "Biokinesis Arcane Vigor",
+        spells: ["arcane vigor"],
+        selection: ["arcane vigor"],
+        firstCol: "oncelr",
+        times: levels.map(function (n) {return n < 3 ? 0 : 1;})
+    }]
+};
+
+FeatsList["clairsentience"] = {
+    name: "Clairsentience",
+    source: ["UA25P", 0],
+    description: "Minor Foreknowledge: When I take the Search action, I can give myself advantage on any ability check made as part of that action. I can do this Prof Bonus times per long rest. I know Guidance and always have Detect Evil and Good prepared. I can cast Detect Evil and Good once per long rest without a spell slot. At 3rd level, I also have See Invisibility prepared. These spells require no verbal or material components.",
+    spellcastingBonus: [{
+        name: "Clairsentience",
+        spells: ["guidance"],
+        selection: ["guidance"],
+        firstCol: "atwill"
+    }, 
+    {
+        name: "Clairsentience Detect Evil and Good",
+        spells: ["detect evil and good"],
+        selection: ["detect evil and good"],
+        firstCol: "oncelr"
+    },
+    {
+        name: "Clairsentience See Invisibility",
+        spells: ["see invisibility"],
+        selection: ["see invisibility"],
+        firstCol: "oncelr",
+        times: levels.map(function (n) {return n < 3 ? 0 : 1;})
+    }]
+};
+
+FeatsList["cryokinesis"] = {
+    name: "Cryokinesis",
+    source: ["UA25P", 0],
+    description: "Ice Manipulation: Once per turn when casting a spell or hitting with an attack that deals bludgeoning, piercing, slashing, or psychic damage, I can change the damage type to cold. I know Ray of Frost and always have Armor of Agathys and Ice Knife prepared. I can cast each once per long rest without a spell slot. These spells require no verbal or material components.",
+    spellcastingBonus: [{
+        name: "Cryokinesis",
+        spells: ["ray of frost"],
+        selection: ["ray of frost"],
+        firstCol: "atwill"
+    }, 
+    {
+        name: "Cryokinesis Armor of Agathys",
+        spells: ["armor of agathys"],
+        selection: ["armor of agathys"],
+        firstCol: "oncelr"
+    },
+    {
+        name: "Cryokinesis Ice Knife",
+        spells: ["ice knife"],
+        selection: ["ice knife"],
+        firstCol: "oncelr"
+    }]
+};
+
+FeatsList["empath"] = {
+    name: "Empath",
+    source: ["UA25P", 0],
+    description: "Emotional Sense: When I take the Influence action, I can give myself advantage on any ability check made as part of that action. I can do this Prof Bonus times per long rest. I always have Charm Person prepared and can cast it once per long rest without a spell slot. At 3rd level, I also have Calm Emotions prepared. These spells require no verbal components.",
+    spellcastingBonus: [{
+        name: "Empath Charm Person",
+        spells: ["charm person"],
+        selection: ["charm person"],
+        firstCol: "oncelr"
+    },
+    {
+        name: "Empath Calm Emotions",
+        spells: ["calm emotions"],
+        selection: ["calm emotions"],
+        firstCol: "oncelr",
+        times: levels.map(function (n) {return n < 3 ? 0 : 1;})
+    }]
+};
+
+FeatsList["flesh morpher"] = {
+    name: "Flesh Morpher",
+    source: ["UA25P", 0],
+    description: "Flexible Flesh: When I make a Dexterity (Acrobatics) or Sleight of Hand check, I gain a bonus equal to my Int modifier (min +1). I can do this Prof Bonus times per long rest. I always have Longstrider prepared and can cast it once per long rest without a spell slot. At 3rd level, I also have Alter Self prepared. These spells require no verbal components.",
+    spellcastingBonus: [{
+        name: "Flesh Morpher Longstrider",
+        spells: ["longstrider"],
+        selection: ["longstrider"],
+        firstCol: "oncelr"
+    },
+    {
+        name: "Flesh Morpher Alter Self",
+        spells: ["alter self"],
+        selection: ["alter self"],
+        firstCol: "oncelr",
+        times: levels.map(function (n) {return n < 3 ? 0 : 1;})
+    }]
+};
+
+FeatsList["mind whisperer"] = {
+    name: "Mind Whisperer",
+    source: ["UA25P", 0],
+    description: "Limited Telepathy: As a magic action, I can form a telepathic connection with a creature I can see within 120 ft for 1 hour. We can communicate telepathically within 120 ft using a mutual language. Once per short/long rest. I know Mind Sliver and always have Dissonant Whispers prepared. I can cast Dissonant Whispers once per long rest without a spell slot. These spells require no verbal or material components.",
+    spellcastingBonus: [{
+        name: "Mind Whisperer",
+        spells: ["mind sliver"],
+        selection: ["mind sliver"],
+        firstCol: "atwill"
+    }, 
+    {
+        name: "Mind Whisperer Dissonant Whispers",
+        spells: ["dissonant whispers"],
+        selection: ["dissonant whispers"],
+        firstCol: "oncelr"
+    }]
+};
+
+FeatsList["psi trickster"] = {
+    name: "Psi Trickster",
+    source: ["UA25P", 0],
+    description: "Cunning Mind: When I make a Charisma (Deception) or Persuasion check, I gain a bonus equal to my Int modifier (min +1). I can do this Prof Bonus times per long rest. I know Minor Illusion and always have Disguise Self prepared. I can cast Disguise Self once per long rest without a spell slot. These spells require no verbal or material components.",
+    spellcastingBonus: [{
+        name: "Psi Trickster",
+        spells: ["minor illusion"],
+        selection: ["minor illusion"],
+        firstCol: "atwill"
+    }, 
+    {
+        name: "Psi Trickster Disguise Self",
+        spells: ["disguise self"],
+        selection: ["disguise self"],
+        firstCol: "oncelr"
+    }]
+};
+
+FeatsList["psykineticist"] = {
+    name: "Psykineticist",
+    source: ["UA25P", 0],
+    description: "Psi Boost: When I take the Dash action, I can increase my speed by 10 ft until the start of my next turn. I can do this Prof Bonus times per long rest. I know Telekinetic Fling and always have Thunderwave prepared. I can cast Thunderwave once per long rest without a spell slot. These spells require no verbal components.",
+    spellcastingBonus: [{
+        name: "Psykineticist",
+        spells: ["telekinetic fling"],
+        selection: ["telekinetic fling"],
+        firstCol: "atwill"
+    }, 
+    {
+        name: "Psykineticist Thunderwave",
+        spells: ["thunderwave"],
+        selection: ["thunderwave"],
+        firstCol: "oncelr"
+    }]
+};
+
+FeatsList["pyrokinesis"] = {
+    name: "Pyrokinesis",
+    source: ["UA25P", 0],
+    description: "Firestarter: Once per turn when casting a spell or hitting with an attack that deals bludgeoning, piercing, slashing, or psychic damage, I can change the damage type to fire. I know Produce Flame and always have Burning Hands prepared. I can cast Burning Hands once per long rest without a spell slot. At 3rd level, I also have Scorching Ray prepared. These spells require no verbal or material components.",
+    spellcastingBonus: [{
+        name: "Pyrokinesis",
+        spells: ["produce flame"],
+        selection: ["produce flame"],
+        firstCol: "atwill"
+    }, 
+    {
+        name: "Pyrokinesis Burning Hands",
+        spells: ["burning hands"],
+        selection: ["burning hands"],
+        firstCol: "oncelr"
+    },
+    {
+        name: "Pyrokinesis Scorching Ray",
+        spells: ["scorching ray"],
+        selection: ["scorching ray"],
+        firstCol: "oncelr",
+        times: levels.map(function (n) {return n < 3 ? 0 : 1;})
+    }]
 };
