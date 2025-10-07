@@ -17,7 +17,7 @@ SourceList["UA25P"] = {
     abbreviationSpellsheet: "P",
     group: "Unearthed Arcana",
     date: "2025/10/07",
-    url: "https://media.wizards.com/2025/dnd/downloads/UA2025_Psion_Update.pdf",
+    url: "https://media.dndbeyond.com/compendium-images/ua/psion-update/kZh2hf4yC7KS45wW/UA2025-Psion+Update.pdf",
 };
 
 // Add new spells to spell list
