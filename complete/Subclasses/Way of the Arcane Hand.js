@@ -14,7 +14,7 @@ It is recommended to enter the code in a fresh sheet before adding any other inf
 
 Subject: Subclass
 
-Effect: This script adds a subclass for the Monk, called "Way of the Arcane Hand"
+Effect: This script adds a subclass for the Monk, called "Way of the Arcane Hand" from Sebastian Crowe's "Guide to Drakenheim" available at https://ghostfiregaming.com/product/sebastian-crowes-guide-to-drakkenheim-pdf/
 
 Code by: Rocky
 
@@ -22,21 +22,22 @@ Date: 2025-10-16 (sheet v13)
 
 */
 
-var iFileName = "Monk_Way_of_the_Arcane_Hand.js";
+var iFileName = "Way_of_the_Arcane_Hand.js";
 
 RequiredSheetVersion(13);
 
-SourceList["S:GtB"] = {
-    name : "Guide to Braakbenjeim",
-    abbreviation : "S:GtB",
-    abbrevireviationSpellsheet : "GtB",
-    group : "Sebastian Crowe"
+SourceList["S:GtD"] = {
+    name : "Guide to Drakenheim",
+    abbreviation : "S:GtD",
+    abbreviationSpellsheet : "GD",
+    group : "Sebastian Crowe",
+    url : "https://ghostfiregaming.com/product/sebastian-crowes-guide-to-drakkenheim-pdf/"
 };
 
 AddSubClass("monk", "way of the arcane hand", {
     regExpSearch : /^(?=.*arcane)(?=.*hand)((?=.*(monk|monastic))|(((?=.*martial)(?=.*(artist|arts)))|((?=.*spiritual)(?=.*warrior)))).*$/i,
     subname : "Way of the Arcane Hand",
-    source : [["S:GtB", 101]],
+    source : [["S:GtD", 101]],
     spellcastingFactor : 3,
     spellcastingKnown : {
         cantrips : [0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
@@ -49,17 +50,18 @@ AddSubClass("monk", "way of the arcane hand", {
     features : {
         "subclassfeature3" : {
             name : "Erudite Education",
-            source : [["S:GtB", 101]],
+            source : [["S:GtD", 101]],
             minlevel : 3,
             description : desc([
                 "I gain proficiency in the Arcana skill",
                 "Whenever I make an Intelligence ability check, I gain a bonus equal to my Wisdom modifier (minimum of +1)"
             ]),
-            skills : ["Arcana"]
+            skills : ["Arcana"],
+			addMod : ["Arcana", "History", "Investigation", "Nature", "Religion"].map(function(skill){return { type : "skill", field : skill, mod : "max(Wis|1)", text : "I can add my Wisdom modifier to any Intelligence check I make (minimum of +1)." };}),
         },
         "subclassfeature3.1" : {
             name : "Spellcasting",
-            source : [["S:GtB", 101]],
+            source : [["S:GtD", 101]],
             minlevel : 3,
             description : desc([
                 "I can cast wizard cantrips/spells that I know, using Wisdom as my spellcasting ability",
@@ -73,13 +75,13 @@ AddSubClass("monk", "way of the arcane hand", {
         },
         "subclassfeature3.2" : {
             name : "Arcane Focus",
-            source : [["S:GtB", 101]],
+            source : [["S:GtD", 101]],
             minlevel : 3,
             description : "\n   " + "I can use a monk weapon as an arcane focus for my spellcasting"
         },
         "subclassfeature3.3" : {
             name : "Spell Slots",
-            source : [["S:GtB", 101]],
+            source : [["S:GtD", 101]],
             minlevel : 3,
             description : desc([
                 "I gain spell slots to cast my wizard spells of 1st level and higher",
@@ -103,7 +105,7 @@ AddSubClass("monk", "way of the arcane hand", {
         },
         "subclassfeature3.4" : {
             name : "Spells Known of 1st-Level and Higher",
-            source : [["S:GtB", 101]],
+            source : [["S:GtD", 101]],
             minlevel : 3,
             description : desc([
                 "I know three 1st-level wizard spells of my choice",
@@ -114,13 +116,12 @@ AddSubClass("monk", "way of the arcane hand", {
         },
         "subclassfeature3.5" : {
             name : "Eldritch Flurry",
-            source : [["S:GtB", 101]],
+            source : [["S:GtD", 101]],
             minlevel : 3,
             description : desc([
                 "Whenever I take the Attack action on my turn, I can cast one of my cantrips",
                 "This cantrip replaces one of those attacks",
-                "When I use my action to cast a spell with a casting time of 1 action (that requires",
-                "my concentration), I can make one unarmed strike as a bonus action",
+                "When I use Flurry of Blows, I can cast a spell with a casting time of 1 action as a bonus action instead of making unarmed strikes.",
                 "Finally, when I use my action to cast a spell, I can treat it as taking an attack action",
                 "with a monk weapon for the purposes of my other monk features"
             ]),
@@ -138,7 +139,7 @@ AddSubClass("monk", "way of the arcane hand", {
         },
         "subclassfeature6" : {
             name : "Arcane Empowerment",
-            source : [["S:GtB", 102]],
+            source : [["S:GtD", 102]],
             minlevel : 6,
             description : desc([
                 "While concentrating on a spell, I add twice the spell's level to the damage rolls of my",
@@ -159,7 +160,7 @@ AddSubClass("monk", "way of the arcane hand", {
         },
         "subclassfeature11" : {
             name : "Focus Power",
-            source : [["S:GtB", 102]],
+            source : [["S:GtD", 102]],
             minlevel : 11,
             description : desc([
                 "When I cast a spell with a casting time of 1 action, I expend 1 ki point for each",
@@ -174,7 +175,7 @@ AddSubClass("monk", "way of the arcane hand", {
         },
         "subclassfeature11.1" : {
             name : "Spell Resistance",
-            source : [["S:GtB", 102]],
+            source : [["S:GtD", 102]],
             minlevel : 11,
             description : desc([
                 "I have advantage on saving throws against spells and magical effects",
@@ -185,7 +186,7 @@ AddSubClass("monk", "way of the arcane hand", {
         },
         "subclassfeature17" : {
             name : "Meditative Casting",
-            source : [["S:GtB", 102]],
+            source : [["S:GtD", 102]],
             minlevel : 17,
             description : desc([
                 "Starting at 17th level, when I cast a spell with a casting time of 1 action (that",
