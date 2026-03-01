@@ -41,7 +41,8 @@ AddSubClass("artificer", "reanimator", {
             usages: "Intelligence modifier per ",
             usagescalc: "event.value = Math.max(1, What('Int Mod'));",
             recovery: "long rest",
-            spellcastingExtra: ["false life", "spare the dying", "witch bolt", "blindness/deafness", "enhance ability", "animate dead", "lightning bolt", "blight", "death ward", "antilife shell", "raise dead"]
+            spellcastingExtra: ["false life", "spare the dying", "witch bolt", "blindness/deafness", "enhance ability", "animate dead", "lightning bolt", "blight", "death ward", "antilife shell", "raise dead"],
+            spellCastingExtraApplyNonconform: true
         },
         "subclassfeature3.1": {
             name: "Reanimated Companion",
@@ -251,6 +252,7 @@ AddSubClass("cleric", "grave domain", {
     subname : "Grave Domain",
     source : [["UAH", 4]],
     spellcastingExtra : ["bane", "chill touch", "detect evil and good", "gentle repose", "ray of enfeeblement", "revivify", "vampiric touch", "blight", "dispel evil and good", "hold monster", "raise dead"],
+    spellCastingExtraApplyNonconform: true,
     features : {
         "subclassfeature3" : {
             name : "Circle of Mortality",
@@ -329,7 +331,8 @@ AddSubClass("ranger", "hollow warden", {
                 text : "While transformed with Wrath of the Wild, I add my Wisdom modifier (min +1) to AC.",
                 stopeval : function(v) { return !v.wearingArmor && v.wis < 1; }
             },
-            spellcastingExtra : ["wrathful smite", "spike growth", "phantom steed", "hallucinatory terrain", "awaken"]
+            spellcastingExtra : ["wrathful smite", "spike growth", "phantom steed", "hallucinatory terrain", "awaken"],
+            spellCastingExtraApplyNonconform: true
         },
         "subclassfeature7" : {
             name : "Hungering Might",
@@ -484,7 +487,8 @@ AddSubClass("sorcerer", "shadow sorcery", {
                 "If a spell I cast creates an area of Darkness, I can see normally through that Darkness"
             ]),
             vision : [["Darkvision", 120], ["Blindsight", 10]],
-            spellcastingExtra : ["bane", "darkness", "inflict wounds", "pass without trace", "hunger of hadar", "summon undead", "greater invisibility", "phantasmal killer", "contagion", "creation"]
+            spellcastingExtra : ["bane", "darkness", "inflict wounds", "pass without trace", "hunger of hadar", "summon undead", "greater invisibility", "phantasmal killer", "contagion", "creation"],
+            spellCastingExtraApplyNonconform: true
         },
         "subclassfeature6" : {
             name : "Spirits of Ill Omen",
@@ -569,7 +573,8 @@ AddSubClass("warlock", "hexblade patron", {
             usages : "Charisma modifier per ",
             usagescalc : "event.value = Math.max(1, What('Cha Mod'));",
             recovery : "long rest",
-            spellcastingExtra : ["arcane vigor", "hex", "magic weapon", "shield", "wrathful smite", "conjure barrage", "dispel magic", "freedom of movement", "staggering smite", "animate objects", "steel wind strike"]
+            spellcastingExtra : ["arcane vigor", "hex", "magic weapon", "shield", "wrathful smite", "conjure barrage", "dispel magic", "freedom of movement", "staggering smite", "animate objects", "steel wind strike"],
+            spellCastingExtraApplyNonconform: true
         },
         "subclassfeature6" : {
             name : "Life Stealer",
