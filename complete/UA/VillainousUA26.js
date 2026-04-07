@@ -6,7 +6,7 @@
 */
 
 /*	-INFORMATION-
-    Subject:	2026 UA Villainous Options http://media.dndbeyond.com/compendium-images/ua/villainous-options/UA2026-VillainousOptions.pdf
+    Subject:	2026 UA Villainous Options https://media.dndbeyond.com/compendium-images/ua/villainous-options/VRQr4YbETAgmpWRj/UA2026-VillainousOptions.pdf
     Effect:		This script adds the 2026 UA Villainous Options subclasses and feat paths.
                 It should be added after PokeSimmer's 2024 scripts https://github.com/thepokesimmer/2024-PHB.
     Code by:	Rocky
@@ -21,7 +21,7 @@ SourceList["UAV26"] = {
     name: "UA 2026 Villainous Options",
     abbreviation: "UAV26",
     group: "Unearthed Arcana",
-    url: "http://media.dndbeyond.com/compendium-images/ua/villainous-options/UA2026-VillainousOptions.pdf",
+    url: "https://media.dndbeyond.com/compendium-images/ua/villainous-options/VRQr4YbETAgmpWRj/UA2026-VillainousOptions.pdf",
     date: "2026/04/07"
 };
 
