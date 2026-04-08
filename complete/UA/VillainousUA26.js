@@ -120,7 +120,197 @@ AddSubClass("cleric", "pestilence domain", {
     }
 });
 
+// ============================================================
+// TITAN FORM CREATURES (Circle of the Titan Wild Shapes)
+// ============================================================
+CreatureList["titan form behemoth"] = {
+    name: "Titan Form: Behemoth",
+    nameAlt: ["Behemoth (Titan Form)", "Titan Behemoth"],
+    regExpSearch: /^(?=.*(titan))(?=.*(behemoth)).*$/i,
+    source: [["UAV26", 4]],
+    size: 2, // Large
+    type: "Monstrosity",
+    alignment: "Unaligned",
+    ac: 11,
+    hp: 20,
+    hd: [3, 6],
+    speed: "40 ft, climb 40 ft",
+    scores: [20, 10, 10, 10, 14, 10],
+    saves: ["", "", "", "", "", ""],
+    senses: "Darkvision 60 ft",
+    languages: "",
+    passivePerception: 12,
+    challengeRating: "\u2014",
+    proficiencyBonus: 2,
+    attacksAction: 1,
+    attacks: [{
+        name: "Rend",
+        ability: 4,
+        damage: [1, 8, "Slashing"],
+        range: "Melee (10 ft)",
+        description: "Uses spell attack modifier; Elemental Rend (level 6+): can deal Acid, Cold, Fire, Lightning, or Thunder instead",
+        abilitytodamage: true
+    }, {
+        name: "Incandescent Breath",
+        ability: 4,
+        damage: [2, 8, "Radiant"],
+        range: "5-ft \xD7 60-ft Line",
+        description: "Expend level 1+ spell slot; +2d8 Radiant per slot level above 1st; Dex save for half; +Wis mod to damage",
+        abilitytodamage: true
+    }],
+    features: [{
+        name: "Titan Form Statistics",
+        description: "AC = 11 + Wis modifier. Str and Dex scores equal Wis score. Temp HP = 2 \xD7 Druid level. Darkvision 60 ft.",
+        joinString: "\n   "
+    }, {
+        name: "Siege Monster",
+        description: "The behemoth deals double damage to objects and structures.",
+        joinString: "\n   "
+    }, {
+        name: "Multiattack (Druid Level 5+)",
+        description: "The behemoth makes two Rend attacks.",
+        joinString: "\n   "
+    }, {
+        name: "Rampager (Druid Level 10+)",
+        description: "When the behemoth enters the space of an enemy that is at least one size smaller for the first time on a turn, that creature makes a Strength saving throw (DC = spell save DC). On a failure, the target has the Prone condition. If already Prone, it takes 2d6 Bludgeoning damage instead.",
+        joinString: "\n   "
+    }],
+    wildshapeString: [
+        "\u25C6 AC: 11 + Wis modifier | Speed: 40 ft, Climb 40 ft | Darkvision 60 ft",
+        "Str & Dex scores equal your Wis score | Temp HP: 2 \xD7 Druid level",
+        "Siege Monster: Double damage to objects and structures",
+        "Multiattack (Druid level 5+): Two Rend attacks",
+        "Rend: Spell atk mod, reach 10 ft, 1d8 + Wis mod Slashing (Elemental Rend at level 6+: choose Acid/Cold/Fire/Lightning/Thunder)",
+        "Incandescent Breath: Expend level 1+ spell slot; 5-ft wide, 60-ft Line; Dex save; Fail: 2d8 Radiant/level + Wis mod; Success: half",
+        "Rampager (Druid level 10+): Entering enemy space (1 size smaller) \u2192 Str save or Prone; if already Prone, 2d6 Bludgeoning instead"
+    ].join("\n"),
+};
+
+CreatureList["titan form leviathan"] = {
+    name: "Titan Form: Leviathan",
+    nameAlt: ["Leviathan (Titan Form)", "Titan Leviathan"],
+    regExpSearch: /^(?=.*(titan))(?=.*(leviathan)).*$/i,
+    source: [["UAV26", 4]],
+    size: 2, // Large
+    type: "Monstrosity",
+    alignment: "Unaligned",
+    ac: 10,
+    hp: 20,
+    hd: [3, 6],
+    speed: "40 ft, swim 40 ft",
+    scores: [20, 10, 10, 10, 14, 10],
+    saves: ["", "", "", "", "", ""],
+    senses: "Darkvision 60 ft",
+    languages: "",
+    passivePerception: 12,
+    challengeRating: "\u2014",
+    proficiencyBonus: 2,
+    attacksAction: 1,
+    attacks: [{
+        name: "Rend",
+        ability: 4,
+        damage: [1, 8, "Bludgeoning"],
+        range: "Melee (10 ft)",
+        description: "Uses spell attack modifier; Elemental Rend (level 6+): can deal Acid, Cold, Fire, Lightning, or Thunder instead",
+        abilitytodamage: true
+    }],
+    features: [{
+        name: "Titan Form Statistics",
+        description: "AC = 10 + Wis modifier. Str and Dex scores equal Wis score. Temp HP = 2 \xD7 Druid level. Darkvision 60 ft.",
+        joinString: "\n   "
+    }, {
+        name: "Amphibious",
+        description: "The leviathan can breathe air and water.",
+        joinString: "\n   "
+    }, {
+        name: "Multiattack (Druid Level 5+)",
+        description: "The leviathan makes two Rend attacks.",
+        joinString: "\n   "
+    }, {
+        name: "Toxic Stench (Druid Level 10+)",
+        description: "Constitution saving throw (DC = spell save DC) for each creature of your choice that starts its turn in a 10-foot Emanation. Failure: 2d4 Poison damage and Poisoned until start of its next turn.",
+        joinString: "\n   "
+    }, {
+        name: "Ink Cloud (Reaction)",
+        description: "Trigger: The leviathan takes damage. Response: Expend a level 1+ spell slot; release an inky cloud filling a 15-foot-radius Cube centered on itself; move up to Speed. The Cube is Heavily Obscured for 1 minute or until a strong wind disperses it.",
+        joinString: "\n   "
+    }],
+    wildshapeString: [
+        "\u25C6 AC: 10 + Wis modifier | Speed: 40 ft, Swim 40 ft | Darkvision 60 ft",
+        "Str & Dex scores equal your Wis score | Temp HP: 2 \xD7 Druid level",
+        "Amphibious: breathe air and water",
+        "Multiattack (Druid level 5+): Two Rend attacks",
+        "Rend: Spell atk mod, reach 10 ft, 1d8 + Wis mod Bludgeoning (Elemental Rend at level 6+: choose Acid/Cold/Fire/Lightning/Thunder)",
+        "Ink Cloud (Reaction): On taking damage, expend level 1+ spell slot; 15-ft radius Cube Heavily Obscured for 1 min; move up to Speed",
+        "Toxic Stench (Druid level 10+): Con save each creature starting turn in 10-ft Emanation; Fail: 2d4 Poison + Poisoned until its next turn"
+    ].join("\n"),
+};
+
+CreatureList["titan form insectoid"] = {
+    name: "Titan Form: Insectoid",
+    nameAlt: ["Insectoid (Titan Form)", "Titan Insectoid"],
+    regExpSearch: /^(?=.*(titan))(?=.*(insectoid)).*$/i,
+    source: [["UAV26", 5]],
+    size: 2, // Large
+    type: "Monstrosity",
+    alignment: "Unaligned",
+    ac: 8,
+    hp: 20,
+    hd: [3, 6],
+    speed: "40 ft, fly 40 ft",
+    scores: [20, 10, 10, 10, 14, 10],
+    saves: ["", "", "", "", "", ""],
+    senses: "Darkvision 60 ft",
+    languages: "",
+    passivePerception: 12,
+    challengeRating: "\u2014",
+    proficiencyBonus: 2,
+    attacksAction: 1,
+    attacks: [{
+        name: "Rend",
+        ability: 4,
+        damage: [1, 8, "Piercing"],
+        range: "Melee (10 ft)",
+        description: "Uses spell attack modifier; Elemental Rend (level 6+): can deal Acid, Cold, Fire, Lightning, or Thunder instead",
+        abilitytodamage: true
+    }, {
+        name: "Energizing Pollen",
+        ability: 4,
+        damage: [2, 8, ""],
+        range: "15 ft (self)",
+        description: "Expend level 1+ spell slot; restore 2d8 + 5/SL HP total; divide among any creatures within 15 ft"
+    }],
+    features: [{
+        name: "Titan Form Statistics",
+        description: "AC = 8 + Wis modifier. Str and Dex scores equal Wis score. Temp HP = 2 \xD7 Druid level. Darkvision 60 ft.",
+        joinString: "\n   "
+    }, {
+        name: "Flyby",
+        description: "The insectoid doesn't provoke Opportunity Attacks when it flies out of an enemy's reach.",
+        joinString: "\n   "
+    }, {
+        name: "Multiattack (Druid Level 5+)",
+        description: "The insectoid makes two Rend attacks.",
+        joinString: "\n   "
+    }, {
+        name: "Hive Mind (Druid Level 10+)",
+        description: "When assuming this form, forge a telepathic link with a number of creatures you can see and that communicate in at least one language (max = Druid level). You and the chosen creatures can communicate telepathically with each other while on the same plane, regardless of shared language.",
+        joinString: "\n   "
+    }],
+    wildshapeString: [
+        "\u25C6 AC: 8 + Wis modifier | Speed: 40 ft, Fly 40 ft | Darkvision 60 ft",
+        "Str & Dex scores equal your Wis score | Temp HP: 2 \xD7 Druid level",
+        "Flyby: No opportunity attacks when flying out of an enemy's reach",
+        "Multiattack (Druid level 5+): Two Rend attacks",
+        "Rend: Spell atk mod, reach 10 ft, 1d8 + Wis mod Piercing (Elemental Rend at level 6+: choose Acid/Cold/Fire/Lightning/Thunder)",
+        "Energizing Pollen: Expend level 1+ spell slot; restore 2d8 + 5\xD7slot level HP total; divide among any creatures within 15 ft",
+        "Hive Mind (Druid level 10+): On assuming form, forge telepathic link with up to [Druid level] visible creatures that speak a language; communicate telepathically on same plane"
+    ].join("\n"),
+};
+
+// ============================================================
 // SUBCLASS: CIRCLE OF THE TITAN (DRUID)
+// ============================================================
 AddSubClass("druid", "circle of the titan", {
     regExpSearch: /^(?=.*(druid|shaman))(?=.*(titan|colossus|behemoth|giant)).*$/i,
     subname: "Circle of the Titan",
