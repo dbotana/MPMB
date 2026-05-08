@@ -27,7 +27,7 @@ SourceList["UAV262"] = {
 
 // SUBCLASS: PATH OF LAMENT (BARBARIAN)
 AddSubClass("barbarian", "path of lament", {
-    regExpSearch: /^(?=.*(barbarian|berserker|rage))(?=.*(lament|sorrow|banshee|wail|grief)).*$/i,
+    regExpSearch: /^(?=.*barbarian)(?=.*lament).*$/i,
     subname: "Path of Lament",
     source: [["UAV262", 1]],
     features: {
@@ -112,7 +112,7 @@ AddSubClass("barbarian", "path of lament", {
 
 // SUBCLASS: WARRIOR OF VENOM (MONK)
 AddSubClass("monk", "warrior of venom", {
-    regExpSearch: /^(?=.*venom)((?=.*(monk|monastic))|(((?=.*martial)(?=.*(artist|arts)))|((?=.*spiritual)(?=.*warrior)))).*$/i,
+    regExpSearch: /^(?=.*monk)(?=.*venom).*$/i,
     subname: "Warrior of Venom",
     source: [["UAV262", 3]],
     features: {
@@ -193,7 +193,7 @@ AddSubClass("monk", "warrior of venom", {
 
 // SUBCLASS: PRIMORDIAL PATRON (WARLOCK)
 AddSubClass("warlock", "primordial patron", {
-    regExpSearch: /^(?=.*(warlock|pact))(?=.*(primordial|elemental|primeval)).*$/i,
+    regExpSearch: /^(?=.*warlock)(?=.*primordial).*$/i,
     subname: "Primordial Patron",
     source: [["UAV262", 5]],
     spellcastingExtra: [
