@@ -112,7 +112,7 @@ AddSubClass("barbarian", "path of lament", {
 
 // SUBCLASS: WARRIOR OF VENOM (MONK)
 AddSubClass("monk", "warrior of venom", {
-    regExpSearch: /^(?=.*(monk|martial|warrior))(?=.*(venom|poison|toxin|serpent)).*$/i,
+    regExpSearch: /^(?=.*venom)((?=.*(monk|monastic))|(((?=.*martial)(?=.*(artist|arts)))|((?=.*spiritual)(?=.*warrior)))).*$/i,
     subname: "Warrior of Venom",
     source: [["UAV262", 3]],
     features: {
