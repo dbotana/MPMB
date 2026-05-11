@@ -27,7 +27,7 @@ SourceList["UAV26"] = {
 
 // SUBCLASS: PESTILENCE DOMAIN (CLERIC)
 AddSubClass("cleric", "pestilence domain", {
-    regExpSearch: /^(?=.*(cleric|priest|clergy|acolyte))(?=.*(pestilence|plague|rot|blight|disease)).*$/i,
+    regExpSearch: /^(?=.*cleric)(?=.*pestilence).*$/i,
     subname: "Pestilence Domain",
     source: [["UAV26", 1]],
     spellcastingExtra: [
@@ -281,7 +281,7 @@ CreatureList["insectoid"] = {
 // SUBCLASS: CIRCLE OF THE TITAN (DRUID)
 // ============================================================
 AddSubClass("druid", "circle of the titan", {
-    regExpSearch: /^(?=.*(druid|shaman))(?=.*(titan|colossus|behemoth|giant)).*$/i,
+    regExpSearch: /^(?=.*druid)(?=.*titan).*$/i,
     subname: "Circle of the Titan",
     source: [["UAV26", 3]],
     spellcastingExtra: [
@@ -403,7 +403,7 @@ AddSubClass("druid", "circle of the titan", {
 
 // SUBCLASS: HELL KNIGHT (FIGHTER)
 AddSubClass("fighter", "hell knight", {
-    regExpSearch: /^(?=.*(fighter|warrior|champion))(?=.*(hell|infernal|diabolical|devil)).*$/i,
+    regExpSearch: /^(?=.*fighter)(?=.*hell).*$/i,
     subname: "Hell Knight",
     source: [["UAV26", 6]],
     features: {
@@ -514,7 +514,7 @@ AddSubClass("fighter", "hell knight", {
 
 // SUBCLASS: DEMONIC SORCERY (SORCERER)
 AddSubClass("sorcerer", "demonic sorcery", {
-    regExpSearch: /^(?=.*(sorcerer|sorcery|witch))(?=.*(demon|demonic|abyss|abyssal)).*$/i,
+    regExpSearch: /^(?=.*sorcerer)(?=.*demon).*$/i,
     subname: "Demonic Sorcery",
     source: [["UAV26", 7]],
     spellcastingExtra: [
