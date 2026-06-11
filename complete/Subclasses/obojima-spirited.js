@@ -2278,3 +2278,154 @@ AddSubClass("wizard", "origami mage", {
 		}
 	}
 });
+
+// Species start here
+
+RaceList["nakudama"] = {
+	regExpSearch : /^(?=.*nakudama).*$/i,
+	name : "Nakudama",
+	sortname : "Nakudama",
+	source : [["OTT", 0]],
+	plural : "Nakudama",
+	size : 4, // Small
+	speed : {
+		walk : { spd : 30, enc : 20 }
+	},
+	creatureType : "humanoid",
+	languageProfs : ["Common", "Naku Naku"],
+	trait : "Nakudama" +
+		"\n • Amphibious: I can breathe air and water." +
+		"\n • Grasping Tongue: Bonus Action, once per turn: lash my tongue at an object within 15 feet weighing no more than 5 pounds, pulling it to me. If worn or carried, the creature makes a Strength save (DC 8 + my Strength modifier + my Proficiency Bonus) or loses the object." +
+		"\n • Latching Tongue: Bonus Action, once per turn: extend my tongue to latch onto a surface or creature at least one size larger within 15 feet, pulling myself toward it." +
+		"\n • Standing Leap: When I make a Long Jump, I can cover up to 20 feet without a running start. When I make a High Jump, I can cover up to 15 feet without a running start.",
+	features : {
+		"grasping tongue" : {
+			name : "Grasping Tongue",
+			usages : 1,
+			minlevel : 1,
+			recovery : "turn",
+			action : [["bonus action", "Grasping Tongue"]]
+		},
+		"latching tongue" : {
+			name : "Latching Tongue",
+			usages : 1,
+			minlevel : 1,
+			recovery : "turn",
+			action : [["bonus action", "Latching Tongue"]]
+		}
+	}
+};
+
+RaceList["elves (obojima)"] = {
+	regExpSearch : /^(?=.*elves?)(?=.*obojima).*$/i,
+	name : "Elves (Obojima)",
+	sortname : "Elves (Obojima)",
+	source : [["OTT", 0]],
+	plural : "Elves",
+	size : 3, // Medium
+	speed : {
+		walk : { spd : 30, enc : 20 }
+	},
+	vision : [["Darkvision", "fixed 60"]],
+	creatureType : "humanoid",
+	languageProfs : ["Common"],
+	trait : "Elves (Obojima)" +
+		"\n • Darkvision: I have Darkvision with a range of 60 feet." +
+		"\n • Ethereal Sight: I can cast a magic action to see creatures in the Spirit Realm as glowing outlines for 1 hour. I can use this a number of times equal to my Proficiency Bonus; I regain all expended uses when I finish a Long Rest." +
+		"\n • Oaka Mark: I gain a cantrip at level 1, a spell at level 3, and a spell at level 5 based on my Oaka Mark. My level 3 and 5 spells are always prepared and can be cast once without expending a spell slot or requiring material components; this recharges on a Long Rest, or I can spend a spell slot. My Spellcasting Ability is Intelligence, Wisdom, or Charisma (my choice).",
+	spellcastingAbility : [3, 4, 5], // Choose one: Strength, Constitution, Intelligence, Wisdom, Charisma
+	spellcastingBonus : [{
+		name : "Oaka Mark (Cantrip)",
+		spells : ["resistance", "sacred flame", "guidance", "dancing lights", "spare the dying"],
+		selection : ["resistance", "sacred flame", "guidance", "dancing lights", "spare the dying"],
+		firstCol : 'atwill'
+	}, {
+		name : "Oaka Mark (Level 3)",
+		spells : ["heroism", "bane", "pacify person", "sprout foliage", "cure wounds"],
+		selection : ["heroism", "bane", "pacify person", "sprout foliage", "cure wounds"],
+		firstCol : 'oncelr'
+	}, {
+		name : "Oaka Mark (Level 5)",
+		spells : ["at your side", "shatter", "calm emotions", "animal messenger", "lesser restoration"],
+		selection : ["at your side", "shatter", "calm emotions", "animal messenger", "lesser restoration"],
+		firstCol : 'oncelr'
+	}],
+	features : {
+		"ethereal sight" : {
+			name : "Ethereal Sight",
+			usages : "Proficiency Bonus",
+			minlevel : 1,
+			recovery : "long rest",
+			action : [["action", "Ethereal Sight (1 hour)"]]
+		}
+	}
+};
+
+RaceList["dara"] = {
+	regExpSearch : /^(?=.*dara).*$/i,
+	name : "Dara",
+	sortname : "Dara",
+	source : [["OTT", 0]],
+	plural : "Dara",
+	size : 3, // Medium or Small based on variant
+	speed : {
+		walk : { spd : 30, enc : 20 }
+	},
+	creatureType : "humanoid",
+	languageProfs : ["Common"],
+	trait : "Dara" +
+		"\n • Awakened Skills: I gain proficiency in three skills of my choice." +
+		"\n • Create Talisman: I can use a Magic action to create a paper talisman that bestows unique abilities on any creature possessing it. This lasts 1 hour or until activated. Once used, it is unavailable until I finish a Long Rest." +
+		"\n • Sacred Revelation: I can use a Magic action to touch and absorb information from thumbprint-shaped glyphs, which can convey simple messages to complex skills." +
+		"\n • Impart Knowledge: At character level 10, I can use a Magic action to press my hand to any surface to create a thumbprint-shaped glyph storing a spoken message. The glyph is visible only to other dara and can only be absorbed via Sacred Revelation.",
+	skillstxt : "Choose three skills to gain proficiency",
+	features : {
+		"create talisman" : {
+			name : "Create Talisman",
+			usages : 1,
+			minlevel : 1,
+			recovery : "long rest",
+			action : [["action", "Create Talisman (1 hour duration)"]]
+		},
+		"sacred revelation" : {
+			name : "Sacred Revelation",
+			usages : "At Will",
+			minlevel : 1,
+			action : [["action", "Sacred Revelation (absorb glyph)"]]
+		},
+		"impart knowledge" : {
+			name : "Impart Knowledge",
+			usages : "At Will",
+			minlevel : 10,
+			action : [["action", "Impart Knowledge (create glyph)"]]
+		}
+	}
+};
+
+RaceList["foldbound"] = {
+	regExpSearch : /^(?=.*foldbound).*$/i,
+	name : "Foldbound",
+	sortname : "Foldbound",
+	source : [["OTT", 0]],
+	plural : "Foldbound",
+	size : 4, // Small
+	speed : {
+		walk : { spd : 25, enc : 15 }
+	},
+	creatureType : "construct",
+	trait : "Foldbound" +
+		"\n • Endless Research: I don't need to sleep, and magic can't put me to sleep. When I take a long rest, I spend at least 6 hours doing light activity instead of sleeping. I may keep watch, copy a spell into a spell book, or scribe a spell scroll during a long rest." +
+		"\n • Made of Paper: I have vulnerability to fire damage. I have resistance to poison damage. I have advantage on saving throws against being poisoned. I don't need to eat, drink, or breathe." +
+		"\n • Paper Thin: I can move through the space of any creature that is a size larger than me, but I can't stop in the same space." +
+		"\n • Reconstruction: My body is made of magically animated paper. I do not age. My body can be manually repaired using Mending, and must go through intensive reconstruction approximately every five years.",
+	dmgres : ["poison"],
+	dmgvuln : ["fire"],
+	features : {
+		"endless research" : {
+			name : "Endless Research",
+			usages : "Constant",
+			minlevel : 1,
+			description : "I don't need to sleep, and magic can't put me to sleep. During a long rest, I spend 6 hours doing light activities like keeping watch, copying spells, or scribing scrolls."
+		}
+	}
+};
