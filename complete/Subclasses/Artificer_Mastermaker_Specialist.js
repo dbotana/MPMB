@@ -1,25 +1,37 @@
-// Add the Mastermaker specialist
+/* -WHAT IS THIS?-
+This file adds optional material to "MPMB's Character Record Sheet" found at https://flapkan.com/mpmb/charsheets
+Import this file using the "Add Extra Materials" bookmark.
+-KEEP IN MIND-
+It is recommended to enter the code in a fresh sheet before adding any other information (i.e. before making your character with it).
+*/
+
+/* -INFORMATION-
+Subject: Subclass
+Effect: This script adds the Mastermaker, an Artificer specialist (Homebrew by Keith Baker, Dread Metrol: Into the Mists - An Eberron / Ravenloft Crossover)
+Code by: Rocky
+Date: 2023-11-24 (sheet v13)
+*/
 var iFileName = "Artificer - Mastermaker [Custom].js";
 RequiredSheetVersion(13);
-
-SourceList["MkM"] = {
+SourceList["MMk"] = {
     name: "Artificer - Mastermaker",
-    abbreviation: "MkM",
-    abbreviationSpellsheet: "Mk",
-    group: "Rocky's Homebrew",
-    date: "2023/11/24"
+    abbreviation: "MMk",
+    abbreviationSpellsheet: "MMk",
+    group: "Dread Metrol",
+    date: "2023/11/24",
+    url: "https://dnd5e.wikidot.com/artificer:mastermaker"
 };
 
 AddSubClass("artificer", "mastermaker", {
     regExpSearch: /^(?=.*mastermaker)(?!.*wizard).*$/i,
     subname: "Mastermaker",
     fullname: "Mastermaker",
-    source: ["HB", 2],
+    source: ["MMk", 2],
     attacks: [1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
     features: {
         "subclassfeature3": {
             name: "Tools of Integration",
-            source: ["HB", 2],
+            source: ["MMk", 2],
             minlevel: 3,
             description: " [proficient with heavy armor and smith's tools]",
             toolProfs: ["smith's tools"],
@@ -28,7 +40,7 @@ AddSubClass("artificer", "mastermaker", {
         },
         "subclassfeature3.1": {
             name: "Prosthesis Expertise",
-            source: ["HB", 2],
+            source: ["MMk", 2],
             minlevel: 3,
             description: desc([
                 "After a long rest, I can touch a nonmagical object to create a permanent magical prosthesis",
@@ -39,7 +51,7 @@ AddSubClass("artificer", "mastermaker", {
         },
         "subclassfeature3.2": {
             name: "Battlefist",
-            source: ["HB", 2],
+            source: ["MMk", 2],
             minlevel: 3,
             description: desc([
                 "Replace an arm with a battlefist, a magical prosthetic",
@@ -52,7 +64,7 @@ AddSubClass("artificer", "mastermaker", {
             weaponsAdd: ["Battlefist"],
             weaponOptions: {
                 name: "Battlefist",
-                source: ["HB", 2],
+                source: ["MMk", 2],
                 regExpSearch: /^(?=.*battlefist).*$/i,
                 type: "Simple",
                 ability: 4, // Intelligence
@@ -77,7 +89,7 @@ AddSubClass("artificer", "mastermaker", {
         },
         "subclassfeature9": {
             name: "Improved Battlefist",
-            source: ["HB", 2],
+            source: ["MMk", 2],
             minlevel: 9,
             description: desc([
                 "Apply two infusions to battlefist at a time, and can be infused as both a weapon and a shield",
@@ -87,7 +99,7 @@ AddSubClass("artificer", "mastermaker", {
         },
         "subclassfeature15": {
             name: "Construct Apotheosis",
-            source: ["HB", 2],
+            source: ["MMk", 2],
             minlevel: 15,
             description: desc([
                 "Gain resistance to poison and psychic damage; immune to poisoned condition",
@@ -124,7 +136,7 @@ AddSubClass("artificer", "mastermaker", {
 });
 MagicItemsList["Improved Battlefist Shield"] = {
     name: "Improved Battlefist Shield",
-    source: [["HB", 2]],
+    source: [["MMk", 2]],
     type: "shield",
     rarity: "common", // Update rarity as appropriate
     description: "When equipped, this shield grants a +2 bonus to AC. It can be infused as both a weapon and a shield. While used as a shield, it still functions as a magical melee weapon.",
