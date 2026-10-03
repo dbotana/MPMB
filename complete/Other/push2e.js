@@ -25,7 +25,7 @@ SourceList["P2E"] = {
 
 SpellsList["push"] = {
 		name : "Push",
-		classes : ["sorcerer", "wizard", "bard", "cleric", "druid", "artificer", "warlock", "paladin", "ranger"],
+		classes : ["sorcerer", "wizard"],
 		source : ["P2E", 0],
 		level : 1,
 		school : "Evoc",
