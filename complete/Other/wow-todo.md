@@ -27,8 +27,28 @@ Done:
 
 Druid, Monk, Paladin, Rogue and Warlock need no class entry. WoW uses the 2024 class unchanged, so players pick the built-in class.
 
+Agent-loop run `agent-loop-runs/2026-11-17-1338-wow-subclasses-1` added seven subclasses. Review 1 sent back two todo corrections, and review 2 passed. Neither reviewer could run the plan's runtime harness (their commands were refused by a permission setting), so it was rerun by hand afterwards: **ALL CHECKS PASSED**.
+
+- [x] Path of the Elements and Path of the Spiritual Guardian (Barbarian, copied by Shaman). Discipline Domain and Shadow Domain (Cleric, copied by Priest). Oath of the Holy (Paladin, copied by Death Knight). Warrior of Mystic Brews (Monk). Swashbuckler (Rogue).
+- [x] The four spells they grant: *Prayer of Mending*, *Psychic Horror*, *Shadow Word: Pain*, *Void Eruption*.
+- [x] Copied subclass features that read the base class key (Berserker, Champion, Draconic Sorcery) now also read the copy's key.
+- [x] `matchWoWSubclasses()` lets copied subclasses match "<WoW class> (<subclass>)", e.g. "Death Knight (Oath of Devotion)".
+
 ## Next: check and fix WoW.js
 
+- [ ] **Fix first: the subclass menu breaks some standard classes.** This was introduced by the class run, not the subclass run. Five built-in subclasses have a `fullname`, and the subclass dialog writes that bare name into the Class field. With the WoW copies loaded, the sheet reads those bare names as the wrong class. The check below runs the sheet's own `ParseClass()` on each subclass's dialog text, which is the test `ClassSelection.js:51` uses to decide what the menu lists:
+
+  | Class | Subclass (`fullname`) | Result now |
+  |---|---|---|
+  | Barbarian | Berserker ("Berserker") | listed, but picking it turns the row into **Shaman** |
+  | Fighter | Champion ("Champion") | listed, but picking it turns the row into **Warrior** |
+  | Ranger | Hunter ("Hunter") | listed, but picking it turns the row into the WoW **Hunter** |
+  | Wizard | Evoker ("Evoker") | **missing from the menu**: "Evoker" is read as the WoW Evoker class |
+  | Demon Hunter | Hunter ("Hunter") | listed, but picking it turns the row into the WoW Hunter |
+  | Evoker | Draconic Sorcery ("Draconic Sorcerer") | listed, but picking it turns the row into the Sorcerer |
+  | Mage | Evoker ("Evoker") | missing from the menu |
+
+  **Verified fix:** in `WoW.js`, `delete ClassSubList[key].fullname` for `barbarian-berserker`, `fighter-champion`, `ranger-hunter`, `wizard-evoker` and `sorcerer-draconic`. The dialog then writes "Class (Subclass)", and the same check gives 0 problems across all 32 class/subclass pairs. Side effect: standard characters show "Barbarian (Berserker)" instead of "Berserker" in the Class field and feature headers, like every other subclass. (Hunter and Evoker can't keep a bare `fullname` in any case, because those are now class names.) Do this before or in the `wow-subclasses-2` run, since the WoW Draconic Sorcery depends on it.
 - [x] **Import test in Acrobat** on a fresh v24 sheet. Type each class name into the Class field and check its features, subclass choice and spell list. Exercise the code that was rekeyed: Shaman Rage damage, both Priest Blessed Strikes options, Hunter's Mark at Hunter and Demon Hunter levels 17 and 20, Mage Spell Mastery (18) and Signature Spells (20), and the Death Coil pool size.
 - [ ] **Faithful Steed at level 20** (`WoW.js:187-191`). The Undead steed text is also appended to the level-20 one-line summary, which takes room the capstone needs. For index 19, append a short note instead, e.g. `" [Undead steed option, Ghostly Stride]"`. (Review note 1.)
 - [ ] **Demon Hunter Fighting Style** (`WoW.js:197`). The text mentions Void Warrior, but it can't be selected. Once the Void Warrior feat exists, add it to this feature's `choices`.
@@ -42,13 +62,13 @@ These have their own `subclassFeature` entries with `source: "WoW"`.
 - [ ] Oath of the Ebon Blade, for the Death Knight (`class/class-deathknight.json`). The book calls it a Paladin subclass.
 - [ ] Demon Hunter, for the Demon Hunter (`class/class-demonhunter.json`). The book calls it a Ranger subclass.
 - [ ] Draconic Sorcery (WoW), for the Evoker (`class/class-evoker.json`). It is the 2024 Draconic Sorcery plus the "Evoker Spells" subclass spell list. Its `regExpSearch` must match "Evoker", because the built-in Draconic Sorcery requires "sorcerer".
-- [ ] Path of the Elements, for the Barbarian and the Shaman (`class/class-barbarian.json`). `class/class-shaman.json` only copies it.
-- [ ] Path of the Spiritual Guardian, for the Barbarian and the Shaman (same files).
-- [ ] Discipline Domain, for the Cleric and the Priest (`class/class-cleric.json`). `class/class-priest.json` only copies it.
-- [ ] Shadow Domain, for the Cleric and the Priest (same files).
-- [ ] Oath of the Holy, for the Paladin (`class/class-paladin.json`).
-- [ ] Warrior of Mystic Brews, for the Monk (`class/class-monk.json`).
-- [ ] Swashbuckler (2024 version), for the Rogue (`class/class-rogue.json`).
+- [x] Path of the Elements, for the Barbarian and the Shaman (`class/class-barbarian.json`). `class/class-shaman.json` only copies it.
+- [x] Path of the Spiritual Guardian, for the Barbarian and the Shaman (same files).
+- [x] Discipline Domain, for the Cleric and the Priest (`class/class-cleric.json`). `class/class-priest.json` only copies it.
+- [x] Shadow Domain, for the Cleric and the Priest (same files).
+- [x] Oath of the Holy, for the Paladin (`class/class-paladin.json`). The Death Knight copies it.
+- [x] Warrior of Mystic Brews, for the Monk (`class/class-monk.json`).
+- [x] Swashbuckler (2024 version), for the Rogue (`class/class-rogue.json`).
 
 Tip: call `AddSubClass()` for the Barbarian, Cleric and Paladin subclasses **before** the `reskinWoWClass()` calls in `WoW.js`. Shaman, Priest and Death Knight then copy them automatically. Their `regExpSearch` must not require the base class name.
 
@@ -63,7 +83,8 @@ These have no new rules. Each 5etools entry is a plain `_copy` of the XPHB subcl
 
 The sheet has only the SRD subclass of each class built in. The other 2024 subclasses exist only if PHB'24 content is imported, and it has to be imported before `WoW.js`.
 
-- [ ] Check each copied subclass under its WoW class name, and fix the cases under "Known limitations".
+- [x] Check each copied subclass under its WoW class name. Done with the menu check: every built-in subclass resolves correctly under its WoW class except the `fullname` cases in "Fix first" above. Repeat the check for PHB'24 subclasses once that content is imported.
+- [ ] `ranger-hunter`'s regex matches any name containing "hunter", so typing plain "Hunter" or "Demon Hunter" selects the Hunter subclass automatically. Removing its `fullname` doesn't change this. It needs a tighter regex, e.g. one that requires "hunter" twice or "ranger" and "hunter" together.
 
 ### Druid Wild Shape stat blocks
 
@@ -71,7 +92,7 @@ The sheet has only the SRD subclass of each class built in. The other 2024 subcl
 
 ## Chapter 1: Spells and class spell lists
 
-66 Chapter 1 spells remain, all in `spells/spells-wow.json`. They are grouped below by the book section that lists them, and each section is also that class's spell-list addition. How to attach a list:
+62 Chapter 1 spells remain, all in `spells/spells-wow.json`. They are grouped below by the book section that lists them, and each section is also that class's spell-list addition. How to attach a list:
 
 - **For a WoW class:** add to its `spellcastingList.extraspells`, e.g. `ClassList.deathknight.spellcastingList.extraspells`.
 - **For a built-in class:** put the class in the spell's `classes` array. That's `"druid"`, `"paladin"` or `"warlock"`.
@@ -153,10 +174,10 @@ Also decide whether the Death Knight keeps the WoW Paladin spells. It reads the 
 **Priest Spells**
 - [ ] Apotheosis
 - [ ] Holy Nova
-- [ ] Prayer of Mending
-- [ ] Psychic Horror
-- [ ] Shadow Word: Pain
-- [ ] Void Eruption
+- [x] Prayer of Mending
+- [x] Psychic Horror
+- [x] Shadow Word: Pain
+- [x] Void Eruption
 
 **Warlock Spells**
 - [ ] Curse of Agony
@@ -229,12 +250,15 @@ Also decide whether the Death Knight keeps the WoW Paladin spells. It reads the 
 
 These are for the subclass work. Fix each one when that subclass is added.
 
-- **Subclasses that don't match the WoW class name.** Some copied subclasses have a `regExpSearch` that requires the base class name. Oath of Devotion needs "paladin" (a problem for the Death Knight), and Draconic Sorcery needs "sorcerer" (Evoker). Check imported PHB'24 subclasses the same way.
-- **Subclass features that don't scale.** These read `classes.known.<base>` and don't scale for a copy: Berserker (`barbarian`, ListsClasses.js:3533) for the Shaman, Champion (`fighter`, :3906) for the Warrior, and Draconic Sorcery (`sorcerer`, :4236) for the Evoker.
+- **Subclass regexes (fixed).** `matchWoWSubclasses()` in `WoW.js` adds a "<WoW class> (<subclass>)" alternative to every copied subclass regex that didn't match, so imported PHB'24 subclasses are covered too as long as they're imported before `WoW.js`. Caveat: Draconic Sorcery has `fullname: "Draconic Sorcerer"`, so it is listed in the Evoker's subclass menu, but picking it there writes "Draconic Sorcerer" into the Class field, which the sheet reads as the Sorcerer. Typing "Evoker (Draconic Sorcery)" works. Removing the `fullname` fixes it (see "Fix first" at the top).
+- **Subclass features (fixed).** Berserker, Champion and Draconic Sorcery now read `(classes.known.<base> || classes.known.<copy>)`.
 - **Import order.** Each copied class takes its subclass list as it is when `WoW.js` runs, so import `WoW.js` after any other content that adds subclasses.
-- **Shared subclass names.** Typing only a subclass name two classes share, e.g. "Champion", "Berserker" or "Evoker", can resolve to the WoW class.
+- **Shared subclass names.** Typing only a subclass name two classes share can resolve to the WoW class, because the class added last wins the tie. For example, "Path of the Elements" gives Shaman, "Discipline Domain" gives Priest and "Oath of the Holy" gives Death Knight. Typing "Class (Subclass)" always works. The dialog problem this bullet used to describe is the "Fix first" item at the top.
+- **PHB'24-only spells.** Five domain spells aren't in the sheet's built-in spell list, so they only show up if PHB'24 content is imported. Otherwise the sheet skips them without an error. Discipline Domain grants `arcane vigor`, `circle of power` and `destructive wave`. Shadow Domain grants `crown of madness` and `summon undead`.
 
 ## Notes for the next agent-loop run
 
 - **Readable folders.** The class run could only read `data/book`, `data/class` and `data/spells`. Feats, invocations, maneuvers, languages and species are in top-level files (`feats.json`, `optionalfeatures.json`, `languages.json`, `races.json`, `fluff-races.json`). So pass `--read-dir /Users/dbotana/Github/5etools-src/data` instead, which also covers `bestiary/`.
-- **Syntax and patterns.** Follow `MPMB-v14/additional content syntax/` (sheet v24). Reuse the helpers in `WoW.js`: `reskinWoWClass`, `rekeyWoWFeature` and `appendWoWDescription`.
+- **Syntax and patterns.** Follow `MPMB-v14/additional content syntax/` (sheet v24). Reuse the helpers in `WoW.js`: `reskinWoWClass`, `rekeyWoWFeature`, `appendWoWDescription` and `matchWoWSubclasses`.
+- **Subclass menu check.** Ask the plan to include this check, and have the reviewer actually run it. Load `ListsClasses.js` and `WoW.js` as the runtime harness does. Then eval the real `ParseClass()` (`MPMB-v14/_functions/Functions1.js:1583`) and `sourceDate()` (`Functions0.js:1560`), with `testSource(key, obj)` stubbed as `return !obj`. Then, for every class and every key in its `subclasses[1]`, check that `ParseClass(fullname or "Class (subname)")` returns that same class and subclass. The `return !obj` stub matters: a stub that always returns false makes the sheet skip the PHB Ranger (`Functions1.js:1598`).
+- **Reviewer permissions.** In the subclasses-1 run, both reviews had their harness commands refused by the permission mode. If that happens again, add an `--allow` rule for the harness command, or rerun the harness by hand before trusting the PASS.
