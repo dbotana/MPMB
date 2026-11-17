@@ -36,7 +36,7 @@ Agent-loop run `agent-loop-runs/2026-11-17-1338-wow-subclasses-1` added seven su
 
 ## Next: check and fix WoW.js
 
-- [ ] **Fix first: the subclass menu breaks some standard classes.** This was introduced by the class run, not the subclass run. Five built-in subclasses have a `fullname`, and the subclass dialog writes that bare name into the Class field. With the WoW copies loaded, the sheet reads those bare names as the wrong class. The check below runs the sheet's own `ParseClass()` on each subclass's dialog text, which is the test `ClassSelection.js:51` uses to decide what the menu lists:
+- [x] **Fix first: the subclass menu breaks some standard classes.** This was introduced by the class run, not the subclass run. Five built-in subclasses have a `fullname`, and the subclass dialog writes that bare name into the Class field. With the WoW copies loaded, the sheet reads those bare names as the wrong class. The check below runs the sheet's own `ParseClass()` on each subclass's dialog text, which is the test `ClassSelection.js:51` uses to decide what the menu lists:
 
   | Class | Subclass (`fullname`) | Result now |
   |---|---|---|
@@ -59,9 +59,9 @@ Agent-loop run `agent-loop-runs/2026-11-17-1338-wow-subclasses-1` added seven su
 
 These have their own `subclassFeature` entries with `source: "WoW"`.
 
-- [ ] Oath of the Ebon Blade, for the Death Knight (`class/class-deathknight.json`). The book calls it a Paladin subclass.
-- [ ] Demon Hunter, for the Demon Hunter (`class/class-demonhunter.json`). The book calls it a Ranger subclass.
-- [ ] Draconic Sorcery (WoW), for the Evoker (`class/class-evoker.json`). It is the 2024 Draconic Sorcery plus the "Evoker Spells" subclass spell list. Its `regExpSearch` must match "Evoker", because the built-in Draconic Sorcery requires "sorcerer".
+- [x] Oath of the Ebon Blade, for the Death Knight (`class/class-deathknight.json`). The book calls it a Paladin subclass.
+- [x] Demon Hunter, for the Demon Hunter (`class/class-demonhunter.json`). The book calls it a Ranger subclass.
+- [x] Draconic Sorcery (WoW), for the Evoker (`class/class-evoker.json`). It is the 2024 Draconic Sorcery plus the "Evoker Spells" subclass spell list. Its `regExpSearch` must match "Evoker", because the built-in Draconic Sorcery requires "sorcerer".
 - [x] Path of the Elements, for the Barbarian and the Shaman (`class/class-barbarian.json`). `class/class-shaman.json` only copies it.
 - [x] Path of the Spiritual Guardian, for the Barbarian and the Shaman (same files).
 - [x] Discipline Domain, for the Cleric and the Priest (`class/class-cleric.json`). `class/class-priest.json` only copies it.
@@ -254,7 +254,7 @@ These are for the subclass work. Fix each one when that subclass is added.
 - **Subclass features (fixed).** Berserker, Champion and Draconic Sorcery now read `(classes.known.<base> || classes.known.<copy>)`.
 - **Import order.** Each copied class takes its subclass list as it is when `WoW.js` runs, so import `WoW.js` after any other content that adds subclasses.
 - **Shared subclass names.** Typing only a subclass name two classes share can resolve to the WoW class, because the class added last wins the tie. For example, "Path of the Elements" gives Shaman, "Discipline Domain" gives Priest and "Oath of the Holy" gives Death Knight. Typing "Class (Subclass)" always works. The dialog problem this bullet used to describe is the "Fix first" item at the top.
-- **PHB'24-only spells.** Five domain spells aren't in the sheet's built-in spell list, so they only show up if PHB'24 content is imported. Otherwise the sheet skips them without an error. Discipline Domain grants `arcane vigor`, `circle of power` and `destructive wave`. Shadow Domain grants `crown of madness` and `summon undead`.
+- **PHB'24-only spells.** Five domain spells aren't in the sheet's built-in spell list, so they only show up if PHB'24 content is imported. Otherwise the sheet skips them without an error. Discipline Domain grants `arcane vigor`, `circle of power` and `destructive wave`. Shadow Domain grants `crown of madness` and `summon undead`. The WoW Ebon Blade, Demon Hunter and Evoker subclass spell lists also name XPHB spells that may be missing without PHB'24 content (e.g. `summon undead`, `freedom of movement`, `circle of power`, `destructive wave`, `steel wind strike`, `conjure volley`).
 
 ## Notes for the next agent-loop run
 

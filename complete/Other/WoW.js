@@ -8,7 +8,7 @@
 
 /*	-INFORMATION-
 	Subject:	Class
-	Effect:		This script adds the World of Warcraft versions of the Death Knight, Demon Hunter, Evoker, Hunter, Mage, Priest, Shaman and Warrior classes, the World of Warcraft class features for the Death Knight, Demon Hunter and Shaman, the Path of the Elements, Path of the Spiritual Guardian, Discipline Domain, Shadow Domain, Oath of the Holy, Warrior of Mystic Brews and Swashbuckler subclasses, the Rune Strike, Prayer of Mending, Psychic Horror, Shadow Word: Pain and Void Eruption spells, and fixes for copied subclasses whose regex or class-level checks needed the WoW class names.
+	Effect:		This script adds the World of Warcraft versions of the Death Knight, Demon Hunter, Evoker, Hunter, Mage, Priest, Shaman and Warrior classes, the World of Warcraft class features for the Death Knight, Demon Hunter and Shaman, the Path of the Elements, Path of the Spiritual Guardian, Discipline Domain, Shadow Domain, Oath of the Holy, Oath of the Ebon Blade, Demon Hunter, Warrior of Mystic Brews, Swashbuckler and Draconic Sorcery (Evoker, with the Evoker Spells) subclasses, the Rune Strike, Prayer of Mending, Psychic Horror, Shadow Word: Pain and Void Eruption spells, the 35 spells those three WoW subclasses grant, fixes for copied subclasses whose regex or class-level checks needed the WoW class names, and the subclass-menu fullname fix for the standard classes.
 	Code by:	Rocky
 	Date:		2026-11-17 (sheet v24)
 */
@@ -24,6 +24,13 @@ SourceList["WoW"] = {
 	group: "Primary Sources",
 	date: "2026/11/17"
 };
+
+// Fix the subclass dialog for the standard classes: bare fullnames collide with the WoW class names
+delete ClassSubList["barbarian-berserker"].fullname;
+delete ClassSubList["fighter-champion"].fullname;
+delete ClassSubList["ranger-hunter"].fullname;
+delete ClassSubList["wizard-evoker"].fullname;
+delete ClassSubList["sorcerer-draconic"].fullname;
 
 SpellsList["rune strike"] = {
 	name: "Rune Strike",
@@ -115,6 +122,627 @@ SpellsList["void eruption"] = {
 		"Shadowy Void energy erupts in a 20-foot-radius Sphere centered on a point you choose within range. Each creature in the Sphere makes a Constitution saving throw, taking 5d6 Necrotic damage on a failed save or half as much damage on a successful one. At the same time, you take on a form of Void that grants you the following benefits for the duration.",
 		" \u2022 Void Bolt. As a Bonus Action on your turn, you can hurl a bolt of Void energy at a creature within 60 feet of yourself. Make a ranged spell attack; on a hit, the target takes Necrotic damage equal to 2d6 plus your spellcasting ability modifier.",
 		" \u2022 Void Stealth. While you are in an area of Dim Light or Darkness, you have the Invisible condition.",
+	],
+};
+
+SpellsList["death grip"] = {
+	name: "Death Grip",
+	classes: [],
+	source: ["WoW", 14],
+	level: 1,
+	school: "Abjur",
+	time: "Bns",
+	range: "30 ft",
+	components: "V",
+	duration: "Instantaneous",
+	save: "Str",
+	description: "1 crea save or pulled straight toward me to the nearest unoccupied space within 5 ft of me",
+	descriptionFull: [
+		"You harness runic energies to bind a foe to you. One creature you can see within range must succeed on a Strength saving throw or be pulled straight toward you to the nearest unoccupied space within 5 feet of you.",
+	],
+};
+
+SpellsList["vampiric blood"] = {
+	name: "Vampiric Blood",
+	classes: [],
+	source: ["WoW", 15],
+	level: 1,
+	school: "Necro",
+	time: "Act",
+	range: "Self",
+	components: "V",
+	duration: "Conc, 1 min",
+	description: "My HP max +10; whenever I regain HP, I heal +1d6+1d6/SL extra HP",
+	descriptionFull: [
+		"For the duration, your Hit Point maximum increases by 10. In addition, whenever you regain Hit Points, you regain an extra 1d6 Hit Points.",
+		UsingHigherLvl + "The additional healing increases by 1d6 for each spell slot level above 1.",
+	],
+};
+
+SpellsList["chains of ice"] = {
+	name: "Chains of Ice",
+	classes: [],
+	source: ["WoW", 14],
+	level: 1,
+	school: "Evoc",
+	time: "Act",
+	range: "30 ft",
+	components: "V",
+	duration: "Instantaneous",
+	save: "Dex",
+	description: "1 crea save or 1d10+1d10/SL Cold dmg \x26 Speed halved 1 rnd; save half",
+	descriptionFull: [
+		"You create chains of ice around a creature you can see within range. The target makes a Dexterity saving throw. On a failed save, the target takes 1d10 Cold damage, and its Speed is halved until the end of its next turn. On a successful save, the target takes half as much damage only.",
+		UsingHigherLvl + "The damage increases by 1d10 for each spell slot level above 1.",
+	],
+};
+
+SpellsList["scourge strike"] = {
+	name: "Scourge Strike",
+	classes: [],
+	source: ["WoW", 15],
+	level: 1,
+	school: "Necro",
+	time: "Bns",
+	timeFull: "Bonus Action, which you take immediately after hitting a target with a Melee weapon or an Unarmed Strike",
+	range: "Self",
+	components: "V",
+	duration: "1 min",
+	save: "Con",
+	description: "Cast on melee hit; +2d6+1d6/SL Necro. dmg, save or Poisoned (save end of turn)",
+	descriptionFull: [
+		"The target takes an extra 2d6 Necrotic damage from the attack, and it must succeed on a Constitution saving throw or have the Poisoned condition until the spell ends. At the end of each of its turns, the Poisoned target repeats the save, ending the spell on itself on a success.",
+		UsingHigherLvl + "The damage increases by 1d6 for each spell slot level above 1.",
+	],
+};
+
+SpellsList["death and decay"] = {
+	name: "Death and Decay",
+	classes: [],
+	source: ["WoW", 14],
+	level: 2,
+	school: "Necro",
+	time: "Act",
+	range: "60 ft",
+	components: "V",
+	duration: "Instantaneous",
+	save: "Wis",
+	description: "20-ft rad all save or 2d6 Necro. dmg \x26 cursed 1 rnd (my atk hits +1d6 Necro.); save half",
+	descriptionFull: [
+		"Corruption ripples out in a 20-foot-radius Sphere from a point on the ground you can see within range. Each creature in that area makes a Wisdom saving throw. On a failed save, a target takes 2d6 Necrotic damage and is cursed until the end of your next turn. If you deal damage to a cursed target with an attack roll, the target takes an extra 1d6 Necrotic damage. On a successful save, the target takes half as much damage only.",
+	],
+};
+
+SpellsList["frostscythe"] = {
+	name: "Frostscythe",
+	classes: [],
+	source: ["WoW", 14],
+	level: 2,
+	school: "Evoc",
+	time: "Act",
+	range: "S:20-ft cone",
+	components: "V",
+	duration: "Instantaneous",
+	save: "Con",
+	description: "20-ft cone all save or 3d8+1d8/SL Cold dmg \x26 Speed -10 ft 1 min; save half",
+	descriptionFull: [
+		"Sweeping your weapon before you, you unleash a blast of icy cold. Each creature in a 20-foot Cone makes a Constitution saving throw. On a failed save, a creature takes 3d8 Cold damage, and its Speed is reduced by 10 feet for 1 minute. On a successful save, a creature takes half as much damage only.",
+		UsingHigherLvl + "The damage increases by 1d8 for each spell slot level above 2.",
+	],
+};
+
+SpellsList["leeching strike"] = {
+	name: "Leeching Strike",
+	classes: [],
+	source: ["WoW", 15],
+	level: 3,
+	school: "Necro",
+	time: "Bns",
+	timeFull: "Bonus Action, which you take immediately after hitting a target with a Melee weapon or an Unarmed Strike",
+	range: "Self",
+	components: "V",
+	duration: "Instantaneous",
+	description: "Cast on melee hit; +3d8+1d8/SL Necro. dmg \x26 I regain 3d4+1d4/SL HP",
+	descriptionFull: [
+		"The target hit by the strike takes an extra 3d8 Necrotic damage from the attack, and you regain 3d4 Hit Points.",
+		UsingHigherLvl + "The damage increases by 1d8, and the Hit Points you regain increase by 1d4, for each spell slot level above 3.",
+	],
+};
+
+SpellsList["remorseless winter"] = {
+	name: "Remorseless Winter",
+	classes: [],
+	source: ["WoW", 15],
+	level: 3,
+	school: "Evoc",
+	time: "Act",
+	range: "S:30-ft rad",
+	components: "V",
+	duration: "Instantaneous",
+	save: "Con",
+	description: "30-ft rad any save or 6d6+1d6/SL Cold dmg; save half; all Speed 10 ft 1 rnd",
+	descriptionFull: [
+		"You drain the warmth from nearby creatures. Each creature of your choice in a 30-foot Emanation originating from you makes a Constitution saving throw, taking 6d6 Cold damage on a failed save or half as much damage on a successful one. Whether or not a creature succeeds on its saving throw, its Speed is reduced to 10 feet until the end of its next turn as clinging frost hinders its movement.",
+		UsingHigherLvl + "The damage increases by 1d6 for each spell slot level above 3.",
+	],
+};
+
+SpellsList["bonestorm"] = {
+	name: "Bonestorm",
+	classes: [],
+	source: ["WoW", 14],
+	level: 5,
+	school: "Abjur",
+	time: "Act",
+	range: "S:10-ft rad",
+	components: "V",
+	duration: "Instantaneous",
+	save: "Con",
+	description: "I regain 4d6 HP; 10-ft rad all save or 4d8 Necro. dmg; save half",
+	descriptionFull: [
+		"You conjure a whirl of battering bone and gore around yourself. You regain 4d6 Hit Points, and each creature in a 10-foot Emanation originating from you makes a Constitution saving throw. A target takes 4d8 Necrotic damage on a failed save or half as much damage on a successful one.",
+	],
+};
+
+SpellsList["throw glaive"] = {
+	name: "Throw Glaive",
+	classes: [],
+	source: ["WoW", 21],
+	level: 1,
+	school: "Evoc",
+	time: "Act",
+	range: "60 ft",
+	components: "V,S",
+	duration: "Instantaneous",
+	description: "Spell atk 1d8 Slash. +1d8+1d8/SL Fire dmg, ricochets to another in 30 ft",
+	descriptionFull: [
+		"You create a demonic warglaive and hurl it at a creature or object in range. Make a ranged spell attack against the target. On a hit, the target takes 1d8 Slashing damage plus 1d8 Fire damage, and the glaive ricochets to a different target of your choice within 30 feet of the target. Make new attack and damage rolls against the new target.",
+		UsingHigherLvl + "The Fire damage increases by 1d8 for each spell slot level above 1. The glaive ricochets a maximum number of times equal to the level of the slot expended; a creature can be targeted only once by each casting of this spell.",
+	],
+};
+
+SpellsList["consume soul"] = {
+	name: "Consume Soul",
+	classes: [],
+	source: ["WoW", 19],
+	level: 1,
+	school: "Necro",
+	time: "Act",
+	range: "60 ft",
+	components: "V",
+	duration: "Instantaneous",
+	save: "Con",
+	description: "1 crea save or 4d4+1d4/SL Force dmg; I gain Temp HP = half dmg; save half",
+	descriptionFull: [
+		"You drain the essence from a creature within range, which makes a Constitution saving throw. On a failed save, it takes 4d4 Force damage, and you gain Temporary Hit Points equal to half the Force damage dealt. On a successful save, it takes half as much damage only.",
+		UsingHigherLvl + "The damage increases by 1d4 for each spell slot level above 1.",
+	],
+};
+
+SpellsList["fel rush"] = {
+	name: "Fel Rush",
+	classes: [],
+	source: ["WoW", 20],
+	level: 1,
+	school: "Trans",
+	time: "Act",
+	range: "Self",
+	components: "V",
+	duration: "Instantaneous",
+	save: "Dex",
+	description: "Speed +30 ft, no OA this turn; crea I pass within 5 ft save or 2d6+1d6/SL Fire dmg",
+	descriptionFull: [
+		"Fiery fel magic surrounds you and grants you explosive speed. Until the end of your turn, your Speed increases by 30 feet, and your movement doesn't provoke Opportunity Attacks.",
+		"When you move within 5 feet of a creature or an object that isn't being worn or carried, it makes a Dexterity saving throw, taking 2d6 Fire damage on a failed save or half as much damage on a successful one. A creature or object can take this damage only once per turn.",
+		UsingHigherLvl + "The damage increases by 1d6 for each spell slot level above 1.",
+	],
+};
+
+SpellsList["infernal strike"] = {
+	name: "Infernal Strike",
+	classes: [],
+	source: ["WoW", 20],
+	level: 1,
+	school: "Evoc",
+	time: "Act",
+	range: "S:10-ft rad",
+	components: "V",
+	duration: "Instantaneous",
+	save: "Dex",
+	description: "Jump 30 ft no OA; 10-ft rad save or 2d6+1d6/SL Fire dmg \x26 Disadv. vs. others 1 rnd; half",
+	descriptionFull: [
+		"You jump through the air without provoking Opportunity Attacks and land in an unoccupied space within 30 feet. Each creature in a 10-foot Emanation originating from you makes a Dexterity saving throw. On a failed save, a creature takes 2d6 Fire damage and has Disadvantage on attack rolls against creatures other than you until the start of your next turn. On a successful save, it takes half as much damage only.",
+		UsingHigherLvl + "The damage increases by 1d6 for each spell slot level above 1.",
+	],
+};
+
+SpellsList["sigil of flame"] = {
+	name: "Sigil of Flame",
+	classes: [],
+	source: ["WoW", 21],
+	level: 2,
+	school: "Evoc",
+	time: "Act",
+	range: "90 ft",
+	components: "V",
+	duration: "Instantaneous",
+	save: "Con",
+	description: "1 crea save or 2d8+1d8/SL Fire dmg, save half; then radiates heat in 10 ft (1d8+1d8/SL)",
+	descriptionFull: [
+		"You inscribe a sigil in the air that then appears on a creature you can see within range. The target makes a Constitution saving throw, taking 2d8 Fire damage on a failed save or half as much damage on a successful one. Whether or not the target fails its saving throw, it radiates heat in a 10-foot Emanation originating from itself until the end of its next turn. At the start of the target's next turn, the target and each creature in the Emanation must succeed on a Constitution saving throw or take 1d8 Fire damage.",
+		UsingHigherLvl + "The damage (both initial and later) increases by 1d8 for each spell slot level above 2.",
+	],
+};
+
+SpellsList["eye beam"] = {
+	name: "Eye Beam",
+	classes: [],
+	source: ["WoW", 20],
+	level: 2,
+	school: "Evoc",
+	time: "Act",
+	range: "S:15-ft cone",
+	components: "V",
+	duration: "Conc, 1 min",
+	save: "Dex",
+	description: "15-ft cone save or 3d6+1d6/SL Force dmg; repeat as Magic action; save half",
+	descriptionFull: [
+		"You concentrate your magic into your eyes. When you cast the spell, and as a Magic action on your subsequent turns for the duration, you can unleash a burst of fel magic. Each creature in a 15-foot Cone makes a Dexterity saving throw, taking 3d6 Force damage on a failed save or half as much damage on a successful one.",
+		UsingHigherLvl + "The damage increases by 1d6 for each spell slot level above 1.",
+	],
+};
+
+SpellsList["fiery brand"] = {
+	name: "Fiery Brand",
+	classes: [],
+	source: ["WoW", 20],
+	level: 2,
+	school: "Evoc",
+	time: "Act",
+	range: "30 ft",
+	components: "V",
+	duration: "1 min",
+	save: "Wis",
+	description: "1 crea save or 3d10 Fire dmg \x26 cursed; I have Resistance to its dmg; save half",
+	descriptionFull: [
+		"You magically place a fiery demonic symbol on a creature within range, which makes a Wisdom saving throw. On a failed save, the creature takes 3d10 Fire damage and is cursed. While it remains cursed, you have Resistance to all damage it deals. On a successful save, it takes half as much damage only.",
+		"A cursed creature repeats the save at the end of each of its turns, ending the spell on a success.",
+	],
+};
+
+SpellsList["metamorphosis"] = {
+	name: "Metamorphosis",
+	classes: [],
+	source: ["WoW", 20],
+	level: 3,
+	school: "Trans",
+	time: "Bns",
+	range: "Self",
+	components: "V,S,M",
+	compMaterial: "One soul fragment, which the spell consumes",
+	duration: "1 min",
+	description: "Gain 1: Devourer (Force dmg dice 1-2 count as 3), Havoc (melee hit +1d6 Fire), Vengeance (AC+2, +5 HP)",
+	descriptionFull: [
+		"Uttering an incantation, you draw on fel or Void magic to transform yourself, taking on demonic features. You gain one of the following benefits of your choice until the spell ends:",
+		" \u2022 ***Devourer***. When you roll damage for a spell, weapon, or feature that deals Force damage, you can treat any 1 or 2 on a damage die as a 3.",
+		" \u2022 ***Havoc***. Whenever you hit a creature with an attack roll using a Melee weapon, the target takes an extra 1d6 Fire damage.",
+		" \u2022 ***Vengeance***. You have a +2 bonus to AC, and your Hit Point maximum and your current Hit Points increase by 5 for the spell's duration.",
+	],
+};
+
+SpellsList["soul reap"] = {
+	name: "Soul Reap",
+	classes: [],
+	source: ["WoW", 21],
+	level: 3,
+	school: "Necro",
+	time: "Act",
+	range: "60 ft",
+	components: "V,S",
+	duration: "Instantaneous",
+	description: "Spell atk 6d6+1d6/SL Force dmg, ignores \xbd \x26 \xbe cover; each 6 adds a d6 (max spell mod)",
+	descriptionFull: [
+		"You cut a hole in the fabric of reality, sending a bolt of cosmic matter toward a creature in range. Make a ranged spell attack against the target, which gains no benefit from Half Cover or Three-Quarters Cover. On a hit, you deal 6d6 Force damage. If you roll a 6 on a d6 for this spell, you can roll another d6 and add it to the damage. When you cast this spell, the maximum number of these d6s you can add to the spell's damage equals your spellcasting ability modifier.",
+		UsingHigherLvl + "The damage increases by 1d6 for each spell slot level above 3.",
+	],
+};
+
+SpellsList["demon spikes"] = {
+	name: "Demon Spikes",
+	classes: [],
+	source: ["WoW", 19],
+	level: 3,
+	school: "Trans",
+	time: "Bns",
+	range: "Self",
+	components: "V",
+	duration: "1 min",
+	description: "AC +2; crea within 5 ft that hits me with melee atk takes 10 Piercing dmg",
+	descriptionFull: [
+		"You surge with fel power and sprout hard, jagged spikes. You gain a +2 bonus to AC for the duration, and when a creature within 5 feet of you hits you with a melee attack roll, it takes 10 Piercing damage.",
+	],
+};
+
+SpellsList["chaos nova"] = {
+	name: "Chaos Nova",
+	classes: [],
+	source: ["WoW", 19],
+	level: 4,
+	school: "Evoc",
+	time: "Act",
+	range: "S:20-ft rad",
+	components: "V",
+	duration: "Instantaneous",
+	save: "Wis",
+	description: "20-ft rad any 2d6 Force dmg \x26 save or Stunned until end of my next turn",
+	descriptionFull: [
+		"Chaos energy bursts out in a 20-foot Emanation originating from you. Each creature of your choice in the Emanation takes 2d6 Force damage and must succeed on a Wisdom saving throw or have the Stunned condition until the end of your next turn.",
+	],
+};
+
+SpellsList["collapsing star"] = {
+	name: "Collapsing Star",
+	classes: [],
+	source: ["WoW", 19],
+	level: 4,
+	school: "Evoc",
+	time: "Act",
+	range: "60 ft",
+	components: "V",
+	duration: "Instantaneous",
+	save: "Con",
+	description: "20-ft rad any save or 4d12 Force dmg; save half",
+	descriptionFull: [
+		"You channel Void energy into a cataclysmic blast that fills a 20-foot-radius Sphere centered on a point you can see within range. Each creature of your choice within the Sphere makes a Constitution saving throw, taking 4d12 Force damage on a failed save or half as much damage on a successful one.",
+	],
+};
+
+SpellsList["sigil of chains"] = {
+	name: "Sigil of Chains",
+	classes: [],
+	source: ["WoW", 20],
+	level: 5,
+	school: "Conj",
+	time: "Act",
+	range: "90 ft",
+	components: "V",
+	duration: "1 rnd",
+	save: "Dex",
+	description: "20-ft rad all save or 5d6 Force dmg, pulled 10 ft, Restrained 1 rnd; save half \x26 Speed -10 ft",
+	descriptionFull: [
+		"A sigil appears at a point on the ground you can see within range, then erupts in a 20-foot-radius Sphere. Each creature in the Sphere makes a Dexterity saving throw. On a failed save, a creature takes 5d6 Force damage, is pulled up to 10 feet straight toward the sigil, and has the Restrained condition until the end of your next turn. On a successful save, the creature takes half as much damage, and its Speed is reduced by 10 feet until the end of your next turn.",
+	],
+};
+
+SpellsList["ebon might"] = {
+	name: "Ebon Might",
+	classes: [],
+	source: ["WoW", 32],
+	level: 1,
+	school: "Trans",
+	time: "Act",
+	range: "S:10-ft rad",
+	components: "V,S",
+	duration: "Instantaneous",
+	description: "10-ft rad any empowered 1 rnd: their atk hits deal +1d4 Force dmg",
+	descriptionFull: [
+		"As you invoke the black dragonflight, draconic might erupts from you. Each creature of your choice in a 10-foot Emanation originating from you is empowered until the end of your next turn. While a creature is empowered, when it hits a target with an attack roll, the attack deals an extra 1d4 Force damage.",
+	],
+};
+
+SpellsList["eruption"] = {
+	name: "Eruption",
+	classes: [],
+	source: ["WoW", 32],
+	level: 2,
+	school: "Evoc",
+	time: "Act",
+	range: "60 ft",
+	components: "V,S",
+	duration: "Instantaneous",
+	save: "Dex",
+	description: "20-ft rad all save or 3d8+1d8/SL Fire dmg; save half; ground is Difficult Terrain 1 rnd",
+	descriptionFull: [
+		"The ground in a 20-foot-radius Sphere centered on a point within range erupts with flames. Each creature in the Sphere makes a Dexterity saving throw, taking 3d8 Fire damage on a failed save or half as much damage on a successful one.",
+		"The cracks turn the ground in the Sphere into Difficult Terrain until the end of your next turn, at which point they close.",
+		UsingHigherLvl + "The damage increases by 1d8 for each spell slot level above 2.",
+	],
+};
+
+SpellsList["azure strike"] = {
+	name: "Azure Strike",
+	classes: [],
+	source: ["WoW", 31],
+	level: 1,
+	school: "Evoc",
+	time: "Act",
+	range: "60 ft",
+	components: "V,S",
+	duration: "1 rnd",
+	description: "2 targets within 30 ft of each other: spell atk 2d6+1d6/SL Force dmg \x26 Speed -10 ft 1 rnd",
+	descriptionFull: [
+		"You fire rays of arcane and frigid energy at up to two targets within range that are within 30 feet of each other. Make a ranged spell attack for each target. On a hit, the target takes 2d6 Force damage, and its Speed is reduced by 10 feet until the end of its next turn.",
+		UsingHigherLvl + "The damage increases by 1d6 for each spell slot level above 1.",
+	],
+};
+
+SpellsList["dream breath"] = {
+	name: "Dream Breath",
+	classes: [],
+	source: ["WoW", 31],
+	level: 2,
+	school: "Abjur",
+	time: "Act",
+	range: "S:15-ft cone",
+	components: "V,S",
+	duration: "Instantaneous",
+	description: "15-ft cone any heal 2d6+2d6/SL HP",
+	descriptionFull: [
+		"You exhale verdant healing magic. Each creature of your choice in a 15-foot Cone regains 2d6 Hit Points.",
+		UsingHigherLvl + "The healing increases by 2d6 for each spell slot level above 2.",
+	],
+};
+
+SpellsList["living flame"] = {
+	name: "Living Flame",
+	classes: [],
+	source: ["WoW", 32],
+	level: 1,
+	school: "Evoc",
+	time: "Act",
+	range: "60 ft",
+	components: "V",
+	duration: "Instantaneous",
+	description: "1 crea: heal 2d6 HP or spell atk 2d8 Fire dmg; +1 target per 2 SL above 1st",
+	descriptionFull: [
+		"Flickering flames hurtle toward a creature you choose within range. Choose one of these options:",
+		" \u2022 ***Healing Flames***. The target regains 2d6 Hit Points.",
+		" \u2022 ***Searing Flames***. Make a ranged attack roll against the target. On a hit, the target takes 2d8 Fire damage.",
+		UsingHigherLvl + "For every two spell slot levels above 1, you can choose an additional target (two targets with a level 3 or 4 slot, three targets with a level 5 or 6 slot, four targets with a level 7 or 8 slot, and five targets with a level 9 slot). You choose the flames' effect separately for each target.",
+	],
+};
+
+SpellsList["blistering scales"] = {
+	name: "Blistering Scales",
+	classes: [],
+	source: ["WoW", 31],
+	level: 3,
+	school: "Trans",
+	time: "Bns",
+	range: "30 ft",
+	components: "V,S,M",
+	compMaterial: "A scale of a Dragon",
+	duration: "Conc, 1 min",
+	description: "1 willing crea: +1 AC \x26 5 explosive scales; melee hit on it explodes one for 1d8 Fire dmg",
+	descriptionFull: [
+		"Choose a willing creature you can see within range. Five explosive scales form on the target, granting it a +1 bonus to AC for the duration. If a creature hits the target with a melee attack roll before the spell ends, a scale explodes, and the attacking creature takes 1d8 Fire damage. The spell ends early if the target has no explosive scales.",
+		UsingHigherLvl + "The number of explosive scales that form on the target increases by one for each spell slot level above 3.",
+	],
+};
+
+SpellsList["emerald blossom"] = {
+	name: "Emerald Blossom",
+	classes: [],
+	source: ["WoW", 32],
+	level: 3,
+	school: "Conj",
+	time: "Bns",
+	range: "60 ft",
+	components: "V,S",
+	duration: "Conc, 1 min",
+	description: "Bulb heals allies in 10 ft 5 HP at end of my turns; ends after 20+5/SL HP",
+	descriptionFull: [
+		"You conjure a spectral bulb that sprouts from the ground in an unoccupied space that you can see within range. The bulb lasts for the duration.",
+		"The bulb emits healing magic in a 10-foot Emanation at the end of each of your turns. Allies of your choice in the Emanation regain 5 Hit Points. The bulb vanishes when it restores a total of 20 Hit Points.",
+		UsingHigherLvl + "The total Hit Points the bulb can restore increases by 5 for each spell slot level above 3.",
+	],
+};
+
+SpellsList["upheaval"] = {
+	name: "Upheaval",
+	classes: [],
+	source: ["WoW", 33],
+	level: 4,
+	school: "Evoc",
+	time: "Act",
+	range: "90 ft",
+	components: "V,S",
+	duration: "Instantaneous",
+	save: "Dex",
+	description: "20-ft rad, 10-ft tall cylinder save or 1d12+1d12/SL Bludg. +3d8 Fire dmg \x26 pushed up; half",
+	descriptionFull: [
+		"Fiery stones erupt, filling a 20-foot-radius, 10-foot tall Cylinder originating from a point on the ground you can see within range. Each creature in the Cylinder makes a Dexterity saving throw. On a failed save, a creature takes 1d12 Bludgeoning damage plus 3d8 Fire damage and is pushed vertically to the top of the cylinder, at which point the creature falls. On a successful save, a creature takes half as much damage only.",
+		"Smoldering stones turn the ground in the Cylinder into Difficult Terrain until the end of your next turn.",
+		UsingHigherLvl + "The Bludgeoning damage increases by 1d12 for each spell slot level above 4.",
+	],
+};
+
+SpellsList["emberstorm"] = {
+	name: "Emberstorm",
+	classes: [],
+	source: ["WoW", 32],
+	level: 4,
+	school: "Evoc",
+	time: "Act",
+	range: "60 ft",
+	components: "V,S",
+	duration: "Instantaneous",
+	save: "Con",
+	description: "20-ft rad all save or 6d8+1d8/SL Fire dmg; save half; in area starts burning 1d8",
+	descriptionFull: [
+		"White-hot embers fill a 20-foot-radius Sphere centered on a point you choose within range. Each creature in the Sphere makes a Constitution saving throw, taking 6d8 Fire damage on a failed save or half as much damage on a successful one.",
+		"Creatures and flammable objects in the Sphere that aren't being worn or carried start burning, taking 1d8 Fire damage at the start of each of their turns instead of the normal burning damage.",
+		UsingHigherLvl + "The damage increases by 1d8 for each spell slot level above 4.",
+	],
+};
+
+SpellsList["time dilation"] = {
+	name: "Time Dilation",
+	classes: [],
+	source: ["WoW", 33],
+	level: 4,
+	school: "Abjur",
+	time: "React",
+	timeFull: "Reaction, which you take in response to you or a creature you can see within 60 feet of you taking damage",
+	range: "60 ft",
+	components: "V,S",
+	duration: "Instantaneous",
+	description: "Target reduces dmg by 4d8, then loses 1d8 HP at end of its turns until 4d8 lost",
+	descriptionFull: [
+		"The target reduces the damage taken by 4d8. At the end of each of the target's turns, the target loses 1d8 Hit Points until it has lost a total of 4d8 Hit Points (roll these 4d8 separately from the damage reduction).",
+	],
+};
+
+SpellsList["breath of eons"] = {
+	name: "Breath of Eons",
+	classes: [],
+	source: ["WoW", 31],
+	level: 4,
+	school: "Abjur",
+	time: "Act",
+	range: "Self",
+	components: "V,S",
+	duration: "Conc, 1 min",
+	description: "Fly 60 ft, hover, no OA; crea I move within 5 ft cursed: next dmg +1d10 Force",
+	descriptionFull: [
+		"You draw on the magic of the bronze dragonflight. For the duration, you gain the following benefits.",
+		" \u2022 ***Temporal Wounds***. When you move within 5 feet of a creature, you can curse it until the start of your next turn. While a creature is cursed, the next time it takes damage, it takes an extra 1d10 Force damage, and the curse ends. A creature can be cursed this way only once per turn.",
+		" \u2022 ***Wings***. You sprout spectral wings from your back if you don't already have wings. You have a Fly Speed of 60 feet and can hover. In addition, your movement doesn't provoke Opportunity Attacks.",
+	],
+};
+
+SpellsList["shattering star"] = {
+	name: "Shattering Star",
+	classes: [],
+	source: ["WoW", 33],
+	level: 5,
+	school: "Evoc",
+	time: "Act",
+	range: "90 ft",
+	components: "V,S",
+	duration: "Instantaneous",
+	description: "Spell atk 10d8+1d8/SL Force dmg \x26 target AC -2 until my next turn",
+	descriptionFull: [
+		"You exhale a bolt of concentrated power at a creature within range. Make a ranged spell attack against the target. On a hit, the target takes 10d8 Force damage, and it takes a -2 penalty to AC until the start of your next turn as clinging frost makes the target's exterior brittle.",
+		UsingHigherLvl + "The damage increases by 1d8 for each spell slot level above 5.",
+	],
+};
+
+SpellsList["dream flight"] = {
+	name: "Dream Flight",
+	classes: [],
+	source: ["WoW", 31],
+	level: 5,
+	school: "Abjur",
+	time: "Act",
+	range: "Self",
+	components: "V,S",
+	duration: "Conc, 1 min",
+	description: "Fly 60 ft, hover, no OA; crea I move within 5 ft heal 5d4 HP (once/turn)",
+	descriptionFull: [
+		"You draw on the magic of the green dragonflight. For the duration, you gain the following benefits.",
+		" \u2022 ***Healing Presence***. When you move within 5 feet of a creature, you can restore 5d4 Hit Points to that creature. A creature can regain these Hit Points only once per turn.",
+		" \u2022 ***Wings***. You sprout spectral wings from your back if you don't already have wings. You have a Fly Speed of 60 feet and can hover. In addition, your movement doesn't provoke Opportunity Attacks.",
 	],
 };
 
@@ -507,6 +1135,186 @@ rekeyWoWFeature(ClassSubList["fighter-champion"], "subclassfeature3", [
 rekeyWoWFeature(ClassSubList["sorcerer-draconic"], "subclassfeature3", [
 	["classes.known.sorcerer", "(classes.known.sorcerer || classes.known.evoker)"],
 ]);
+
+// WoW subclasses for the WoW classes only, added after the classes are copied
+AddSubClass("deathknight", "oath of the ebon blade", {
+	regExpSearch: /^(?=.*ebon)(?=.*blade).*$/i,
+	subname: "Oath of the Ebon Blade",
+	subnameShort: "Ebon Blade",
+	source: [["WoW", 0]],
+	features: {
+		"subclassfeature3": {
+			name: "Oath of the Ebon Blade", source: [["WoW", 0]], minlevel: 3,
+			description: desc("I always have the Spells (All) column of the Oath of the Ebon Blade Spells prepared, plus the column of the rune inscribed on my weapon (see Runeforging). I also gain Runeforging and Runic Power."),
+		},
+		"subclassfeature3.1": {
+			name: "Runeforging", source: [["WoW", 0]], minlevel: 3,
+			description: ' #[Select option with "Choose Feature"]#' + desc('When I finish a Long Rest, I can inscribe a Blood, Frost, or Unholy rune on a melee weapon I am holding, or transfer it to another weapon. Whenever I gain a level, I can replace it. Choose the rune with the "Choose Feature" button above; it also sets my rune oath spells.'),
+			choices: ["Blood", "Frost", "Unholy"],
+			"blood": {
+				name: "Blood Rune", source: [["WoW", 0]],
+				description: desc("When I inscribe this rune, and whenever I finish a Long Rest while it is inscribed, I gain Temp HP equal to my Cha mod + my Death Knight level. While wielding the inscribed weapon, I also gain these Temp HP whenever I reduce an enemy to 0 HP."),
+				spellcastingExtra: ["death grip", "vampiric blood", "death and decay", "spiritual weapon", "summon undead", "leeching strike", "freedom of movement", "evard's black tentacles", "circle of power", "bonestorm"],
+			},
+			"frost": {
+				name: "Frost Rune", source: [["WoW", 0]],
+				description: desc("While wielding the inscribed weapon, damage from my weapon attacks, Death Knight spells, and Death Knight features ignores Resistance to Cold damage. When I make the extra attack of the Light property and hit while wielding it, I deal an extra 1d4 Cold damage."),
+				spellcastingExtra: ["death grip", "chains of ice", "death and decay", "frostscythe", "summon undead", "remorseless winter", "freedom of movement", "ice storm", "circle of power", "cone of cold"],
+			},
+			"unholy": {
+				name: "Unholy Rune", source: [["WoW", 0]],
+				description: desc("While wielding the inscribed weapon, damage from my weapon attacks, Death Knight spells, and Death Knight features ignores Resistance to Necrotic damage. If it has the Heavy property, the first creature I hit with it each turn takes extra Necrotic damage equal to my Cha mod (minimum 1)."),
+				spellcastingExtra: ["death grip", "scourge strike", "death and decay", "ray of enfeeblement", "summon undead", "bestow curse", "freedom of movement", "blight", "circle of power", "contagion"],
+			},
+		},
+		"subclassfeature3.2": {
+			name: "Runic Power", source: [["WoW", 0]], minlevel: 3,
+			description: desc([
+				"Immediately after I cast Rune Strike, I can expend 1 Channel Divinity for an effect based on my inscribed rune.",
+				" \u2022 ***Blood***. I regain HP equal to the Necrotic damage dealt with my Rune Strike.",
+				" \u2022 ***Frost***. The target of my Rune Strike and each enemy in a 10-ft Emanation from it take 2d6 Cold damage.",
+				" \u2022 ***Unholy***. The target of my Rune Strike is cursed until the end of my next turn; the next save it makes subtracts 1d6, then the curse ends.",
+			]),
+			additional: "1 Channel Divinity",
+		},
+		"subclassfeature7": {
+			name: "Aura of Deathly Endurance", source: [["WoW", 0]], minlevel: 7,
+			description: desc("I and my allies have Resistance to Cold, Necrotic, and Psychic damage while in my Aura of Protection."),
+		},
+		"subclassfeature15": {
+			name: "Runic Mastery", source: [["WoW", 0]], minlevel: 15,
+			description: desc([
+				"I can invoke the power of my inscribed rune; the effect depends on the rune.",
+				" \u2022 ***Blood***. When a creature hits another I can see within 10 ft of me with an attack roll, I can use my Reaction to reduce the damage the target takes by my Death Knight level; I then lose that many HP.",
+				" \u2022 ***Frost***. When I take the Attack action, I can replace one attack with a 30-ft Cone of frost; each creature in it makes a Dex save vs. my spell save DC, taking 8d6 Cold damage on a failure or half on a success.",
+				" \u2022 ***Unholy***. When I cast Summon Undead, it can be without Concentration (duration 1 min); the spirit gets Temp HP equal to my Death Knight level + Cha mod, and the first time each turn it hits, it deals extra Necrotic damage equal to half my Death Knight level (round up).",
+			]),
+			usages: 1, recovery: "Long Rest",
+			action: [["reaction", " (Blood rune)"]],
+		},
+		"subclassfeature20": {
+			name: "Aspect of the Horsemen", source: [["WoW", 0]], minlevel: 20,
+			description: desc([
+				"As a Bonus Action, I gain the benefits below for 10 minutes or until I end them (no action). I can restore my use by expending a level 5 spell slot (no action).",
+				" \u2022 ***Generate Runic Power***. I can restore a use of Runic Mastery by expending a level 4 spell slot (no action).",
+				" \u2022 ***Runeforging***. When I use Runic Power and Runic Mastery, I can choose any effect, not just the one matching my inscribed rune.",
+			]),
+			usages: 1, recovery: "Long Rest", altResource: "SS 5+",
+			action: [["bonus action", ""]],
+		},
+	},
+});
+
+AddSubClass("demonhunter", "demon hunter", {
+	regExpSearch: /^(?=.*demon.*demon)(?=.*hunter).*$/i, // "demon" twice: matches "Demon Hunter (Demon Hunter)" but not "Demon Hunter (Hunter)"
+	subname: "Demon Hunter",
+	subnameShort: "Demon Hunter",
+	source: [["WoW", 0]],
+	features: {
+		"subclassfeature3": {
+			name: "Demon Hunter Spells", source: [["WoW", 0]], minlevel: 3,
+			description: ' #[Select option with "Choose Feature"]#' + desc('I always have the Spells (All) column of the Demon Hunter Spells prepared, plus one other column of my choice. Choose the column with the "Choose Feature" button above.'),
+			choices: ["Devourer", "Havoc", "Vengeance"],
+			"devourer": {
+				name: "Devourer Spells", source: [["WoW", 0]],
+				description: desc("I always have prepared: Throw Glaive, Sigil of Flame, Metamorphosis, Chaos Nova, and Destructive Wave, plus Consume Soul, Misty Step, Soul Reap, Collapsing Star, and Steel Wind Strike."),
+				spellcastingExtra: ["throw glaive", "consume soul", "sigil of flame", "misty step", "metamorphosis", "soul reap", "chaos nova", "collapsing star", "destructive wave", "steel wind strike"],
+			},
+			"havoc": {
+				name: "Havoc Spells", source: [["WoW", 0]],
+				description: desc("I always have prepared: Throw Glaive, Sigil of Flame, Metamorphosis, Chaos Nova, and Destructive Wave, plus Fel Rush, Eye Beam, Blink, Fire Shield, and Conjure Volley."),
+				spellcastingExtra: ["throw glaive", "fel rush", "sigil of flame", "eye beam", "metamorphosis", "blink", "chaos nova", "fire shield", "destructive wave", "conjure volley"],
+			},
+			"vengeance": {
+				name: "Vengeance Spells", source: [["WoW", 0]],
+				description: desc("I always have prepared: Throw Glaive, Sigil of Flame, Metamorphosis, Chaos Nova, and Destructive Wave, plus Infernal Strike, Fiery Brand, Demon Spikes, Banishment, and Sigil of Chains."),
+				spellcastingExtra: ["throw glaive", "infernal strike", "sigil of flame", "fiery brand", "metamorphosis", "demon spikes", "chaos nova", "banishment", "destructive wave", "sigil of chains"],
+			},
+		},
+		"subclassfeature3.1": {
+			name: "Soul Fragments", source: [["WoW", 0]], minlevel: 3,
+			description: desc([
+				"When I finish a Long Rest, I gain soul fragments (Tiny crystals) equal to my Wis mod (min 1), +1 at Demon Hunter level 13 and +2 at 17. They last until my next Long Rest. If I move more than 30 ft from one, it teleports to my person. Soul fragment saves use my Demon Hunter spell save DC.",
+				" \u2022 ***Double Jump***. I can expend one to cast Feather Fall or Jump without a spell slot.",
+				" \u2022 ***Soul Cleave***. Once per turn when I take the Attack action, I can expend one and replace one attack: each creature in a 10-ft Emanation from me makes a Dex save; on a failure it takes 1d12 + my Wis mod Psychic damage, and I regain HP equal to my Wis mod.",
+				" \u2022 ***Regaining***. When an enemy I can see within 30 ft of me dies, I can use my Reaction to regain one expended soul fragment.",
+			]),
+			usages: "Wis mod (+1 at 13, +2 at 17) per ", recovery: "Long Rest",
+			limfeaname: "Soul Fragments",
+			usagescalc: 'var lvl = classes.known.demonhunter ? classes.known.demonhunter.level : 0; event.value = Math.max(1, Number(What("Wis Mod"))) + (lvl >= 17 ? 2 : lvl >= 13 ? 1 : 0);',
+			action: [["reaction", " (regain soul fragment)"]],
+		},
+		"subclassfeature3.2": {
+			name: "Spectral Sight", source: [["WoW", 0]], minlevel: 3,
+			description: desc("I have Blindsight with a range of 10 ft."),
+			vision: [["Blindsight", 10]],
+		},
+		"subclassfeature7": {
+			name: "Torment", source: [["WoW", 0]], minlevel: 7,
+			description: desc([
+				"A creature marked by my Hunter's Mark has Disadvantage on attack rolls against targets other than me.",
+				"Once per turn when I hit a creature marked by my Hunter's Mark with an attack roll with a weapon or a Demon Hunter spell, I can impose one of these effects:",
+				" \u2022 ***Aura of Pain***. It subtracts 1d4 from the next save it makes before the end of my next turn.",
+				" \u2022 ***Chaos Strike***. It takes an extra 1d8 Fire damage.",
+			]),
+		},
+		"subclassfeature11": {
+			name: "Illidari Knowledge", source: [["WoW", 0]], minlevel: 11,
+			description: desc([
+				"I gain new ways to use soul fragments.",
+				" \u2022 ***Disrupt***. I can expend two soul fragments to cast Counterspell in response to its trigger, using my spellcasting ability.",
+				" \u2022 ***Warglaive Mastery***. As a Bonus Action, I can expend one soul fragment to cast Throw Glaive without a spell slot.",
+			]),
+			action: [["bonus action", " (Warglaive Mastery)"]],
+		},
+		"subclassfeature15": {
+			name: "Soul Shatter", source: [["WoW", 0]], minlevel: 15,
+			description: desc("My Soul Cleave damage increases to 2d12 + my Wis mod. When I roll Initiative and have no soul fragments, I regain one."),
+		},
+	},
+});
+
+// WoW Draconic Sorcery for the Evoker: the 2024 Draconic Sorcery with the Evoker Spells instead of the Draconic Spells
+// It replaces the inherited Sorcerer Draconic Sorcery in the Evoker's subclass list, so the Evoker has one Draconic Sorcery
+var evokerDraconic = newObj(ClassSubList["sorcerer-draconic"]);
+evokerDraconic.regExpSearch = /^(?=.*evoker)(?=.*(draconic|dragon)).*$/i;
+evokerDraconic.subname = "Draconic Sorcery";
+evokerDraconic.subnameShort = "Draconic";
+evokerDraconic.source = [["WoW", 0]];
+delete evokerDraconic.fullname;
+rekeyWoWFeature(evokerDraconic, "subclassfeature3", [
+	["(classes.known.sorcerer || classes.known.evoker)", "classes.known.evoker"],
+	["Sorcerer level", "Evoker level"],
+]);
+delete evokerDraconic.features.subclassfeature3.spellcastingExtra;
+delete evokerDraconic.features.subclassfeature3.spellcastingExtraApplyNonconform;
+evokerDraconic.features["subclassfeature3.1"] = {
+	name: "Evoker Spells", source: [["WoW", 0]], minlevel: 3,
+	description: ' #[Select option with "Choose Feature"]#' + desc('I always have the Spells (All) column of the Evoker Spells prepared, plus one other column of my choice. Choose the column with the "Choose Feature" button above.'),
+	choices: ["Augmentation", "Devastation", "Preservation"],
+	"augmentation": {
+		name: "Augmentation Spells", source: [["WoW", 0]],
+		description: desc("I always have prepared: Chromatic Orb, Dragon's Breath, Fly, Arcane Eye, and Summon Dragon, plus Ebon Might, Eruption, Blistering Scales, Upheaval, and Breath of Eons."),
+		spellcastingExtra: ["chromatic orb", "dragon's breath", "ebon might", "eruption", "fly", "blistering scales", "arcane eye", "upheaval", "summon dragon", "breath of eons"],
+		spellcastingExtraApplyNonconform: true,
+	},
+	"devastation": {
+		name: "Devastation Spells", source: [["WoW", 0]],
+		description: desc("I always have prepared: Chromatic Orb, Dragon's Breath, Fly, Arcane Eye, and Summon Dragon, plus Azure Strike, Scorching Ray, Fireball, Emberstorm, and Shattering Star."),
+		spellcastingExtra: ["chromatic orb", "dragon's breath", "azure strike", "scorching ray", "fly", "fireball", "arcane eye", "emberstorm", "summon dragon", "shattering star"],
+		spellcastingExtraApplyNonconform: true,
+	},
+	"preservation": {
+		name: "Preservation Spells", source: [["WoW", 0]],
+		description: desc("I always have prepared: Chromatic Orb, Dragon's Breath, Fly, Arcane Eye, and Summon Dragon, plus Dream Breath, Living Flame, Emerald Blossom, Time Dilation, and Dream Flight."),
+		spellcastingExtra: ["chromatic orb", "dragon's breath", "dream breath", "living flame", "fly", "emerald blossom", "arcane eye", "time dilation", "summon dragon", "dream flight"],
+		spellcastingExtraApplyNonconform: true,
+	},
+};
+var evokerSubs = ClassList.evoker.subclasses[1];
+var evokerIdx = evokerSubs.indexOf("sorcerer-draconic");
+if (evokerIdx !== -1) evokerSubs.splice(evokerIdx, 1);
+AddSubClass("evoker", "draconic sorcery", evokerDraconic);
 
 // Copied subclasses whose regExpSearch needs the base class name, e.g. Oath of Devotion ("paladin") and Draconic Sorcery ("sorcerer")
 // Add an alternative that matches "<WoW class> (<subclass>)", the name the sheet writes when picking a subclass
