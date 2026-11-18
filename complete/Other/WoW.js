@@ -8,9 +8,9 @@
 
 /*	-INFORMATION-
 	Subject:	Class
-	Effect:		This script adds the World of Warcraft versions of the Death Knight, Demon Hunter, Evoker, Hunter, Mage, Priest, Shaman and Warrior classes, the World of Warcraft class features for the Death Knight, Demon Hunter and Shaman, the Path of the Elements, Path of the Spiritual Guardian, Discipline Domain, Shadow Domain, Oath of the Holy, Oath of the Ebon Blade, Demon Hunter, Warrior of Mystic Brews, Swashbuckler and Draconic Sorcery (Evoker, with the Evoker Spells) subclasses, the Rune Strike, Prayer of Mending, Psychic Horror, Shadow Word: Pain and Void Eruption spells, the 35 spells those three WoW subclasses grant, fixes for copied subclasses whose regex or class-level checks needed the WoW class names, and the subclass-menu fullname fix for the standard classes.
+	Effect:		This script adds the World of Warcraft versions of the Death Knight, Demon Hunter, Evoker, Hunter, Mage, Priest, Shaman and Warrior classes, the World of Warcraft class features for the Death Knight, Demon Hunter and Shaman, the Path of the Elements, Path of the Spiritual Guardian, Discipline Domain, Shadow Domain, Oath of the Holy, Oath of the Ebon Blade, Demon Hunter, Warrior of Mystic Brews, Swashbuckler and Draconic Sorcery (Evoker, with the Evoker Spells) subclasses, the Rune Strike, Prayer of Mending, Psychic Horror, Shadow Word: Pain and Void Eruption spells, the 35 spells those three WoW subclasses grant, fixes for copied subclasses whose regex or class-level checks needed the WoW class names, the subclass-menu fullname fix for the standard classes, the 27 remaining Chapter 1 spells, and the WoW class spell lists: Death Knight, Demon Hunter, Evoker, Hunter, Mage and Priest via extraspells, and Druid, Paladin and Warlock via the spells' classes.
 	Code by:	Rocky
-	Date:		2026-11-17 (sheet v24)
+	Date:		2026-11-18 (sheet v24)
 */
 
 var iFileName = "WoW.js";
@@ -260,7 +260,7 @@ SpellsList["remorseless winter"] = {
 	components: "V",
 	duration: "Instantaneous",
 	save: "Con",
-	description: "30-ft rad any save or 6d6+1d6/SL Cold dmg; save half; all Speed 10 ft 1 rnd",
+	description: "30-ft rad any save or 6d6+1d6/SL Cold dmg; save half; Speed becomes 10 ft 1 rnd",
 	descriptionFull: [
 		"You drain the warmth from nearby creatures. Each creature of your choice in a 30-foot Emanation originating from you makes a Constitution saving throw, taking 6d6 Cold damage on a failed save or half as much damage on a successful one. Whether or not a creature succeeds on its saving throw, its Speed is reduced to 10 feet until the end of its next turn as clinging frost hinders its movement.",
 		UsingHigherLvl + "The damage increases by 1d6 for each spell slot level above 3.",
@@ -746,6 +746,490 @@ SpellsList["dream flight"] = {
 	],
 };
 
+// Druid spells
+SpellsList["wrath"] = {
+	name: "Wrath",
+	classes: ["druid"],
+	source: ["WoW", 27],
+	level: 0,
+	school: "Evoc",
+	time: "Act",
+	range: "60 ft",
+	components: "V,S",
+	duration: "Instantaneous",
+	description: "Spell attack for 1d8 Lightning dmg; Speed -10 ft until end of my next turn; +1d8 at CL 5, 11, and 17",
+	descriptionCantripDie: "Spell attack for `CD`d8 Lightning dmg; Speed -10 ft until end of my next turn",
+	descriptionFull: [
+		"You hurl a ball of energy at a target within range. Make a ranged spell attack against the target. On a hit, the target takes 1d8 Lightning damage, and its Speed is reduced by 10 feet until the end of your next turn.",
+		CantripUpgrade + "The damage increases by 1d8 when you reach levels 5 (2d8), 11 (3d8), and 17 (4d8).",
+	],
+};
+
+SpellsList["moonfire"] = {
+	name: "Moonfire",
+	classes: ["druid"],
+	source: ["WoW", 26],
+	level: 1,
+	school: "Evoc",
+	time: "Bns",
+	range: "60 ft",
+	components: "V",
+	duration: "1 rnd",
+	save: "Dex",
+	description: "1 crea save or 2d8+1d8/SL Radiant dmg, sheds Dim Light, no Invisible; +1d8+1d8/SL next EoT; save half",
+	descriptionFull: [
+		"A beam of lunar light burns a creature you can see within range. The target makes a Dexterity saving throw. On a failed save, it takes 2d8 Radiant damage, sheds Dim Light in a 10-foot radius, and can't benefit from the Invisible condition until the end of its next turn. At the end of its next turn, it takes an extra 1d8 Radiant damage, and the spell ends. On a successful save, it takes half the initial damage only.",
+		UsingHigherLvl + "Both the initial and the later damage increase by 1d8 for each spell slot level above 1.",
+	],
+};
+
+SpellsList["feral prowl"] = {
+	name: "Feral Prowl",
+	classes: ["druid"],
+	source: ["WoW", 26],
+	level: 2,
+	school: "Trans",
+	time: "Bns",
+	range: "Self",
+	components: "V",
+	duration: "1 min",
+	description: "Shape-shift as if using Wild Shape without a use; Invisible until spell ends (early after atk, dmg, spell, revert)",
+	descriptionFull: [
+		"You shape-shift as if you had used Wild Shape, but you don't expend a use of your Wild Shape. You have the Invisible condition until the spell ends. The spell ends early immediately after you make an attack roll, deal damage, cast a spell, or revert to your natural form.",
+	],
+};
+
+SpellsList["roar of ursoc"] = {
+	name: "Roar of Ursoc",
+	classes: ["druid"],
+	source: ["WoW", 26],
+	level: 2,
+	school: "Trans",
+	time: "Bns",
+	range: "Self",
+	components: "V",
+	duration: "1 rnd",
+	description: "Shape-shift as if Wild Shape without expending a use; crea starting turn within 5 ft Disadv. vs. others 1 rnd",
+	descriptionFull: [
+		"You shape-shift as if you had used Wild Shape, but you don't expend a use of your Wild Shape. Until the start of your next turn, any creature that starts its turn within 5 feet of you has Disadvantage on attack rolls against any creature other than you.",
+	],
+};
+
+SpellsList["regrowth"] = {
+	name: "Regrowth",
+	classes: ["druid"],
+	source: ["WoW", 26],
+	level: 3,
+	school: "Abjur",
+	time: "Act",
+	range: "120 ft",
+	components: "V",
+	duration: "Conc, 1 min",
+	description: "1 crea heals 3d8 HP, then 1d8 HP at start of my turns; ends after 24 HP total",
+	descriptionFull: [
+		"One creature you can see within range regains 3d8 Hit Points. For the duration, the target regains 1d8 Hit Points at the start of each of your turns. The spell ends early once it restores at least 24 Hit Points.",
+	],
+};
+
+SpellsList["starfall"] = {
+	name: "Starfall",
+	classes: ["druid"],
+	source: ["WoW", 26],
+	level: 4,
+	school: "Evoc",
+	time: "Act",
+	range: "120 ft",
+	components: "V,S,M",
+	compMaterial: "A pinch of stardust",
+	duration: "1 rnd",
+	save: "Dex",
+	description: "30-ft rad, 40-ft cyl all save or 7d8 Radiant dmg; save half; entering/ending turn there = Radiant dmg = Druid lvl",
+	descriptionFull: [
+		"You call down falling stars on creatures in a 30-foot-radius, 40-foot-high Cylinder within range. Each creature in the Cylinder makes a Dexterity saving throw, taking 7d8 Radiant damage on a failed save or half as much damage on a successful one.",
+		"Until the start of your next turn, a creature that enters the Cylinder for the first time on a turn or ends its turn there takes Radiant damage equal to your Druid level. A creature takes this damage only once per turn.",
+	],
+};
+
+SpellsList["innervate"] = {
+	name: "Innervate",
+	classes: ["druid"],
+	source: ["WoW", 26],
+	level: 5,
+	school: "Trans",
+	time: "Act",
+	range: "30 ft",
+	components: "V",
+	duration: "Instantaneous",
+	description: "1 crea gains a lvl 4 spell slot (gone when used or after Long Rest); I regain 1 use of Wild Shape",
+	descriptionFull: [
+		"A creature of your choice within range gains a level 4 spell slot. The spell slot vanishes after it is expended or the target finishes a Long Rest. It can use this spell slot to cast any spell it has prepared.",
+		"In addition, you regain one expended use of Wild Shape.",
+	],
+};
+
+SpellsList["tranquility"] = {
+	name: "Tranquility",
+	classes: ["druid"],
+	source: ["WoW", 27],
+	level: 6,
+	school: "Abjur",
+	time: "Act",
+	range: "S:60-ft rad",
+	components: "V",
+	duration: "Conc, 1 min",
+	description: "60-ft rad any Resist Bludg./Pierc./Slash.; Bns: each ally heals 2d8+1d8/SL+spell mod HP",
+	descriptionFull: [
+		"Nature's power flows around you in a 60-foot Emanation for the duration. Creatures of your choice in the Emanation have Resistance to Bludgeoning, Piercing, and Slashing damage. As a Bonus Action, you can cause each ally in the Emanation to regain Hit Points equal to 2d8 plus your spellcasting ability modifier.",
+		UsingHigherLvl + "Creatures regain 1d8 additional Hit Points for each spell slot level above 6.",
+	],
+};
+
+SpellsList["tree of life"] = {
+	name: "Tree of Life",
+	classes: ["druid"],
+	source: ["WoW", 27],
+	level: 8,
+	school: "Trans",
+	time: "Bns",
+	range: "Self",
+	components: "V,S",
+	duration: "1 min",
+	description: "Treant form: Large, Speed 10 ft, +2 AC, 10 Temp HP, immune Paralyzed/Restrained, +1 spell DC \x26 Adv. on spell atks",
+	descriptionFull: [
+		"You shape-shift into a Tree of Life form that resembles a treant. In this form, you gain the following benefits.",
+		" \u2022 ***Tree Form***. You become Large. Your Speed becomes 10 feet and can't be reduced, and Difficult Terrain doesn't cost you extra movement.",
+		" \u2022 ***Bark Skin***. You gain a +2 bonus to Armor Class and 10 Temporary Hit Points.",
+		" \u2022 ***Condition Immunity***. You gain Immunity to the Paralyzed and Restrained conditions. You can't be shape-shifted against your will.",
+		" \u2022 ***Source of Life***. When a spell you cast with a spell slot restores Hit Points to a creature, that creature regains an additional 1d8 Hit Points on the turn you cast the spell.",
+		" \u2022 ***Spells Enhanced***. The spell save DC of your Druid spells increases by 1, and you have Advantage on the attack rolls of Druid spells you cast.",
+	],
+};
+
+// Evoker spells
+SpellsList["rescue"] = {
+	name: "Rescue",
+	classes: [],
+	source: ["WoW", 33],
+	level: 5,
+	school: "Conj",
+	time: "Bns",
+	range: "120 ft",
+	components: "V",
+	duration: "Instantaneous",
+	description: "I teleport to a space I can see; 1 willing crea within 60 ft of where I left teleports to within 5 ft of me",
+	descriptionFull: [
+		"You teleport to an unoccupied space you can see within range. One willing creature within 60 feet of the space you left also teleports to an unoccupied space within 5 feet of your destination space.",
+	],
+};
+
+SpellsList["azure sweep"] = {
+	name: "Azure Sweep",
+	classes: [],
+	source: ["WoW", 31],
+	level: 6,
+	school: "Evoc",
+	time: "Act",
+	range: "S:30-ft rad",
+	components: "V,S",
+	duration: "1 min",
+	save: "Con",
+	description: "30-ft rad any save or 7d8 Force dmg \x26 Speed -20 ft for 1 min; save half",
+	descriptionFull: [
+		"Pure magic sweeps out from you in a 30-foot Emanation. Creatures of your choice in the Emanation make a Constitution saving throw. On a failed save, a creature takes 7d8 Force damage, and its Speed is reduced by 20 feet for the duration. On a successful save, the target takes half as much damage only.",
+	],
+};
+
+SpellsList["lay waste"] = {
+	name: "Lay Waste",
+	classes: [],
+	source: ["WoW", 32],
+	level: 7,
+	school: "Evoc",
+	time: "Act",
+	range: "S:120-ft line",
+	components: "V",
+	duration: "Instantaneous",
+	save: "Dex",
+	description: "120-ft line all save or 12d6 Fire dmg; save half; then I teleport within 5 ft of line's end",
+	descriptionFull: [
+		"You draw a deep breath and spew molten cinders along a 120-foot-long, 10-foot-wide Line originating from you in a direction you choose. Each creature in the Line makes a Dexterity saving throw, taking 12d6 Fire damage on a failed save or half as much damage on a successful one.",
+		"You then teleport to an unoccupied space within 5 feet of the end of the Line.",
+	],
+};
+
+// Hunter spells
+SpellsList["freezing trap"] = {
+	name: "Freezing Trap",
+	classes: [],
+	source: ["WoW", 37],
+	level: 1,
+	school: "Evoc",
+	time: "Act",
+	range: "60 ft",
+	components: "S",
+	duration: "Conc, 1 min",
+	save: "Con",
+	description: "Invisible ground trap; first crea within 5 ft save or Restrained 1 min (any dmg ends); spell ends",
+	descriptionFull: [
+		"An Invisible, intangible trap appears on the ground at a point you choose within range. The first time a creature comes within 5 feet of the trap, the trap explodes in a burst of frost, the spell ends, and the triggering creature makes a Constitution saving throw. On a failed save, the target has the Restrained condition for 1 minute. If the creature takes any damage, the Restrained condition from the trap ends.",
+	],
+};
+
+SpellsList["serpent sting"] = {
+	name: "Serpent Sting",
+	classes: [],
+	source: ["WoW", 37],
+	level: 3,
+	school: "Necro",
+	time: "Bns",
+	timeFull: "Bonus Action, which you take immediately after hitting a creature with a weapon",
+	range: "Self",
+	components: "V",
+	duration: "1 min",
+	save: "Con",
+	description: "Cast on weapon hit; +4d6 Poison dmg \x26 Poisoned; Con save end of its turns: fail 2d6 Poison dmg, success ends",
+	descriptionFull: [
+		"The target takes an extra 4d6 Poison damage from the attack, and the target has the Poisoned condition until the spell ends. At the end of each of its turns, the Poisoned target makes a Constitution saving throw. On a failed save, the creature takes 2d6 Poison damage. On a successful save, the spell ends.",
+	],
+};
+
+SpellsList["explosive trap"] = {
+	name: "Explosive Trap",
+	classes: [],
+	source: ["WoW", 37],
+	level: 5,
+	school: "Evoc",
+	time: "Act",
+	range: "60 ft",
+	components: "S",
+	duration: "Conc, 1 min",
+	save: "Dex",
+	description: "Invisible ground trap; first crea within 5 ft: 20-ft rad all save or 8d6 Fire dmg \x26 Huge or smaller pushed 20 ft",
+	descriptionFull: [
+		"An Invisible, intangible trap appears on the ground at a point you choose within range. The first time a creature comes within 5 feet of the trap, the trap explodes in a fiery burst that fills a 20-foot-radius Sphere centered on the trap. The spell ends, and each creature within the Sphere makes a Dexterity saving throw. On a failed save, a creature takes 8d6 Fire damage and, if it is Huge or smaller, is pushed 20 feet straight away from the trap's location.",
+	],
+};
+
+// Mage spells
+SpellsList["frost nova"] = {
+	name: "Frost Nova",
+	classes: [],
+	source: ["WoW", 41],
+	level: 1,
+	school: "Evoc",
+	time: "Act",
+	range: "S:15-ft rad",
+	components: "V,S",
+	duration: "Instantaneous",
+	save: "Con",
+	description: "15-ft rad any save or 2d6+1d6/SL Cold dmg \x26 Restrained until end of my next turn; save half",
+	descriptionFull: [
+		"You unleash a burst of frost, creating a 15-foot Emanation originating from you. Each creature of your choice in the Emanation makes a Constitution saving throw. On a failed save, a creature takes 2d6 Cold damage, and it has the Restrained condition until the end of your next turn. On a successful save, the creature takes half as much damage only.",
+		UsingHigherLvl + "The damage increases by 1d6 for each spell slot level above 1.",
+	],
+};
+
+SpellsList["flurry"] = {
+	name: "Flurry",
+	classes: [],
+	source: ["WoW", 41],
+	level: 3,
+	school: "Evoc",
+	time: "Act",
+	range: "120 ft",
+	components: "V,S",
+	duration: "Instantaneous",
+	description: "3 shards, each spell atk for 3d6 Cold dmg; crit Restrains until end of my next turn; +1 shard/SL",
+	descriptionFull: [
+		"You hurl three shards of ice at one target within range or at several. Make a ranged spell attack for each shard. On a hit, the target takes 3d6 Cold damage. On a Critical Hit, the target has the Restrained condition until the end of your next turn.",
+		UsingHigherLvl + "You create one additional shard of ice for each spell slot level above 3.",
+	],
+};
+
+SpellsList["combustion"] = {
+	name: "Combustion",
+	classes: [],
+	source: ["WoW", 41],
+	level: 6,
+	school: "Evoc",
+	time: "Act",
+	range: "S:5-ft rad",
+	components: "V,S",
+	duration: "1 min",
+	description: "Immune Fire, Adv. on spell atks, Bright Light 20 ft; 5-ft rad any 3d8 Fire dmg at end of my turns",
+	descriptionFull: [
+		"You engulf yourself in flames for the duration, shedding Bright Light in a 20-foot radius and Dim Light for an additional 10 feet. These flames grant you Immunity to Fire damage. While they last, you have Advantage on spell attack rolls.",
+		"At the end of each of your turns, each creature of your choice in a 5-foot Emanation originating from you takes 3d8 Fire damage.",
+	],
+};
+
+SpellsList["mass polymorph"] = {
+	name: "Mass Polymorph",
+	classes: [],
+	source: ["WoW", 41],
+	level: 9,
+	school: "Trans",
+	time: "Act",
+	range: "S:30-ft rad",
+	components: "V,S,M",
+	compMaterial: "A caterpillar cocoon",
+	duration: "Conc, 1 h",
+	save: "Wis",
+	description: "30-ft rad any save or become a CR 0 Beast (Goat), Temp HP = its HP; can't speak/cast",
+	descriptionFull: [
+		"You attempt to transform any number of creatures in a 30-foot Emanation originating from you into identical Beasts. Each creature in the Emanation must succeed on a Wisdom saving throw or shapeshift into a Beast form for the duration. A creature that isn't a Beast, a Giant, a Humanoid, or a Monstrosity automatically succeeds on its saving throw.",
+		"The new form can be any Beast you choose that has a Challenge Rating of 0 (Goat is recommended). Each target's game statistics are replaced by the stat block of the chosen Beast, but the target retains its alignment, personality, creature type, Hit Points, and Hit Point Dice.",
+		"Each target gains a number of Temporary Hit Points equal to the Hit Points of the Beast form. The spell ends early on the target if it has no Temporary Hit Points left.",
+		"The targets are limited in the actions they can perform by the anatomy of their new form, and they can't speak or cast spells.",
+		"Each target's gear melds into the new form. The creature can't use or otherwise benefit from any of that equipment.",
+	],
+};
+
+// Paladin spells
+SpellsList["consecration"] = {
+	name: "Consecration",
+	classes: ["paladin"],
+	source: ["WoW", 49],
+	level: 2,
+	school: "Evoc",
+	time: "Act",
+	range: "S:15-ft rad",
+	components: "V",
+	duration: "Conc, 1 min",
+	description: "15-ft rad any starting turn there take 1d8 Radiant dmg; Difficult Terrain for Fiends/Undead",
+	descriptionFull: [
+		"You consecrate the area in a 15-foot Emanation originating from you. Creatures of your choice that start their turn in the Emanation take 1d8 Radiant damage. The Emanation is Difficult Terrain for Fiends and Undead.",
+	],
+};
+
+SpellsList["guided prayer"] = {
+	name: "Guided Prayer",
+	classes: ["paladin"],
+	source: ["WoW", 49],
+	level: 3,
+	school: "Evoc",
+	time: "React",
+	timeFull: "Reaction, which you take when you become Bloodied or take damage while you are Bloodied",
+	range: "Self",
+	components: "V",
+	duration: "Instantaneous",
+	description: "I heal 8d4+spell mod HP; Adv. on next atk before end of my next turn",
+	descriptionFull: [
+		"You regain Hit Points equal to 8d4 plus your spellcasting ability modifier. You have Advantage on the next attack roll you make before the end of your next turn.",
+	],
+};
+
+SpellsList["divine shield"] = {
+	name: "Divine Shield",
+	classes: ["paladin"],
+	source: ["WoW", 49],
+	level: 4,
+	school: "Abjur",
+	time: "React",
+	timeFull: "Reaction, which you take when you take damage",
+	range: "Self",
+	components: "V",
+	duration: "1 rnd",
+	description: "Immune all dmg until start of my next turn; Speed can't be reduced \x26 no effect can move me",
+	descriptionFull: [
+		"You have Immunity to all damage until the start of your next turn, including the triggering damage. For the duration, your Speed can't be reduced, any current reductions to your Speed are suspended, and no effect can move you against your will.",
+	],
+};
+
+// Priest spells
+SpellsList["holy nova"] = {
+	name: "Holy Nova",
+	classes: [],
+	source: ["WoW", 54],
+	level: 4,
+	school: "Evoc",
+	time: "Act",
+	range: "S:30-ft rad",
+	components: "V",
+	duration: "Instantaneous",
+	save: "Con",
+	description: "30-ft rad any save or 5d6+1d6/SL Radiant dmg; save half; others in area heal 3d6+1d6/SL HP",
+	descriptionFull: [
+		"An explosion of holy light surrounds you in a 30-foot Emanation, harming your enemies and healing your allies. Each creature of your choice in the Emanation makes a Constitution saving throw, taking 5d6 Radiant damage on a failed save or half as much damage on a successful one. Each other creature in the Emanation regains 3d6 Hit Points.",
+		UsingHigherLvl + "The damage and healing each increase by 1d6 for each spell slot level above 4.",
+	],
+};
+
+SpellsList["apotheosis"] = {
+	name: "Apotheosis",
+	classes: [],
+	source: ["WoW", 54],
+	level: 9,
+	school: "Trans",
+	time: "Bns",
+	range: "Self",
+	components: "V",
+	duration: "1 min",
+	description: "Fly 90 ft; Resist Bludg./Pierc./Radiant/Slash.; healing/Radiant slot spells count as 2 SL higher (max 9)",
+	descriptionFull: [
+		"You transform into a spectral, angelic form that grants you the following benefits.",
+		" \u2022 ***Angelic Wings***. You have a Fly Speed of 90 feet.",
+		" \u2022 ***Spectral Form***. You have Resistance to Bludgeoning, Piercing, Radiant, and Slashing damage.",
+		" \u2022 ***Holy Empowerment***. Whenever you cast a spell using a spell slot that restores Hit Points to one or more creatures or deals Radiant damage, determine the spell's effects as if you had used a spell slot 2 levels higher than the spell slot you used to cast it (maximum of level 9).",
+	],
+};
+
+// Warlock spells
+SpellsList["curse of agony"] = {
+	name: "Curse of Agony",
+	classes: ["warlock"],
+	source: ["WoW", 64],
+	level: 2,
+	school: "Necro",
+	time: "Act",
+	range: "30 ft",
+	components: "V,S",
+	duration: "1 min",
+	save: "Con",
+	description: "1 crea saves now \x26 end of its turns, takes 1d4 Psychic dmg each; fail = die grows (max d12); success ends",
+	descriptionFull: [
+		"You curse one creature within range with excruciating pain. The target makes a Constitution saving throw; the spell's damage starts at 1d4 Psychic damage. On a failed save, the target takes the spell's damage, and the spell's damage die increases: from 1d4 to 1d6, 1d6 to 1d8, 1d8 to 1d10, or 1d10 to 1d12 (the maximum). On a successful save, the target takes the spell's damage, and the effect ends. The target repeats the save at the end of each of its turns.",
+	],
+};
+
+SpellsList["hand of gul'dan"] = {
+	name: "Hand of Gul'dan",
+	classes: ["warlock"],
+	source: ["WoW", 65],
+	level: 3,
+	school: "Conj",
+	time: "Act",
+	range: "120 ft",
+	components: "V,S",
+	duration: "Conc, 1 min",
+	save: "Dex",
+	description: "20-ft rad all save or 2d8 Fire+2d8 Necro. dmg; save half; entering/ending turn there save vs 1d8+1d8 (once/turn)",
+	descriptionFull: [
+		"A demonic meteor hurtles from you to a point you choose within range and then erupts. Each creature in a 20-foot-radius Sphere centered on that point makes a Dexterity saving throw, taking 2d8 Fire damage plus 2d8 Necrotic damage on a failed save or half as much damage on a successful one.",
+		"Demonic spirits resembling fel imps flit about the Sphere for the duration. A creature that enters the Sphere or ends its turn there makes a Dexterity saving throw, taking 1d8 Fire damage plus 1d8 Necrotic damage on a failed save or half as much damage on a successful one. A creature can be affected by this spell only once per turn.",
+	],
+};
+
+SpellsList["rain of fire"] = {
+	name: "Rain of Fire",
+	classes: ["warlock"],
+	source: ["WoW", 65],
+	level: 3,
+	school: "Evoc",
+	time: "Act",
+	range: "120 ft",
+	components: "V,S",
+	duration: "Conc, 1 min",
+	save: "Dex",
+	description: "20-ft rad, 40-ft cyl all save or 3d8+1d8/SL Fire dmg; save half; Magic action moves it 60 ft; Adv. \x26 +1d6 Necro.",
+	descriptionFull: [
+		"Hellfire rains down in a 20-foot-radius, 40-foot-high Cylinder centered on a point within range. Until the spell ends, you can take a Magic action on later turns to move the Cylinder up to 60 feet.",
+		"When the Cylinder appears, each creature in it makes a Dexterity saving throw, taking 3d8 Fire damage on a failed save or half as much damage on a successful one. A creature also makes this save when the spell's area moves into its space and when it enters the spell's area or ends its turn there. A creature makes this save only once per turn.",
+		"You have Advantage on spell attack rolls against a creature in the Cylinder, and you deal an extra 1d6 Necrotic damage to the target if you hit.",
+		UsingHigherLvl + "The Fire damage increases by 1d8 for each spell slot level above 3.",
+	],
+};
+
 function reskinWoWClass(fromKey, toKey, name, regex, spellListClass) {
 	var c = newObj(ClassList[fromKey]);
 	c.name = name;
@@ -1089,6 +1573,14 @@ reskinWoWClass("cleric", "priest", "Priest", /^(?=.*priest)(?!.*cleric).*$/i, "c
 reskinWoWClass("barbarian", "shaman", "Shaman", /^(?=.*shaman)(?!.*(barbarian|druid)).*$/i);
 reskinWoWClass("fighter", "warrior", "Warrior", /^(?=.*warrior)(?!.*(barbarian|fighter|monk|paladin|ranger|warrior of|feral|tribal|spiritual|exalted|sacred|holy|divine|nature|natural)).*$/i);
 
+// Class spell lists: each WoW class keeps its base class list and adds the spells from its book section
+ClassList.deathknight.spellcastingList.extraspells = ["chains of ice", "death grip", "rune strike", "scourge strike", "vampiric blood", "death and decay", "frostscythe", "leeching strike", "remorseless winter", "bonestorm"];
+ClassList.demonhunter.spellcastingList.extraspells = ["consume soul", "fel rush", "infernal strike", "throw glaive", "eye beam", "fiery brand", "sigil of flame", "demon spikes", "metamorphosis", "soul reap", "chaos nova", "collapsing star", "sigil of chains"];
+ClassList.evoker.spellcastingList.extraspells = ["azure strike", "ebon might", "living flame", "dream breath", "eruption", "blistering scales", "emerald blossom", "breath of eons", "emberstorm", "time dilation", "upheaval", "dream flight", "rescue", "shattering star", "azure sweep", "lay waste"];
+ClassList.hunter.spellcastingList.extraspells = ["freezing trap", "serpent sting", "explosive trap"];
+ClassList.mage.spellcastingList.extraspells = ["frost nova", "create food and water", "flurry", "flame strike", "combustion", "heroes' feast", "mass polymorph"];
+ClassList.priest.spellcastingList.extraspells = ["mind sliver", "shadow word: pain", "blur", "levitate", "haste", "prayer of mending", "summon undead", "holy nova", "psychic horror", "dominate person", "void eruption", "dominate monster", "apotheosis"];
+
 function rekeyWoWFeature(cls, featKey, pairs) {
 	var src = cls.features[featKey].toSource();
 	for (var i = 0; i < pairs.length; i++) src = src.split(pairs[i][0]).join(pairs[i][1]);
@@ -1411,11 +1903,14 @@ dk.features["improved death coil"] = {
 	}),
 };
 
-appendWoWDescription(dk.features["faithful steed"], [
+// Faithful Steed: append the Undead steed text; at level 20 only a short note, to make room for the capstone
+var fsDesc = dk.features["faithful steed"].description;
+var fsText = desc([
 	"When I cast *Find Steed*, the Otherworldly Steed can be Undead.",
 	"An Undead steed deals Necrotic damage with its Otherworldly Slam and gains Ghostly Stride (Bonus Action; recharges after a Long Rest).",
 	"Ghostly Stride: the steed and its rider can move through other creatures and objects this turn as if they were Difficult Terrain, and each takes 1d10 Force damage if it ends its turn inside an object.",
 ]);
+for (var fsl = 0; fsl < fsDesc.length; fsl++) fsDesc[fsl] += (fsl < 19 ? fsText : " [Undead steed option, Ghostly Stride]");
 
 // Demon Hunter class features
 var dh = ClassList.demonhunter;

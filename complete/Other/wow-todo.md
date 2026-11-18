@@ -50,7 +50,7 @@ Agent-loop run `agent-loop-runs/2026-11-17-1338-wow-subclasses-1` added seven su
 
   **Verified fix:** in `WoW.js`, `delete ClassSubList[key].fullname` for `barbarian-berserker`, `fighter-champion`, `ranger-hunter`, `wizard-evoker` and `sorcerer-draconic`. The dialog then writes "Class (Subclass)", and the same check gives 0 problems across all 32 class/subclass pairs. Side effect: standard characters show "Barbarian (Berserker)" instead of "Berserker" in the Class field and feature headers, like every other subclass. (Hunter and Evoker can't keep a bare `fullname` in any case, because those are now class names.) Do this before or in the `wow-subclasses-2` run, since the WoW Draconic Sorcery depends on it.
 - [x] **Import test in Acrobat** on a fresh v24 sheet. Type each class name into the Class field and check its features, subclass choice and spell list. Exercise the code that was rekeyed: Shaman Rage damage, both Priest Blessed Strikes options, Hunter's Mark at Hunter and Demon Hunter levels 17 and 20, Mage Spell Mastery (18) and Signature Spells (20), and the Death Coil pool size.
-- [ ] **Faithful Steed at level 20** (`WoW.js:187-191`). The Undead steed text is also appended to the level-20 one-line summary, which takes room the capstone needs. For index 19, append a short note instead, e.g. `" [Undead steed option, Ghostly Stride]"`. (Review note 1.)
+- [x] **Faithful Steed at level 20** (`WoW.js:187-191`). The Undead steed text is also appended to the level-20 one-line summary, which takes room the capstone needs. For index 19, append a short note instead, e.g. `" [Undead steed option, Ghostly Stride]"`. (Review note 1.)
 - [ ] **Demon Hunter Fighting Style** (`WoW.js:197`). The text mentions Void Warrior, but it can't be selected. Once the Void Warrior feat exists, add it to this feature's `choices`.
 
 ## Chapter 1: Subclasses
@@ -92,97 +92,97 @@ The sheet has only the SRD subclass of each class built in. The other 2024 subcl
 
 ## Chapter 1: Spells and class spell lists
 
-62 Chapter 1 spells remain, all in `spells/spells-wow.json`. They are grouped below by the book section that lists them, and each section is also that class's spell-list addition. How to attach a list:
+All 67 Chapter 1 spells are in `WoW.js` (2026-11-18). They are grouped below by the book section that lists them, and each section is also that class's spell-list addition. How to attach a list:
 
 - **For a WoW class:** add to its `spellcastingList.extraspells`, e.g. `ClassList.deathknight.spellcastingList.extraspells`.
 - **For a built-in class:** put the class in the spell's `classes` array. That's `"druid"`, `"paladin"` or `"warlock"`.
 
-Also decide whether the Death Knight keeps the WoW Paladin spells. It reads the Paladin list.
+Decision (2026-11-18): the Death Knight keeps reading the Paladin list, so it also gets *Consecration*, *Guided Prayer* and *Divine Shield*, which have `classes: ["paladin"]`. The ten Death Knight spells are only in `ClassList.deathknight.spellcastingList.extraspells`, never on the Paladin list, because the book restricts them to Ebon Blade paladins. Every Death Knight can pick them, whatever its subclass, since the WoW Death Knight class stands for the Ebon Blade paladin. The Death Knight doesn't use `notspells` to drop the Paladin spells. The Mage and Priest `extraspells` also include the PHB spells from the book's tables.
 
 **Death Knight Spells**
-- [ ] Add *Rune Strike* (already in `WoW.js`) to the Death Knight list.
-- [ ] Bonestorm
-- [ ] Chains of Ice
-- [ ] Death and Decay
-- [ ] Death Grip
-- [ ] Frostscythe
-- [ ] Leeching Strike
-- [ ] Remorseless Winter
-- [ ] Scourge Strike
-- [ ] Vampiric Blood
+- [x] Add *Rune Strike* (already in `WoW.js`) to the Death Knight list.
+- [x] Bonestorm
+- [x] Chains of Ice
+- [x] Death and Decay
+- [x] Death Grip
+- [x] Frostscythe
+- [x] Leeching Strike
+- [x] Remorseless Winter
+- [x] Scourge Strike
+- [x] Vampiric Blood
 
 **Demon Hunter Spells**
-- [ ] Chaos Nova
-- [ ] Collapsing Star
-- [ ] Consume Soul
-- [ ] Demon Spikes
-- [ ] Eye Beam
-- [ ] Fel Rush
-- [ ] Fiery Brand
-- [ ] Infernal Strike
-- [ ] Metamorphosis
-- [ ] Sigil of Chains
-- [ ] Sigil of Flame
-- [ ] Soul Reap
-- [ ] Throw Glaive
+- [x] Chaos Nova
+- [x] Collapsing Star
+- [x] Consume Soul
+- [x] Demon Spikes
+- [x] Eye Beam
+- [x] Fel Rush
+- [x] Fiery Brand
+- [x] Infernal Strike
+- [x] Metamorphosis
+- [x] Sigil of Chains
+- [x] Sigil of Flame
+- [x] Soul Reap
+- [x] Throw Glaive
 
 **Druid Spells**
-- [ ] Feral Prowl
-- [ ] Innervate
-- [ ] Moonfire
-- [ ] Regrowth
-- [ ] Roar of Ursoc
-- [ ] Starfall
-- [ ] Tranquility
-- [ ] Tree of Life
-- [ ] Wrath
+- [x] Feral Prowl
+- [x] Innervate
+- [x] Moonfire
+- [x] Regrowth
+- [x] Roar of Ursoc
+- [x] Starfall
+- [x] Tranquility
+- [x] Tree of Life
+- [x] Wrath
 
 **New Evoker Spells**
-- [ ] Azure Strike
-- [ ] Azure Sweep
-- [ ] Blistering Scales
-- [ ] Breath of Eons
-- [ ] Dream Breath
-- [ ] Dream Flight
-- [ ] Ebon Might
-- [ ] Emberstorm
-- [ ] Emerald Blossom
-- [ ] Eruption
-- [ ] Lay Waste
-- [ ] Living Flame
-- [ ] Rescue
-- [ ] Shattering Star
-- [ ] Time Dilation
-- [ ] Upheaval
+- [x] Azure Strike
+- [x] Azure Sweep
+- [x] Blistering Scales
+- [x] Breath of Eons
+- [x] Dream Breath
+- [x] Dream Flight
+- [x] Ebon Might
+- [x] Emberstorm
+- [x] Emerald Blossom
+- [x] Eruption
+- [x] Lay Waste
+- [x] Living Flame
+- [x] Rescue
+- [x] Shattering Star
+- [x] Time Dilation
+- [x] Upheaval
 
 **Hunter Spells**
-- [ ] Explosive Trap
-- [ ] Freezing Trap
-- [ ] Serpent Sting
+- [x] Explosive Trap
+- [x] Freezing Trap
+- [x] Serpent Sting
 
 **Mage Spells**
-- [ ] Combustion
-- [ ] Flurry
-- [ ] Frost Nova
-- [ ] Mass Polymorph
+- [x] Combustion
+- [x] Flurry
+- [x] Frost Nova
+- [x] Mass Polymorph
 
 **Paladin Spells**
-- [ ] Consecration
-- [ ] Divine Shield
-- [ ] Guided Prayer
+- [x] Consecration
+- [x] Divine Shield
+- [x] Guided Prayer
 
 **Priest Spells**
-- [ ] Apotheosis
-- [ ] Holy Nova
+- [x] Apotheosis
+- [x] Holy Nova
 - [x] Prayer of Mending
 - [x] Psychic Horror
 - [x] Shadow Word: Pain
 - [x] Void Eruption
 
 **Warlock Spells**
-- [ ] Curse of Agony
-- [ ] Hand of Gul'dan
-- [ ] Rain of Fire
+- [x] Curse of Agony
+- [x] Hand of Gul'dan
+- [x] Rain of Fire
 
 ## Chapter 1: Feats, invocations, maneuvers and pets
 
@@ -250,11 +250,11 @@ Also decide whether the Death Knight keeps the WoW Paladin spells. It reads the 
 
 These are for the subclass work. Fix each one when that subclass is added.
 
-- **Subclass regexes (fixed).** `matchWoWSubclasses()` in `WoW.js` adds a "<WoW class> (<subclass>)" alternative to every copied subclass regex that didn't match, so imported PHB'24 subclasses are covered too as long as they're imported before `WoW.js`. Caveat: Draconic Sorcery has `fullname: "Draconic Sorcerer"`, so it is listed in the Evoker's subclass menu, but picking it there writes "Draconic Sorcerer" into the Class field, which the sheet reads as the Sorcerer. Typing "Evoker (Draconic Sorcery)" works. Removing the `fullname` fixes it (see "Fix first" at the top).
+- **Subclass regexes (fixed).** `matchWoWSubclasses()` in `WoW.js` adds a "<WoW class> (<subclass>)" alternative to every copied subclass regex that didn't match. Imported PHB'24 subclasses are covered too, as long as they're imported before `WoW.js`. The `fullname` collision this bullet used to describe is fixed (see "Fix first" at the top). `WoW.js` deletes the five standard-class `fullname`s, and the Evoker's Draconic Sorcery is a separate `evoker-draconic sorcery` entry with no `fullname`.
 - **Subclass features (fixed).** Berserker, Champion and Draconic Sorcery now read `(classes.known.<base> || classes.known.<copy>)`.
 - **Import order.** Each copied class takes its subclass list as it is when `WoW.js` runs, so import `WoW.js` after any other content that adds subclasses.
 - **Shared subclass names.** Typing only a subclass name two classes share can resolve to the WoW class, because the class added last wins the tie. For example, "Path of the Elements" gives Shaman, "Discipline Domain" gives Priest and "Oath of the Holy" gives Death Knight. Typing "Class (Subclass)" always works. The dialog problem this bullet used to describe is the "Fix first" item at the top.
-- **PHB'24-only spells.** Five domain spells aren't in the sheet's built-in spell list, so they only show up if PHB'24 content is imported. Otherwise the sheet skips them without an error. Discipline Domain grants `arcane vigor`, `circle of power` and `destructive wave`. Shadow Domain grants `crown of madness` and `summon undead`. The WoW Ebon Blade, Demon Hunter and Evoker subclass spell lists also name XPHB spells that may be missing without PHB'24 content (e.g. `summon undead`, `freedom of movement`, `circle of power`, `destructive wave`, `steel wind strike`, `conjure volley`).
+- **PHB'24-only spells.** Five domain spells aren't in the sheet's built-in spell list, so they only show up if PHB'24 content is imported. Otherwise the sheet skips them without an error. Discipline Domain grants `arcane vigor`, `circle of power` and `destructive wave`. Shadow Domain grants `crown of madness` and `summon undead`. The WoW Ebon Blade, Demon Hunter and Evoker subclass spell lists also name XPHB spells that may be missing without PHB'24 content (e.g. `summon undead`, `freedom of movement`, `circle of power`, `destructive wave`, `steel wind strike`, `conjure volley`). The Priest spell list also names `mind sliver` and `summon undead`, which the sheet only has with PHB'24 content.
 
 ## Notes for the next agent-loop run
 
