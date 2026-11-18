@@ -8,7 +8,7 @@
 
 /*	-INFORMATION-
 	Subject:	Class
-	Effect:		This script adds the World of Warcraft versions of the Death Knight, Demon Hunter, Evoker, Hunter, Mage, Priest, Shaman and Warrior classes, the World of Warcraft class features for the Death Knight, Demon Hunter and Shaman, the Path of the Elements, Path of the Spiritual Guardian, Discipline Domain, Shadow Domain, Oath of the Holy, Oath of the Ebon Blade, Demon Hunter, Warrior of Mystic Brews, Swashbuckler and Draconic Sorcery (Evoker, with the Evoker Spells) subclasses, the Rune Strike, Prayer of Mending, Psychic Horror, Shadow Word: Pain and Void Eruption spells, the 35 spells those three WoW subclasses grant, fixes for copied subclasses whose regex or class-level checks needed the WoW class names, the subclass-menu fullname fix for the standard classes, the 27 remaining Chapter 1 spells, and the WoW class spell lists: Death Knight, Demon Hunter, Evoker, Hunter, Mage and Priest via extraspells, and Druid, Paladin and Warlock via the spells' classes.
+	Effect:		This script adds the World of Warcraft versions of the Death Knight, Demon Hunter, Evoker, Hunter, Mage, Priest, Shaman and Warrior classes, the World of Warcraft class features for the Death Knight, Demon Hunter and Shaman, the Path of the Elements, Path of the Spiritual Guardian, Discipline Domain, Shadow Domain, Oath of the Holy, Oath of the Ebon Blade, Demon Hunter, Warrior of Mystic Brews, Swashbuckler and Draconic Sorcery (Evoker, with the Evoker Spells) subclasses, the Rune Strike, Prayer of Mending, Psychic Horror, Shadow Word: Pain and Void Eruption spells, the 35 spells those three WoW subclasses grant, fixes for copied subclasses whose regex or class-level checks needed the WoW class names, the subclass-menu fullname fix for the standard classes, the 27 remaining Chapter 1 spells, and the WoW class spell lists: Death Knight, Demon Hunter, Evoker, Hunter, Mage and Priest via extraspells, and Druid, Paladin and Warlock via the spells' classes, the 8 WoW feats (Clearcasting, Fingers of Frost, Hot Streak, Elusive Brawler, Enveloping Mist, Fists of Fury, Stagger and Sway, and the Void Warrior Fighting Style for the Demon Hunter) and the 7 WoW Warlock Eldritch Invocations (including Pact of the Legion).
 	Code by:	Rocky
 	Date:		2026-11-18 (sheet v24)
 */
@@ -1916,6 +1916,9 @@ for (var fsl = 0; fsl < fsDesc.length; fsl++) fsDesc[fsl] += (fsl < 19 ? fsText 
 var dh = ClassList.demonhunter;
 dh.features["_spellcasting"].description = dh.features["_spellcasting"].description.split("I can use a Druidic Focus").join("I can use an Arcane Focus (not a Druidic Focus)");
 appendWoWDescription(dh.features["expertise"], "Languages come from the WoW Chapter 2 language tables; Eredun and Nathrezim are recommended.");
+// Void Warrior is a type: "fighting style" feat (end of this file). This feature keeps choicesFightingStyles
+// from the Ranger, so the sheet's processChoicesFightingStyles() adds Void Warrior to its choices at the end
+// of import. Don't push it into choices here: that would list it twice.
 appendWoWDescription(dh.features["fighting style"], "As a Demon Hunter, I can also choose the Void Warrior feat (WoW).");
 delete dh.features["feral senses"];
 
@@ -1950,3 +1953,254 @@ sh.features["totems"] = {
 	limfeaname: "Primal Knowledge Totem",
 	action: [["bonus action", ""]],
 };
+
+// Chapter 1: Feats
+FeatsList["clearcasting"] = {
+	name: "Clearcasting",
+	source: [["WoW", 40]],
+	type: "general",
+	prerequisite: "Level 4+",
+	prereqeval: function (v) { return v.characterLevel >= 4; },
+	scores: [0, 0, 0, 1, 0, 0],
+	action: [["reaction", "Clearcasting (after spell crit)"]],
+	description: "When I score a Critical Hit with a spell's attack roll, I can take a Reaction to cast a cantrip with a casting time of an action. When I roll damage for a spell that deals Force damage, I can treat any 1 on a damage die as a 2. [+1 Intelligence]",
+	descriptionFull: [
+		"You gain the following benefits.",
+		"***Ability Score Increase***. Increase your Intelligence score by 1, to a maximum of 20.",
+		"***Clearcasting***. When you score a Critical Hit with a spell's attack roll, you can take a Reaction to cast a cantrip with a casting time of an action.",
+		"***Force Adept***. When you roll damage for a spell you cast that deals Force damage, you can treat any 1 on a damage die as a 2.",
+	],
+};
+
+FeatsList["fingers of frost"] = {
+	name: "Fingers of Frost",
+	source: [["WoW", 40]],
+	type: "general",
+	prerequisite: "Level 4+",
+	prereqeval: function (v) { return v.characterLevel >= 4; },
+	scores: [0, 0, 0, 1, 0, 0],
+	description: "My spells ignore Resistance to Cold damage. When I deal Cold damage to a Restrained creature, it takes extra Cold damage equal to a number of d4s equal to my Proficiency Bonus. [+1 Intelligence]",
+	descriptionFull: [
+		"You gain the following benefits.",
+		"***Ability Score Increase***. Increase your Intelligence score by 1, to a maximum of 20.",
+		"***Cold Mastery***. Spells you cast ignore Resistance to Cold damage.",
+		"***Frostbite***. When you deal Cold damage to a creature that has the Restrained condition, the creature takes extra Cold damage. To determine the extra damage, roll a number of d4s equal to your Proficiency Bonus and add them together.",
+	],
+};
+
+FeatsList["hot streak"] = {
+	name: "Hot Streak",
+	source: [["WoW", 41]],
+	type: "general",
+	prerequisite: "Level 4+",
+	prereqeval: function (v) { return v.characterLevel >= 4; },
+	scores: [0, 0, 0, 1, 0, 0],
+	description: "My spells ignore Resistance to Fire damage. When a spell I cast deals Fire damage to a creature, it starts burning; if it was already burning, the burning damage increases by 1d4. [+1 Intelligence]",
+	descriptionFull: [
+		"You gain the following benefits.",
+		"***Ability Score Increase***. Increase your Intelligence score by 1, to a maximum of 20.",
+		"***Fire Mastery***. Spells you cast ignore Resistance to Fire damage.",
+		"***Ignite***. When a spell you cast deals Fire damage to a creature, the target starts burning. When you deal Fire damage to a creature that is already burning, the flames become more severe, increasing the burning damage by 1d4.",
+	],
+};
+
+FeatsList["elusive brawler"] = {
+	name: "Elusive Brawler",
+	source: [["WoW", 45]],
+	type: "general",
+	prerequisite: "Level 4+, Dexterity 13+ and Wisdom 13+",
+	prereqeval: function (v) { return v.characterLevel >= 4 && What("Dex") >= 13 && What("Wis") >= 13; },
+	action: [["reaction", "Reactive Dodge (when damaged)"]],
+	description: "When I take damage, I can take a Reaction to take the Dodge action. [+1 Dexterity or Wisdom]",
+	descriptionFull: [
+		"You gain the following benefits.",
+		"***Ability Score Increase***. Increase your Dexterity or Wisdom score by 1, to a maximum of 20.",
+		"***Reactive Dodge***. When you take damage, you can take a Reaction to take the Dodge action.",
+	],
+	choices: ["Dexterity", "Wisdom"],
+	choicesNotInMenu: true,
+	"dexterity": {
+		description: "When I take damage, I can take a Reaction to take the Dodge action. [+1 Dexterity]",
+		scores: [0, 1, 0, 0, 0, 0],
+	},
+	"wisdom": {
+		description: "When I take damage, I can take a Reaction to take the Dodge action. [+1 Wisdom]",
+		scores: [0, 0, 0, 0, 1, 0],
+	},
+};
+
+FeatsList["enveloping mist"] = {
+	name: "Enveloping Mist",
+	source: [["WoW", 45]],
+	type: "general",
+	prerequisite: "Level 4+, Dexterity 13+ and Wisdom 13+",
+	prereqeval: function (v) { return v.characterLevel >= 4 && What("Dex") >= 13 && What("Wis") >= 13; },
+	action: [["reaction", "Enveloping Mist (reduce damage)"]],
+	description: "When I restore HP to a creature with a spell or feature, I roll one of its healing dice as the creature's Life Cocoon value. If it is hit by an attack before the start of its next turn, I can take a Reaction to reduce that damage by the value; otherwise it gains that many Temporary HP at the start of its turn. [+1 Dexterity or Wisdom]",
+	descriptionFull: [
+		"You gain the following benefits.",
+		"***Ability Score Increase***. Increase your Dexterity or Wisdom score by 1, to a maximum of 20.",
+		"***Enveloping Mist***. When you cast a spell or use a feature to restore Hit Points to a creature, the creature is wrapped in a healing mist. Roll one of the dice from the feature that healed it, and note that number as the creature's Life Cocoon value. If the creature is hit by an attack roll before the start of its next turn, you can take a Reaction to reduce the damage it takes from that attack by its Life Cocoon value. The mist then disappears. At the start of the creature's next turn, if the mist persists, the creature gains Temporary Hit Points equal to its Life Cocoon value.",
+	],
+	choices: ["Dexterity", "Wisdom"],
+	choicesNotInMenu: true,
+	"dexterity": {
+		description: "When I restore HP to a creature with a spell or feature, I roll one of its healing dice as the creature's Life Cocoon value. If it is hit by an attack before the start of its next turn, I can take a Reaction to reduce that damage by the value; otherwise it gains that many Temporary HP at the start of its turn. [+1 Dexterity]",
+		scores: [0, 1, 0, 0, 0, 0],
+	},
+	"wisdom": {
+		description: "When I restore HP to a creature with a spell or feature, I roll one of its healing dice as the creature's Life Cocoon value. If it is hit by an attack before the start of its next turn, I can take a Reaction to reduce that damage by the value; otherwise it gains that many Temporary HP at the start of its turn. [+1 Wisdom]",
+		scores: [0, 0, 0, 0, 1, 0],
+	},
+};
+
+FeatsList["fists of fury"] = {
+	name: "Fists of Fury",
+	source: [["WoW", 45]],
+	type: "general",
+	prerequisite: "Level 4+, Dexterity 13+ and Wisdom 13+",
+	prereqeval: function (v) { return v.characterLevel >= 4 && What("Dex") >= 13 && What("Wis") >= 13; },
+	description: "When I roll damage for an Unarmed Strike or a Light weapon, I can treat any 1 on a damage die as a 2. When I deal damage with an Unarmed Strike, I get +1 to the damage roll for each time I previously hit that creature with a melee attack roll this turn. [+1 Dexterity or Wisdom]",
+	descriptionFull: [
+		"You gain the following benefits.",
+		"***Ability Score Increase***. Increase your Dexterity or Wisdom score by 1, to a maximum of 20.",
+		"***Clean Hits***. When you roll damage for an attack you make with an Unarmed Strike or a weapon that has the Light property, you can treat any 1 on a damage die as a 2.",
+		"***Combo Strikes***. When you deal damage to a creature with an Unarmed Strike, you gain a +1 bonus to the damage roll for each time you previously hit that creature with a melee attack roll in the same turn.",
+	],
+	choices: ["Dexterity", "Wisdom"],
+	choicesNotInMenu: true,
+	"dexterity": {
+		description: "When I roll damage for an Unarmed Strike or a Light weapon, I can treat any 1 on a damage die as a 2. When I deal damage with an Unarmed Strike, I get +1 to the damage roll for each time I previously hit that creature with a melee attack roll this turn. [+1 Dexterity]",
+		scores: [0, 1, 0, 0, 0, 0],
+	},
+	"wisdom": {
+		description: "When I roll damage for an Unarmed Strike or a Light weapon, I can treat any 1 on a damage die as a 2. When I deal damage with an Unarmed Strike, I get +1 to the damage roll for each time I previously hit that creature with a melee attack roll this turn. [+1 Wisdom]",
+		scores: [0, 0, 0, 0, 1, 0],
+	},
+};
+
+FeatsList["stagger and sway"] = {
+	name: "Stagger and Sway",
+	source: [["WoW", 45]],
+	type: "general",
+	prerequisite: "Level 4+, Dexterity 13+ and Wisdom 13+",
+	prereqeval: function (v) { return v.characterLevel >= 4 && What("Dex") >= 13 && What("Wis") >= 13; },
+	action: [["bonus action", "Purify (Delayed Reaction pool)"]],
+	description: "When I take damage, I reduce it by my Dex mod (min 1) and add a d6 to my Delayed Reaction pool. At the end of my turn, I roll all dice in the pool and take that much Force damage. As a Bonus Action, I can remove dice equal to my Wis mod from the pool. [+1 Dexterity or Wisdom]",
+	descriptionFull: [
+		"You gain the following benefits.",
+		"***Ability Score Increase***. Increase your Dexterity or Wisdom score by 1, to a maximum of 20.",
+		"***Defer Damage***. When you take damage, reduce the damage you take by your Dexterity modifier (minimum of 1). Then add a d6 to your Delayed Reaction pool. At the end of your turn, remove all the dice from your Delayed Reaction pool and roll them. You take Force damage equal to the total rolled.",
+		"***Purify***. As a Bonus Action, you can remove a number of dice equal to your Wisdom modifier from your Delayed Reaction pool.",
+	],
+	choices: ["Dexterity", "Wisdom"],
+	choicesNotInMenu: true,
+	"dexterity": {
+		description: "When I take damage, I reduce it by my Dex mod (min 1) and add a d6 to my Delayed Reaction pool. At the end of my turn, I roll all dice in the pool and take that much Force damage. As a Bonus Action, I can remove dice equal to my Wis mod from the pool. [+1 Dexterity]",
+		scores: [0, 1, 0, 0, 0, 0],
+	},
+	"wisdom": {
+		description: "When I take damage, I reduce it by my Dex mod (min 1) and add a d6 to my Delayed Reaction pool. At the end of my turn, I roll all dice in the pool and take that much Force damage. As a Bonus Action, I can remove dice equal to my Wis mod from the pool. [+1 Wisdom]",
+		scores: [0, 0, 0, 0, 1, 0],
+	},
+};
+
+FeatsList["void warrior"] = {
+	name: "Void Warrior",
+	source: [["WoW", 18]],
+	type: "fighting style",
+	prerequisite: "Level 2+ Demon Hunter (Fighting Style feature)",
+	prereqeval: function (v) { return classes.known.demonhunter && classes.known.demonhunter.level >= 2 ? true : false; },
+	description: "I learn two Warlock cantrips of my choice (Chill Touch and Mind Sliver are recommended). They count as Demon Hunter spells for me and Wisdom is my spellcasting ability for them. Whenever I gain a Demon Hunter level, I can replace one with another Warlock cantrip.",
+	descriptionClassFeature: desc("I learn two Warlock cantrips; they count as Demon Hunter spells for me. Whenever I gain a Demon Hunter level, I can replace one of them with another Warlock cantrip."),
+	descriptionFull: "You learn two Warlock cantrips of your choice. Chill Touch and Mind Sliver are recommended. The chosen cantrips count as Ranger spells for you, and Wisdom is your spellcasting ability for them. Whenever you gain a Ranger level, you can replace one of these cantrips with another Warlock cantrip.",
+	spellcastingAbility: 5,
+	spellcastingBonus: [{
+		name: "Void Warrior",
+		"class": ["warlock"],
+		level: [0, 0],
+		selection: ["chill touch", "mind sliver"],
+		times: 2,
+	}],
+};
+
+// Chapter 1: Warlock Eldritch Invocations (WoW has no Warlock class entry, so these go on the built-in Warlock)
+AddWarlockInvocation("Curse of Corruption", {
+	name: "Curse of Corruption",
+	source: [["WoW", 0]],
+	minlevel: 2,
+	description: desc("When an enemy starts its turn cursed by a Warlock spell I cast (such as *Hex*), it must succeed on a Charisma saving throw or take Necrotic damage equal to my Charisma modifier."),
+});
+AddWarlockInvocation("Health Funnel", {
+	name: "Health Funnel",
+	source: [["WoW", 0]],
+	minlevel: 2,
+	description: desc("As a Bonus Action, I can expend any number of unexpended Hit Point Dice, roll them, and add my Charisma modifier to each die. My familiar or another Fiend I command gains the total as Temporary Hit Points."),
+	action: [["bonus action", ""]],
+});
+AddWarlockInvocation("Master Demonologist", {
+	name: "Master Demonologist",
+	source: [["WoW", 0]],
+	minlevel: 5,
+	description: desc("Any Fiends I command also deal extra damage to the target of my *Hex* spell as if they were me."),
+});
+AddWarlockInvocation("Expendable Minions", {
+	name: "Expendable Minions",
+	source: [["WoW", 0]],
+	minlevel: 9,
+	description: desc("When my familiar or a summoned creature I control dies, I or another creature within 60 ft of me regains HP equal to my Warlock level + my Charisma modifier."),
+});
+// Pact of the Legion tree, mirroring the built-in Pact of the Chain tree
+AddWarlockInvocation("Pact of the Legion", {
+	name: "Pact of the Legion",
+	submenu: ["[Warlock level  0+]", "[improves Pact of the Legion]"],
+	source: [["WoW", 0]],
+	description: desc([
+		"As a Magic action, I can cast *Find Familiar* without expending a spell slot. When I do so, I summon a Fel Imp familiar.",
+		"Additionally, when I take the Attack action, I can forgo one of my attacks to allow my familiar to use its Reaction to make one attack of its own.",
+	]),
+	spellcastingBonus: [{
+		name: "Pact of the Legion",
+		spells: ["find familiar"],
+		selection: ["find familiar"],
+		firstCol: "atwill",
+	}],
+	spellChanges: {
+		"find familiar": {
+			time: "Act",
+			ritual: false,
+			changes: "With the Pact of the Legion invocation I can cast *Find Familiar* as a Magic action without expending a spell slot.",
+		},
+	},
+});
+AddWarlockInvocation("Call of the Void (req: lvl 5+, Pact of the Legion)", {
+	name: "Call of the Void",
+	source: [["WoW", 0]],
+	minlevel: 5,
+	submenu: ["[Warlock level  5+]", "[improves Pact of the Legion]"],
+	prereqeval: function (v) { return v.choiceActive.indexOf("pact of the legion") !== -1; },
+	description: desc([
+		"When I cast *Find Familiar* with Pact of the Legion, I can summon a Fel Imp or a Voidwalker. It gains:",
+		" \u2022 ***Quick Attack***. As a Bonus Action, I can command the familiar to take the Attack action.",
+		" \u2022 ***Your Spell Attack***. The familiar uses my spell attack bonus for its attacks.",
+		" \u2022 ***Shadow Shield***. As a Reaction when my Voidwalker familiar takes damage, I can grant it Resistance to that damage.",
+	]),
+	action: [
+		["bonus action", "Call of the Void: Quick Attack"],
+		["reaction", "Call of the Void: Shadow Shield"],
+	],
+});
+AddWarlockInvocation("Legion Summoning (req: lvl 9+, Pact of the Legion)", {
+	name: "Legion Summoning",
+	source: [["WoW", 0]],
+	minlevel: 9,
+	submenu: ["[Warlock level  9+]", "[improves Pact of the Legion]"],
+	prereqeval: function (v) { return v.choiceActive.indexOf("pact of the legion") !== -1; },
+	description: desc("I can cast *Planar Binding* without expending a spell slot. When I do, I summon a Felguard, a Felhound, an Incubus or a Succubus, and that Fiend becomes the target of the spell. Once I cast it this way, I can't do so again until I finish a Long Rest."),
+	spellcastingBonus: [{
+		name: "Legion Summoning",
+		spells: ["planar binding"],
+		selection: ["planar binding"],
+		firstCol: "oncelr",
+	}],
+});

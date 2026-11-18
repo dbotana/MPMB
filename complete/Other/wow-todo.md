@@ -51,7 +51,7 @@ Agent-loop run `agent-loop-runs/2026-11-17-1338-wow-subclasses-1` added seven su
   **Verified fix:** in `WoW.js`, `delete ClassSubList[key].fullname` for `barbarian-berserker`, `fighter-champion`, `ranger-hunter`, `wizard-evoker` and `sorcerer-draconic`. The dialog then writes "Class (Subclass)", and the same check gives 0 problems across all 32 class/subclass pairs. Side effect: standard characters show "Barbarian (Berserker)" instead of "Berserker" in the Class field and feature headers, like every other subclass. (Hunter and Evoker can't keep a bare `fullname` in any case, because those are now class names.) Do this before or in the `wow-subclasses-2` run, since the WoW Draconic Sorcery depends on it.
 - [x] **Import test in Acrobat** on a fresh v24 sheet. Type each class name into the Class field and check its features, subclass choice and spell list. Exercise the code that was rekeyed: Shaman Rage damage, both Priest Blessed Strikes options, Hunter's Mark at Hunter and Demon Hunter levels 17 and 20, Mage Spell Mastery (18) and Signature Spells (20), and the Death Coil pool size.
 - [x] **Faithful Steed at level 20** (`WoW.js:187-191`). The Undead steed text is also appended to the level-20 one-line summary, which takes room the capstone needs. For index 19, append a short note instead, e.g. `" [Undead steed option, Ghostly Stride]"`. (Review note 1.)
-- [ ] **Demon Hunter Fighting Style** (`WoW.js:197`). The text mentions Void Warrior, but it can't be selected. Once the Void Warrior feat exists, add it to this feature's `choices`.
+- [x] **Demon Hunter Fighting Style** (`WoW.js:197`). The text mentions Void Warrior, but it can't be selected. Once the Void Warrior feat exists, add it to this feature's `choices`. Done: Void Warrior is a `type: "fighting style"` feat, so the sheet adds it to this feature's choices through `choicesFightingStyles`.
 
 ## Chapter 1: Subclasses
 
@@ -187,23 +187,23 @@ Decision (2026-11-18): the Death Knight keeps reading the Paladin list, so it al
 ## Chapter 1: Feats, invocations, maneuvers and pets
 
 **Feats** (`feats.json`)
-- [ ] Clearcasting (Mage feat)
-- [ ] Fingers of Frost (Mage feat)
-- [ ] Hot Streak (Mage feat)
-- [ ] Elusive Brawler (Monk feat)
-- [ ] Enveloping Mist (Monk feat)
-- [ ] Fists of Fury (Monk feat)
-- [ ] Stagger and Sway (Monk feat)
-- [ ] Void Warrior (a Fighting Style feat for the Demon Hunter; then add it to Demon Hunter's Fighting Style `choices`)
+- [x] Clearcasting (Mage feat)
+- [x] Fingers of Frost (Mage feat)
+- [x] Hot Streak (Mage feat)
+- [x] Elusive Brawler (Monk feat)
+- [x] Enveloping Mist (Monk feat)
+- [x] Fists of Fury (Monk feat)
+- [x] Stagger and Sway (Monk feat)
+- [x] Void Warrior (a Fighting Style feat for the Demon Hunter; then add it to Demon Hunter's Fighting Style `choices`)
 
 **Eldritch Invocations** (`optionalfeatures.json`, Warlock)
-- [ ] Call of the Void
-- [ ] Curse of Corruption
-- [ ] Expendable Minions
-- [ ] Health Funnel
-- [ ] Legion Summoning
-- [ ] Master Demonologist
-- [ ] Pact of the Legion
+- [x] Call of the Void
+- [x] Curse of Corruption
+- [x] Expendable Minions
+- [x] Health Funnel
+- [x] Legion Summoning
+- [x] Master Demonologist
+- [x] Pact of the Legion
 
 **Warrior Maneuvers** (`optionalfeatures.json`, Battle Master maneuvers). Battle Master is not in the SRD, so these need the PHB'24 Battle Master.
 - [ ] Battle Shout
@@ -212,8 +212,12 @@ Decision (2026-11-18): the Death Knight keeps reading the Paladin list, so it al
 - [ ] Mortal Strike
 - [ ] Warding Maneuver
 
+  > **Blocked:** `MPMB-v14/_variables/ListsClasses.js` has no Battle Master (the Fighter's only subclass is `fighter-champion`) and no maneuver list or Superiority Dice. All 5 maneuvers spend a Superiority Die, so a WoW-owned host feature would have to re-create the Battle Master. Add them with `AddFeatureChoice` on the Battle Master's maneuver feature once a PHB'24 Battle Master script is available.
+
 **Hunter Pets**
 - [ ] The Pet Families table (`book/book-wow.json`, Hunter > "Hunter Pets"), which gives options for the Beast Master's primal companion.
+
+  > **Blocked:** the Ranger's only built-in subclass is `ranger-hunter`; the Beast Master and its Primal Companion are PHB'24-only and absent from `ListsClasses.js`. The Pet Families table modifies the Primal Companion, so it has no feature to attach to. Transcribe it once a PHB'24 Beast Master is available.
 
 ## Chapter 2: Character origins
 
