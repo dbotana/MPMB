@@ -8,7 +8,7 @@
 
 /*	-INFORMATION-
 	Subject:	Class
-	Effect:		This script adds the World of Warcraft versions of the Death Knight, Demon Hunter, Evoker, Hunter, Mage, Priest, Shaman and Warrior classes, the World of Warcraft class features for the Death Knight, Demon Hunter and Shaman, the Path of the Elements, Path of the Spiritual Guardian, Discipline Domain, Shadow Domain, Oath of the Holy, Oath of the Ebon Blade, Demon Hunter, Warrior of Mystic Brews, Swashbuckler and Draconic Sorcery (Evoker, with the Evoker Spells) subclasses, the Rune Strike, Prayer of Mending, Psychic Horror, Shadow Word: Pain and Void Eruption spells, the 35 spells those three WoW subclasses grant, fixes for copied subclasses whose regex or class-level checks needed the WoW class names, the subclass-menu fullname fix for the standard classes, the 27 remaining Chapter 1 spells, and the WoW class spell lists: Death Knight, Demon Hunter, Evoker, Hunter, Mage and Priest via extraspells, and Druid, Paladin and Warlock via the spells' classes, the 8 WoW feats (Clearcasting, Fingers of Frost, Hot Streak, Elusive Brawler, Enveloping Mist, Fists of Fury, Stagger and Sway, and the Void Warrior Fighting Style for the Demon Hunter) and the 7 WoW Warlock Eldritch Invocations (including Pact of the Legion).
+	Effect:		This script adds the World of Warcraft versions of the Death Knight, Demon Hunter, Evoker, Hunter, Mage, Priest, Shaman and Warrior classes, the World of Warcraft class features for the Death Knight, Demon Hunter and Shaman, the Path of the Elements, Path of the Spiritual Guardian, Discipline Domain, Shadow Domain, Oath of the Holy, Oath of the Ebon Blade, Demon Hunter, Warrior of Mystic Brews, Swashbuckler and Draconic Sorcery (Evoker, with the Evoker Spells) subclasses, the Rune Strike, Prayer of Mending, Psychic Horror, Shadow Word: Pain and Void Eruption spells, the 35 spells those three WoW subclasses grant, fixes for copied subclasses whose regex or class-level checks needed the WoW class names, the subclass-menu fullname fix for the standard classes, the 27 remaining Chapter 1 spells, and the WoW class spell lists: Death Knight, Demon Hunter, Evoker, Hunter, Mage and Priest via extraspells, and Druid, Paladin and Warlock via the spells' classes, the 8 WoW feats (Clearcasting, Fingers of Frost, Hot Streak, Elusive Brawler, Enveloping Mist, Fists of Fury, Stagger and Sway, and the Void Warrior Fighting Style for the Demon Hunter) and the 7 WoW Warlock Eldritch Invocations (including Pact of the Legion), the 12 World of Warcraft species (Dracthyr, Draenei with its 4 Eredar lineages, Earthen, Forsaken, Goblin, Haranir, Mechagnome, Pandaren, Tauren with its 3 lineages, Troll with its 3 lineages, Vulpera and Worgen), the Blood Elf, Night Elf, Nightborne and Void Elf lineages for the Elf, the Arcane Pulse and Entropic Embrace spells, and the Human origin feats Arathi Heritage, Child of the Sea and Will to Survive. The WoW Dwarf, Gnome (Rock Gnome), Human and Orc are the built-in species. The 33 WoW languages are listed in a comment, because the sheet has no language list to add them to.
 	Code by:	Rocky
 	Date:		2026-11-18 (sheet v24)
 */
@@ -2203,4 +2203,934 @@ AddWarlockInvocation("Legion Summoning (req: lvl 9+, Pact of the Legion)", {
 		selection: ["planar binding"],
 		firstCol: "oncelr",
 	}],
+});
+
+// Chapter 2: Character origins
+
+// Chapter 2: Languages. The sheet has no language list: the AddLanguage function writes straight into the character's
+// Language fields, so it can't register languages. A WoW character knows Common (Alliance) or Orcish (Horde)
+// plus two languages from the tables below, which is what the WoW species and lineages set with languageProfs.
+// Standard languages (18): Common, Common Sign Language, Darnassian, Draconic, Draenei, Dwarven, Forsaken, Gnomish, Goblin, Hara'ni, Orcish, Orcish Sign Language, Pandaren, Shalassian, Taur-ahe, Thalassian, Vulpera, Zandali.
+// Rare languages (15): Cyphers of the First Ones, Druidic, Eredun, Furbolg, Kalimag, Nathrezim, Nazja, Nerglish, Nerubian, Ogre, Qiraji, Shath'Yar, Thieves' Cant, Titan, Vrykul.
+
+SpellsList["arcane pulse"] = {
+	name: "Arcane Pulse",
+	classes: [],
+	source: ["WoW", 78],
+	level: 0,
+	school: "Evoc",
+	time: "Act",
+	range: "S:10-ft rad",
+	components: "V,S",
+	duration: "1 rnd",
+	save: "Con",
+	description: "Any crea in area save or 1d8 Force dmg \x26 Speed -10 ft until end of my next turn",
+	descriptionFull: [
+		"You create a pulse of arcane energy in a 10-foot Emanation originating from yourself. Each creature of your choice within this area makes a Constitution saving throw. On a failed save, it takes 1d8 Force damage, and its Speed is reduced by 10 feet (to a minimum of 0 feet) until the end of your next turn.",
+	],
+};
+
+SpellsList["entropic embrace"] = {
+	name: "Entropic Embrace",
+	classes: [],
+	source: ["WoW", 78],
+	level: 1,
+	school: "Necro",
+	time: "React",
+	timeFull: "Reaction, which you take when you make a D20 Test with Advantage or Disadvantage and roll the same number on both dice",
+	range: "Self",
+	components: "V",
+	duration: "1 min",
+	description: "Auto-succeed Con saves for Conc.; my space Lightly Obscured; 1/turn +1d4+1d4/SL Necro. dmg or healing",
+	descriptionFull: [
+		"You are empowered by the essence of the Void for the duration, becoming swathed in shadow and taking on a dark-blue or purple appearance. While this effect lasts, you gain the following benefits.",
+		" \u2022 ***Preternatural Calm***. You automatically succeed on Constitution saving throws to maintain Concentration.",
+		" \u2022 ***Shadow Shroud***. You are shrouded in shadow, making your space Lightly Obscured.",
+		" \u2022 ***Touch of the Void***. Once on each of your turns, you can deal an extra 1d4 Necrotic damage to one creature when you deal damage to it, or you can restore an extra 1d4 Hit Points to one creature when you heal it.",
+		UsingHigherLvl + "The extra damage or healing from the Touch of the Void effect increases by 1d4 for each spell slot level above 1.",
+	],
+};
+
+FeatsList["arathi heritage"] = {
+	name: "Arathi Heritage",
+	source: [["WoW", 85]],
+	type: "origin",
+	prerequisite: "Human",
+	prereqeval: function (v) { return CurrentRace.known.indexOf("human") !== -1; },
+	savetxt: { adv_vs: ["Charmed"] },
+	usages: 1,
+	recovery: "1d4 LR",
+	limfeaname: "Lethargy Resilience",
+	description: "I have Advantage on saves to avoid or end Charmed. When I fail a save to avoid or end Unconscious, I can succeed instead; after I do, I can't again until I finish 1d4 Long Rests.",
+	descriptionFull: [
+		"As a descendant of humans from Arathor and high elves from Quel'Thalas, you gain the following benefits.",
+		"***Fey Ancestry***. You have Advantage on saving throws to avoid or end the Charmed condition.",
+		"***Lethargy Resilience***. When you fail a saving throw to avoid or end the Unconscious condition, you can succeed instead. Once you use this trait, you can't do so again until you finish 1d4 Long Rests.",
+	],
+};
+
+FeatsList["child of the sea"] = {
+	name: "Child of the Sea",
+	source: [["WoW", 85]],
+	type: "origin",
+	prerequisite: "Human",
+	prereqeval: function (v) { return CurrentRace.known.indexOf("human") !== -1; },
+	speed: { swim: { spd: "walk", enc: "walk" } },
+	description: "I can hold my breath for 2 + my Con modifier minutes (min 1). I have a Swim Speed equal to my Speed.",
+	descriptionFull: [
+		"As a Kul Tiran, you gain the following benefits.",
+		"***Lasting Breath***. You can hold your breath for a number of minutes equal to 2 plus your Constitution modifier (minimum of 1 minute).",
+		"***Ocean Born***. You have a Swim Speed equal to your Speed.",
+	],
+};
+
+FeatsList["will to survive"] = {
+	name: "Will to Survive",
+	source: [["WoW", 85]],
+	type: "origin",
+	prerequisite: "Human",
+	prereqeval: function (v) { return CurrentRace.known.indexOf("human") !== -1; },
+	description: "When I have the Incapacitated condition but not Unconscious, I can ignore Incapacitated on my turn; if I do, I gain 1 Exhaustion level.",
+	descriptionFull: [
+		"When you have the Incapacitated condition but not the Unconscious condition, you can draw on the proud heritage of Stormwind or Stromgarde to ignore the Incapacitated condition on your turn. If you do, you gain 1 Exhaustion level.",
+	],
+};
+
+// Chapter 2: Species. In the 2024 rules a species grants no ability score increases (they come from the background), so none of these has scores.
+RaceList["dracthyr"] = {
+	regExpSearch: /dracthyr/i,
+	name: "Dracthyr",
+	source: [["WoW", 70]],
+	plural: "Dracthyr",
+	size: 3,
+	speed: { walk: { spd: 30, enc: 20 } },
+	vision: [["Darkvision", 60]],
+	languageProfs: [["Common or Orcish", 1], 2],
+	action: [
+		["bonus action", "Natural Weaponry (Shove)"],
+		["action", "Visage (shape-shift)"],
+	],
+	features: {
+		"draconic flight": {
+			name: "Draconic Flight",
+			source: [["WoW", 70]],
+			minlevel: 5,
+			usages: 1,
+			recovery: "Long Rest",
+			action: [["bonus action", ""]],
+		},
+	},
+	trait: [
+		"**Dracthyr**",
+		"##\u25C6 Creature Type##. I am a Dragon.",
+		"##\u25C6 Gliding Wings##. In my natural form and not Incapacitated, when I fall I subtract up to 100 ft from the distance for damage, and I can move 2 ft horizontally for every 1 ft I descend.",
+		"##\u25C6 Natural Weaponry##. In my natural form, as a Bonus Action I can make an Unarmed Strike with my wings or tail to Shove a creature.",
+		"##\u25C6 Visage##. As a Magic action, I can shape-shift into my humanoid visage or back to my natural form. This doesn't change my clothing, equipment, or game statistics.",
+		"##\u25C6 Draconic Flight## (level 5). As a Bonus Action once per Long Rest, I can give myself a Fly Speed equal to my Speed for 10 min.",
+	],
+};
+
+RaceList["draenei"] = {
+	regExpSearch: /draenei/i,
+	name: "Draenei",
+	source: [["WoW", 72]],
+	plural: "Draenei",
+	size: 3,
+	speed: { walk: { spd: 30, enc: 20 } },
+	vision: [["Darkvision", 60]],
+	languageProfs: [["Common or Orcish", 1], 2],
+	spellcastingAbility: [4, 5, 6],
+	features: {
+		"heroic presence": {
+			name: "Heroic Presence",
+			source: [["WoW", 72]],
+			minlevel: 1,
+			usages: 1,
+			recovery: "Short Rest",
+		},
+	},
+	trait: [
+		"##\u25C6 Heroic Presence##. When I cast a spell from my Eredar Lineage and don't have Heroic Inspiration, I gain it. I can do this once per Short or Long Rest.",
+	],
+	variants: [],
+};
+
+RaceList["earthen"] = {
+	regExpSearch: /earthen/i,
+	name: "Earthen",
+	source: [["WoW", 75]],
+	plural: "Earthen",
+	size: 3,
+	speed: { walk: { spd: 30, enc: 20 } },
+	vision: [["Darkvision", 120]],
+	languageProfs: [["Common or Orcish", 1], 2],
+	dmgres: ["Poison"],
+	savetxt: { adv_vs: ["Poisoned"] },
+	features: {
+		"azerite surge": {
+			name: "Azerite Surge",
+			source: [["WoW", 75]],
+			minlevel: 1,
+			usages: "Proficiency Bonus per ",
+			usagescalc: "event.value = How('Proficiency Bonus');",
+			recovery: "Long Rest",
+			additional: cantripDie.map(function (n) { return n + "d10"; }),
+			weaponOptions: [{
+				regExpSearch: /^(?=.*azerite)(?=.*surge).*$/i,
+				name: "Azerite Surge",
+				source: [["WoW", 75]],
+				ability: 3,
+				type: "Natural",
+				damage: ["C", 10, "radiant"],
+				range: "15-ft Cone",
+				description: "Replaces 1 attack; chosen crea in cone heal same dice; others Dex save, half on success; Prof Bonus per Long Rest",
+				abilitytodamage: false,
+				dc: true,
+				selectNow: true,
+			}],
+		},
+	},
+	trait: [
+		"**Earthen**",
+		"##\u25C6 Azerite Surge##. Instead of one attack of my Attack action, I can blast a 15-ft Cone: chosen creatures in it regain 1d10 HP, all others make a Dex save (DC 8 + Con mod + Prof Bonus), taking 1d10 Radiant damage on a failure or half on a success. Both increase at levels 5 (2d10), 11 (3d10), and 17 (4d10). I can do this my Prof Bonus times per Long Rest.",
+		"##\u25C6 Earthen Resilience##. I have Resistance to Poison damage and Advantage on saves to avoid or end Poisoned.",
+		"##\u25C6 Ingest Minerals##. I don't gain Exhaustion levels from malnutrition.",
+		"##\u25C6 Quiet Contemplation##. When I spend Hit Point Dice at the end of a Short Rest, I regain 1 extra HP per die spent.",
+	],
+};
+
+RaceList["forsaken"] = {
+	regExpSearch: /forsaken/i,
+	name: "Forsaken",
+	source: [["WoW", 78]],
+	plural: "Forsaken",
+	size: [3, 4],
+	speed: { walk: { spd: 30, enc: 20 } },
+	vision: [["Darkvision", 60]],
+	languageProfs: [["Common or Orcish", 1], 2],
+	dmgres: ["Necrotic"],
+	savetxt: { immune: ["Sleep magic"], adv_vs: ["Charmed", "Frightened"] },
+	features: {
+		"touch of the grave": {
+			name: "Touch of the Grave",
+			source: [["WoW", 78]],
+			minlevel: 1,
+			usages: 1,
+			recovery: "Long Rest",
+			additional: ProficiencyBonusList.map(function (n) { return n + "d4 Necrotic"; }),
+		},
+	},
+	trait: [
+		"**Forsaken**",
+		"##\u25C6 Creature Type##. I am Undead.",
+		"##\u25C6 Deathly Endurance##. I have Resistance to Necrotic damage.",
+		"##\u25C6 Everlasting##. I don't gain Exhaustion from dehydration, malnutrition, or suffocation. I don't need to sleep and magic can't put me to sleep. I can finish a Long Rest in 4 hours if I spend them inactive and motionless, retaining consciousness.",
+		"##\u25C6 Touch of the Grave##. Once per Long Rest when I deal damage to a creature, I can roll Prof Bonus d4s and deal that much extra Necrotic damage, regaining HP equal to the extra damage.",
+		"##\u25C6 Will of the Forsaken##. I have Advantage on saves to avoid or end Charmed or Frightened.",
+	],
+};
+
+RaceList["goblin"] = {
+	regExpSearch: /^(?!.*hob)(?=.*goblin).*$/i,
+	name: "Goblin",
+	source: [["WoW", 81]],
+	plural: "Goblins",
+	size: 4,
+	speed: { walk: { spd: 30, enc: 20 } },
+	vision: [["Darkvision", 60]],
+	languageProfs: [["Common or Orcish", 1], 2],
+	savetxt: { adv_vs: ["Charmed"] },
+	action: [["bonus action", "Nimble Escape (Disengage/Hide)"]],
+	features: {
+		"fury of the small": {
+			name: "Fury of the Small",
+			source: [["WoW", 81]],
+			minlevel: 1,
+			usages: "Proficiency Bonus per ",
+			usagescalc: "event.value = How('Proficiency Bonus');",
+			recovery: "Long Rest",
+			additional: ProficiencyBonusList.map(function (n) { return "+" + n + " dmg"; }),
+		},
+	},
+	trait: [
+		"**Goblin**",
+		"##\u25C6 Fey Ancestry##. I have Advantage on saves to avoid or end Charmed.",
+		"##\u25C6 Fury of the Small##. Once per turn when I damage a creature larger than me with an attack or spell, I can deal extra damage of the same type equal to my Prof Bonus. I can do this my Prof Bonus times per Long Rest.",
+		"##\u25C6 Nimble Escape##. I can take the Disengage or Hide action as a Bonus Action on each of my turns.",
+	],
+};
+
+RaceList["haranir"] = {
+	regExpSearch: /haranir/i,
+	name: "Haranir",
+	source: [["WoW", 83]],
+	plural: "Haranir",
+	size: 3,
+	speed: { walk: { spd: 30, enc: 20 } },
+	vision: [["Darkvision", 120]],
+	languageProfs: [["Common or Orcish", 1], 2],
+	skills: ["Nature", "Survival"],
+	spellcastingAbility: [4, 5, 6],
+	features: {
+		"haranir magic 1": {
+			name: "Haranir Magic",
+			source: [["WoW", 83]],
+			minlevel: 1,
+			spellcastingBonus: [{
+				name: "Haranir Magic",
+				spells: ["druidcraft", "thorn whip"],
+				selection: ["druidcraft", "thorn whip"],
+				times: 2,
+			}],
+		},
+		"haranir magic 3": {
+			name: "Entangle (Haranir Magic)",
+			source: [["WoW", 83]],
+			minlevel: 3,
+			spellFirstColTitle: "PR",
+			spellcastingBonus: [{
+				name: "Haranir Magic level 3",
+				spells: ["entangle"],
+				selection: ["entangle"],
+				firstCol: "oncelr+markedbox",
+			}],
+		},
+		"haranir magic 5": {
+			name: "Spike Growth (Haranir Magic)",
+			source: [["WoW", 83]],
+			minlevel: 5,
+			spellcastingBonus: [{
+				name: "Haranir Magic level 5",
+				spells: ["spike growth"],
+				selection: ["spike growth"],
+				firstCol: "oncelr+markedbox",
+			}],
+		},
+	},
+	trait: [
+		"**Haranir**",
+		"##\u25C6 Gift of the World Tree##. I have proficiency in Nature and Survival.",
+		"##\u25C6 Haranir Magic##. I know *Druidcraft* and *Thorn Whip*, *Entangle* at level 3, and *Spike Growth* at level 5. I can cast Entangle and Spike Growth once per Long Rest each without a spell slot, or with a spell slot as normal; Int, Wis, or Cha is my spellcasting ability for these (choose when selecting this species).",
+	],
+};
+
+RaceList["mechagnome"] = {
+	regExpSearch: /mecha.?gnome/i,
+	name: "Mechagnome",
+	source: [["WoW", 80]],
+	plural: "Mechagnomes",
+	size: 4,
+	speed: { walk: { spd: 30, enc: 20 } },
+	languageProfs: [["Common or Orcish", 1], 2],
+	dmgres: ["Poison"],
+	savetxt: { adv_vs: ["Paralyzed", "Poisoned"] },
+	toolProfs: [["Any tool", 2]],
+	features: {
+		"built for success": {
+			name: "Built for Success",
+			source: [["WoW", 80]],
+			minlevel: 1,
+			usages: "Proficiency Bonus per ",
+			usagescalc: "event.value = How('Proficiency Bonus');",
+			recovery: "Long Rest",
+			additional: "+1d4",
+		},
+		"emergency fail-safe": {
+			name: "Emergency Fail-Safe",
+			source: [["WoW", 80]],
+			minlevel: 1,
+			usages: 1,
+			recovery: "Short Rest",
+			action: [["reaction", " (when Bloodied)"]],
+		},
+	},
+	trait: [
+		"**Mechagnome**",
+		"##\u25C6 Creature Type##. I am a Construct.",
+		"##\u25C6 Built for Success##. I can add 1d4 to a D20 Test I make, after rolling but before the result is resolved. I can do this my Prof Bonus times per Long Rest.",
+		"##\u25C6 Emergency Fail-Safe##. When I become Bloodied, I can take a Reaction to spend and roll one Hit Point Die, regaining HP equal to the roll + Con mod (min 1). Once per Short or Long Rest.",
+		"##\u25C6 Mechanical Nature##. I have Resistance to Poison damage and Advantage on saves to avoid or end Paralyzed or Poisoned. I don't gain Exhaustion from dehydration, malnutrition, or suffocation.",
+		"##\u25C6 Sentry's Rest##. I don't need to sleep; I can finish a Long Rest in 6 hours if I spend them inactive and motionless, retaining consciousness.",
+		"##\u25C6 Specialized Design##. I gain proficiency with two tools of my choice.",
+	],
+};
+
+RaceList["pandaren"] = {
+	regExpSearch: /pandaren/i,
+	name: "Pandaren",
+	source: [["WoW", 87]],
+	plural: "Pandaren",
+	size: 3,
+	speed: { walk: { spd: 30, enc: 20 } },
+	vision: [["Darkvision", 60]],
+	languageProfs: [["Common or Orcish", 1], 2],
+	dmgres: [["Bludgeoning", "Bludg. (falling)"]],
+	trait: [
+		"**Pandaren**",
+		"##\u25C6 Bouncy##. I have Resistance to Bludgeoning damage from falling.",
+		"##\u25C6 Inner Peace##. When I spend Hit Point Dice after a Short Rest, I regain 1 extra HP per die spent.",
+		"##\u25C6 Quaking Palm##. When I hit a creature with a melee attack on my turn, my movement doesn't provoke Opportunity Attacks from it until the end of my turn.",
+	],
+};
+
+RaceList["tauren"] = {
+	regExpSearch: /tauren/i,
+	name: "Tauren",
+	source: [["WoW", 88]],
+	plural: "Tauren",
+	size: 3,
+	speed: { walk: { spd: 30, enc: 20 } },
+	languageProfs: [["Common or Orcish", 1], 2],
+	action: [
+		["bonus action", "Goring Rush (after Dash 20 ft)"],
+		["bonus action", "Hammering Horns (Shove)"],
+	],
+	features: {
+		"horns": {
+			name: "Horns",
+			source: [["WoW", 88]],
+			minlevel: 1,
+			weaponOptions: [{
+				regExpSearch: /^(?=.*\bhorns?\b).*$/i,
+				name: "Horns",
+				source: [["WoW", 88]],
+				ability: 1,
+				type: "Natural",
+				damage: [1, 6, "piercing"],
+				range: "Melee",
+				description: "Replaces Unarmed Strike damage",
+				abilitytodamage: true,
+				selectNow: true,
+			}],
+		},
+	},
+	trait: [
+		"##\u25C6 Horns##. When I hit with an Unarmed Strike and deal damage, I can deal 1d6 + Str mod Piercing damage instead of the normal damage.",
+		"##\u25C6 Goring Rush##. Right after I take the Dash action on my turn and move at least 20 ft, I can make an Unarmed Strike as a Bonus Action.",
+		"##\u25C6 Hammering Horns##. Right after I hit a creature within 5 ft with a melee attack as part of the Attack action on my turn, I can Shove it with an Unarmed Strike as a Bonus Action, pushing it up to 10 ft.",
+	],
+	variants: [],
+};
+
+RaceList["troll"] = {
+	regExpSearch: /troll/i,
+	name: "Troll",
+	source: [["WoW", 91]],
+	plural: "Trolls",
+	size: 3,
+	speed: { walk: { spd: 30, enc: 20 } },
+	vision: [["Darkvision", 60]],
+	languageProfs: [["Common or Orcish", 1], 2],
+	trait: [
+		"##\u25C6 Bloodied Frenzy##. While Bloodied, I have Advantage on attack rolls.",
+		"##\u25C6 Troll Healing##. When I spend Hit Point Dice after a Short Rest, each die regains its maximum roll + my Con mod.",
+	],
+	variants: [],
+};
+
+RaceList["vulpera"] = {
+	regExpSearch: /vulpera/i,
+	name: "Vulpera",
+	source: [["WoW", 92]],
+	plural: "Vulpera",
+	size: 4,
+	speed: { walk: { spd: 30, enc: 20 } },
+	vision: [["Darkvision", 60]],
+	languageProfs: [["Common or Orcish", 1], 2],
+	dmgres: ["Fire"],
+	trait: [
+		"**Vulpera**",
+		"##\u25C6 Fire Resistance##. I have Resistance to Fire damage.",
+		"##\u25C6 Nose for Trouble##. The first time I take damage after I roll Initiative, I reduce that damage by my level (min 0).",
+		"##\u25C6 Vulpera Nimbleness##. I can move through the space of any creature that is a size larger than me, but I can't stop there.",
+	],
+};
+
+RaceList["worgen"] = {
+	regExpSearch: /worgen/i,
+	name: "Worgen",
+	source: [["WoW", 93]],
+	plural: "Worgen",
+	size: 3,
+	speed: { walk: { spd: 30, enc: 20 } },
+	vision: [["Darkvision", 60]],
+	languageProfs: [["Common or Orcish", 1], 2],
+	dmgres: [["Necrotic", "Necrotic (Darkflight)"]],
+	features: {
+		"darkflight": {
+			name: "Darkflight",
+			source: [["WoW", 93]],
+			minlevel: 1,
+			usages: "Proficiency Bonus per ",
+			usagescalc: "event.value = How('Proficiency Bonus');",
+			recovery: "Long Rest",
+			additional: ProficiencyBonusList.map(function (n) { return (2 * n) + " temp HP"; }),
+			action: [
+				["bonus action", ""],
+				["reaction", "Reactive Movement (Darkflight)"],
+			],
+		},
+	},
+	trait: [
+		"**Worgen**",
+		"##\u25C6 Darkflight##. As a Bonus Action, I can take a bestial form for 1 min (or until I revert as a Bonus Action) and gain 2 \xD7 Prof Bonus Temp HP. I can do this my Prof Bonus times per Long Rest. In this form my Speed increases by 10 ft, I have Resistance to Necrotic damage, and when a creature ends its turn within 5 ft of me I can use a Reaction to move up to 10 ft without provoking Opportunity Attacks.",
+		"##\u25C6 Instinctual Shift##. When I roll Initiative while I have a Darkflight use left, I can use it immediately (no action required).",
+	],
+};
+
+// Draenei Eredar lineages (page 72)
+AddSubRace("draenei", "draenei", {
+	regExpSearch: /^(?!.*(krokul|lightforged|man.?ari))(?=.*draenei)(?=.*lineage).*$/i,
+	name: "Draenei (Draenei Lineage)",
+	sortname: "Draenei Lineage",
+	source: [["WoW", 72]],
+	plural: "Draenei (Draenei Lineage)",
+	dmgres: ["Necrotic"],
+	trait: [
+		"**Draenei (Draenei Lineage)**",
+		"##\u25C6 Eredar Lineage (Draenei)##. I have Resistance to Necrotic damage. I know *Spare the Dying*, *Healing Word* at level 3, and *Prayer of Healing* at level 5. I can cast the level 3 and 5 spells once per Long Rest each without a spell slot, or with a spell slot as normal; Int, Wis, or Cha is my spellcasting ability for these (choose when selecting the lineage).",
+	].concat(RaceList["draenei"].trait),
+	features: {
+		"eredar lineage 1": {
+			name: "Spare the Dying (Draenei Lineage)",
+			source: [["WoW", 72]],
+			minlevel: 1,
+			spellcastingBonus: [{
+				name: "Draenei level 1",
+				spells: ["spare the dying"],
+				selection: ["spare the dying"],
+			}],
+		},
+		"eredar lineage 3": {
+			name: "Healing Word (Draenei Lineage)",
+			source: [["WoW", 72]],
+			minlevel: 3,
+			spellFirstColTitle: "PR",
+			spellcastingBonus: [{
+				name: "Draenei level 3",
+				spells: ["healing word"],
+				selection: ["healing word"],
+				firstCol: "oncelr+markedbox",
+			}],
+		},
+		"eredar lineage 5": {
+			name: "Prayer of Healing (Draenei Lineage)",
+			source: [["WoW", 72]],
+			minlevel: 5,
+			spellcastingBonus: [{
+				name: "Draenei level 5",
+				spells: ["prayer of healing"],
+				selection: ["prayer of healing"],
+				firstCol: "oncelr+markedbox",
+			}],
+		},
+	},
+});
+
+AddSubRace("draenei", "krokul", {
+	regExpSearch: /krokul/i,
+	name: "Krokul Draenei",
+	source: [["WoW", 72]],
+	plural: "Krokul Draenei",
+	dmgres: ["Poison"],
+	trait: [
+		"**Krokul Draenei**",
+		"##\u25C6 Eredar Lineage (Krokul)##. I have Resistance to Poison damage. I know *Poison Spray*, *Ray of Sickness* at level 3, and *Hold Person* at level 5. I can cast the level 3 and 5 spells once per Long Rest each without a spell slot, or with a spell slot as normal; Int, Wis, or Cha is my spellcasting ability for these (choose when selecting the lineage).",
+	].concat(RaceList["draenei"].trait),
+	features: {
+		"eredar lineage 1": {
+			name: "Poison Spray (Krokul Lineage)",
+			source: [["WoW", 72]],
+			minlevel: 1,
+			spellcastingBonus: [{
+				name: "Krokul level 1",
+				spells: ["poison spray"],
+				selection: ["poison spray"],
+			}],
+		},
+		"eredar lineage 3": {
+			name: "Ray of Sickness (Krokul Lineage)",
+			source: [["WoW", 72]],
+			minlevel: 3,
+			spellFirstColTitle: "PR",
+			spellcastingBonus: [{
+				name: "Krokul level 3",
+				spells: ["ray of sickness"],
+				selection: ["ray of sickness"],
+				firstCol: "oncelr+markedbox",
+			}],
+		},
+		"eredar lineage 5": {
+			name: "Hold Person (Krokul Lineage)",
+			source: [["WoW", 72]],
+			minlevel: 5,
+			spellcastingBonus: [{
+				name: "Krokul level 5",
+				spells: ["hold person"],
+				selection: ["hold person"],
+				firstCol: "oncelr+markedbox",
+			}],
+		},
+	},
+});
+
+AddSubRace("draenei", "lightforged", {
+	regExpSearch: /lightforged/i,
+	name: "Lightforged Draenei",
+	source: [["WoW", 72]],
+	plural: "Lightforged Draenei",
+	dmgres: ["Radiant"],
+	trait: [
+		"**Lightforged Draenei**",
+		"##\u25C6 Eredar Lineage (Lightforged)##. I have Resistance to Radiant damage. I know *Sacred Flame*, *Guiding Bolt* at level 3, and *Aid* at level 5. I can cast the level 3 and 5 spells once per Long Rest each without a spell slot, or with a spell slot as normal; Int, Wis, or Cha is my spellcasting ability for these (choose when selecting the lineage).",
+	].concat(RaceList["draenei"].trait),
+	features: {
+		"eredar lineage 1": {
+			name: "Sacred Flame (Lightforged Lineage)",
+			source: [["WoW", 72]],
+			minlevel: 1,
+			spellcastingBonus: [{
+				name: "Lightforged level 1",
+				spells: ["sacred flame"],
+				selection: ["sacred flame"],
+			}],
+		},
+		"eredar lineage 3": {
+			name: "Guiding Bolt (Lightforged Lineage)",
+			source: [["WoW", 72]],
+			minlevel: 3,
+			spellFirstColTitle: "PR",
+			spellcastingBonus: [{
+				name: "Lightforged level 3",
+				spells: ["guiding bolt"],
+				selection: ["guiding bolt"],
+				firstCol: "oncelr+markedbox",
+			}],
+		},
+		"eredar lineage 5": {
+			name: "Aid (Lightforged Lineage)",
+			source: [["WoW", 72]],
+			minlevel: 5,
+			spellcastingBonus: [{
+				name: "Lightforged level 5",
+				spells: ["aid"],
+				selection: ["aid"],
+				firstCol: "oncelr+markedbox",
+			}],
+		},
+	},
+});
+
+AddSubRace("draenei", "manari", {
+	regExpSearch: /man.?ari/i,
+	name: "Man'ari Draenei",
+	source: [["WoW", 72]],
+	plural: "Man'ari Draenei",
+	dmgres: ["Fire"],
+	trait: [
+		"**Man'ari Draenei**",
+		"##\u25C6 Eredar Lineage (Man'ari)##. I have Resistance to Fire damage. I know *Fire Bolt*, *Hellish Rebuke* at level 3, and *Darkness* at level 5. I can cast the level 3 and 5 spells once per Long Rest each without a spell slot, or with a spell slot as normal; Int, Wis, or Cha is my spellcasting ability for these (choose when selecting the lineage).",
+	].concat(RaceList["draenei"].trait),
+	features: {
+		"eredar lineage 1": {
+			name: "Fire Bolt (Man'ari Lineage)",
+			source: [["WoW", 72]],
+			minlevel: 1,
+			spellcastingBonus: [{
+				name: "Man'ari level 1",
+				spells: ["fire bolt"],
+				selection: ["fire bolt"],
+			}],
+		},
+		"eredar lineage 3": {
+			name: "Hellish Rebuke (Man'ari Lineage)",
+			source: [["WoW", 72]],
+			minlevel: 3,
+			spellFirstColTitle: "PR",
+			spellcastingBonus: [{
+				name: "Man'ari level 3",
+				spells: ["hellish rebuke"],
+				selection: ["hellish rebuke"],
+				firstCol: "oncelr+markedbox",
+			}],
+		},
+		"eredar lineage 5": {
+			name: "Darkness (Man'ari Lineage)",
+			source: [["WoW", 72]],
+			minlevel: 5,
+			spellcastingBonus: [{
+				name: "Man'ari level 5",
+				spells: ["darkness"],
+				selection: ["darkness"],
+				firstCol: "oncelr+markedbox",
+			}],
+		},
+	},
+});
+
+// Tauren lineages (page 88)
+AddSubRace("tauren", "mulgore", {
+	regExpSearch: /mulgore/i,
+	name: "Mulgore Tauren",
+	source: [["WoW", 88]],
+	plural: "Mulgore Tauren",
+	abilitySave: [1, 3, 5],
+	trait: [
+		"**Mulgore Tauren**",
+		"##\u25C6 Tauren Lineage (Mulgore)##. War Stomp: instead of one attack of my Attack action (not while Prone, flying, climbing, or swimming), each creature of my choice within 5 ft makes a Con save or is Stunned until the end of my turn. DC 8 + Prof Bonus + Str, Con, or Wis mod (choose when selecting the lineage).",
+	].concat(RaceList["tauren"].trait),
+});
+
+AddSubRace("tauren", "highmountain", {
+	regExpSearch: /highmountain/i,
+	name: "Highmountain Tauren",
+	source: [["WoW", 88]],
+	plural: "Highmountain Tauren",
+	abilitySave: [1, 3, 5],
+	action: [
+		["bonus action", "Goring Rush (after Dash 20 ft)"],
+		["bonus action", "Hammering Horns (Shove)"],
+		["action", "Bull Rush"],
+	],
+	trait: [
+		"**Highmountain Tauren**",
+		"##\u25C6 Tauren Lineage (Highmountain)##. Bull Rush: as an action, I move up to my Speed without provoking Opportunity Attacks and through other creatures' spaces. Each Medium or smaller creature whose space I enter makes a Str save or takes Prof Bonus + Str mod damage and is Prone (once per turn per creature). DC 8 + Prof Bonus + Str, Con, or Wis mod (choose when selecting the lineage).",
+	].concat(RaceList["tauren"].trait),
+});
+
+AddSubRace("tauren", "taunka", {
+	regExpSearch: /taunka/i,
+	name: "Taunka",
+	source: [["WoW", 88]],
+	plural: "Taunka",
+	dmgres: ["Cold"],
+	extraAC: [{ mod: 1, name: "Shaggy Hide", text: "I gain a +1 bonus to AC." }],
+	trait: [
+		"**Taunka**",
+		"##\u25C6 Tauren Lineage (Taunka)##. My shaggy hide gives me a +1 bonus to AC and Resistance to Cold damage.",
+	].concat(RaceList["tauren"].trait),
+});
+
+// Troll lineages (page 91)
+AddSubRace("troll", "amani", {
+	regExpSearch: /amani/i,
+	name: "Amani Troll",
+	source: [["WoW", 91]],
+	plural: "Amani Trolls",
+	trait: [
+		"**Amani Troll**",
+		"##\u25C6 Troll Lineage (Amani)##. Whenever I spend Heroic Inspiration, I regain 1 expended Hit Point Die.",
+	].concat(RaceList["troll"].trait),
+});
+
+AddSubRace("troll", "darkspear", {
+	regExpSearch: /darkspear/i,
+	name: "Darkspear Troll",
+	source: [["WoW", 91]],
+	plural: "Darkspear Trolls",
+	trait: [
+		"**Darkspear Troll**",
+		"##\u25C6 Troll Lineage (Darkspear)##. When I take the Dash action, Difficult Terrain of ice, rubble, snow, or undergrowth costs me no extra movement until the end of my turn.",
+	].concat(RaceList["troll"].trait),
+});
+
+AddSubRace("troll", "zandalari", {
+	regExpSearch: /zandalari/i,
+	name: "Zandalari Troll",
+	source: [["WoW", 91]],
+	plural: "Zandalari Trolls",
+	trait: [
+		"**Zandalari Troll**",
+		"##\u25C6 Troll Lineage (Zandalari)##. If I roll a 1 on the d20 for a D20 Test, I gain Heroic Inspiration at the end of the current turn.",
+	].concat(RaceList["troll"].trait),
+});
+
+// Dwarf, Gnome, Human and Orc: the WoW versions copy the 2024 PHB species. Dwarf and Orc are unchanged, Human only rewords Versatile,
+// and the WoW Gnome's single lineage is the built-in Rock Gnome lineage, so players use the built-in species (Gnome: pick Rock Gnome).
+// Elf: the WoW Azeroth Elven Lineage adds four lineages to the built-in Elf; its High Elf is identical to the built-in High Elf.
+
+// Elf Azeroth Elven lineages (page 76)
+AddSubRace("elf", "blood", {
+	regExpSearch: /^((?=.*sin.?dorei)|(?=.*\bblood\b)(?=.*\b(elfs?|elves|elven)\b)).*$/i,
+	name: "Blood Elf",
+	source: [["WoW", 76]],
+	plural: "Blood Elves",
+	languageProfs: [["Common or Orcish", 1], 2],
+	spellcastingAbility: [4, 5, 6],
+	trait: [
+		"##\u25C6 Blood Elf Lineage##. I know *Prestidigitation* and can replace it with another Wizard cantrip after a Long Rest, *Detect Magic* at level 3, and *Arcane Vigor* at level 5. I can cast the level 3 and 5 spells once per Long Rest each without a spell slot, or with a spell slot as normal; Int, Wis, or Cha is my spellcasting ability for these (choose when selecting the lineage).",
+	].concat(RaceList["elf"].trait),
+	features: {
+		"blood lineage 1": {
+			name: "Prestidigitation (Blood Elf Lineage)",
+			source: [["WoW", 76]],
+			minlevel: 1,
+			spellFirstColTitle: "PR",
+			spellcastingPreparedCantrips: { "class": ["wizard"] },
+			spellcastingBonus: [{
+				name: "Blood Elf level 1",
+				"class": ["wizard"],
+				level: [0, 0],
+				selection: ["prestidigitation"],
+			}],
+		},
+		"blood lineage 3": {
+			name: "Detect Magic (Blood Elf Lineage)",
+			source: [["WoW", 76]],
+			minlevel: 3,
+			spellFirstColTitle: "PR",
+			spellcastingBonus: [{
+				name: "Blood Elf level 3",
+				spells: ["detect magic"],
+				selection: ["detect magic"],
+				firstCol: "oncelr+markedbox",
+			}],
+		},
+		"blood lineage 5": {
+			name: "Arcane Vigor (Blood Elf Lineage)",
+			source: [["WoW", 76]],
+			minlevel: 5,
+			spellcastingBonus: [{
+				name: "Blood Elf level 5",
+				spells: ["arcane vigor"],
+				selection: ["arcane vigor"],
+				firstCol: "oncelr+markedbox",
+			}],
+		},
+	},
+});
+
+AddSubRace("elf", "night", {
+	regExpSearch: /^((?=.*kal.?dorei)|(?=.*\bnight\b)(?=.*\b(elfs?|elves|elven)\b)).*$/i,
+	name: "Night Elf",
+	source: [["WoW", 76]],
+	plural: "Night Elves",
+	languageProfs: [["Common or Orcish", 1], 2],
+	spellcastingAbility: [4, 5, 6],
+	skills: ["Stealth"],
+	action: [["bonus action", "Hide (Night Elf, in Dim Light/Darkness)"]],
+	trait: [
+		"##\u25C6 Night Elf Lineage##. I have proficiency in Stealth, and while in Dim Light or Darkness I can take the Hide action as a Bonus Action. I know *Longstrider* at level 3 and *Pass without Trace* at level 5, each castable once per Long Rest without a spell slot, or with a spell slot as normal; Int, Wis, or Cha is my spellcasting ability for these (choose when selecting the lineage).",
+	].concat(RaceList["elf"].trait),
+	features: {
+		"night lineage 3": {
+			name: "Longstrider (Night Elf Lineage)",
+			source: [["WoW", 76]],
+			minlevel: 3,
+			spellFirstColTitle: "PR",
+			spellcastingBonus: [{
+				name: "Night Elf level 3",
+				spells: ["longstrider"],
+				selection: ["longstrider"],
+				firstCol: "oncelr+markedbox",
+			}],
+		},
+		"night lineage 5": {
+			name: "Pass without Trace (Night Elf Lineage)",
+			source: [["WoW", 76]],
+			minlevel: 5,
+			spellcastingBonus: [{
+				name: "Night Elf level 5",
+				spells: ["pass without trace"],
+				selection: ["pass without trace"],
+				firstCol: "oncelr+markedbox",
+			}],
+		},
+	},
+});
+
+AddSubRace("elf", "nightborne", {
+	regExpSearch: /nightborne|shal.?dorei/i,
+	name: "Nightborne",
+	source: [["WoW", 76]],
+	plural: "Nightborne",
+	languageProfs: [["Common or Orcish", 1], 2],
+	spellcastingAbility: [4, 5, 6],
+	vision: [["Darkvision", 120]],
+	trait: [
+		"##\u25C6 Nightborne Lineage##. My Darkvision has a range of 120 ft. I know *Arcane Pulse*, *Faerie Fire* at level 3, and *Darkness* at level 5. I can cast the level 3 and 5 spells once per Long Rest each without a spell slot, or with a spell slot as normal; Int, Wis, or Cha is my spellcasting ability for these (choose when selecting the lineage).",
+	].concat(RaceList["elf"].trait),
+	features: {
+		"nightborne lineage 1": {
+			name: "Arcane Pulse (Nightborne Lineage)",
+			source: [["WoW", 76]],
+			minlevel: 1,
+			spellcastingBonus: [{
+				name: "Nightborne level 1",
+				spells: ["arcane pulse"],
+				selection: ["arcane pulse"],
+			}],
+		},
+		"nightborne lineage 3": {
+			name: "Faerie Fire (Nightborne Lineage)",
+			source: [["WoW", 76]],
+			minlevel: 3,
+			spellFirstColTitle: "PR",
+			spellcastingBonus: [{
+				name: "Nightborne level 3",
+				spells: ["faerie fire"],
+				selection: ["faerie fire"],
+				firstCol: "oncelr+markedbox",
+			}],
+		},
+		"nightborne lineage 5": {
+			name: "Darkness (Nightborne Lineage)",
+			source: [["WoW", 76]],
+			minlevel: 5,
+			spellcastingBonus: [{
+				name: "Nightborne level 5",
+				spells: ["darkness"],
+				selection: ["darkness"],
+				firstCol: "oncelr+markedbox",
+			}],
+		},
+	},
+});
+
+AddSubRace("elf", "void", {
+	regExpSearch: /^((?=.*ren.?dorei)|(?=.*\bvoid\b)(?=.*\b(elfs?|elves|elven)\b)).*$/i,
+	name: "Void Elf",
+	source: [["WoW", 76]],
+	plural: "Void Elves",
+	languageProfs: [["Common or Orcish", 1], 2],
+	spellcastingAbility: [4, 5, 6],
+	vision: [["Darkvision", 120]],
+	trait: [
+		"##\u25C6 Void Elf Lineage##. My Darkvision has a range of 120 ft. I know *Mind Sliver*, *Entropic Embrace* at level 3, and *Misty Step* at level 5. I can cast the level 3 and 5 spells once per Long Rest each without a spell slot, or with a spell slot as normal; Int, Wis, or Cha is my spellcasting ability for these (choose when selecting the lineage).",
+	].concat(RaceList["elf"].trait),
+	features: {
+		"void lineage 1": {
+			name: "Mind Sliver (Void Elf Lineage)",
+			source: [["WoW", 76]],
+			minlevel: 1,
+			spellcastingBonus: [{
+				name: "Void Elf level 1",
+				spells: ["mind sliver"],
+				selection: ["mind sliver"],
+			}],
+		},
+		"void lineage 3": {
+			name: "Entropic Embrace (Void Elf Lineage)",
+			source: [["WoW", 76]],
+			minlevel: 3,
+			spellFirstColTitle: "PR",
+			spellcastingBonus: [{
+				name: "Void Elf level 3",
+				spells: ["entropic embrace"],
+				selection: ["entropic embrace"],
+				firstCol: "oncelr+markedbox",
+			}],
+		},
+		"void lineage 5": {
+			name: "Misty Step (Void Elf Lineage)",
+			source: [["WoW", 76]],
+			minlevel: 5,
+			spellcastingBonus: [{
+				name: "Void Elf level 5",
+				spells: ["misty step"],
+				selection: ["misty step"],
+				firstCol: "oncelr+markedbox",
+			}],
+		},
+	},
 });

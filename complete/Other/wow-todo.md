@@ -221,27 +221,27 @@ Decision (2026-11-18): the Death Knight keeps reading the Paladin list, so it al
 
 ## Chapter 2: Character origins
 
-- [ ] Languages: 33 entries with source WoW in `languages.json`.
-- [ ] Species: 17 entries in `races.json` (descriptions in `fluff-races.json`):
-  - [ ] Dracthyr
-  - [ ] Draenei
-  - [ ] Dwarf
-  - [ ] Earthen
-  - [ ] Elf
-  - [ ] Forsaken
-  - [ ] Gnome
-  - [ ] Mechagnome
-  - [ ] Goblin
-  - [ ] Haranir
-  - [ ] Human
-  - [ ] Orc
-  - [ ] Pandaren
-  - [ ] Tauren
-  - [ ] Troll
-  - [ ] Vulpera
-  - [ ] Worgen
-- [ ] Elf Spells: *Arcane Pulse* and *Entropic Embrace* (`spells/spells-wow.json`). These are the last 2 of the 69 WoW spells.
-- [ ] Origin feats (`feats.json`): Arathi Heritage, Child of the Sea, Will to Survive.
+- [x] Languages: 33 entries with source WoW in `languages.json`. (listed in a comment in WoW.js; the sheet has no language list, and AddLanguage() writes into the character's fields, so nothing is registered. The WoW species and Elf lineages use languageProfs "Common or Orcish" + 2.)
+- [x] Species: 17 entries in `races.json` (descriptions in `fluff-races.json`):
+  - [x] Dracthyr
+  - [x] Draenei (4 Eredar lineages)
+  - [x] Dwarf (unchanged copy of the 2024 species: use the built-in one)
+  - [x] Earthen
+  - [x] Elf (Blood Elf, Night Elf, Nightborne and Void Elf added as lineages of the built-in Elf; the WoW High Elf is the built-in High Elf)
+  - [x] Forsaken
+  - [x] Gnome (its lineage is the Rock Gnome lineage: use the built-in Gnome, Rock Gnome)
+  - [x] Mechagnome
+  - [x] Goblin
+  - [x] Haranir
+  - [x] Human (only rewords Versatile: use the built-in Human)
+  - [x] Orc (unchanged copy of the 2024 species: use the built-in one)
+  - [x] Pandaren
+  - [x] Tauren (3 lineages)
+  - [x] Troll (3 lineages)
+  - [x] Vulpera
+  - [x] Worgen
+- [x] Elf Spells: *Arcane Pulse* and *Entropic Embrace* (`spells/spells-wow.json`). These are the last 2 of the 69 WoW spells.
+- [x] Origin feats (`feats.json`): Arathi Heritage, Child of the Sea, Will to Survive. (type "origin", restricted to Humans with prereqeval)
 - Backgrounds: neither the book nor the 5etools data has WoW backgrounds, so players use the PHB backgrounds. Nothing to do.
 
 ## Later chapters (not planned yet)
@@ -258,7 +258,7 @@ These are for the subclass work. Fix each one when that subclass is added.
 - **Subclass features (fixed).** Berserker, Champion and Draconic Sorcery now read `(classes.known.<base> || classes.known.<copy>)`.
 - **Import order.** Each copied class takes its subclass list as it is when `WoW.js` runs, so import `WoW.js` after any other content that adds subclasses.
 - **Shared subclass names.** Typing only a subclass name two classes share can resolve to the WoW class, because the class added last wins the tie. For example, "Path of the Elements" gives Shaman, "Discipline Domain" gives Priest and "Oath of the Holy" gives Death Knight. Typing "Class (Subclass)" always works. The dialog problem this bullet used to describe is the "Fix first" item at the top.
-- **PHB'24-only spells.** Five domain spells aren't in the sheet's built-in spell list, so they only show up if PHB'24 content is imported. Otherwise the sheet skips them without an error. Discipline Domain grants `arcane vigor`, `circle of power` and `destructive wave`. Shadow Domain grants `crown of madness` and `summon undead`. The WoW Ebon Blade, Demon Hunter and Evoker subclass spell lists also name XPHB spells that may be missing without PHB'24 content (e.g. `summon undead`, `freedom of movement`, `circle of power`, `destructive wave`, `steel wind strike`, `conjure volley`). The Priest spell list also names `mind sliver` and `summon undead`, which the sheet only has with PHB'24 content.
+- **PHB'24-only spells.** Five domain spells aren't in the sheet's built-in spell list, so they only show up if PHB'24 content is imported. Otherwise the sheet skips them without an error. Discipline Domain grants `arcane vigor`, `circle of power` and `destructive wave`. Shadow Domain grants `crown of madness` and `summon undead`. The WoW Ebon Blade, Demon Hunter and Evoker subclass spell lists also name XPHB spells that may be missing without PHB'24 content (e.g. `summon undead`, `freedom of movement`, `circle of power`, `destructive wave`, `steel wind strike`, `conjure volley`). The Priest spell list also names `mind sliver` and `summon undead`, which the sheet only has with PHB'24 content. The species lineages also name PHB'24-only spells: `thorn whip` (Haranir), `arcane vigor` (Blood Elf) and `mind sliver` (Void Elf).
 
 ## Notes for the next agent-loop run
 
