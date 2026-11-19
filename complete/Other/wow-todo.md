@@ -17,7 +17,7 @@ It did **not** import the script in Acrobat.
 
 Done:
 
-- [x] `SourceList["WoW"]`, requiring sheet v24.0.8 or later.
+- [x] `SourceList["WoW"]`, requiring sheet v24.1.0 or later (the version of `pub_20240917_PHB.js`, which must be imported first).
 - [x] 8 classes copied from the sheet's built-in 2024 classes. Their keys are `deathknight` (Paladin), `demonhunter` (Ranger), `evoker` (Sorcerer), `hunter` (Ranger), `mage` (Wizard), `priest` (Cleric), `shaman` (Barbarian) and `warrior` (Fighter). Each keeps its base class's subclass list.
 - [x] Copied code that named the base class now uses the new key: Shaman Rage, Priest Blessed Strikes, Hunter and Demon Hunter Precise Hunter and Foe Slayer, and Mage Spell Mastery and Signature Spells.
 - [x] Death Knight: Death Coil, Runic Smite, Runic Strikes, Improved Death Coil, and the Undead steed option for Faithful Steed.
@@ -83,12 +83,14 @@ These have no new rules. Each 5etools entry is a plain `_copy` of the XPHB subcl
 
 The sheet has only the SRD subclass of each class built in. The other 2024 subclasses exist only if PHB'24 content is imported, and it has to be imported before `WoW.js`.
 
-- [x] Check each copied subclass under its WoW class name. Done with the menu check: every built-in subclass resolves correctly under its WoW class except the `fullname` cases in "Fix first" above. Repeat the check for PHB'24 subclasses once that content is imported.
+- [x] Check each copied subclass under its WoW class name. Done with the menu check: every built-in subclass resolves correctly under its WoW class except the `fullname` cases in "Fix first" above. Repeat the check for PHB'24 subclasses once that content is imported. Done for the PHB'24 subclasses too: 94 class/subclass pairs, 0 problems, after deleting 13 PHB `fullname`s.
 - [ ] `ranger-hunter`'s regex matches any name containing "hunter", so typing plain "Hunter" or "Demon Hunter" selects the Hunter subclass automatically. Removing its `fullname` doesn't change this. It needs a tighter regex, e.g. one that requires "hunter" twice or "ranger" and "hunter" together.
 
 ### Druid Wild Shape stat blocks
 
-- [ ] Cat Form and Bear Form (`bestiary/bestiary-wow.json`, from the Druid's Feral and Guardian specializations). Add them as `CreatureList` Wild Shape options.
+- [x] Cat Form and Bear Form (`bestiary/bestiary-wow.json`, from the Druid's Feral and Guardian specializations). Added as a `subclassfeature3.2` on the PHB'24 Circle of the Moon (the book requires Circle Forms), with the two forms as `creatureOptions` and `forceWildshapeOption`, so they appear on the Wild Shape page under "Circle of the Moon (WoW)" only for a Moon druid. A Wild Shape callback sets Str and Dex to the druid's Wisdom and keeps Con, scales the Pounce and Mangle dice with Druid level, and gives the Cat Stealth proficiency. AC is 13 + Wis (Cat) and 15 + Wis (Bear). The book doesn't say these forms count against the known forms, so they use a normal known-form slot. Not automated: Primal Wrath, Prowl, Frenzied Regeneration and Growl (text only), and the temporary HP, which Circle Forms already gives.
+- [ ] Check in Acrobat: the forms show up in the Wild Shape drop-down for a Moon druid, the page shows Str and Dex equal to Wisdom and the right AC, and the attacks use the spell attack bonus.
+- [ ] Moonkin (`bestiary/bestiary-wow.json`, Chapter 7). The Circle of the Stars druid's Starry Form can take this appearance. Not done: it is a normal stat block and a cosmetic option of Starry Form.
 
 ## Chapter 1: Spells and class spell lists
 
@@ -205,19 +207,16 @@ Decision (2026-11-18): the Death Knight keeps reading the Paladin list, so it al
 - [x] Master Demonologist
 - [x] Pact of the Legion
 
-**Warrior Maneuvers** (`optionalfeatures.json`, Battle Master maneuvers). Battle Master is not in the SRD, so these need the PHB'24 Battle Master.
-- [ ] Battle Shout
-- [ ] Demoralizing Shout
-- [ ] Heroic Leap
-- [ ] Mortal Strike
-- [ ] Warding Maneuver
-
-  > **Blocked:** `MPMB-v14/_variables/ListsClasses.js` has no Battle Master (the Fighter's only subclass is `fighter-champion`) and no maneuver list or Superiority Dice. All 5 maneuvers spend a Superiority Die, so a WoW-owned host feature would have to re-create the Battle Master. Add them with `AddFeatureChoice` on the Battle Master's maneuver feature once a PHB'24 Battle Master script is available.
+**Warrior Maneuvers** (`optionalfeatures.json`, Battle Master maneuvers). Added with `AddFeatureChoice` to the PHB'24 Battle Master's Maneuvers feature, which the Fighter and the Warrior share.
+- [x] Battle Shout
+- [x] Demoralizing Shout
+- [x] Heroic Leap
+- [x] Mortal Strike
+- [x] Warding Maneuver
 
 **Hunter Pets**
-- [ ] The Pet Families table (`book/book-wow.json`, Hunter > "Hunter Pets"), which gives options for the Beast Master's primal companion.
-
-  > **Blocked:** the Ranger's only built-in subclass is `ranger-hunter`; the Beast Master and its Primal Companion are PHB'24-only and absent from `ListsClasses.js`. The Pet Families table modifies the Primal Companion, so it has no feature to attach to. Transcribe it once a PHB'24 Beast Master is available.
+- [x] The Pet Families table (`book/book-wow.json`, Hunter > "Hunter Pets"), which gives options for the Beast Master's primal companion. Done on a Hunter-only copy `hunter-beast master`: a summary on Primal Companion plus the table on a Notes page.
+- [x] Pet Specialization (Hunter level 6, `class/class-ranger.json`), which the Spec. column refers to. It is a `roving` feature on the Hunter-only `hunter-beast master`, so it replaces Roving for a Beast Master Hunter only. It has Cunning, Ferocity and Tenacity choices, each with a once-per-Long-Rest spell the beast casts. Cunning adds 10 ft to all speeds, and Tenacity adds the Hunter level to HP maximum. Not automated: the beast's own HP and speed, and Ferocity's healing. Picking the Specialization for the beast's family is left to the player.
 
 ## Chapter 2: Character origins
 
@@ -257,6 +256,8 @@ These are for the subclass work. Fix each one when that subclass is added.
 - **Subclass regexes (fixed).** `matchWoWSubclasses()` in `WoW.js` adds a "<WoW class> (<subclass>)" alternative to every copied subclass regex that didn't match. Imported PHB'24 subclasses are covered too, as long as they're imported before `WoW.js`. The `fullname` collision this bullet used to describe is fixed (see "Fix first" at the top). `WoW.js` deletes the five standard-class `fullname`s, and the Evoker's Draconic Sorcery is a separate `evoker-draconic sorcery` entry with no `fullname`.
 - **Subclass features (fixed).** Berserker, Champion and Draconic Sorcery now read `(classes.known.<base> || classes.known.<copy>)`.
 - **Import order.** Each copied class takes its subclass list as it is when `WoW.js` runs, so import `WoW.js` after any other content that adds subclasses.
+- **PHB'24 import order.** `WoW.js` requires `pub_20240917_PHB.js` (sheet v24.1.0) to be imported first. The Warrior Maneuvers attach to its Battle Master, the Hunter Pet Families to its Beast Master, and the WoW classes only inherit its subclasses if it is loaded before `WoW.js`. Without it, `WoW.js` still imports, but those blocks are skipped.
+- **Demon Hunter Beast Master companion.** The Demon Hunter shares the PHB'24 `ranger-beast master`, whose Primal Companion links its HP, level and Beast's Strike to the `ranger` class key. A Demon Hunter without Ranger levels gets no automatic companion HP or attack bonus. The Hunter's copy is rekeyed to `hunter`; a Demon Hunter fix would need its own copy.
 - **Shared subclass names.** Typing only a subclass name two classes share can resolve to the WoW class, because the class added last wins the tie. For example, "Path of the Elements" gives Shaman, "Discipline Domain" gives Priest and "Oath of the Holy" gives Death Knight. Typing "Class (Subclass)" always works. The dialog problem this bullet used to describe is the "Fix first" item at the top.
 - **PHB'24-only spells.** Five domain spells aren't in the sheet's built-in spell list, so they only show up if PHB'24 content is imported. Otherwise the sheet skips them without an error. Discipline Domain grants `arcane vigor`, `circle of power` and `destructive wave`. Shadow Domain grants `crown of madness` and `summon undead`. The WoW Ebon Blade, Demon Hunter and Evoker subclass spell lists also name XPHB spells that may be missing without PHB'24 content (e.g. `summon undead`, `freedom of movement`, `circle of power`, `destructive wave`, `steel wind strike`, `conjure volley`). The Priest spell list also names `mind sliver` and `summon undead`, which the sheet only has with PHB'24 content. The species lineages also name PHB'24-only spells: `thorn whip` (Haranir), `arcane vigor` (Blood Elf) and `mind sliver` (Void Elf).
 

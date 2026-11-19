@@ -4,18 +4,19 @@
 
 	-KEEP IN MIND-
 	It is recommended to enter the code in a fresh sheet before adding any other information (i.e. before making your character with it).
+	Import "pub_20240917_PHB.js" (the 2024 Player's Handbook add-on) before this file: the Warrior Maneuvers and Hunter Pets attach to its Battle Master and Beast Master subclasses, and the WoW classes only inherit its subclasses if it is imported first.
 */
 
 /*	-INFORMATION-
 	Subject:	Class
-	Effect:		This script adds the World of Warcraft versions of the Death Knight, Demon Hunter, Evoker, Hunter, Mage, Priest, Shaman and Warrior classes, the World of Warcraft class features for the Death Knight, Demon Hunter and Shaman, the Path of the Elements, Path of the Spiritual Guardian, Discipline Domain, Shadow Domain, Oath of the Holy, Oath of the Ebon Blade, Demon Hunter, Warrior of Mystic Brews, Swashbuckler and Draconic Sorcery (Evoker, with the Evoker Spells) subclasses, the Rune Strike, Prayer of Mending, Psychic Horror, Shadow Word: Pain and Void Eruption spells, the 35 spells those three WoW subclasses grant, fixes for copied subclasses whose regex or class-level checks needed the WoW class names, the subclass-menu fullname fix for the standard classes, the 27 remaining Chapter 1 spells, and the WoW class spell lists: Death Knight, Demon Hunter, Evoker, Hunter, Mage and Priest via extraspells, and Druid, Paladin and Warlock via the spells' classes, the 8 WoW feats (Clearcasting, Fingers of Frost, Hot Streak, Elusive Brawler, Enveloping Mist, Fists of Fury, Stagger and Sway, and the Void Warrior Fighting Style for the Demon Hunter) and the 7 WoW Warlock Eldritch Invocations (including Pact of the Legion), the 12 World of Warcraft species (Dracthyr, Draenei with its 4 Eredar lineages, Earthen, Forsaken, Goblin, Haranir, Mechagnome, Pandaren, Tauren with its 3 lineages, Troll with its 3 lineages, Vulpera and Worgen), the Blood Elf, Night Elf, Nightborne and Void Elf lineages for the Elf, the Arcane Pulse and Entropic Embrace spells, and the Human origin feats Arathi Heritage, Child of the Sea and Will to Survive. The WoW Dwarf, Gnome (Rock Gnome), Human and Orc are the built-in species. The 33 WoW languages are listed in a comment, because the sheet has no language list to add them to.
+	Effect:		This script adds the World of Warcraft versions of the Death Knight, Demon Hunter, Evoker, Hunter, Mage, Priest, Shaman and Warrior classes, the World of Warcraft class features for the Death Knight, Demon Hunter and Shaman, the Path of the Elements, Path of the Spiritual Guardian, Discipline Domain, Shadow Domain, Oath of the Holy, Oath of the Ebon Blade, Demon Hunter, Warrior of Mystic Brews, Swashbuckler and Draconic Sorcery (Evoker, with the Evoker Spells) subclasses, the Rune Strike, Prayer of Mending, Psychic Horror, Shadow Word: Pain and Void Eruption spells, the 35 spells those three WoW subclasses grant, fixes for copied subclasses whose regex or class-level checks needed the WoW class names, the subclass-menu fullname fix for the standard classes, the 27 remaining Chapter 1 spells, and the WoW class spell lists: Death Knight, Demon Hunter, Evoker, Hunter, Mage and Priest via extraspells, and Druid, Paladin and Warlock via the spells' classes, the 8 WoW feats (Clearcasting, Fingers of Frost, Hot Streak, Elusive Brawler, Enveloping Mist, Fists of Fury, Stagger and Sway, and the Void Warrior Fighting Style for the Demon Hunter) and the 7 WoW Warlock Eldritch Invocations (including Pact of the Legion), the 12 World of Warcraft species (Dracthyr, Draenei with its 4 Eredar lineages, Earthen, Forsaken, Goblin, Haranir, Mechagnome, Pandaren, Tauren with its 3 lineages, Troll with its 3 lineages, Vulpera and Worgen), the Blood Elf, Night Elf, Nightborne and Void Elf lineages for the Elf, the Arcane Pulse and Entropic Embrace spells, and the Human origin feats Arathi Heritage, Child of the Sea and Will to Survive. It also adds, on top of "pub_20240917_PHB.js" (which must be imported first), the 5 WoW Warrior Maneuvers for the Battle Master of the Fighter and Warrior, a Hunter copy of the Beast Master with the WoW Pet Families for its Primal Companion, and the subclass-menu fullname fix for the PHB'24 subclasses the WoW classes inherit. The WoW Dwarf, Gnome (Rock Gnome), Human and Orc are the built-in species. The 33 WoW languages are listed in a comment, because the sheet has no language list to add them to.
 	Code by:	Rocky
-	Date:		2026-11-18 (sheet v24)
+	Date:		2026-11-19 (sheet v24)
 */
 
 var iFileName = "WoW.js";
 
-RequiredSheetVersion("24.0.8");
+RequiredSheetVersion("24.1.0");
 
 SourceList["WoW"] = {
 	name: "World of Warcraft",
@@ -31,6 +32,12 @@ delete ClassSubList["fighter-champion"].fullname;
 delete ClassSubList["ranger-hunter"].fullname;
 delete ClassSubList["wizard-evoker"].fullname;
 delete ClassSubList["sorcerer-draconic"].fullname;
+
+// The same fix for the PHB'24 subclasses the WoW classes inherit: a bare fullname shared by two classes resolves to the WoW copy
+// Guarded, because these only exist when "pub_20240917_PHB.js" is imported first
+["barbarian-zealot", "fighter-battle master", "fighter-eldritch knight", "fighter-psi warrior", "ranger-beast master", "ranger-fey wanderer", "ranger-gloom stalker", "sorcerer-aberrant", "sorcerer-clockwork", "sorcerer-wild magic", "wizard-abjurer", "wizard-diviner", "wizard-illusionist"].forEach(function (k) {
+	if (ClassSubList[k]) delete ClassSubList[k].fullname;
+});
 
 SpellsList["rune strike"] = {
 	name: "Rune Strike",
@@ -2204,6 +2211,300 @@ AddWarlockInvocation("Legion Summoning (req: lvl 9+, Pact of the Legion)", {
 		firstCol: "oncelr",
 	}],
 });
+
+// Chapter 1: Warrior Maneuvers, extra options for the PHB'24 Battle Master ("pub_20240917_PHB.js" must be imported first)
+// The WoW Warrior shares the Fighter's Battle Master object, so adding them once covers both classes
+if (ClassSubList["fighter-battle master"]) {
+	var wowManeuverFeature = ClassSubList["fighter-battle master"].features["subclassfeature3.1"];
+	var wowManeuvers = {
+		"Battle Shout": {
+			name: "Battle Shout", extraname: "Maneuver", source: [["WoW", 0]],
+			description: desc("As a Bonus Action, I can expend 1 SD to shout encouragement to allies within 30 ft of me that can hear me. Until the start of my next turn, each affected ally adds the SD to the damage roll the next time it hits with a melee attack."),
+			additional: "allies add SD to melee damage",
+			action: [["bonus action", ""]],
+		},
+		"Demoralizing Shout": {
+			name: "Demoralizing Shout", extraname: "Maneuver", source: [["WoW", 0]],
+			description: desc("As a Bonus Action, I can expend 1 SD to shout, demoralizing enemies within 30 ft of me that can hear me. Until the end of my next turn, each affected enemy subtracts the SD from the damage roll the next time it hits a target other than me with a melee attack."),
+			additional: "enemies subtract SD from melee damage",
+			action: [["bonus action", ""]],
+		},
+		"Heroic Leap": {
+			name: "Heroic Leap", extraname: "Maneuver", source: [["WoW", 0]],
+			description: desc("As a Bonus Action, I can expend 1 SD to jump a number of feet up to my Strength score. Creatures within 5 ft of me when I land make a Strength save, taking Bludgeoning damage equal to the SD roll on a failed save, or half as much on a success."),
+			additional: "SD Bludgeoning on landing",
+			action: [["bonus action", ""]],
+		},
+		"Mortal Strike": {
+			name: "Mortal Strike", extraname: "Maneuver", source: [["WoW", 0]],
+			description: desc("When I hit a creature with an attack roll, I can expend 1 SD to prevent the target from healing. I add the SD to the attack's damage roll, and the target can't regain Hit Points until the end of my next turn."),
+			additional: "add SD to damage; target can't heal",
+		},
+		"Warding Maneuver": {
+			name: "Warding Maneuver", extraname: "Maneuver", source: [["WoW", 0]],
+			description: desc("When I or a creature I can see within 5 ft of me is hit by an attack roll, I can take a Reaction and expend 1 SD if I'm wielding a Melee weapon or a Shield. I add the SD to the target's AC against the triggering attack. If the attack still hits, the target has Resistance against the attack's damage."),
+			additional: "add SD to AC; Resistance if still hit",
+			action: [["reaction", ""]],
+		},
+	};
+	for (var wm in wowManeuvers) AddFeatureChoice(wowManeuverFeature, true, wm, wowManeuvers[wm]);
+}
+
+// Chapter 1: Hunter Pets. A WoW Hunter's Beast Master picks the primal beast's form from the Pet Families table, which maps
+// each family onto one of the PHB'24 Beast of the Land/Sea/Sky stat blocks and gives it a mastery property.
+// The Hunter gets its own copy, so the Ranger and Demon Hunter keep the plain PHB'24 Beast Master.
+if (ClassSubList["ranger-beast master"]) {
+	var hunterBeastMaster = newObj(ClassSubList["ranger-beast master"]);
+	delete hunterBeastMaster.fullname;
+	hunterBeastMaster.source = [["WoW", 0], ["PHB24", 122]];
+	// The companion's level, HP and attack links name the Ranger class key
+	rekeyWoWFeature(hunterBeastMaster, "subclassfeature3", [
+		['"ranger"', '"hunter"'],
+		["classes.known.ranger", "classes.known.hunter"],
+		["my Ranger level", "my Hunter level"],
+		["Ranger spell save DC", "Hunter spell save DC"],
+	]);
+	appendWoWDescription(hunterBeastMaster.features.subclassfeature3, [
+		"***Hunter Pets***. I choose the beast's form from the Pet Families table (see Notes page). Its family sets the stat block it uses and its Specialization (Cunning, Ferocity, or Tenacity), which matters only if I have the Pet Specialization feature.",
+		"When I gain this feature and whenever I finish a Long Rest, I can choose my pet's family as one of the weapons for my Weapon Mastery feature. Its mastery property then applies to the beast's Beast's Strike.",
+	]);
+	hunterBeastMaster.features.subclassfeature3.toNotesPage = [{
+		name: "Pet Families",
+		source: [["WoW", 0]],
+		note: [
+			"When I use my Primal Companion feature to summon a primal beast, I choose the form it takes from among the pet families on the table below. Each family has three characteristics:",
+			" \u2022 ***Stat Block***. The family determines which stat block from the Player's Handbook the beast uses: Beast of the Land, Beast of the Sea, or Beast of the Sky.",
+			" \u2022 ***Specialization (Spec.)***. Each family has a specialization, Cunning (C), Ferocity (F), or Tenacity (T), that comes into play only if I have the Pet Specialization feature.",
+			" \u2022 ***Mastery Property (Mastery)***. When I gain the Primal Companion feature and whenever I finish a Long Rest, I can choose my pet's family as one of the weapons for my Weapon Mastery feature. Then its mastery property applies to my primal companion's Beast's Strike attack.",
+			[
+				["Family", "Stat Block", "Spec.", "Mastery"],
+				["Basilisk", "Land", "C", "Slow"],
+				["Bat", "Sky", "F", "Vex"],
+				["Bear", "Land", "T", "Push"],
+				["Beetle", "Land", "T", "Sap"],
+				["Bird of Prey", "Sky", "C", "Slow"],
+				["Blood Beast* (stirge)", "Sky", "T", "Slow"],
+				["Boar", "Land", "C", "Sap"],
+				["Camel", "Land", "C", "Push"],
+				["Carrion Bird", "Sky", "F", "Cleave"],
+				["Cat", "Land", "F", "Graze"],
+				["Courser (horses)", "Land", "F", "Graze"],
+				["Crab", "Land", "T", "Slow"],
+				["Crocolisk", "Land", "F", "Slow"],
+				["Direhorn* (triceratops)", "Land", "T", "Cleave"],
+				["Dolphin", "Sea", "T", "Vex"],
+				["Dragonhawk", "Sky", "T", "Graze"],
+				["Feathermane* (gryphon)", "Sky", "T", "Graze"],
+				["Fox", "Land", "C", "Graze"],
+				["Frenzy (piranha-like fish)", "Sea", "F", "Cleave"],
+				["Gorilla", "Land", "F", "Push"],
+				["Gruffhorn (goats)", "Land", "C", "Push"],
+				["Hopper (frogs, toads)", "Land", "T", "Graze"],
+				["Hound", "Land", "C", "Slow"],
+				["Hydra", "Land", "T", "Cleave"],
+				["Hyena", "Land", "C", "Cleave"],
+				["Lizard", "Land", "T", "Cleave"],
+				["Mammoth", "Land", "T", "Slow"],
+				["Mechanized animal*", "Land", "C", "Sap"],
+				["Monkey", "Land", "C", "Graze"],
+				["Moth", "Sky", "C", "Vex"],
+				["Oxen", "Land", "T", "Push"],
+				["Raptor (allosaurus)", "Land", "C", "Cleave"],
+				["Ray", "Sky", "F", "Vex"],
+				["Riverbeast (hippo)", "Land", "T", "Cleave"],
+				["Rodent", "Land", "C", "Cleave"],
+				["Scalehide (ankylosaurus)", "Land", "F", "Sap"],
+				["Scorpid", "Land", "F", "Cleave"],
+				["Serpent", "Land or Sea", "C", "Graze"],
+				["Shark", "Sea", "C", "Graze"],
+				["Spider", "Land", "F", "Slow"],
+				["Stag", "Land", "T", "Vex"],
+				["Tallstrider (flightless bird)", "Land", "F", "Slow"],
+				["Threshadon* (plesiosaur)", "Sea", "T", "Sap"],
+				["Turtle", "Land", "T", "Sap"],
+				["Wasp", "Sky", "F", "Cleave"],
+				["Waterfowl", "Land", "T", "Vex"],
+				["Wolf", "Land", "F", "Slow"],
+			],
+			"*Unusual pet family; a hunter must acquire a special ability (typically by reading a magical tome) to tame an unusual pet.",
+		],
+	}];
+	// Pet Specialization (Hunter 6). Using the object name of the class feature "roving" makes this subclass feature replace Roving
+	// for a Beast Master Hunter from level 6 on (see "SAME OBJECT NAME REPLACES" in the class features syntax file).
+	hunterBeastMaster.features["roving"] = {
+		name: "Pet Specialization",
+		source: [["WoW", 0]],
+		minlevel: 6,
+		description: ' #[Select option with "Choose Feature"]#' + desc([
+			"This replaces Roving. While my primal beast is within 60 ft of me, I gain a benefit that depends on its pet family and Specialization (Spec. column of the Pet Families table on the Notes page).",
+			"Choose the option that matches my beast's Specialization: Cunning, Ferocity, or Tenacity.",
+		]),
+		choices: ["Cunning", "Ferocity", "Tenacity"],
+		"cunning": {
+			name: "Pet Specialization: Cunning",
+			description: desc([
+				"While my primal beast is within 60 ft of me, my Speed and all of my beast's speeds increase by 10 ft.",
+				"My beast can use its action to cast *Freedom of Movement* without spell components, affecting itself and me (if I'm in range). It can do so once per Long Rest.",
+			]),
+			speed: { allModes: "+10" },
+			usages: 1,
+			recovery: "Long Rest",
+			limfeaname: "Pet: Freedom of Movement",
+			action: [["action", " (pet casts)"]],
+		},
+		"ferocity": {
+			name: "Pet Specialization: Ferocity",
+			description: desc([
+				"While my primal beast is within 60 ft of me, when it is Bloodied and hits with its Beast's Strike, my beast and I each regain HP equal to my Wisdom modifier.",
+				"My beast can use its action to cast *Haste* without spell components, affecting itself and me (if I'm in range). It can do so once per Long Rest.",
+			]),
+			usages: 1,
+			recovery: "Long Rest",
+			limfeaname: "Pet: Haste",
+			action: [["action", " (pet casts)"]],
+		},
+		"tenacity": {
+			name: "Pet Specialization: Tenacity",
+			description: desc([
+				"While my primal beast is within 60 ft of me, my HP maximum increases by 6, and by 1 more whenever I gain a Hunter level (my Hunter level in total).",
+				"My beast's HP maximum also increases by my Hunter level.",
+				"My beast can use its action to cast *Stoneskin* without spell components, affecting itself and me (if I'm in range). It can do so once per Long Rest.",
+			]),
+			usages: 1,
+			recovery: "Long Rest",
+			limfeaname: "Pet: Stoneskin",
+			action: [["action", " (pet casts)"]],
+			calcChanges: {
+				hp: function (totalHD, HDobj, prefix) {
+					if (classes.known.hunter && classes.known.hunter.level >= 6) {
+						return [classes.known.hunter.level, "Pet Specialization: Tenacity (Hunter level)"];
+					}
+				},
+			},
+		},
+	};
+	var hunterSubs = ClassList.hunter.subclasses[1];
+	var hunterBMIdx = hunterSubs.indexOf("ranger-beast master");
+	if (hunterBMIdx !== -1) hunterSubs.splice(hunterBMIdx, 1);
+	AddSubClass("hunter", "beast master", hunterBeastMaster, true);
+}
+
+// Chapter 1: Druid Cat Form and Bear Form. The book offers these two Wild Shape forms to a Circle of the Moon druid, and they
+// require the Circle Forms feature. They are not Beasts: the druid keeps their own type, and their Strength and Dexterity equal
+// their Wisdom. A Moon feature adds them as creatureOptions, so they are only available while the feature is present.
+// The Wild Shape callback sets the ability scores, the Stealth proficiency and the damage dice, which scale with Druid level.
+if (ClassSubList["druid-moon"]) {
+	var wowCircleFormBase = {
+		source: [["WoW", 0]],
+		type: "Unchanged",
+		alignment: "Unchanged",
+		hp: 1, // Wild Shape uses the temporary HP from Circle Forms (3 x Druid level), not this value
+		hd: [0, 8],
+		proficiencyBonus: 2,
+		proficiencyBonusLinked: true,
+		challengeRating: "―",
+		scores: [10, 10, 10, 10, 10, 10], // Str, Dex and Con are set by the Wild Shape callback below
+		senses: "Darkvision 60 ft",
+		languages: "Your languages don't change",
+		forceWildshapeOption: "Circle of the Moon (WoW)",
+	};
+	var wowCatForm = {
+		name: "Cat Form",
+		nameThis: "cat form",
+		size: 3,
+		ac: "13+Wis",
+		speed: "40 ft",
+		attacksAction: 1,
+		attacks: [{
+			name: "Pounce",
+			ability: 5,
+			useSpellMod: "druid",
+			damage: [1, 10, "slashing"],
+			range: "Melee (5 ft)",
+			description: "Adv on attack roll: +1d6 Slashing and Large or smaller target is Prone; extra dice +1d6 per Druid level 6, 9, 12, 15, 18",
+		}],
+		actions: [{
+			name: "Multiattack",
+			description: "I make one Pounce attack and use Prowl.",
+		}, {
+			name: "Prowl",
+			description: "I move up to half my Speed without provoking Opportunity Attacks. At the end of this movement, I can take the Hide action.",
+		}, {
+			name: "Primal Wrath",
+			description: "I expend a level 1+ spell slot. Each creature of my choice in a 5-ft Emanation from me makes a Dex save against my spell save DC, taking 2d6 Slashing damage per spell slot level plus my Wis mod on a failed save.",
+		}],
+		traits: [{
+			name: "Cat Form",
+			description: "Requires Circle Forms. My Str and Dex scores equal my Wisdom score. I have proficiency in Stealth. My AC is 13 + my Wis mod.",
+		}],
+	};
+	var wowBearForm = {
+		name: "Bear Form",
+		nameThis: "bear form",
+		size: 2,
+		ac: "15+Wis",
+		speed: "30 ft",
+		attacksAction: 2,
+		attacks: [{
+			name: "Mangle",
+			ability: 5,
+			useSpellMod: "druid",
+			damage: [1, 8, "slashing"],
+			range: "Melee (5 ft)",
+			description: "Two Mangle attacks as part of an Attack action",
+		}],
+		actions: [{
+			name: "Multiattack",
+			description: "I make two Mangle attacks.",
+		}, {
+			name: "Frenzied Regeneration (Bonus Action)",
+			description: "I expend a level 1+ spell slot and gain Temp HP equal to five times the spell slot level.",
+		}, {
+			name: "Growl (Reaction)",
+			description: "When a creature I can see attacks a target other than me within 5 ft of me, I impose Disadvantage on that attack roll and on all other attack rolls against the target until the start of my next turn, if I remain within 5 ft of the target.",
+		}],
+		traits: [{
+			name: "Bear Form",
+			description: "Requires Circle Forms. My Str and Dex scores equal my Wisdom score. My AC is 15 + my Wis mod.",
+		}],
+	};
+	for (var wowFormKey in wowCircleFormBase) {
+		wowCatForm[wowFormKey] = wowCircleFormBase[wowFormKey];
+		wowBearForm[wowFormKey] = wowCircleFormBase[wowFormKey];
+	}
+	ClassSubList["druid-moon"].features["subclassfeature3.2"] = {
+		name: "Wild Shape: Cat Form and Bear Form",
+		source: [["WoW", 0]],
+		minlevel: 3,
+		description: desc([
+			"When I use Wild Shape, I can adopt the Cat Form or Bear Form stat block instead of a Beast (Feral and Guardian specializations).",
+			"In these forms my Str and Dex equal my Wis score. I keep my Con, and my own type, alignment and languages. Pick them on the Wild Shape page under \"Circle of the Moon (WoW)\".",
+		]),
+		creatureOptions: [wowCatForm, wowBearForm],
+		calcChanges: {
+			wildshapeCallback: [
+				function (prefix, fieldNo, oWildshape, sCrea) {
+					if (!/^(Cat|Bear) Form$/.test(oWildshape.name)) return;
+					var wis = Number(What("Wis"));
+					oWildshape.ability.Str.value = wis;
+					oWildshape.ability.Dex.value = wis;
+					oWildshape.ability.Con.value = Number(What("Con"));
+					var lvl = classes.known.druid ? classes.known.druid.level : 0;
+					var dice = lvl >= 17 ? 4 : lvl >= 11 ? 3 : lvl >= 5 ? 2 : 1;
+					for (var i = 0; i < oWildshape.attacks.length; i++) {
+						if (/^(Pounce|Mangle)$/.test(oWildshape.attacks[i].name)) oWildshape.attacks[i].damage[0] = dice;
+					}
+					if (oWildshape.name === "Cat Form") {
+						var pounceDice = lvl >= 18 ? 6 : lvl >= 15 ? 5 : lvl >= 12 ? 4 : lvl >= 9 ? 3 : lvl >= 6 ? 2 : 1;
+						oWildshape.attacks[0].description = "Adv on attack roll: +" + pounceDice + "d6 Slashing and Large or smaller target is Prone";
+						if (oWildshape.skill && oWildshape.skill.stealth) oWildshape.skill.stealth.creature.proficiency = "proficient";
+					}
+				},
+				"While in Cat Form or Bear Form, my Strength and Dexterity scores equal my Wisdom score, the damage dice of my attacks increase with my Druid level, and the Cat Form gives me proficiency in Stealth.",
+			],
+		},
+	};
+}
 
 // Chapter 2: Character origins
 
