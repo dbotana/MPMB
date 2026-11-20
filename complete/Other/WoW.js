@@ -1246,7 +1246,7 @@ function reskinWoWClass(fromKey, toKey, name, regex, spellListClass) {
 	if (c.features.subclassfeature3) {
 		c.features.subclassfeature3.name = name + " Subclass";
 		c.features.subclassfeature3.source = [["WoW", 0]];
-		c.features.subclassfeature3.description = desc('Choose a ' + name + ' Subclass using the "Class" button/bookmark or type its name into the "Class" field.');
+		c.features.subclassfeature3.description = desc('Choose a ' + name + ' Subclass with the "Class" button or typing it in the "Class" field.');
 	}
 	if (spellListClass) c.spellcastingList = { "class": spellListClass };
 	ClassList[toKey] = c;
@@ -1263,13 +1263,27 @@ AddSubClass("barbarian", "path of the elements", {
 		"subclassfeature3": {
 			name: "Raging Elements", source: [["WoW", 0]], minlevel: 3,
 			description: desc([
-				"Whenever I activate my Rage, I can use one Raging Elements option as part of that Bonus Action. While Raging, I can use a Bonus Action to use that option again or a different one.",
+				"Whenever I activate my Rage, I can use 1 Raging Elements option as part of that Bonus Action. While Raging, I can use a Bonus Action to use that option again or a different one (options on 3rd page).",
 				"If an option requires a save, the DC is 8 + my Con mod + PB.",
-				" \u2022 ***Icefury***. I roll d8s equal to my Rage Damage bonus and hurl ice at one creature within 30 ft. I make a melee (if within 5 ft) or ranged spell attack using Con. On a hit, it takes Cold damage equal to the roll, and the next Fire damage it takes before the end of my next turn is +1d10.",
-				" \u2022 ***Lava Burst***. I roll d4s equal to my Rage Damage bonus and hurl lava at one creature I can see within 30 ft. It makes a Dex save, taking Fire damage equal to the roll (half on a success), and the next Lightning damage it takes before the end of my next turn is +1d8.",
-				" \u2022 ***Lightning Bolt***. I roll d6s equal to my Rage Damage bonus and hurl lightning at one creature I can see within 30 ft. It makes a Dex save, taking Lightning damage equal to the roll (half on a success), and the next Cold damage it takes before the end of my next turn is +1d6.",
 			]),
 			action: [["bonus action", " (while Raging)"]],
+			autoSelectExtrachoices: [
+				{ extrachoice: "icefury" },
+				{ extrachoice: "lava burst" },
+				{ extrachoice: "lightning bolt" },
+			],
+			"icefury": {
+				name: "Icefury", extraname: "Path of the Elements 3", source: [["WoW", 0]],
+				description: desc("I roll d8s equal to my Rage Damage bonus and hurl ice at one creature within 30 ft. I make a melee (if within 5 ft) or ranged spell attack using Con. On a hit, it takes Cold damage equal to the roll, and the next Fire damage it takes before the end of my next turn is +1d10."),
+			},
+			"lava burst": {
+				name: "Lava Burst", extraname: "Path of the Elements 3", source: [["WoW", 0]],
+				description: desc("I roll d4s equal to my Rage Damage bonus and hurl lava at one creature I can see within 30 ft. It makes a Dex save, taking Fire damage equal to the roll (half on a success), and the next Lightning damage it takes before the end of my next turn is +1d8."),
+			},
+			"lightning bolt": {
+				name: "Lightning Bolt", extraname: "Path of the Elements 3", source: [["WoW", 0]],
+				description: desc("I roll d6s equal to my Rage Damage bonus and hurl lightning at one creature I can see within 30 ft. It makes a Dex save, taking Lightning damage equal to the roll (half on a success), and the next Cold damage it takes before the end of my next turn is +1d6."),
+			},
 		},
 		"subclassfeature6": {
 			name: "Echo of the Elements", source: [["WoW", 0]], minlevel: 6,
@@ -1296,12 +1310,24 @@ AddSubClass("barbarian", "path of the elements", {
 		},
 		"subclassfeature14": {
 			name: "Elemental Overload", source: [["WoW", 0]], minlevel: 14,
-			description: desc([
-				"My Raging Elements options gain the following effects.",
-				" \u2022 ***Icefury***. Hit or miss, the target subtracts half the number rolled (round down) from the next damage roll it makes before the start of my next turn.",
-				" \u2022 ***Lava Burst***. Failed save or not, the target and each enemy within 10 ft of it start Burning.",
-				" \u2022 ***Lightning Bolt***. Failed save or not, a bolt leaps from the target to another target of my choice I can see within 30 ft of the first. The new target makes a Dex save, taking Lightning damage equal to the roll (half on a success).",
-			]),
+			description: desc("My Raging Elements options gain these effects (3rd page)."),
+			autoSelectExtrachoices: [
+				{ extrachoice: "icefury overload" },
+				{ extrachoice: "lava burst overload" },
+				{ extrachoice: "lightning bolt overload" },
+			],
+			"icefury overload": {
+				name: "Icefury Overload", extraname: "Path of the Elements 14", source: [["WoW", 0]],
+				description: desc("Hit or miss, the target subtracts half the number rolled (round down) from the next damage roll it makes before the start of my next turn."),
+			},
+			"lava burst overload": {
+				name: "Lava Burst Overload", extraname: "Path of the Elements 14", source: [["WoW", 0]],
+				description: desc("Failed save or not, the target and each enemy within 10 ft of it start Burning."),
+			},
+			"lightning bolt overload": {
+				name: "Lightning Bolt Overload", extraname: "Path of the Elements 14", source: [["WoW", 0]],
+				description: desc("Failed save or not, a bolt leaps from the target to another target of my choice I can see within 30 ft of the first. The new target makes a Dex save, taking Lightning damage equal to the roll (half on a success)."),
+			},
 		},
 	},
 });
@@ -1314,12 +1340,24 @@ AddSubClass("barbarian", "path of the spiritual guardian", {
 	features: {
 		"subclassfeature3": {
 			name: "Spiritual Protectors", source: [["WoW", 0]], minlevel: 3,
-			description: desc([
-				"While Raging, when I hit a creature with a weapon or an Unarmed Strike, the spirits cause one of the following effects of my choice.",
-				" \u2022 ***Distract***. Until the start of my next turn, it has Disadvantage on attacks against targets other than me or another Barbarian with this feature.",
-				" \u2022 ***Hinder***. I can use the Slow mastery with that weapon in addition to the mastery I'm already using.",
-				" \u2022 ***Strike***. It takes an extra 1d4 Cold, Fire, or Lightning damage (my choice).",
-			]),
+			description: desc("While Raging, when I hit a creature with a weapon or an Unarmed Strike, the spirits cause 1 of the following effects of my choice (3rd page)."),
+			autoSelectExtrachoices: [
+				{ extrachoice: "distract" },
+				{ extrachoice: "hinder" },
+				{ extrachoice: "strike" },
+			],
+			"distract": {
+				name: "Distract", extraname: "Spiritual Guardian 3", source: [["WoW", 0]],
+				description: desc("Until the start of my next turn, the target has Disadvantage on attacks against targets other than me or another Barbarian with this feature."),
+			},
+			"hinder": {
+				name: "Hinder", extraname: "Spiritual Guardian 3", source: [["WoW", 0]],
+				description: desc("I can use the Slow mastery with that weapon in addition to the mastery I'm already using."),
+			},
+			"strike": {
+				name: "Strike", extraname: "Spiritual Guardian 3", source: [["WoW", 0]],
+				description: desc("The target takes an extra 1d4 Cold, Fire, or Lightning damage (my choice)."),
+			},
 		},
 		"subclassfeature6": {
 			name: "Spirit Shield", source: [["WoW", 0]], minlevel: 6,
@@ -1394,9 +1432,9 @@ AddSubClass("cleric", "shadow domain", {
 		"subclassfeature3": {
 			name: "Shadowform", source: [["WoW", 0]], minlevel: 3,
 			description: desc([
-				"As a Bonus Action, I can expend 1 Channel Divinity to take on a shadowy form for 1 minute. It ends early if I dismiss it (no action), have the Incapacitated condition, or deal Radiant damage with a spell.",
-				" \u2022 ***Shadow Stealth***. In Dim Light or Darkness, I can take the Hide action as a Bonus Action.",
-				" \u2022 ***Void Empowerment***. When I cast a spell using a spell slot that deals Psychic or Necrotic damage, I can add 1d6 to one damage roll of the spell.",
+				"Bonus Action + 1 Channel Divinity: for 1 min, I take on a shadowy form. It ends early if I dismiss it (no action), am Incapacitated, or deal Radiant damage with a spell.",
+				" \u2022 ***Shadow Stealth***. In Dim Light or Darkness, I can Hide as a Bonus Action.",
+				" \u2022 ***Void Empowerment***. When a spell cast with a spell slot deals Psychic or Necrotic damage, I add 1d6 to one damage roll of it.",
 			]),
 			additional: "1 Channel Divinity",
 			action: [["bonus action", " (Channel Divinity)"]],
@@ -1480,52 +1518,80 @@ AddSubClass("monk", "warrior of mystic brews", {
 	features: {
 		"subclassfeature3": {
 			name: "Bonus Proficiencies", source: [["WoW", 0]], minlevel: 3,
-			description: desc("I gain proficiency with Performance, or another Monk skill of my choice if I already have it, and with Brewer's Supplies."),
+			description: " [Performance or another Monk skill; Brewer's Supplies]",
 			skills: ["Performance"],
 			skillstxt: "Performance, or one Monk skill of my choice if already proficient",
 			toolProfs: ["Brewer's Supplies"],
 		},
 		"subclassfeature3.1": {
 			name: "Drunken Technique", source: [["WoW", 0]], minlevel: 3,
-			description: desc("Whenever I expend a Focus Point on Patient Defense, my Speed increases by 10 ft until the end of the current turn, and I can make one Unarmed Strike immediately after that Bonus Action."),
+			description: desc("When I spend 1 FP on Patient Defense, my Speed +10 ft until the end of the turn and I can make 1 Unarmed Strike right after."),
 		},
 		"subclassfeature6": {
 			name: "Mystic Brew", source: [["WoW", 0]], minlevel: 6,
-			description: desc([
-				"When I finish a Short or Long Rest while holding Brewer's Supplies, I can magically produce one magical beverage: Cinnamon Dragon, Heavenly Spirit, or Refreshing Dip. It vanishes if any remains when I next finish a Short or Long Rest.",
-				"Only I can benefit. I must drink the full pint, which takes 1 minute, and the benefits last 1 hour or until I drink another magical beverage.",
-				" \u2022 ***Cinnamon Dragon***. As a Magic action, I exhale toxic flames in a 30-ft Cone. Each creature makes a Dex save (DC 8 + my Wis mod + PB), taking Fire damage equal to four rolls of my Martial Arts die and being Poisoned until the end of its next turn, or half damage only on a success.",
-				" \u2022 ***Heavenly Spirit***. I gain Resistance to two of Cold, Necrotic, Psychic, or Radiant (my choice).",
-				" \u2022 ***Refreshing Dip***. I have a pool of dice of my Martial Arts die type, with a maximum equal to my Wis mod + half my Monk level (round down). Whenever I regain HP, I can expend and roll one to regain that much additional HP.",
-				" \u2022 ***Enhancing a Magical Beverage***. When I create one, I can expend 1 Focus Point to extend its benefits to 8 hours.",
-			]),
+			description: desc("After a Short or Long Rest with Brewer's Supplies, I make 1 magical beverage (options on 3rd page); leftovers vanish at my next Short/Long Rest."),
 			additional: "1 Focus Point: 8 hours",
+			autoSelectExtrachoices: [
+				{ extrachoice: "drinking a beverage" },
+				{ extrachoice: "cinnamon dragon" },
+				{ extrachoice: "heavenly spirit" },
+				{ extrachoice: "refreshing dip" },
+				{ extrachoice: "enhancing a magical beverage" },
+			],
+			"drinking a beverage": {
+				name: "Drinking a Beverage", extraname: "Mystic Brews 6", source: [["WoW", 0]],
+				description: desc("Only I benefit. Drinking the full pint takes 1 min; its effect lasts 1 h or until I drink another."),
+			},
+			"cinnamon dragon": {
+				name: "Cinnamon Dragon", extraname: "Mystic Brews 6", source: [["WoW", 0]],
+				description: desc("As a Magic action, I exhale toxic flames in a 30-ft Cone. Each creature makes a Dex save (DC 8 + my Wis mod + PB), taking Fire damage equal to 4 rolls of my Martial Arts die and being Poisoned until the end of its next turn, or half damage only on a success."),
+			},
+			"heavenly spirit": {
+				name: "Heavenly Spirit", extraname: "Mystic Brews 6", source: [["WoW", 0]],
+				description: desc("I gain Resistance to two of Cold, Necrotic, Psychic, or Radiant (my choice)."),
+			},
+			"refreshing dip": {
+				name: "Refreshing Dip", extraname: "Mystic Brews 6", source: [["WoW", 0]],
+				description: desc("I have a pool of dice of my Martial Arts die type, with a maximum equal to my Wis mod + half my Monk level (round down). Whenever I regain HP, I can expend and roll one to regain that much additional HP."),
+			},
+			"enhancing a magical beverage": {
+				name: "Enhancing a Magical Beverage", extraname: "Mystic Brews 6", source: [["WoW", 0]],
+				description: desc("When I create one, I can expend 1 Focus Point to extend its benefits to 8 hours."),
+			},
 		},
 		"subclassfeature6.1": {
 			name: "Tipsy Sway", source: [["WoW", 0]], minlevel: 6,
-			description: desc([
-				"I can move in sudden, swaying ways, gaining the following benefits.",
-				" \u2022 ***Leap to Your Feet***. While Prone, I can stand up by spending 5 ft of movement.",
-				" \u2022 ***Redirect Attack***. When an enemy misses me with a melee attack roll, I can use my Reaction and spend 1 Focus Point to cause that attack to hit one creature of my choice, other than the attacker, that I can see within 5 ft of me.",
-			]),
+			description: desc("While Prone, I stand up for 5 ft of movement. Reaction + 1 FP: when an enemy misses me with a melee attack roll, that attack hits 1 creature I can see within 5 ft of me instead (not the attacker)."),
 			action: [["reaction", " (Redirect Attack)"]],
 		},
 		"subclassfeature11": {
 			name: "Wizened Brewer", source: [["WoW", 0]], minlevel: 11,
-			description: desc([
-				"I learn more complex flavors. These beverages are added to my Mystic Brew options.",
-				" \u2022 ***Blue Lightning***. Whenever I take a Reaction that isn't an Opportunity Attack or casting a spell, I can make one Unarmed Strike as part of it.",
-				" \u2022 ***Drunkard's Luck***. I gain Heroic Inspiration if I don't have it. I can also give it to myself when I make an ability check or saving throw without it.",
-				" \u2022 ***Stumbling Monk***. When I take a Bonus Action other than Patient Defense, I can use Patient Defense immediately after it.",
-			]),
+			description: desc("I learn 3 more Mystic Brew beverages (see 3rd page)."),
+			autoSelectExtrachoices: [
+				{ extrachoice: "blue lightning" },
+				{ extrachoice: "drunkard's luck" },
+				{ extrachoice: "stumbling monk" },
+			],
+			"blue lightning": {
+				name: "Blue Lightning", extraname: "Mystic Brews 11", source: [["WoW", 0]],
+				description: desc("When I take a Reaction that isn't an Opportunity Attack or a spell, I can make 1 Unarmed Strike as part of it."),
+			},
+			"drunkard's luck": {
+				name: "Drunkard's Luck", extraname: "Mystic Brews 11", source: [["WoW", 0]],
+				description: desc("I gain Heroic Inspiration if I don't have it. I can also give it to myself when I make an ability check or save without it."),
+			},
+			"stumbling monk": {
+				name: "Stumbling Monk", extraname: "Mystic Brews 11", source: [["WoW", 0]],
+				description: desc("When I take a Bonus Action other than Patient Defense, I can use Patient Defense right after it."),
+			},
 		},
 		"subclassfeature17": {
 			name: "Intoxicated Frenzy", source: [["WoW", 0]], minlevel: 17,
-			description: desc("Immediately after I use Patient Defense, I can move up to my Speed. Whenever I enter a space within 5 ft of a creature during this movement, I can make an Unarmed Strike against it. When I hit with one of these strikes, it must succeed on a Dex save or be Prone. A creature can be targeted by one of these strikes only once per turn."),
+			description: desc("After Patient Defense, I can move up to my Speed. Each time I enter a space within 5 ft of a creature, I can make 1 Unarmed Strike against it; on a hit, Dex save or Prone. Each creature: once per turn."),
 		},
 		"subclassfeature17.1": {
 			name: "Master Brewer", source: [["WoW", 0]], minlevel: 17,
-			description: desc("When I create a magical beverage with Mystic Brew, I can choose two different options and produce one beverage that provides the effects of both for the duration."),
+			description: desc("When I create a Mystic Brew beverage, I can combine 2 different options into 1 beverage that gives both effects for the duration."),
 		},
 	},
 });
@@ -1543,26 +1609,42 @@ AddSubClass("rogue", "swashbuckler", {
 		"subclassfeature3.1": {
 			name: "Rakish Audacity", source: [["WoW", 0]], minlevel: 3,
 			description: desc([
-				"When I roll Initiative, I can add my Cha mod to the roll.",
-				"I don't need Advantage on the attack roll to use Sneak Attack against a creature if I'm within 5 ft of it, no other creatures are within 5 ft of me, and I don't have Disadvantage. All the other Sneak Attack rules still apply.",
+				"When I roll Initiative, I add my Cha mod.",
+				"I don't need Advantage on the attack roll to use Sneak Attack against a creature within 5 ft of me if no other creature is within 5 ft of me and I don't have Disadvantage; all other Sneak Attack rules still apply.",
 			]),
 			addMod: [{ type: "skill", field: "Init", mod: "Cha", text: "I can add my Charisma modifier to initiative rolls." }],
 		},
 		"subclassfeature9": {
 			name: "Panache", source: [["WoW", 0]], minlevel: 9,
-			description: desc([
-				"I have practiced new ways to use my Sneak Attack. These effects are now among my Cunning Strike options.",
-				" \u2022 ***Goad (Cost: 1d6)***. The target must succeed on a Wis save, or until the end of its next turn it has Disadvantage on attacks against targets other than me and can't make Opportunity Attacks against them.",
-				" \u2022 ***Awe (Cost: 3d6)***. Each creature of my choice within 30 ft must succeed on a Wis save or be Charmed until the end of my next turn.",
-			]),
+			description: desc("I have practiced new ways to use my Sneak Attack; these are now Cunning Strike options (3rd page)."),
+			autoSelectExtrachoices: [
+				{ extrachoice: "goad" },
+				{ extrachoice: "awe" },
+			],
+			"goad": {
+				name: "Goad (Cost: 1d6)", extraname: "Swashbuckler 9", source: [["WoW", 0]],
+				description: desc("The target must succeed on a Wis save, or until the end of its next turn it has Disadvantage on attacks against targets other than me and can't make Opportunity Attacks against them."),
+			},
+			"awe": {
+				name: "Awe (Cost: 3d6)", extraname: "Swashbuckler 9", source: [["WoW", 0]],
+				description: desc("Each creature of my choice within 30 ft must succeed on a Wis save or be Charmed until the end of my next turn."),
+			},
 		},
 		"subclassfeature13": {
 			name: "Dashing Strikes", source: [["WoW", 0]], minlevel: 13,
-			description: desc([
-				"I have practiced new ways to use my Sneak Attack. These effects are now among my Cunning Strike options.",
-				" \u2022 ***Invigorate (Cost: 2d6)***. A creature I can see within 30 ft can, until the end of its next turn, roll 1d6 and add it to each attack roll or saving throw it makes.",
-				" \u2022 ***Parrying Stance (Cost: 2d6)***. I roll 1d6 and gain a bonus to my AC equal to the roll until the start of my next turn.",
-			]),
+			description: desc("I have practiced new ways to use my Sneak Attack; these are now Cunning Strike options (3rd page)."),
+			autoSelectExtrachoices: [
+				{ extrachoice: "invigorate" },
+				{ extrachoice: "parrying stance" },
+			],
+			"invigorate": {
+				name: "Invigorate (Cost: 2d6)", extraname: "Swashbuckler 13", source: [["WoW", 0]],
+				description: desc("A creature I can see within 30 ft can, until the end of its next turn, roll 1d6 and add it to each attack roll or saving throw it makes."),
+			},
+			"parrying stance": {
+				name: "Parrying Stance (Cost: 2d6)", extraname: "Swashbuckler 13", source: [["WoW", 0]],
+				description: desc("I roll 1d6 and gain a bonus to my AC equal to the roll until the start of my next turn."),
+			},
 		},
 		"subclassfeature17": {
 			name: "Master Duelist", source: [["WoW", 0]], minlevel: 17,
@@ -1644,59 +1726,84 @@ AddSubClass("deathknight", "oath of the ebon blade", {
 	features: {
 		"subclassfeature3": {
 			name: "Oath of the Ebon Blade", source: [["WoW", 0]], minlevel: 3,
-			description: desc("I always have the Spells (All) column of the Oath of the Ebon Blade Spells prepared, plus the column of the rune inscribed on my weapon (see Runeforging). I also gain Runeforging and Runic Power."),
+			description: desc("I always have the Spells (All) column of the Ebon Blade spells prepared, plus the column of my inscribed rune (see Runeforging). I also gain Runeforging and Runic Power."),
 		},
 		"subclassfeature3.1": {
 			name: "Runeforging", source: [["WoW", 0]], minlevel: 3,
-			description: ' #[Select option with "Choose Feature"]#' + desc('When I finish a Long Rest, I can inscribe a Blood, Frost, or Unholy rune on a melee weapon I am holding, or transfer it to another weapon. Whenever I gain a level, I can replace it. Choose the rune with the "Choose Feature" button above; it also sets my rune oath spells.'),
+			description: ' #[Select option with "Choose Feature"]#' + desc('Choose my rune with the "Choose Feature" button above. This choice also sets my rune oath spells.'),
 			choices: ["Blood", "Frost", "Unholy"],
 			"blood": {
 				name: "Blood Rune", source: [["WoW", 0]],
-				description: desc("When I inscribe this rune, and whenever I finish a Long Rest while it is inscribed, I gain Temp HP equal to my Cha mod + my Death Knight level. While wielding the inscribed weapon, I also gain these Temp HP whenever I reduce an enemy to 0 HP."),
+				description: desc("LR: inscribe or move this rune on a melee weapon I hold; can swap on level up. On inscribing and on each LR while it is inscribed: Temp HP = Cha mod + Death Knight lvl; also when I reduce an enemy to 0 HP while wielding it."),
 				spellcastingExtra: ["death grip", "vampiric blood", "death and decay", "spiritual weapon", "summon undead", "leeching strike", "freedom of movement", "evard's black tentacles", "circle of power", "bonestorm"],
 			},
 			"frost": {
 				name: "Frost Rune", source: [["WoW", 0]],
-				description: desc("While wielding the inscribed weapon, damage from my weapon attacks, Death Knight spells, and Death Knight features ignores Resistance to Cold damage. When I make the extra attack of the Light property and hit while wielding it, I deal an extra 1d4 Cold damage."),
+				description: desc("LR: inscribe or move this rune on a melee weapon I hold; can swap on level up. While wielding it, my weapon attacks, Death Knight spells and features ignore Cold Resistance; the Light property's extra attack deals +1d4 Cold damage on a hit."),
 				spellcastingExtra: ["death grip", "chains of ice", "death and decay", "frostscythe", "summon undead", "remorseless winter", "freedom of movement", "ice storm", "circle of power", "cone of cold"],
 			},
 			"unholy": {
 				name: "Unholy Rune", source: [["WoW", 0]],
-				description: desc("While wielding the inscribed weapon, damage from my weapon attacks, Death Knight spells, and Death Knight features ignores Resistance to Necrotic damage. If it has the Heavy property, the first creature I hit with it each turn takes extra Necrotic damage equal to my Cha mod (minimum 1)."),
+				description: desc("LR: inscribe or move this rune on a melee weapon I hold; can swap on level up. While wielding it, my weapon attacks, Death Knight spells and features ignore Necrotic Resistance; if it has the Heavy property, the first creature I hit each turn takes +Cha mod (min 1) Necrotic damage."),
 				spellcastingExtra: ["death grip", "scourge strike", "death and decay", "ray of enfeeblement", "summon undead", "bestow curse", "freedom of movement", "blight", "circle of power", "contagion"],
 			},
 		},
 		"subclassfeature3.2": {
 			name: "Runic Power", source: [["WoW", 0]], minlevel: 3,
-			description: desc([
-				"Immediately after I cast Rune Strike, I can expend 1 Channel Divinity for an effect based on my inscribed rune.",
-				" \u2022 ***Blood***. I regain HP equal to the Necrotic damage dealt with my Rune Strike.",
-				" \u2022 ***Frost***. The target of my Rune Strike and each enemy in a 10-ft Emanation from it take 2d6 Cold damage.",
-				" \u2022 ***Unholy***. The target of my Rune Strike is cursed until the end of my next turn; the next save it makes subtracts 1d6, then the curse ends.",
-			]),
+			description: desc("After I cast Rune Strike, I can expend 1 Channel Divinity for my inscribed rune's effect (3rd page)."),
 			additional: "1 Channel Divinity",
+			autoSelectExtrachoices: [
+				{ extrachoice: "blood (runic power)" },
+				{ extrachoice: "frost (runic power)" },
+				{ extrachoice: "unholy (runic power)" },
+			],
+			"blood (runic power)": {
+				name: "Blood Runic Power", extraname: "Ebon Blade 3", source: [["WoW", 0]],
+				description: desc("I regain HP equal to the Necrotic damage dealt with my Rune Strike."),
+			},
+			"frost (runic power)": {
+				name: "Frost Runic Power", extraname: "Ebon Blade 3", source: [["WoW", 0]],
+				description: desc("The target of my Rune Strike and each enemy in a 10-ft Emanation from it take 2d6 Cold damage."),
+			},
+			"unholy (runic power)": {
+				name: "Unholy Runic Power", extraname: "Ebon Blade 3", source: [["WoW", 0]],
+				description: desc("The target of my Rune Strike is cursed until the end of my next turn; the next save it makes subtracts 1d6, then the curse ends."),
+			},
 		},
 		"subclassfeature7": {
 			name: "Aura of Deathly Endurance", source: [["WoW", 0]], minlevel: 7,
-			description: desc("I and my allies have Resistance to Cold, Necrotic, and Psychic damage while in my Aura of Protection."),
+			description: desc("Allies and I in my Aura of Protection have Resistance to Cold, Necrotic, and Psychic damage."),
 		},
 		"subclassfeature15": {
 			name: "Runic Mastery", source: [["WoW", 0]], minlevel: 15,
-			description: desc([
-				"I can invoke the power of my inscribed rune; the effect depends on the rune.",
-				" \u2022 ***Blood***. When a creature hits another I can see within 10 ft of me with an attack roll, I can use my Reaction to reduce the damage the target takes by my Death Knight level; I then lose that many HP.",
-				" \u2022 ***Frost***. When I take the Attack action, I can replace one attack with a 30-ft Cone of frost; each creature in it makes a Dex save vs. my spell save DC, taking 8d6 Cold damage on a failure or half on a success.",
-				" \u2022 ***Unholy***. When I cast Summon Undead, it can be without Concentration (duration 1 min); the spirit gets Temp HP equal to my Death Knight level + Cha mod, and the first time each turn it hits, it deals extra Necrotic damage equal to half my Death Knight level (round up).",
-			]),
+			description: " [effect of my inscribed rune; see 3rd page]",
 			usages: 1, recovery: "Long Rest",
 			action: [["reaction", " (Blood rune)"]],
+			autoSelectExtrachoices: [
+				{ extrachoice: "blood (runic mastery)" },
+				{ extrachoice: "frost (runic mastery)" },
+				{ extrachoice: "unholy (runic mastery)" },
+			],
+			"blood (runic mastery)": {
+				name: "Blood Runic Mastery", extraname: "Ebon Blade 15", source: [["WoW", 0]],
+				description: desc("When a creature hits another creature I can see within 10 ft of me with an attack roll, I can use my Reaction to reduce the damage the target takes by my Death Knight level; I then lose that many HP."),
+			},
+			"frost (runic mastery)": {
+				name: "Frost Runic Mastery", extraname: "Ebon Blade 15", source: [["WoW", 0]],
+				description: desc("When I take the Attack action, I can replace 1 attack with a 30-ft Cone of frost; each creature in it makes a Dex save vs my spell save DC, taking 8d6 Cold damage on a failure or half on a success."),
+			},
+			"unholy (runic mastery)": {
+				name: "Unholy Runic Mastery", extraname: "Ebon Blade 15", source: [["WoW", 0]],
+				description: desc("When I cast Summon Undead, it can need no Concentration (1 min); the spirit gets Temp HP = my Death Knight level + Cha mod, and the first time each turn it hits, it deals extra Necrotic damage = half my Death Knight level (round up)."),
+			},
 		},
 		"subclassfeature20": {
 			name: "Aspect of the Horsemen", source: [["WoW", 0]], minlevel: 20,
 			description: desc([
-				"As a Bonus Action, I gain the benefits below for 10 minutes or until I end them (no action). I can restore my use by expending a level 5 spell slot (no action).",
-				" \u2022 ***Generate Runic Power***. I can restore a use of Runic Mastery by expending a level 4 spell slot (no action).",
-				" \u2022 ***Runeforging***. When I use Runic Power and Runic Mastery, I can choose any effect, not just the one matching my inscribed rune.",
+				"Bonus Action: for 10 min or until I end it (no action), I gain:",
+				" \u2022 I can restore a use of Runic Mastery with a level 4 spell slot (no action).",
+				" \u2022 When I use Runic Power or Runic Mastery, I can choose any rune's effect, not just my inscribed one.",
+				"I can restore this feature with a level 5 spell slot (no action).",
 			]),
 			usages: 1, recovery: "Long Rest", altResource: "SS 5+",
 			action: [["bonus action", ""]],
@@ -1712,36 +1819,48 @@ AddSubClass("demonhunter", "demon hunter", {
 	features: {
 		"subclassfeature3": {
 			name: "Demon Hunter Spells", source: [["WoW", 0]], minlevel: 3,
-			description: ' #[Select option with "Choose Feature"]#' + desc('I always have the Spells (All) column of the Demon Hunter Spells prepared, plus one other column of my choice. Choose the column with the "Choose Feature" button above.'),
+			description: ' #[Select option with "Choose Feature"]#' + desc('Choose my second spell column with the "Choose Feature" button above. I always have the Spells (All) column prepared (see spell sheet).'),
 			choices: ["Devourer", "Havoc", "Vengeance"],
 			"devourer": {
 				name: "Devourer Spells", source: [["WoW", 0]],
-				description: desc("I always have prepared: Throw Glaive, Sigil of Flame, Metamorphosis, Chaos Nova, and Destructive Wave, plus Consume Soul, Misty Step, Soul Reap, Collapsing Star, and Steel Wind Strike."),
+				description: desc("I always have the Spells (All) and Devourer columns of the Demon Hunter Spells prepared (see spell sheet)."),
 				spellcastingExtra: ["throw glaive", "consume soul", "sigil of flame", "misty step", "metamorphosis", "soul reap", "chaos nova", "collapsing star", "destructive wave", "steel wind strike"],
 			},
 			"havoc": {
 				name: "Havoc Spells", source: [["WoW", 0]],
-				description: desc("I always have prepared: Throw Glaive, Sigil of Flame, Metamorphosis, Chaos Nova, and Destructive Wave, plus Fel Rush, Eye Beam, Blink, Fire Shield, and Conjure Volley."),
+				description: desc("I always have the Spells (All) and Havoc columns of the Demon Hunter Spells prepared (see spell sheet)."),
 				spellcastingExtra: ["throw glaive", "fel rush", "sigil of flame", "eye beam", "metamorphosis", "blink", "chaos nova", "fire shield", "destructive wave", "conjure volley"],
 			},
 			"vengeance": {
 				name: "Vengeance Spells", source: [["WoW", 0]],
-				description: desc("I always have prepared: Throw Glaive, Sigil of Flame, Metamorphosis, Chaos Nova, and Destructive Wave, plus Infernal Strike, Fiery Brand, Demon Spikes, Banishment, and Sigil of Chains."),
+				description: desc("I always have the Spells (All) and Vengeance columns of the Demon Hunter Spells prepared (see spell sheet)."),
 				spellcastingExtra: ["throw glaive", "infernal strike", "sigil of flame", "fiery brand", "metamorphosis", "demon spikes", "chaos nova", "banishment", "destructive wave", "sigil of chains"],
 			},
 		},
 		"subclassfeature3.1": {
 			name: "Soul Fragments", source: [["WoW", 0]], minlevel: 3,
-			description: desc([
-				"When I finish a Long Rest, I gain soul fragments (Tiny crystals) equal to my Wis mod (min 1), +1 at Demon Hunter level 13 and +2 at 17. They last until my next Long Rest. If I move more than 30 ft from one, it teleports to my person. Soul fragment saves use my Demon Hunter spell save DC.",
-				" \u2022 ***Double Jump***. I can expend one to cast Feather Fall or Jump without a spell slot.",
-				" \u2022 ***Soul Cleave***. Once per turn when I take the Attack action, I can expend one and replace one attack: each creature in a 10-ft Emanation from me makes a Dex save; on a failure it takes 1d12 + my Wis mod Psychic damage, and I regain HP equal to my Wis mod.",
-				" \u2022 ***Regaining***. When an enemy I can see within 30 ft of me dies, I can use my Reaction to regain one expended soul fragment.",
-			]),
+			description: desc("On a Long Rest, I gain soul fragments (Tiny crystals) equal to my Wis mod (min 1), +1 at Demon Hunter level 13 and +2 at 17; they last until my next Long Rest. One more than 30 ft from me teleports to my person. Their saves use my Demon Hunter spell save DC (options on 3rd page)."),
 			usages: "Wis mod (+1 at 13, +2 at 17) per ", recovery: "Long Rest",
 			limfeaname: "Soul Fragments",
 			usagescalc: 'var lvl = classes.known.demonhunter ? classes.known.demonhunter.level : 0; event.value = Math.max(1, Number(What("Wis Mod"))) + (lvl >= 17 ? 2 : lvl >= 13 ? 1 : 0);',
 			action: [["reaction", " (regain soul fragment)"]],
+			autoSelectExtrachoices: [
+				{ extrachoice: "double jump" },
+				{ extrachoice: "soul cleave" },
+				{ extrachoice: "regaining" },
+			],
+			"double jump": {
+				name: "Double Jump", extraname: "Demon Hunter 3", source: [["WoW", 0]],
+				description: desc("I can expend one soul fragment to cast Feather Fall or Jump without a spell slot."),
+			},
+			"soul cleave": {
+				name: "Soul Cleave", extraname: "Demon Hunter 3", source: [["WoW", 0]],
+				description: desc("Once per turn when I take the Attack action, I can expend one soul fragment and replace one attack: each creature in a 10-ft Emanation from me makes a Dex save; on a failure it takes 1d12 + my Wis mod Psychic damage, and I regain HP equal to my Wis mod."),
+			},
+			"regaining": {
+				name: "Regaining", extraname: "Demon Hunter 3", source: [["WoW", 0]],
+				description: desc("When an enemy I can see within 30 ft of me dies, I can use my Reaction to regain one expended soul fragment."),
+			},
 		},
 		"subclassfeature3.2": {
 			name: "Spectral Sight", source: [["WoW", 0]], minlevel: 3,
@@ -1752,8 +1871,8 @@ AddSubClass("demonhunter", "demon hunter", {
 			name: "Torment", source: [["WoW", 0]], minlevel: 7,
 			description: desc([
 				"A creature marked by my Hunter's Mark has Disadvantage on attack rolls against targets other than me.",
-				"Once per turn when I hit a creature marked by my Hunter's Mark with an attack roll with a weapon or a Demon Hunter spell, I can impose one of these effects:",
-				" \u2022 ***Aura of Pain***. It subtracts 1d4 from the next save it makes before the end of my next turn.",
+				"Once per turn when I hit it with a weapon or Demon Hunter spell attack roll, I can impose one of these effects:",
+				" \u2022 ***Aura of Pain***. It subtracts 1d4 from its next save before the end of my next turn.",
 				" \u2022 ***Chaos Strike***. It takes an extra 1d8 Fire damage.",
 			]),
 		},
@@ -1793,19 +1912,19 @@ evokerDraconic.features["subclassfeature3.1"] = {
 	choices: ["Augmentation", "Devastation", "Preservation"],
 	"augmentation": {
 		name: "Augmentation Spells", source: [["WoW", 0]],
-		description: desc("I always have prepared: Chromatic Orb, Dragon's Breath, Fly, Arcane Eye, and Summon Dragon, plus Ebon Might, Eruption, Blistering Scales, Upheaval, and Breath of Eons."),
+		description: desc("I always have the Spells (All) and Augmentation columns of the Evoker Spells prepared (see spell sheet)."),
 		spellcastingExtra: ["chromatic orb", "dragon's breath", "ebon might", "eruption", "fly", "blistering scales", "arcane eye", "upheaval", "summon dragon", "breath of eons"],
 		spellcastingExtraApplyNonconform: true,
 	},
 	"devastation": {
 		name: "Devastation Spells", source: [["WoW", 0]],
-		description: desc("I always have prepared: Chromatic Orb, Dragon's Breath, Fly, Arcane Eye, and Summon Dragon, plus Azure Strike, Scorching Ray, Fireball, Emberstorm, and Shattering Star."),
+		description: desc("I always have the Spells (All) and Devastation columns of the Evoker Spells prepared (see spell sheet)."),
 		spellcastingExtra: ["chromatic orb", "dragon's breath", "azure strike", "scorching ray", "fly", "fireball", "arcane eye", "emberstorm", "summon dragon", "shattering star"],
 		spellcastingExtraApplyNonconform: true,
 	},
 	"preservation": {
 		name: "Preservation Spells", source: [["WoW", 0]],
-		description: desc("I always have prepared: Chromatic Orb, Dragon's Breath, Fly, Arcane Eye, and Summon Dragon, plus Dream Breath, Living Flame, Emerald Blossom, Time Dilation, and Dream Flight."),
+		description: desc("I always have the Spells (All) and Preservation columns of the Evoker Spells prepared (see spell sheet)."),
 		spellcastingExtra: ["chromatic orb", "dragon's breath", "dream breath", "living flame", "fly", "emerald blossom", "arcane eye", "time dilation", "summon dragon", "dream flight"],
 		spellcastingExtraApplyNonconform: true,
 	},
@@ -1851,11 +1970,7 @@ dk.features["death coil"] = {
 	source: [["WoW", 0]],
 	minlevel: 1,
 	description: desc([
-		"My creature type becomes Undead.",
-		"I have a pool of d8s equal to 1 + my Cha mod (minimum 1 die), which refills when I finish a Long Rest.",
-		"As a Bonus Action, I can target a creature I can see within 60 ft and expend up to my Cha mod dice (minimum 1).",
-		" \u2022 The target makes a Con save and takes Necrotic damage equal to the roll (half as much on a success).",
-		" \u2022 If the target is Undead, I can have it regain that many HP instead.",
+		"My creature type is Undead. Bonus Action: expend up to Cha mod dice (min 1) from my pool of d8s (1 + Cha mod, min 1) at a creature I can see in 60 ft. Con save: Necrotic dmg = roll (half on success). Undead: I can have it regain that HP instead.",
 	]),
 	usages: "d8 pool per ",
 	recovery: "Long Rest",
@@ -1883,7 +1998,7 @@ dk.features["runic strikes"] = {
 	name: "Runic Strikes",
 	source: [["WoW", 0]],
 	minlevel: 11,
-	description: desc("When I hit with a Melee weapon or Unarmed Strike attack, I deal +1d8 Necrotic damage."),
+	description: desc("My Melee weapon and Unarmed Strike hits deal +1d8 Necrotic damage."),
 	calcChanges: {
 		atkAdd: [
 			function (fields, v) {
@@ -1921,19 +2036,20 @@ for (var fsl = 0; fsl < fsDesc.length; fsl++) fsDesc[fsl] += (fsl < 19 ? fsText 
 
 // Demon Hunter class features
 var dh = ClassList.demonhunter;
-dh.features["_spellcasting"].description = dh.features["_spellcasting"].description.split("I can use a Druidic Focus").join("I can use an Arcane Focus (not a Druidic Focus)");
-appendWoWDescription(dh.features["expertise"], "Languages come from the WoW Chapter 2 language tables; Eredun and Nathrezim are recommended.");
+dh.features["_spellcasting"].description = dh.features["_spellcasting"].description.split("I can use a Druidic Focus as Spellcasting Focus for them.").join("Spellcasting Focus: Arcane (not Druidic).");
+appendWoWDescription(dh.features["expertise"], "Langs: WoW Ch. 2 tables (Eredun, Nathrezim rec.).");
 // Void Warrior is a type: "fighting style" feat (end of this file). This feature keeps choicesFightingStyles
 // from the Ranger, so the sheet's processChoicesFightingStyles() adds Void Warrior to its choices at the end
 // of import. Don't push it into choices here: that would list it twice.
-appendWoWDescription(dh.features["fighting style"], "As a Demon Hunter, I can also choose the Void Warrior feat (WoW).");
+dh.features["fighting style"].description = dh.features["fighting style"].description.replace(/Choose a Fighting Style Feat or Druidic Warrior using the "Choose Feature" button above\./, "Fighting Style feat or Druidic Warrior.");
+appendWoWDescription(dh.features["fighting style"], "Also: Void Warrior feat (WoW).");
 delete dh.features["feral senses"];
 
 dh.features["improved spectral sight"] = {
 	name: "Improved Spectral Sight",
 	source: [["WoW", 0]],
 	minlevel: 18,
-	description: desc("I have Truesight with a range of 30 ft."),
+	description: " [Truesight 30 ft]",
 	vision: [["Truesight", 30]],
 };
 
@@ -1945,20 +2061,41 @@ sh.features["totems"] = {
 	name: "Totems",
 	source: [["WoW", 0]],
 	minlevel: 3,
-	description: desc([
-		"As a Bonus Action, I can plant a totem in an unoccupied space I can see within 10 ft of myself.",
-		"A totem is a Small object with AC 10 and 1 HP. It lasts 1 minute, until it drops to 0 HP, or until I use this feature again.",
-		"At the end of each of my turns, it pulses in a 30-ft Emanation. Each effect lasts until the end of my next turn:",
-		" \u2022 Earthbind: each enemy's Speed is reduced by 10 ft.",
-		" \u2022 Primal Knowledge: each ally can make Acrobatics, Intimidation, Perception, Stealth and Survival checks as Strength checks.",
-		" \u2022 Tremor: each ally is Immune to the Charmed and Frightened conditions, or those conditions are suppressed.",
-		" \u2022 Wind Rush: each ally's Speed is increased by 10 ft.",
-		"After I plant the Primal Knowledge totem, I can't plant it again until I finish a Long Rest, unless I expend one use of Rage to restore it (no action required).",
-	]),
+	description: desc("Bonus Action: plant a totem in an unoccupied space I can see within 10 ft. At the end of each of my turns it pulses in a 30-ft Emanation (totem rules and effects on 3rd page)."),
 	usages: 1,
 	recovery: "Long Rest",
 	limfeaname: "Primal Knowledge Totem",
 	action: [["bonus action", ""]],
+	autoSelectExtrachoices: [
+		{ extrachoice: "planting a totem" },
+		{ extrachoice: "earthbind" },
+		{ extrachoice: "primal knowledge (totem)" },
+		{ extrachoice: "tremor" },
+		{ extrachoice: "wind rush" },
+	],
+	"planting a totem": {
+		name: "Planting a Totem", extraname: "Totems", source: [["WoW", 0]],
+		description: desc("A totem is a Small object (AC 10, 1 HP). It lasts 1 min, until it drops to 0 HP, or until I plant another. Each pulse's effect lasts until the end of my next turn."),
+	},
+	"earthbind": {
+		name: "Earthbind Totem", extraname: "Totems", source: [["WoW", 0]],
+		description: desc("Each enemy's Speed is reduced by 10 ft."),
+	},
+	"primal knowledge (totem)": {
+		name: "Primal Knowledge Totem", extraname: "Totems", source: [["WoW", 0]],
+		description: desc([
+			"Each ally can make Acrobatics, Intimidation, Perception, Stealth, and Survival checks as Strength checks.",
+			"After I plant this totem, I can't plant it again until I finish a Long Rest, unless I expend 1 use of Rage to restore it (no action required).",
+		]),
+	},
+	"tremor": {
+		name: "Tremor Totem", extraname: "Totems", source: [["WoW", 0]],
+		description: desc("Each ally is Immune to the Charmed and Frightened conditions, or those conditions are suppressed."),
+	},
+	"wind rush": {
+		name: "Wind Rush Totem", extraname: "Totems", source: [["WoW", 0]],
+		description: desc("Each ally's Speed is increased by 10 ft."),
+	},
 };
 
 // Chapter 1: Feats
@@ -2242,7 +2379,7 @@ if (ClassSubList["fighter-battle master"]) {
 		},
 		"Warding Maneuver": {
 			name: "Warding Maneuver", extraname: "Maneuver", source: [["WoW", 0]],
-			description: desc("When I or a creature I can see within 5 ft of me is hit by an attack roll, I can take a Reaction and expend 1 SD if I'm wielding a Melee weapon or a Shield. I add the SD to the target's AC against the triggering attack. If the attack still hits, the target has Resistance against the attack's damage."),
+			description: desc("When I or a creature I can see within 5 ft of me is hit by an attack roll, I can take a Reaction and expend 1 SD if I'm wielding a Melee weapon or a Shield. I add the SD to the target's AC against that attack; if it still hits, the target has Resistance to its damage."),
 			additional: "add SD to AC; Resistance if still hit",
 			action: [["reaction", ""]],
 		},
@@ -2264,10 +2401,9 @@ if (ClassSubList["ranger-beast master"]) {
 		["my Ranger level", "my Hunter level"],
 		["Ranger spell save DC", "Hunter spell save DC"],
 	]);
-	appendWoWDescription(hunterBeastMaster.features.subclassfeature3, [
-		"***Hunter Pets***. I choose the beast's form from the Pet Families table (see Notes page). Its family sets the stat block it uses and its Specialization (Cunning, Ferocity, or Tenacity), which matters only if I have the Pet Specialization feature.",
-		"When I gain this feature and whenever I finish a Long Rest, I can choose my pet's family as one of the weapons for my Weapon Mastery feature. Its mastery property then applies to the beast's Beast's Strike.",
-	]);
+	// The Primal Companion rules move to a Notes page, so the Class Features section keeps only the Hunter Pets summary
+	var hunterCompanionDesc = hunterBeastMaster.features.subclassfeature3.description;
+	hunterBeastMaster.features.subclassfeature3.description = desc("***Hunter Pets***. My beast's form comes from the Pet Families table (Notes page), which sets its stat block, Spec. and mastery; see there for Weapon Mastery.");
 	hunterBeastMaster.features.subclassfeature3.toNotesPage = [{
 		name: "Pet Families",
 		source: [["WoW", 0]],
@@ -2328,6 +2464,15 @@ if (ClassSubList["ranger-beast master"]) {
 			],
 			"*Unusual pet family; a hunter must acquire a special ability (typically by reading a magical tome) to tame an unusual pet.",
 		],
+	}, {
+		// The PHB Primal Companion rules, moved off the Class Features section and tersened
+		name: "Primal Companion",
+		source: [["PHB24", 122]],
+		note: [
+			"When I finish a Long Rest, I summon a Beast of the Land, Sea, or Sky within 5 ft (form from the Pet Families table). It has primal markings. A new one replaces the old. It is friendly to me and my allies, obeys my commands, and vanishes if I die.",
+			"***In Combat***. It acts on my turn and can move and use Reactions on its own. It only takes the Dodge action unless I use a Bonus Action to command it. I can forgo one attack of my Attack action to command its Beast's Strike. If I'm Incapacitated, it acts on its own and is not limited to Dodge.",
+			"***Restoring***. As a Magic action, if it died within the last hour, I touch it and expend a spell slot to return it to life with full HP.",
+		],
 	}];
 	// Pet Specialization (Hunter 6). Using the object name of the class feature "roving" makes this subclass feature replace Roving
 	// for a Beast Master Hunter from level 6 on (see "SAME OBJECT NAME REPLACES" in the class features syntax file).
@@ -2335,17 +2480,11 @@ if (ClassSubList["ranger-beast master"]) {
 		name: "Pet Specialization",
 		source: [["WoW", 0]],
 		minlevel: 6,
-		description: ' #[Select option with "Choose Feature"]#' + desc([
-			"This replaces Roving. While my primal beast is within 60 ft of me, I gain a benefit that depends on its pet family and Specialization (Spec. column of the Pet Families table on the Notes page).",
-			"Choose the option that matches my beast's Specialization: Cunning, Ferocity, or Tenacity.",
-		]),
+		description: ' #[Select option with "Choose Feature"]#' + desc("This replaces Roving. While my beast is within 60 ft of me, I gain the benefit for its Specialization (Spec. on the Notes page). Choose Cunning, Ferocity, or Tenacity below."),
 		choices: ["Cunning", "Ferocity", "Tenacity"],
 		"cunning": {
 			name: "Pet Specialization: Cunning",
-			description: desc([
-				"While my primal beast is within 60 ft of me, my Speed and all of my beast's speeds increase by 10 ft.",
-				"My beast can use its action to cast *Freedom of Movement* without spell components, affecting itself and me (if I'm in range). It can do so once per Long Rest.",
-			]),
+			description: desc("While my beast is within 60 ft: my Speed and all its speeds +10 ft. 1/LR its action: it casts *Freedom of Movement* on itself and me (if in range), without components."),
 			speed: { allModes: "+10" },
 			usages: 1,
 			recovery: "Long Rest",
@@ -2354,10 +2493,7 @@ if (ClassSubList["ranger-beast master"]) {
 		},
 		"ferocity": {
 			name: "Pet Specialization: Ferocity",
-			description: desc([
-				"While my primal beast is within 60 ft of me, when it is Bloodied and hits with its Beast's Strike, my beast and I each regain HP equal to my Wisdom modifier.",
-				"My beast can use its action to cast *Haste* without spell components, affecting itself and me (if I'm in range). It can do so once per Long Rest.",
-			]),
+			description: desc("While my beast is within 60 ft: when it is Bloodied and hits with its Beast's Strike, it and I each regain HP = my Wis mod. 1/LR its action: it casts *Haste* on itself and me (if in range), without components."),
 			usages: 1,
 			recovery: "Long Rest",
 			limfeaname: "Pet: Haste",
@@ -2365,11 +2501,7 @@ if (ClassSubList["ranger-beast master"]) {
 		},
 		"tenacity": {
 			name: "Pet Specialization: Tenacity",
-			description: desc([
-				"While my primal beast is within 60 ft of me, my HP maximum increases by 6, and by 1 more whenever I gain a Hunter level (my Hunter level in total).",
-				"My beast's HP maximum also increases by my Hunter level.",
-				"My beast can use its action to cast *Stoneskin* without spell components, affecting itself and me (if I'm in range). It can do so once per Long Rest.",
-			]),
+			description: desc("While my beast is within 60 ft: my HP max and its HP max each +my Hunter level. 1/LR its action: it casts *Stoneskin* on itself and me (if in range), without components."),
 			usages: 1,
 			recovery: "Long Rest",
 			limfeaname: "Pet: Stoneskin",
@@ -2622,12 +2754,11 @@ RaceList["dracthyr"] = {
 		},
 	},
 	trait: [
-		"**Dracthyr**",
 		"##\u25C6 Creature Type##. I am a Dragon.",
-		"##\u25C6 Gliding Wings##. In my natural form and not Incapacitated, when I fall I subtract up to 100 ft from the distance for damage, and I can move 2 ft horizontally for every 1 ft I descend.",
-		"##\u25C6 Natural Weaponry##. In my natural form, as a Bonus Action I can make an Unarmed Strike with my wings or tail to Shove a creature.",
-		"##\u25C6 Visage##. As a Magic action, I can shape-shift into my humanoid visage or back to my natural form. This doesn't change my clothing, equipment, or game statistics.",
-		"##\u25C6 Draconic Flight## (level 5). As a Bonus Action once per Long Rest, I can give myself a Fly Speed equal to my Speed for 10 min.",
+		"##\u25C6 Gliding Wings##. Natural form, not Incapacitated: falling, I subtract up to 100 ft from the damage distance and move 2 ft horizontally per 1 ft I descend.",
+		"##\u25C6 Natural Weaponry##. In my natural form, Bonus Action: Unarmed Strike with my wings or tail to Shove it.",
+		"##\u25C6 Visage##. Magic action: shape-shift into my humanoid visage or back; clothing, equipment, and statistics don't change.",
+		"##\u25C6 Draconic Flight## (level 5). As a Bonus Action, 1/LR, I gain a Fly Speed equal to my Speed for 10 min.",
 	],
 };
 
@@ -2692,11 +2823,10 @@ RaceList["earthen"] = {
 		},
 	},
 	trait: [
-		"**Earthen**",
-		"##\u25C6 Azerite Surge##. Instead of one attack of my Attack action, I can blast a 15-ft Cone: chosen creatures in it regain 1d10 HP, all others make a Dex save (DC 8 + Con mod + Prof Bonus), taking 1d10 Radiant damage on a failure or half on a success. Both increase at levels 5 (2d10), 11 (3d10), and 17 (4d10). I can do this my Prof Bonus times per Long Rest.",
-		"##\u25C6 Earthen Resilience##. I have Resistance to Poison damage and Advantage on saves to avoid or end Poisoned.",
-		"##\u25C6 Ingest Minerals##. I don't gain Exhaustion levels from malnutrition.",
-		"##\u25C6 Quiet Contemplation##. When I spend Hit Point Dice at the end of a Short Rest, I regain 1 extra HP per die spent.",
+		"##\u25C6 Azerite Surge##. Replace 1 attack of my Attack action: 15-ft Cone; chosen creatures regain 1d10 HP, others make a Dex save (DC 8 + Con mod + PB) or take 1d10 Radiant damage, half on a success. Dice become 2d10 at 5, 3d10 at 11, 4d10 at 17. PB/LR.",
+		"##\u25C6 Earthen Resilience##. Resistance to Poison damage; Adv. on saves to avoid or end Poisoned.",
+		"##\u25C6 Ingest Minerals##. No Exhaustion from malnutrition.",
+		"##\u25C6 Quiet Contemplation##. When I spend Hit Point Dice after a Short Rest, I regain 1 extra HP per die.",
 	],
 };
 
@@ -2722,12 +2852,11 @@ RaceList["forsaken"] = {
 		},
 	},
 	trait: [
-		"**Forsaken**",
 		"##\u25C6 Creature Type##. I am Undead.",
-		"##\u25C6 Deathly Endurance##. I have Resistance to Necrotic damage.",
-		"##\u25C6 Everlasting##. I don't gain Exhaustion from dehydration, malnutrition, or suffocation. I don't need to sleep and magic can't put me to sleep. I can finish a Long Rest in 4 hours if I spend them inactive and motionless, retaining consciousness.",
-		"##\u25C6 Touch of the Grave##. Once per Long Rest when I deal damage to a creature, I can roll Prof Bonus d4s and deal that much extra Necrotic damage, regaining HP equal to the extra damage.",
-		"##\u25C6 Will of the Forsaken##. I have Advantage on saves to avoid or end Charmed or Frightened.",
+		"##\u25C6 Deathly Endurance##. Resistance to Necrotic damage.",
+		"##\u25C6 Everlasting##. No Exhaustion from dehydration, malnutrition, or suffocation. I don't need to sleep; magic can't put me to sleep. Long Rest in 4 h if inactive and motionless, conscious.",
+		"##\u25C6 Touch of the Grave##. 1/LR when I deal damage, I roll PB d4s: extra Necrotic damage, and I regain that much HP.",
+		"##\u25C6 Will of the Forsaken##. Adv. on saves to avoid or end Charmed or Frightened.",
 	],
 };
 
@@ -2846,13 +2975,12 @@ RaceList["mechagnome"] = {
 		},
 	},
 	trait: [
-		"**Mechagnome**",
-		"##\u25C6 Creature Type##. I am a Construct.",
-		"##\u25C6 Built for Success##. I can add 1d4 to a D20 Test I make, after rolling but before the result is resolved. I can do this my Prof Bonus times per Long Rest.",
-		"##\u25C6 Emergency Fail-Safe##. When I become Bloodied, I can take a Reaction to spend and roll one Hit Point Die, regaining HP equal to the roll + Con mod (min 1). Once per Short or Long Rest.",
-		"##\u25C6 Mechanical Nature##. I have Resistance to Poison damage and Advantage on saves to avoid or end Paralyzed or Poisoned. I don't gain Exhaustion from dehydration, malnutrition, or suffocation.",
-		"##\u25C6 Sentry's Rest##. I don't need to sleep; I can finish a Long Rest in 6 hours if I spend them inactive and motionless, retaining consciousness.",
-		"##\u25C6 Specialized Design##. I gain proficiency with two tools of my choice.",
+		"##\u25C6 Creature Type##. Construct.",
+		"##\u25C6 Built for Success##. 1d4 to a D20 Test after rolling, before the result. PB/LR.",
+		"##\u25C6 Emergency Fail-Safe##. When Bloodied, Reaction: spend a Hit Point Die; regain the roll + Con mod (min 1) HP. 1/SR.",
+		"##\u25C6 Mechanical Nature##. Poison Resist.; Adv. on saves to avoid or end Paralyzed or Poisoned. No Exhaustion from dehydration, malnutrition, or suffocation.",
+		"##\u25C6 Sentry's Rest##. No sleep; Long Rest in 6 h if inactive and motionless, conscious.",
+		"##\u25C6 Specialized Design##. Prof. with 2 tools of my choice.",
 	],
 };
 
@@ -2906,9 +3034,9 @@ RaceList["tauren"] = {
 		},
 	},
 	trait: [
-		"##\u25C6 Horns##. When I hit with an Unarmed Strike and deal damage, I can deal 1d6 + Str mod Piercing damage instead of the normal damage.",
-		"##\u25C6 Goring Rush##. Right after I take the Dash action on my turn and move at least 20 ft, I can make an Unarmed Strike as a Bonus Action.",
-		"##\u25C6 Hammering Horns##. Right after I hit a creature within 5 ft with a melee attack as part of the Attack action on my turn, I can Shove it with an Unarmed Strike as a Bonus Action, pushing it up to 10 ft.",
+		"##\u25C6 Horns##. My Unarmed Strike can deal 1d6 + Str mod Piercing damage instead of its normal damage.",
+		"##\u25C6 Goring Rush##. Right after I take the Dash action on my turn and move 20+ ft, I can make an Unarmed Strike as a Bonus Action.",
+		"##\u25C6 Hammering Horns##. Right after I hit a creature within 5 ft with a melee attack (Attack action) on my turn, I can Shove it as a Bonus Action, up to 10 ft.",
 	],
 	variants: [],
 };
@@ -2973,8 +3101,7 @@ RaceList["worgen"] = {
 		},
 	},
 	trait: [
-		"**Worgen**",
-		"##\u25C6 Darkflight##. As a Bonus Action, I can take a bestial form for 1 min (or until I revert as a Bonus Action) and gain 2 \xD7 Prof Bonus Temp HP. I can do this my Prof Bonus times per Long Rest. In this form my Speed increases by 10 ft, I have Resistance to Necrotic damage, and when a creature ends its turn within 5 ft of me I can use a Reaction to move up to 10 ft without provoking Opportunity Attacks.",
+		"##\u25C6 Darkflight##. Bonus Action: bestial form for 1 min (or revert as a Bonus Action) and 2 \xD7 PB Temp HP. PB/LR. In this form my Speed +10 ft, Resistance to Necrotic, and when a creature ends its turn within 5 ft of me I can use a Reaction to move up to 10 ft without provoking Opportunity Attacks.",
 		"##\u25C6 Instinctual Shift##. When I roll Initiative while I have a Darkflight use left, I can use it immediately (no action required).",
 	],
 };
@@ -3177,8 +3304,7 @@ AddSubRace("tauren", "mulgore", {
 	plural: "Mulgore Tauren",
 	abilitySave: [1, 3, 5],
 	trait: [
-		"**Mulgore Tauren**",
-		"##\u25C6 Tauren Lineage (Mulgore)##. War Stomp: instead of one attack of my Attack action (not while Prone, flying, climbing, or swimming), each creature of my choice within 5 ft makes a Con save or is Stunned until the end of my turn. DC 8 + Prof Bonus + Str, Con, or Wis mod (choose when selecting the lineage).",
+		"##\u25C6 War Stomp##. Instead of one attack, each creature I choose within 5 ft makes a Con save or is Stunned until the end of my turn. Not while Prone, flying, climbing, or swimming. DC 8 + PB + Str, Con, or Wis mod (my choice).",
 	].concat(RaceList["tauren"].trait),
 });
 
@@ -3194,8 +3320,7 @@ AddSubRace("tauren", "highmountain", {
 		["action", "Bull Rush"],
 	],
 	trait: [
-		"**Highmountain Tauren**",
-		"##\u25C6 Tauren Lineage (Highmountain)##. Bull Rush: as an action, I move up to my Speed without provoking Opportunity Attacks and through other creatures' spaces. Each Medium or smaller creature whose space I enter makes a Str save or takes Prof Bonus + Str mod damage and is Prone (once per turn per creature). DC 8 + Prof Bonus + Str, Con, or Wis mod (choose when selecting the lineage).",
+		"##\u25C6 Bull Rush##. Action: I move up to my Speed, no Opportunity Attacks, through others' spaces. Each Medium or smaller creature whose space I enter: Str save or PB + Str mod dmg and Prone (1/turn each). DC 8 + PB + Str, Con, or Wis mod (my choice).",
 	].concat(RaceList["tauren"].trait),
 });
 
@@ -3259,7 +3384,7 @@ AddSubRace("elf", "blood", {
 	languageProfs: [["Common or Orcish", 1], 2],
 	spellcastingAbility: [4, 5, 6],
 	trait: [
-		"##\u25C6 Blood Elf Lineage##. I know *Prestidigitation* and can replace it with another Wizard cantrip after a Long Rest, *Detect Magic* at level 3, and *Arcane Vigor* at level 5. I can cast the level 3 and 5 spells once per Long Rest each without a spell slot, or with a spell slot as normal; Int, Wis, or Cha is my spellcasting ability for these (choose when selecting the lineage).",
+		"##\u25C6 Blood Elf Lineage##. I know *Prestidigitation* (swap for another Wizard cantrip after a LR), *Detect Magic* at 3, and *Arcane Vigor* at 5. The level 3 and 5 spells: 1/LR each without a slot, or with one as normal; Int, Wis, or Cha is my ability (my choice).",
 	].concat(RaceList["elf"].trait),
 	features: {
 		"blood lineage 1": {
@@ -3311,7 +3436,7 @@ AddSubRace("elf", "night", {
 	skills: ["Stealth"],
 	action: [["bonus action", "Hide (Night Elf, in Dim Light/Darkness)"]],
 	trait: [
-		"##\u25C6 Night Elf Lineage##. I have proficiency in Stealth, and while in Dim Light or Darkness I can take the Hide action as a Bonus Action. I know *Longstrider* at level 3 and *Pass without Trace* at level 5, each castable once per Long Rest without a spell slot, or with a spell slot as normal; Int, Wis, or Cha is my spellcasting ability for these (choose when selecting the lineage).",
+		"##\u25C6 Night Elf Lineage##. Stealth proficiency; in Dim Light or Darkness I can Hide as a Bonus Action. I know *Longstrider* at 3 and *Pass without Trace* at 5: 1/LR each without a slot, or with one as normal; Int, Wis, or Cha is my ability (my choice).",
 	].concat(RaceList["elf"].trait),
 	features: {
 		"night lineage 3": {
@@ -3349,7 +3474,7 @@ AddSubRace("elf", "nightborne", {
 	spellcastingAbility: [4, 5, 6],
 	vision: [["Darkvision", 120]],
 	trait: [
-		"##\u25C6 Nightborne Lineage##. My Darkvision has a range of 120 ft. I know *Arcane Pulse*, *Faerie Fire* at level 3, and *Darkness* at level 5. I can cast the level 3 and 5 spells once per Long Rest each without a spell slot, or with a spell slot as normal; Int, Wis, or Cha is my spellcasting ability for these (choose when selecting the lineage).",
+		"##\u25C6 Nightborne Lineage##. Darkvision 120 ft. I know *Arcane Pulse*, *Faerie Fire* at 3, and *Darkness* at 5: 1/LR each without a slot, or with one as normal; Int, Wis, or Cha is my ability (my choice).",
 	].concat(RaceList["elf"].trait),
 	features: {
 		"nightborne lineage 1": {
@@ -3397,7 +3522,7 @@ AddSubRace("elf", "void", {
 	spellcastingAbility: [4, 5, 6],
 	vision: [["Darkvision", 120]],
 	trait: [
-		"##\u25C6 Void Elf Lineage##. My Darkvision has a range of 120 ft. I know *Mind Sliver*, *Entropic Embrace* at level 3, and *Misty Step* at level 5. I can cast the level 3 and 5 spells once per Long Rest each without a spell slot, or with a spell slot as normal; Int, Wis, or Cha is my spellcasting ability for these (choose when selecting the lineage).",
+		"##\u25C6 Void Elf Lineage##. Darkvision 120 ft. I know *Mind Sliver*, *Entropic Embrace* at 3, and *Misty Step* at 5: 1/LR each without a slot, or with one as normal; Int, Wis, or Cha is my ability (my choice).",
 	].concat(RaceList["elf"].trait),
 	features: {
 		"void lineage 1": {

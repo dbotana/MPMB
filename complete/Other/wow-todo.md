@@ -53,6 +53,83 @@ Agent-loop run `agent-loop-runs/2026-11-17-1338-wow-subclasses-1` added seven su
 - [x] **Faithful Steed at level 20** (`WoW.js:187-191`). The Undead steed text is also appended to the level-20 one-line summary, which takes room the capstone needs. For index 19, append a short note instead, e.g. `" [Undead steed option, Ghostly Stride]"`. (Review note 1.)
 - [x] **Demon Hunter Fighting Style** (`WoW.js:197`). The text mentions Void Warrior, but it can't be selected. Once the Void Warrior feat exists, add it to this feature's `choices`. Done: Void Warrior is a `type: "fighting style"` feat, so the sheet adds it to this feature's choices through `choicesFightingStyles`.
 
+- [x] **Make the WoW features fit the Colourful sheet (level 20).** Added `complete/Other/wow-fit-harness.js`. It loads `ListsClasses.js`, the PHB'24 file and `WoW.js`, and counts the text the sheet prints at level 20, with chosen choices replacing the parent text. It compares each WoW subclass (worst host class, class + subclass features), WoW class, feat, invocation, maneuver, species and lineage against the largest PHB'24 entry of the same kind. "Before" is `WoW.js` at `fdb30a4`. Long option lists (Mystic Brew beverages, Ebon Blade Runic Mastery, Soul Fragments, Raging Elements, Cunning Strike options, Shaman totems, species and lineage detail) moved to page 3 (`autoSelectExtrachoices`, `page3notes`) or Notes pages (`toNotesPage`), with short pointers. Each `choices` option now repeats its parent's rules, because a chosen option replaces the parent's description. `node "complete/Other/wow-fit-harness.js" --dump` prints all sheet text for rule checks. The PHB Primal Companion text of the Hunter Beast Master moved to a "Primal Companion" Notes page in terse form (all rules kept), because Pet Specialization replaces Roving and the row can't fit with the PHB text on page 2.
+
+| Group | Entry | Host | Before | After | Budget | Budget from | Status |
+|---|---|---|---:|---:|---:|---|---|
+| subclass | barbarian-path of the elements | barbarian | 4052 | 2111 | 2565 | barbarian-wild heart | OK |
+| subclass | barbarian-path of the spiritual guardian | barbarian | 3344 | 2391 | 2565 | barbarian-wild heart | OK |
+| subclass | cleric-discipline domain | cleric | 2759 | 2759 | 2797 | cleric-trickery | OK |
+| subclass | cleric-shadow domain | cleric | 2822 | 2752 | 2797 | cleric-trickery | OK |
+| subclass | paladin-oath of the holy | paladin | 2624 | 2432 | 2492 | paladin-vengeance | OK |
+| subclass | deathknight-oath of the ebon blade | deathknight | 3928 | 2484 | 2492 | paladin-vengeance | OK |
+| subclass | demonhunter-demon hunter | demonhunter | 3017 | 2254 | 2394 | ranger-beast master | OK |
+| subclass | monk-warrior of mystic brews | monk | 4444 | 2520 | 2544 | monk-elements | OK |
+| subclass | rogue-swashbuckler | rogue | 2761 | 2077 | 2321 | rogue-soulknife | OK |
+| subclass | evoker-draconic sorcery | evoker | 2343 | 2343 | 2769 | sorcerer-clockwork | OK |
+| subclass | druid-moon | druid | 2835 | 2835 | 2980 | druid-land | OK |
+| subclass | hunter-beast master | hunter | 3114 | 1790 | 2434 | ranger-beast master (PHB original) + 40 | OK |
+| class | deathknight |  | 1783 | 1571 | 1586 | paladin | OK |
+| class | demonhunter |  | 1277 | 1074 | 1076 | ranger | OK |
+| class | evoker |  | 1529 | 1513 | 1531 | sorcerer | OK |
+| class | hunter |  | 1076 | 1060 | 1076 | ranger | OK |
+| class | mage |  | 1389 | 1373 | 1391 | wizard | OK |
+| class | priest |  | 1775 | 1759 | 1775 | cleric | OK |
+| class | shaman |  | 2304 | 1625 | 1689 | barbarian | OK |
+| class | warrior |  | 853 | 837 | 853 | fighter | OK |
+| feat | clearcasting |  | 245 | 245 | 365 | mounted combatant | OK |
+| feat | fingers of frost |  | 194 | 194 | 365 | mounted combatant | OK |
+| feat | hot streak |  | 197 | 197 | 365 | mounted combatant | OK |
+| feat | elusive brawler |  | 92 | 92 | 365 | mounted combatant | OK |
+| feat | enveloping mist |  | 336 | 336 | 365 | mounted combatant | OK |
+| feat | fists of fury |  | 278 | 278 | 365 | mounted combatant | OK |
+| feat | stagger and sway |  | 276 | 276 | 365 | mounted combatant | OK |
+| feat | void warrior |  | 263 | 263 | 365 | mounted combatant | OK |
+| feat | arathi heritage |  | 178 | 178 | 365 | mounted combatant | OK |
+| feat | child of the sea |  | 100 | 100 | 365 | mounted combatant | OK |
+| feat | will to survive |  | 135 | 135 | 365 | mounted combatant | OK |
+| invocation | Curse of Corruption |  | 178 | 178 | 542 | Investment of the Chain Master (req: lvl 5+, Pact of the Chain) | OK |
+| invocation | Health Funnel |  | 206 | 206 | 542 | Investment of the Chain Master (req: lvl 5+, Pact of the Chain) | OK |
+| invocation | Master Demonologist |  | 96 | 96 | 542 | Investment of the Chain Master (req: lvl 5+, Pact of the Chain) | OK |
+| invocation | Expendable Minions |  | 158 | 158 | 542 | Investment of the Chain Master (req: lvl 5+, Pact of the Chain) | OK |
+| invocation | Pact of the Legion |  | 268 | 268 | 542 | Investment of the Chain Master (req: lvl 5+, Pact of the Chain) | OK |
+| invocation | Call of the Void (req: lvl 5+, Pact of the Legion) |  | 406 | 406 | 542 | Investment of the Chain Master (req: lvl 5+, Pact of the Chain) | OK |
+| invocation | Legion Summoning (req: lvl 9+, Pact of the Legion) |  | 251 | 251 | 542 | Investment of the Chain Master (req: lvl 5+, Pact of the Chain) | OK |
+| maneuver | Battle Shout |  | 233 | 233 | 278 | Commander's Strike | OK |
+| maneuver | Demoralizing Shout |  | 260 | 260 | 278 | Commander's Strike | OK |
+| maneuver | Heroic Leap |  | 244 | 244 | 278 | Commander's Strike | OK |
+| maneuver | Mortal Strike |  | 209 | 209 | 278 | Commander's Strike | OK |
+| maneuver | Warding Maneuver |  | 301 | 269 | 278 | Commander's Strike | OK |
+| species | dracthyr |  | 668 | 532 | 537 | dragonborn | OK |
+| species | draenei |  | 154 | 154 | 537 | dragonborn | OK |
+| species | earthen |  | 670 | 505 | 537 | dragonborn | OK |
+| species | forsaken |  | 637 | 475 | 537 | dragonborn | OK |
+| species | goblin |  | 399 | 399 | 537 | dragonborn | OK |
+| species | haranir |  | 404 | 404 | 537 | dragonborn | OK |
+| species | mechagnome |  | 815 | 536 | 537 | dragonborn | OK |
+| species | pandaren |  | 338 | 338 | 537 | dragonborn | OK |
+| species | tauren |  | 478 | 388 | 537 | dragonborn | OK |
+| species | troll |  | 189 | 189 | 537 | dragonborn | OK |
+| species | vulpera |  | 314 | 314 | 537 | dragonborn | OK |
+| species | worgen |  | 546 | 428 | 537 | dragonborn | OK |
+| lineage | draenei-draenei |  | 548 | 548 | 638 | elf-high | OK |
+| lineage | draenei-krokul |  | 528 | 528 | 638 | elf-high | OK |
+| lineage | draenei-lightforged |  | 528 | 528 | 638 | elf-high | OK |
+| lineage | draenei-manari |  | 521 | 521 | 638 | elf-high | OK |
+| lineage | tauren-mulgore |  | 806 | 614 | 638 | elf-high | OK |
+| lineage | tauren-highmountain |  | 888 | 637 | 638 | elf-high | OK |
+| lineage | tauren-taunka |  | 592 | 502 | 638 | elf-high | OK |
+| lineage | troll-amani |  | 306 | 306 | 638 | elf-high | OK |
+| lineage | troll-darkspear |  | 379 | 379 | 638 | elf-high | OK |
+| lineage | troll-zandalari |  | 341 | 341 | 638 | elf-high | OK |
+| lineage | elf-blood |  | 713 | 595 | 638 | elf-high | OK |
+| lineage | elf-night |  | 717 | 584 | 638 | elf-high | OK |
+| lineage | elf-nightborne |  | 677 | 535 | 638 | elf-high | OK |
+| lineage | elf-void |  | 681 | 539 | 638 | elf-high | OK |
+ALL BUDGETS PASSED
+
+- [ ] **Check in Acrobat** that the longest subclasses fit at level 20 on the Colourful sheet and that their notes land on page 3 or on a Notes page: Warrior of Mystic Brews, Oath of the Ebon Blade, Demon Hunter, and Shadow Domain.
+
 ## Chapter 1: Subclasses
 
 ### New rules to transcribe
